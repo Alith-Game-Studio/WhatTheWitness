@@ -3,6 +3,8 @@ extends Node2D
 var graph = preload("res://script/graph.gd").new()
 var solution = preload("res://script/solution.gd").Solution.new()
 var view_scale = 100.0
+var puzzle = graph.create_sample_puzzle()
+var mouse_start_position = null
 
 func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 	var nb_points = 32
@@ -17,17 +19,15 @@ func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 
 
 func _draw():
-	var puzzle = graph.create_sample_puzzle()
 	var center = Vector2(200, 200)
 	var radius = 80
 	var angle_from = 75
 	var angle_to = 195
 	var line_color = puzzle.line_color
-	var line_width = puzzle.line_width * view_scale
 	for vertex in puzzle.vertices:
-		draw_circle(vertex.pos * view_scale, line_width / 2.0, line_color)
+		add_circle(vertex.pos, puzzle.line_width / 2.0, line_color)
 	for edge in puzzle.edges:
-		draw_line(edge.start.pos * view_scale, edge.end.pos * view_scale, line_color, line_width, true)
+		add_line(edge.start.pos, edge.end.pos, puzzle.line_width, line_color)
 	for vertex in puzzle.vertices:
 		if (vertex.decorator != null):
 			vertex.decorator.draw_foreground(self, vertex, 0, puzzle)
@@ -38,7 +38,17 @@ func _draw():
 		if (facet.decorator != null):
 			facet.decorator.draw_foreground(self, facet, 2, puzzle)
 	if (solution.started):
-		add_circle(solution.start_pos, 0.2, puzzle.solution_color)
+		add_circle(solution.start_pos, puzzle.start_size, puzzle.solution_color)
+		var last_pos = solution.start_pos
+		for segment in solution.segments:
+			var edge = segment[0]
+			var percentage = segment[2]
+			if (segment[1]):
+				percentage = 1.0 - percentage
+			var pos = edge.start.pos * (1.0 - percentage) + edge.end.pos * percentage
+			add_line(last_pos, pos, puzzle.line_width, puzzle.solution_color)
+			add_circle(pos, puzzle.line_width / 2.0, puzzle.solution_color)
+			last_pos = pos
 	
 	
 func add_circle(pos, radius, color):
@@ -49,7 +59,18 @@ func add_line(pos1, pos2, width, color):
 	
 func _input(event):
 	if (event is InputEventMouseButton and event.is_pressed()):
-		solution.started = true
-		solution.start_pos = event.position / view_scale
+		if (solution.try_start_solution_at(puzzle, event.position / view_scale)):
+			mouse_start_position = event.position
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			if (mouse_start_position != null):
+				Input.warp_mouse_position(mouse_start_position)
+				mouse_start_position = null
+		self.update()
+	if (event is InputEventMouseMotion):
+		var split = 5
+		for i in range(split):
+			solution.try_continue_solution(puzzle, event.relative / view_scale / split)
 		self.update()
 	
