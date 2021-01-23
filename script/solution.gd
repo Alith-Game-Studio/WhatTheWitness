@@ -30,6 +30,19 @@ class Solution:
 				
 	func det(v1, v2):
 		return v1.x * v2.y - v2.x * v1.y
+		
+	func get_end_position():
+		if (!started):
+			return null
+		if (len(segments) == 0):
+			return start_pos
+		var segment = segments[-1]
+		var edge = segment[0]
+		var percentage = segment[2]
+		if (segment[1]):
+			percentage = 1.0 - percentage
+		var pos = edge.start.pos * (1.0 - percentage) + edge.end.pos * percentage
+		return pos
 
 	func try_continue_solution(puzzle, delta):
 		if (!started):

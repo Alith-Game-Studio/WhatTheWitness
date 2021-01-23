@@ -10,11 +10,11 @@ var filament_nails = create_filament_nails()
 
 func create_filament_nails():
 	var result = []
-	for i in range(4):
-		for j in range(4):
+	for i in range(3):
+		for j in range(3):
 			for k in range(2):
 				for l in range(2):
-					result.append(Vector2(i + 1 + k * 0.1, j + 1 + l * 0.1))
+					result.append(Vector2(i + 2.45 + k * 0.1, j + 2.45 + l * 0.1))
 	return result
 
 func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
@@ -29,16 +29,20 @@ func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 	draw_polygon(points_arc, colors, [], null, null, true)
 
 func _draw():
+	draw_witness()
 	draw_filament()
 
 func draw_filament():
 	for vertex in filament_nails:
-		add_circle(vertex, 0.01, Color.white)
+		# add_circle(vertex, 0.01, Color.white)
+		for vertex2 in filament_nails:
+			if ((vertex2 - vertex).length() < 0.11):
+				add_line(vertex, vertex2, 0.01, Color.white)
 	if (filament.started):
 		for i in range(len(filament.path_points)):
 			var start = filament.path_points[i][0]
 			var end = filament.end_pos if i + 1 == len(filament.path_points) else filament.path_points[i + 1][0]
-			add_line(start, end, 0.01, Color.white)
+			add_line(start, end, 0.01, Color.lightblue)
 		 
 
 func draw_witness():
@@ -77,18 +81,23 @@ func add_line(pos1, pos2, width, color):
 	
 func _input(event):
 	if (event is InputEventMouseButton and event.is_pressed()):
-		if (filament.try_start_solution_at(event.position / view_scale)):
+		if (solution.try_start_solution_at(puzzle, event.position / view_scale)):
+			filament.try_start_solution_at(solution.start_pos)
 			mouse_start_position = event.position
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
+			filament.started = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			if (mouse_start_position != null):
 				Input.warp_mouse_position(mouse_start_position)
 				mouse_start_position = null
 		self.update()
 	if (event is InputEventMouseMotion):
-		var split = 5
-		for i in range(split):
-			filament.try_continue_solution(filament_nails, event.relative / view_scale / split)
-		self.update()
+		if (solution.started):
+			var split = 5
+			for i in range(split):
+				solution.try_continue_solution(puzzle, event.relative / view_scale / split)
+			filament.try_continue_solution(filament_nails, solution.get_end_position() - filament.end_pos)
+			solution.try_continue_solution(puzzle, filament.end_pos - solution.get_end_position())
+			self.update()
 	
