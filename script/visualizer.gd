@@ -5,6 +5,17 @@ var solution = preload("res://script/solution.gd").Solution.new()
 var view_scale = 100.0
 var puzzle = graph.create_sample_puzzle()
 var mouse_start_position = null
+var filament = preload("res://fliament.gd").FilamentSolution.new()
+var filament_nails = create_filament_nails()
+
+func create_filament_nails():
+	var result = []
+	for i in range(4):
+		for j in range(4):
+			for k in range(2):
+				for l in range(2):
+					result.append(Vector2(i + 1 + k * 0.1, j + 1 + l * 0.1))
+	return result
 
 func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 	var nb_points = 32
@@ -17,17 +28,24 @@ func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 		points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
 	draw_polygon(points_arc, colors, [], null, null, true)
 
-
 func _draw():
-	var center = Vector2(200, 200)
-	var radius = 80
-	var angle_from = 75
-	var angle_to = 195
-	var line_color = puzzle.line_color
+	draw_filament()
+
+func draw_filament():
+	for vertex in filament_nails:
+		add_circle(vertex, 0.01, Color.white)
+	if (filament.started):
+		for i in range(len(filament.path_points)):
+			var start = filament.path_points[i][0]
+			var end = filament.end_pos if i + 1 == len(filament.path_points) else filament.path_points[i + 1][0]
+			add_line(start, end, 0.01, Color.white)
+		 
+
+func draw_witness():
 	for vertex in puzzle.vertices:
-		add_circle(vertex.pos, puzzle.line_width / 2.0, line_color)
+		add_circle(vertex.pos, puzzle.line_width / 2.0, puzzle.line_color)
 	for edge in puzzle.edges:
-		add_line(edge.start.pos, edge.end.pos, puzzle.line_width, line_color)
+		add_line(edge.start.pos, edge.end.pos, puzzle.line_width, puzzle.line_color)
 	for vertex in puzzle.vertices:
 		if (vertex.decorator != null):
 			vertex.decorator.draw_foreground(self, vertex, 0, puzzle)
@@ -59,7 +77,7 @@ func add_line(pos1, pos2, width, color):
 	
 func _input(event):
 	if (event is InputEventMouseButton and event.is_pressed()):
-		if (solution.try_start_solution_at(puzzle, event.position / view_scale)):
+		if (filament.try_start_solution_at(event.position / view_scale)):
 			mouse_start_position = event.position
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
@@ -71,6 +89,6 @@ func _input(event):
 	if (event is InputEventMouseMotion):
 		var split = 5
 		for i in range(split):
-			solution.try_continue_solution(puzzle, event.relative / view_scale / split)
+			filament.try_continue_solution(filament_nails, event.relative / view_scale / split)
 		self.update()
 	
