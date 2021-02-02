@@ -46,9 +46,9 @@ class Solution:
 
 	func try_continue_solution(puzzle, delta):
 		if (!started):
-			return
+			return Vector2(0.0, 0.0)
 		if (delta.length() < 1e-6):
-			return
+			return Vector2(0.0, 0.0)
 		var crossroad_vertex = null
 		var previous_edge = null
 		if (len(segments) == 0):
@@ -82,7 +82,7 @@ class Solution:
 				else:
 					segments.append([chosen_edge[0], chosen_edge[1], 1e-6])
 			else:
-				return
+				return Vector2(0.0, 0.0)
 		if(len(segments) > 0):
 			var edge = segments[-1][0]
 			var end_to_start =segments[-1][1]
@@ -109,8 +109,7 @@ class Solution:
 			else:
 				projected_percentage += projected_det * 0.5 # encourage
 			if (projected_percentage <= 0.0):
-				segments.pop_back()
-				return
+				projected_percentage = 0.0  
 			if (projected_percentage >= limit):
 				projected_percentage = limit
 			segments[-1][2] = projected_percentage
