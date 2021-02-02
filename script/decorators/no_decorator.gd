@@ -1,4 +1,4 @@
-extends Node
+extends "../decorator.gd"
 
 var rule = 'none'
 

@@ -1,6 +1,7 @@
 extends Node2D
 
 var graph = preload("res://script/graph.gd").new()
+var better_xml = preload("res://script/better_xml.gd").new()
 var solution = preload("res://script/solution.gd").Solution.new()
 var view_scale = 100.0
 var puzzle = graph.create_sample_puzzle()
@@ -27,6 +28,9 @@ func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 		var angle_point = deg2rad(angle_from + i * (angle_to - angle_from) / nb_points - 90)
 		points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
 	draw_polygon(points_arc, colors, [], null, null, true)
+
+func _init():
+	test_xml()
 
 func _draw():
 	draw_witness()
@@ -100,4 +104,9 @@ func _input(event):
 			filament.try_continue_solution(filament_nails, solution.get_end_position() - filament.end_pos)
 			solution.try_continue_solution(puzzle, filament.end_pos - solution.get_end_position())
 			self.update()
-	
+
+func test_xml():
+	for i in range(10):
+		var result = better_xml.parse_xml_file("res://puzzles/miaoji.wit")
+		print(result)
+		
