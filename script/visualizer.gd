@@ -4,19 +4,10 @@ var graph = preload("res://script/graph.gd").new()
 var better_xml = preload("res://script/better_xml.gd").new()
 var solution = preload("res://script/solution.gd").Solution.new()
 var view_scale = 100.0
-var puzzle = graph.create_sample_puzzle()
+var view_origin = Vector2(200, 300)
+var puzzle = graph.load_from_xml('res://puzzles/miaoji.wit')
 var mouse_start_position = null
 var filament = preload("res://fliament.gd").FilamentSolution.new()
-var filament_nails = create_filament_nails()
-
-func create_filament_nails():
-	var result = []
-	for i in range(3):
-		for j in range(3):
-			for k in range(2):
-				for l in range(2):
-					result.append(Vector2(i + 2.45 + k * 0.1, j + 2.45 + l * 0.1))
-	return result
 
 func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 	var nb_points = 32
@@ -29,14 +20,10 @@ func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 		points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
 	draw_polygon(points_arc, colors, [], null, null, true)
 
-func _init():
-	test_xml()
-
 func _draw():
 	draw_witness()
-	draw_filament()
 
-func draw_filament():
+func draw_filament(filament_nails):
 	for vertex in filament_nails:
 		# add_circle(vertex, 0.01, Color.white)
 		for vertex2 in filament_nails:
@@ -78,14 +65,20 @@ func draw_witness():
 	
 	
 func add_circle(pos, radius, color):
-	draw_circle(pos * view_scale, radius * view_scale, color)
+	draw_circle(world_to_screen(pos), radius * view_scale, color)
 	
 func add_line(pos1, pos2, width, color):
-	draw_line(pos1 * view_scale, pos2 * view_scale, color, width * view_scale, true)
-	
+	draw_line(world_to_screen(pos1), world_to_screen(pos2), color, width * view_scale, true)
+
+func screen_to_world(position):
+	return (position - view_origin) / view_scale
+
+func world_to_screen(position):
+	return position * view_scale + view_origin
+
 func _input(event):
 	if (event is InputEventMouseButton and event.is_pressed()):
-		if (solution.try_start_solution_at(puzzle, event.position / view_scale)):
+		if (solution.try_start_solution_at(puzzle, screen_to_world(event.position))):
 			filament.try_start_solution_at(solution.start_pos)
 			mouse_start_position = event.position
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -101,12 +94,5 @@ func _input(event):
 			var split = 5
 			for i in range(split):
 				solution.try_continue_solution(puzzle, event.relative / view_scale / split)
-			filament.try_continue_solution(filament_nails, solution.get_end_position() - filament.end_pos)
-			solution.try_continue_solution(puzzle, filament.end_pos - solution.get_end_position())
 			self.update()
-
-func test_xml():
-	for i in range(10):
-		var result = better_xml.parse_xml_file("res://puzzles/miaoji.wit")
-		print(result)
-		
+	

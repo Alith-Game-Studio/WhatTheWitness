@@ -1,10 +1,11 @@
 extends Node
 
-const no_decorator = preload("res://script/decorators/no_decorator.gd")
+const NoDecorator = preload("res://script/decorators/no_decorator.gd")
+var better_xml = preload("res://script/better_xml.gd").new()
 
 class Vertex:
 	var pos: Vector2
-	var decorator = no_decorator.new()
+	var decorator = NoDecorator.new()
 	func _init(x, y):
 		pos.x = x
 		pos.y = y
@@ -12,7 +13,7 @@ class Vertex:
 class Edge:
 	var start: Vertex
 	var end: Vertex
-	var decorator = no_decorator.new()
+	var decorator = NoDecorator.new()
 	func _init(v1, v2):
 		start = v1
 		end = v2
@@ -20,7 +21,7 @@ class Edge:
 	
 class Facet:
 	var vertices: Array
-	var decorator = no_decorator.new()
+	var decorator = NoDecorator.new()
 	func _init(v):
 		vertices = v
 	
@@ -61,4 +62,31 @@ func create_sample_puzzle():
 	puzzle.start_size = 0.2
 	return puzzle
 	
+func load_from_xml(file):
+	var puzzle = Puzzle.new()
+	var raw = better_xml.parse_xml_file("res://puzzles/miaoji.wit")
+	var vertices = puzzle.vertices
+	var edges = puzzle.edges
+	var facets = puzzle.facets
+	for raw_node in raw['Nodes']['_arr']:
+		vertices.push_back(Vertex.new(float(raw_node['X']), float(raw_node['Y'])))
+		if ('Decorator' in raw_node):
+			var raw_decorator = raw_node['Decorator']
+			if (raw_decorator['xsi:type'] == "StartDecorator"):
+				vertices[-1].decorator = load('res://script/decorators/start_decorator.gd').new()
+	for raw_edge in raw['EdgesID']['_arr']:
+		edges.push_back(Edge.new(vertices[int(raw_edge['Start'])], vertices[int(raw_edge['End'])]))
+	for raw_face in raw['FacesID']['_arr']:
+		var facet_vertices = []
+		print(raw_face['Nodes']['_arr'])
+		for raw_face_node in raw_face['Nodes']['_arr']:
+			facet_vertices.push_back(vertices[int(raw_face_node)])
+		facets.push_back(Facet.new(facet_vertices))
+	var raw_meta = raw['MetaData']
+	puzzle.solution_color = Color(1.0, 1.0, 1.0, 1.0)
+	puzzle.line_color = Color(0.7, 0.7, 0.7, 1.0)
+	puzzle.background_color = Color(0.0, 0.0, 0.0, 1.0)
+	puzzle.line_width = float(raw_meta['EdgeWidth'])
+	puzzle.start_size = puzzle.line_width * 2
+	return puzzle
 	
