@@ -1,6 +1,6 @@
 extends "../decorator.gd"
 
-var rule = 'broken'
+var rule = 'point'
 
 func draw_foreground(canvas, owner, owner_type, puzzle):
 	var width = 0.4330127 * puzzle.line_width
@@ -11,17 +11,17 @@ func draw_foreground(canvas, owner, owner_type, puzzle):
 			owner.pos + Vector2(0, -radius), 
 			owner.pos + Vector2(0, radius), 
 			width, 
-			Color.black
+			color
 		)
 		canvas.add_line(
 			owner.pos + Vector2(-x2, radius / 2), 
 			owner.pos + Vector2(x2, -radius / 2), 
 			width, 
-			Color.black
+			color
 		)
 		canvas.add_line(
 			owner.pos + Vector2(x2, radius / 2), 
 			owner.pos + Vector2(-x2, -radius / 2), 
 			width, 
-			Color.black
+			color
 		)

@@ -22,9 +22,14 @@ class Edge:
 	
 class Facet:
 	var vertices: Array
+	var center: Vector2
 	var decorator = NoDecorator.new()
-	func _init(v):
-		vertices = v
+	func _init(vs):
+		vertices = vs
+		center = Vector2.ZERO
+		for v in vertices:
+			center += v.pos
+		center /= len(vertices)
 	
 class Puzzle:
 	var vertices: Array
@@ -99,19 +104,34 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			var raw_decorator = raw_element['Decorator']
 			if (raw_decorator['xsi:type'] == "PointDecorator"):
 				puzzle.vertices[v3].decorator = load('res://script/decorators/point_decorator.gd').new()
-				
+				puzzle.vertices[v3].decorator.color = ColorN(raw_decorator['Color'])
+			else:
+				print('Unsupported decorator: %s on edge' % raw_decorator['xsi:type'])
 	elif (element_type == 2):
 		var facet_vertices = []
 		for raw_face_node in raw_element['Nodes']['_arr']:
 			facet_vertices.push_back(puzzle.vertices[int(raw_face_node)])
-		puzzle.facets.push_back(Facet.new(facet_vertices))
-	if ('Decorator' in raw_element):
-		var raw_decorator = raw_element['Decorator']
-		if (raw_decorator['xsi:type'] == "StartDecorator" and element_type == 0):
-			puzzle.vertices[id].decorator = load('res://script/decorators/start_decorator.gd').new()
-		else:
-			print('Unsupported decorator: %s on %s' % [raw_decorator['xsi:type'], ['vertex', 'edge', 'facet'][element_type]])
-		
+		var facet = Facet.new(facet_vertices)
+		puzzle.facets.push_back(facet)
+		if ('Decorator' in raw_element):
+			var raw_decorator = raw_element['Decorator']
+			if (raw_decorator['xsi:type'] == "TriangleDecorator"):
+				facet.decorator = load('res://script/decorators/triangle_decorator.gd').new()
+				facet.decorator.color = ColorN(raw_decorator['Color'])
+				facet.decorator.count = int(raw_decorator['Count'])
+			if (raw_decorator['xsi:type'] == "StarDecorator"):
+				facet.decorator = load('res://script/decorators/star_decorator.gd').new()
+				facet.decorator.color = ColorN(raw_decorator['Color'])
+			else:
+				print('Unsupported decorator: %s on facet' % raw_decorator['xsi:type'])
+	if (element_type == 0):
+		if ('Decorator' in raw_element):
+			var raw_decorator = raw_element['Decorator']
+			if (raw_decorator['xsi:type'] == "StartDecorator"):
+				puzzle.vertices[id].decorator = load('res://script/decorators/start_decorator.gd').new()
+			else:
+				print('Unsupported decorator: %s on vertex' % raw_decorator['xsi:type'])
+	
 	
 	
 func load_from_xml(file):
@@ -134,6 +154,6 @@ func load_from_xml(file):
 	puzzle.line_color = Color(0.7, 0.7, 0.7, 1.0)
 	puzzle.background_color = Color(0.0, 0.0, 0.0, 1.0)
 	puzzle.line_width = float(raw_meta['EdgeWidth'])
-	puzzle.start_size = puzzle.line_width * 2
+	puzzle.start_size = puzzle.line_width * 1.5
 	return puzzle
 	

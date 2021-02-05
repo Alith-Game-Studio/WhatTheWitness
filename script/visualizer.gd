@@ -72,7 +72,10 @@ func add_line(pos1, pos2, width, color):
 	draw_line(world_to_screen(pos1), world_to_screen(pos2), color, width * view_scale, true)
 
 func add_polygon(pos_list, color):
-	pass
+	var result_list = []
+	for pos in pos_list:
+		result_list.push_back(world_to_screen(pos))
+	draw_polygon(result_list, PoolColorArray([color]), [], null, null, true)
 
 func screen_to_world(position):
 	return (position - view_origin) / view_scale
