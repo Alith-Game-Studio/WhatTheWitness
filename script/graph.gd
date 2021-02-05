@@ -77,10 +77,10 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 	if (element_type == 1):
 		var v1 = int(raw_element['Start'])
 		var v2 = int(raw_element['End'])
+		var p1 = puzzle.vertices[v1].pos
+		var p2 = puzzle.vertices[v2].pos
 		if ('Decorator' in raw_element):
 			var raw_decorator = raw_element['Decorator']
-			var p1 = puzzle.vertices[v1].pos
-			var p2 = puzzle.vertices[v2].pos
 			if (raw_decorator['xsi:type'] == "BrokenDecorator"):
 				var p3 = p1 * 0.8 + p2 * 0.2
 				var p4 = p1 * 0.2 + p2 * 0.8
@@ -92,7 +92,14 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 				push_edge_idx(puzzle, v1, v3)
 				push_edge_idx(puzzle, v2, v4)
 				return
-		push_edge_idx(puzzle, v1, v2)
+		var v3 = push_vertex_vec(puzzle, p1 * 0.5 + p2 * 0.5)
+		push_edge_idx(puzzle, v1, v3)
+		push_edge_idx(puzzle, v3, v2)
+		if ('Decorator' in raw_element):
+			var raw_decorator = raw_element['Decorator']
+			if (raw_decorator['xsi:type'] == "PointDecorator"):
+				puzzle.vertices[v3].decorator = load('res://script/decorators/point_decorator.gd').new()
+				
 	elif (element_type == 2):
 		var facet_vertices = []
 		for raw_face_node in raw_element['Nodes']['_arr']:

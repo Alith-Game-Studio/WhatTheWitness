@@ -65,7 +65,8 @@ func draw_witness():
 	
 	
 func add_circle(pos, radius, color):
-	draw_circle(world_to_screen(pos), radius * view_scale, color)
+	draw_circle(world_to_screen(pos), radius * view_scale - 0.5, color)
+	draw_arc(world_to_screen(pos), radius * view_scale - 0.5, 0.0, 2 * PI, 64, color, 1.0, true)
 	
 func add_line(pos1, pos2, width, color):
 	draw_line(world_to_screen(pos1), world_to_screen(pos2), color, width * view_scale, true)
