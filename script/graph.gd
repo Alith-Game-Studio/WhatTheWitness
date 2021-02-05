@@ -63,17 +63,36 @@ func create_sample_puzzle():
 	puzzle.start_size = 0.2
 	return puzzle
 	
+func push_vertex_vec(puzzle, pos):
+	var result = len(puzzle.vertices)
+	puzzle.vertices.push_back(Vertex.new(pos.x, pos.y))
+	return result
+
+func push_edge_idx(puzzle, idx1, idx2):
+	var result = len(puzzle.edges)
+	puzzle.edges.push_back(Edge.new(puzzle.vertices[idx1], puzzle.vertices[idx2]))
+	return result
+	
 func add_element(puzzle, raw_element, element_type, id=-1):
 	if (element_type == 1):
-		var v1 = puzzle.vertices[int(raw_element['Start'])]
-		var v2 = puzzle.vertices[int(raw_element['End'])]
+		var v1 = int(raw_element['Start'])
+		var v2 = int(raw_element['End'])
 		if ('Decorator' in raw_element):
 			var raw_decorator = raw_element['Decorator']
-			var p1 = puzzle.vertices[int(raw_element['Start'])].pos
-			var p2 = puzzle.vertices[int(raw_element['End'])].pos
+			var p1 = puzzle.vertices[v1].pos
+			var p2 = puzzle.vertices[v2].pos
 			if (raw_decorator['xsi:type'] == "BrokenDecorator"):
+				var p3 = p1 * 0.8 + p2 * 0.2
+				var p4 = p1 * 0.2 + p2 * 0.8
+				var v3 = push_vertex_vec(puzzle, p3)
+				var v4 = push_vertex_vec(puzzle, p4)
+				puzzle.vertices[v3].decorator = load('res://script/decorators/broken_decorator.gd').new()
+				puzzle.vertices[v3].decorator.direction = (p2 - p1).normalized()
+				puzzle.vertices[v4].decorator = puzzle.vertices[v3].decorator
+				push_edge_idx(puzzle, v1, v3)
+				push_edge_idx(puzzle, v2, v4)
 				return
-		puzzle.edges.push_back(Edge.new(v1, v2))
+		push_edge_idx(puzzle, v1, v2)
 	elif (element_type == 2):
 		var facet_vertices = []
 		for raw_face_node in raw_element['Nodes']['_arr']:
