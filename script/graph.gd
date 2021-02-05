@@ -65,9 +65,15 @@ func create_sample_puzzle():
 	
 func add_element(puzzle, raw_element, element_type, id=-1):
 	if (element_type == 1):
-		puzzle.edges.push_back(Edge.new(
-			puzzle.vertices[int(raw_element['Start'])], 
-			puzzle.vertices[int(raw_element['End'])]))
+		var v1 = puzzle.vertices[int(raw_element['Start'])]
+		var v2 = puzzle.vertices[int(raw_element['End'])]
+		if ('Decorator' in raw_element):
+			var raw_decorator = raw_element['Decorator']
+			var p1 = puzzle.vertices[int(raw_element['Start'])].pos
+			var p2 = puzzle.vertices[int(raw_element['End'])].pos
+			if (raw_decorator['xsi:type'] == "BrokenDecorator"):
+				return
+		puzzle.edges.push_back(Edge.new(v1, v2))
 	elif (element_type == 2):
 		var facet_vertices = []
 		for raw_face_node in raw_element['Nodes']['_arr']:
@@ -78,7 +84,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		if (raw_decorator['xsi:type'] == "StartDecorator" and element_type == 0):
 			puzzle.vertices[id].decorator = load('res://script/decorators/start_decorator.gd').new()
 		else:
-			print('Unsupported decorator: %s on %s' % [raw_decorator['xsi:type'], ['vertex', 'edge', 'facet'][id]])
+			print('Unsupported decorator: %s on %s' % [raw_decorator['xsi:type'], ['vertex', 'edge', 'facet'][element_type]])
 		
 	
 	

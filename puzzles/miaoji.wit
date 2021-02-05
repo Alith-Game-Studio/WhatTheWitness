@@ -140,6 +140,10 @@
       <Start>2</Start>
       <End>5</End>
       <Decorator xsi:type="PointDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
         <Color>Black</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
@@ -187,6 +191,7 @@
     <SaveEdge>
       <Start>11</Start>
       <End>12</End>
+      <Decorator xsi:type="BrokenDecorator" />
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -277,6 +282,10 @@
         <int>6</int>
       </Nodes>
       <Decorator xsi:type="StarDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
         <Color>Gold</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
@@ -291,6 +300,10 @@
         <int>10</int>
       </Nodes>
       <Decorator xsi:type="TriangleDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
         <Count>3</Count>
         <Color>Gold</Color>
       </Decorator>
@@ -305,6 +318,10 @@
         <int>20</int>
       </Nodes>
       <Decorator xsi:type="TriangleDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
         <Count>3</Count>
         <Color>Gold</Color>
       </Decorator>
@@ -1063,5 +1080,6 @@
     <FaceDecorationScale>1</FaceDecorationScale>
     <ExportWidth>768</ExportWidth>
     <ExportHeight>768</ExportHeight>
+    <LineColor>Yellow</LineColor>
   </MetaData>
 </SaveState>
