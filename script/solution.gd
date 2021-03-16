@@ -104,10 +104,10 @@ class Solution:
 						segments[i][0].end == end_node):
 						limit = 1.0 - puzzle.line_width / edge_length
 						break
-			if (last_percentage < 0.5): # first half
-				projected_percentage -= projected_det * 0.5 # discorage
-			else:
+			if (end_to_start): # second half is always end to start
 				projected_percentage += projected_det * 0.5 # encourage
+			else:
+				projected_percentage -= projected_det * 0.5 # discorage
 			if (projected_percentage <= 0.0):
 				segments.pop_back()
 				return

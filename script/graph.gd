@@ -99,7 +99,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 				return
 		var v3 = push_vertex_vec(puzzle, p1 * 0.5 + p2 * 0.5)
 		push_edge_idx(puzzle, v1, v3)
-		push_edge_idx(puzzle, v3, v2)
+		push_edge_idx(puzzle, v2, v3)
 		if ('Decorator' in raw_element):
 			var raw_decorator = raw_element['Decorator']
 			if (raw_decorator['xsi:type'] == "PointDecorator"):
@@ -119,7 +119,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 				facet.decorator = load('res://script/decorators/triangle_decorator.gd').new()
 				facet.decorator.color = ColorN(raw_decorator['Color'])
 				facet.decorator.count = int(raw_decorator['Count'])
-			if (raw_decorator['xsi:type'] == "StarDecorator"):
+			elif (raw_decorator['xsi:type'] == "StarDecorator"):
 				facet.decorator = load('res://script/decorators/star_decorator.gd').new()
 				facet.decorator.color = ColorN(raw_decorator['Color'])
 			else:
@@ -129,7 +129,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			var raw_decorator = raw_element['Decorator']
 			if (raw_decorator['xsi:type'] == "StartDecorator"):
 				puzzle.vertices[id].decorator = load('res://script/decorators/start_decorator.gd').new()
-			if (raw_decorator['xsi:type'] == "EndDecorator"):
+			elif (raw_decorator['xsi:type'] == "EndDecorator"):
 				var end_length = float(raw_decorator['Length'])
 				var end_angle = deg2rad(float(raw_decorator['Angle']))
 				var p_end = puzzle.vertices[id].pos + Vector2(cos(end_angle), sin(end_angle)) * end_length
