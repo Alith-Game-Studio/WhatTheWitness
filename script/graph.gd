@@ -129,6 +129,13 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			var raw_decorator = raw_element['Decorator']
 			if (raw_decorator['xsi:type'] == "StartDecorator"):
 				puzzle.vertices[id].decorator = load('res://script/decorators/start_decorator.gd').new()
+			if (raw_decorator['xsi:type'] == "EndDecorator"):
+				var end_length = float(raw_decorator['Length'])
+				var end_angle = deg2rad(float(raw_decorator['Angle']))
+				var p_end = puzzle.vertices[id].pos + Vector2(cos(end_angle), sin(end_angle)) * end_length
+				var v_end = push_vertex_vec(puzzle, p_end)
+				push_edge_idx(puzzle, id, v_end)
+				puzzle.vertices[v_end].decorator = load('res://script/decorators/end_decorator.gd').new()
 			else:
 				print('Unsupported decorator: %s on vertex' % raw_decorator['xsi:type'])
 	
