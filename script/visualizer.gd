@@ -5,7 +5,7 @@ var better_xml = preload("res://script/better_xml.gd").new()
 var solution = preload("res://script/solution.gd").Solution.new()
 var view_scale = 100.0
 var view_origin = Vector2(200, 300)
-var puzzle = graph.load_from_xml('res://puzzles/miaoji.wit')
+var puzzle = graph.load_from_xml('res://puzzles/symmetry.wit')
 var mouse_start_position = null
 var filament = preload("res://fliament.gd").FilamentSolution.new()
 
@@ -22,6 +22,27 @@ func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 
 func _draw():
 	draw_witness()
+
+func _ready():
+	normalize_view()	
+
+func normalize_view():
+	var screen_size = get_viewport().size
+	if (len(puzzle.vertices) == 0):
+		return
+	var min_x = puzzle.vertices[0].pos.x
+	var max_x = puzzle.vertices[0].pos.x
+	var min_y = puzzle.vertices[0].pos.y
+	var max_y = puzzle.vertices[0].pos.y
+	for vertex in puzzle.vertices:
+		max_x = max(max_x, vertex.pos.x)
+		min_x = min(min_x, vertex.pos.x)
+		max_y = max(max_y, vertex.pos.y)
+		min_y = min(min_y, vertex.pos.y)
+	view_scale = min(screen_size.x * 0.8 / (max_x - min_x), 
+					 screen_size.y * 0.8 / (max_y - min_y))
+	view_origin = screen_size / 2 - Vector2((max_x + min_x) / 2, (max_y + min_y) / 2) * view_scale
+	
 
 func draw_filament(filament_nails):
 	for vertex in filament_nails:

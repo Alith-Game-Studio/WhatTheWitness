@@ -136,7 +136,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 	
 func load_from_xml(file):
 	var puzzle = Puzzle.new()
-	var raw = better_xml.parse_xml_file("res://puzzles/miaoji.wit")
+	var raw = better_xml.parse_xml_file(file)
 	var vertices = puzzle.vertices
 	var edges = puzzle.edges
 	var facets = puzzle.facets
