@@ -72,17 +72,23 @@ func draw_witness():
 		if (facet.decorator != null):
 			facet.decorator.draw_foreground(self, facet, 2, puzzle)
 	if (solution.started):
-		add_circle(solution.start_pos, puzzle.start_size, puzzle.solution_color)
-		var last_pos = solution.start_pos
-		for segment in solution.segments:
-			var edge = segment[0]
-			var percentage = segment[2]
-			if (segment[1]):
-				percentage = 1.0 - percentage
-			var pos = edge.start.pos * (1.0 - percentage) + edge.end.pos * percentage
-			add_line(last_pos, pos, puzzle.line_width, puzzle.solution_color)
-			add_circle(pos, puzzle.line_width / 2.0, puzzle.solution_color)
-			last_pos = pos
+		for way in range(puzzle.n_ways):
+			add_circle(solution.start_vertices[way].pos, puzzle.start_size, puzzle.solution_color)
+			var last_pos = solution.start_vertices[way].pos
+			for i in range(len(solution.progress)):
+				var segment = solution.lines[way][i]
+				var segment_main = solution.lines[solution.MAIN_WAY][i]
+				var main_line_length = (segment_main[0].start.pos - segment_main[0].end.pos).length()
+				var line_length = (segment[0].start.pos - segment[0].end.pos).length()
+				
+				var edge = segment[0]
+				var percentage = solution.progress[i] * main_line_length / line_length
+				if (segment[1]):
+					percentage = 1.0 - percentage
+				var pos = edge.start.pos * (1.0 - percentage) + edge.end.pos * percentage
+				add_line(last_pos, pos, puzzle.line_width, puzzle.solution_color)
+				add_circle(pos, puzzle.line_width / 2.0, puzzle.solution_color)
+				last_pos = pos
 	
 	
 func add_circle(pos, radius, color):
@@ -107,7 +113,7 @@ func world_to_screen(position):
 func _input(event):
 	if (event is InputEventMouseButton and event.is_pressed()):
 		if (solution.try_start_solution_at(puzzle, screen_to_world(event.position))):
-			filament.try_start_solution_at(solution.start_pos)
+			# filament.try_start_solution_at(solution.start_pos)
 			mouse_start_position = event.position
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:

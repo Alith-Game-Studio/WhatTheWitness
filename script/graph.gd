@@ -40,6 +40,10 @@ class Puzzle:
 	var solution_color: Color
 	var line_width: float
 	var start_size: float
+	var n_ways: int
+	var symmetry_type: int # 0: rotational 1: reflective
+	var symmetry_center: Vector2
+	var symmetry_angle: float
 
 func create_sample_puzzle():
 	var puzzle = Puzzle.new()
@@ -78,7 +82,29 @@ func push_edge_idx(puzzle, idx1, idx2):
 	puzzle.edges.push_back(Edge.new(puzzle.vertices[idx1], puzzle.vertices[idx2]))
 	return result
 	
+func __get_raw_element_center(puzzle, raw_element, element_type, id):
+	if (element_type == 1):
+		var v1 = int(raw_element['Start'])
+		var v2 = int(raw_element['End'])
+		var p1 = puzzle.vertices[v1].pos
+		var p2 = puzzle.vertices[v2].pos
+		return p1 * 0.5 + p2 * 0.5
+	elif (element_type == 0):
+		return puzzle.vertices[id].pos
+	elif (element_type == 2):
+		var center = Vector2()
+		for raw_face_node in raw_element['Nodes']['_arr']:
+			center += puzzle.vertices[int(raw_face_node)].pos
+		return center / len(raw_element['Nodes']['_arr'])
+		
 func add_element(puzzle, raw_element, element_type, id=-1):
+	if ('Decorator' in raw_element):
+		var raw_decorator = raw_element['Decorator']
+		if (raw_decorator['xsi:type'] == "ThreeWayPuzzleDecorator"):
+			puzzle.n_ways = 3
+			puzzle.symmetry_type = 0
+			puzzle.symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
+			puzzle.symmetry_center += Vector2(float(raw_decorator['DeltaX']), float(raw_decorator['DeltaY']))
 	if (element_type == 1):
 		var v1 = int(raw_element['Start'])
 		var v2 = int(raw_element['End'])
@@ -143,6 +169,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 	
 func load_from_xml(file):
 	var puzzle = Puzzle.new()
+	puzzle.n_ways = 1
 	var raw = better_xml.parse_xml_file(file)
 	var vertices = puzzle.vertices
 	var edges = puzzle.edges
