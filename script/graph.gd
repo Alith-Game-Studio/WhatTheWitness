@@ -37,40 +37,13 @@ class Puzzle:
 	var facets: Array
 	var line_color: Color
 	var background_color: Color
-	var solution_color: Color
+	var solution_colors: Array
 	var line_width: float
 	var start_size: float
 	var n_ways: int
 	var symmetry_type: int # 0: rotational 1: reflective
 	var symmetry_center: Vector2
 	var symmetry_angle: float
-
-func create_sample_puzzle():
-	var puzzle = Puzzle.new()
-	var vertices = {}
-	var end_vertex = Vertex.new(6.2, 6.2)
-	puzzle.vertices = [end_vertex]
-	puzzle.edges = []
-	for i in range(6):
-		for j in range(6):
-			vertices[Vector2(i + 1, j + 1)] = Vertex.new(i + 1, j + 1)
-			puzzle.vertices.append(vertices[Vector2(i + 1, j + 1)])
-	for i in range(6):
-		for j in range(6):
-			if (i >= 1):
-				puzzle.edges.append(Edge.new(vertices[Vector2(i, j + 1)], vertices[Vector2(i + 1, j + 1)]))
-			if (j >= 1):
-				puzzle.edges.append(Edge.new(vertices[Vector2(i + 1, j)], vertices[Vector2(i + 1, j + 1)]))
-	vertices[Vector2(1, 1)].decorator = load('res://script/decorators/start_decorator.gd').new()
-	end_vertex.decorator = load('res://script/decorators/end_decorator.gd').new()
-	puzzle.edges.append(Edge.new(vertices[Vector2(6, 6)], end_vertex))
-	puzzle.facets = []
-	puzzle.solution_color = Color(1.0, 1.0, 1.0, 1.0)
-	puzzle.line_color = Color(0.7, 0.7, 0.7, 1.0)
-	puzzle.background_color = Color(0.0, 0.0, 0.0, 1.0)
-	puzzle.line_width = 0.1
-	puzzle.start_size = 0.2
-	return puzzle
 	
 func push_vertex_vec(puzzle, pos):
 	var result = len(puzzle.vertices)
@@ -105,6 +78,8 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			puzzle.symmetry_type = 0
 			puzzle.symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
 			puzzle.symmetry_center += Vector2(float(raw_decorator['DeltaX']), float(raw_decorator['DeltaY']))
+			puzzle.solution_colors.push_back(ColorN(raw_decorator['SecondLineColor']))
+			puzzle.solution_colors.push_back(ColorN(raw_decorator['ThirdLineColor']))
 	if (element_type == 1):
 		var v1 = int(raw_element['Start'])
 		var v2 = int(raw_element['End'])
@@ -171,6 +146,12 @@ func load_from_xml(file):
 	var puzzle = Puzzle.new()
 	puzzle.n_ways = 1
 	var raw = better_xml.parse_xml_file(file)
+	var raw_meta = raw['MetaData']
+	puzzle.solution_colors = [ColorN(raw_meta['LineColor'])]
+	puzzle.line_color = ColorN(raw_meta['ForegroundColor'])
+	puzzle.background_color = ColorN(raw_meta['BackgroundColor'])
+	puzzle.line_width = float(raw_meta['EdgeWidth'])
+	puzzle.start_size = puzzle.line_width * 1.5
 	var vertices = puzzle.vertices
 	var edges = puzzle.edges
 	var facets = puzzle.facets
@@ -183,11 +164,5 @@ func load_from_xml(file):
 		add_element(puzzle, raw_edge, 1)
 	for raw_face in raw['FacesID']['_arr']:
 		add_element(puzzle, raw_face, 2)
-	var raw_meta = raw['MetaData']
-	puzzle.solution_color = Color(1.0, 1.0, 1.0, 1.0)
-	puzzle.line_color = Color(0.7, 0.7, 0.7, 1.0)
-	puzzle.background_color = Color(0.0, 0.0, 0.0, 1.0)
-	puzzle.line_width = float(raw_meta['EdgeWidth'])
-	puzzle.start_size = puzzle.line_width * 1.5
 	return puzzle
 	

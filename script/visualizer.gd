@@ -3,11 +3,13 @@ extends Node2D
 var graph = preload("res://script/graph.gd").new()
 var better_xml = preload("res://script/better_xml.gd").new()
 var solution = preload("res://script/solution.gd").Solution.new()
+var validator = preload("res://script/validation.gd").Validator.new()
 var view_scale = 100.0
 var view_origin = Vector2(200, 300)
 var puzzle = graph.load_from_xml('res://puzzles/symmetry.wit')
 var mouse_start_position = null
 var filament = preload("res://fliament.gd").FilamentSolution.new()
+var is_drawing_solution = false
 
 func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 	var nb_points = 32
@@ -73,7 +75,10 @@ func draw_witness():
 			facet.decorator.draw_foreground(self, facet, 2, puzzle)
 	if (solution.started):
 		for way in range(puzzle.n_ways):
-			add_circle(solution.start_vertices[way].pos, puzzle.start_size, puzzle.solution_color)
+			var color = puzzle.solution_colors[way]
+			if (validator.solution_validity == -1):
+				color = Color.black
+			add_circle(solution.start_vertices[way].pos, puzzle.start_size, color)
 			var last_pos = solution.start_vertices[way].pos
 			for i in range(len(solution.progress)):
 				var segment = solution.lines[way][i]
@@ -86,8 +91,8 @@ func draw_witness():
 				if (segment[1]):
 					percentage = 1.0 - percentage
 				var pos = edge.start.pos * (1.0 - percentage) + edge.end.pos * percentage
-				add_line(last_pos, pos, puzzle.line_width, puzzle.solution_color)
-				add_circle(pos, puzzle.line_width / 2.0, puzzle.solution_color)
+				add_line(last_pos, pos, puzzle.line_width, color)
+				add_circle(pos, puzzle.line_width / 2.0, color)
 				last_pos = pos
 	
 	
@@ -112,19 +117,23 @@ func world_to_screen(position):
 
 func _input(event):
 	if (event is InputEventMouseButton and event.is_pressed()):
-		if (solution.try_start_solution_at(puzzle, screen_to_world(event.position))):
-			# filament.try_start_solution_at(solution.start_pos)
-			mouse_start_position = event.position
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		else:
-			filament.started = false
+		if (is_drawing_solution):
+			if (solution.is_completed()):
+				validator.validate(puzzle, solution)
+			is_drawing_solution = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			if (mouse_start_position != null):
 				Input.warp_mouse_position(mouse_start_position)
 				mouse_start_position = null
+		else:
+			if (solution.try_start_solution_at(puzzle, screen_to_world(event.position))):
+				validator.reset()
+				mouse_start_position = event.position
+				is_drawing_solution = true
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		self.update()
 	if (event is InputEventMouseMotion):
-		if (solution.started):
+		if (is_drawing_solution):
 			var split = 5
 			for i in range(split):
 				solution.try_continue_solution(puzzle, event.relative / view_scale / split)

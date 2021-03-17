@@ -744,7 +744,7 @@
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
         <SecondLineColor>Aqua</SecondLineColor>
-        <ThirdLineColorLineColor>LightGreen</ThirdLineColorLineColor>
+        <ThirdLineColor>LightGreen</ThirdLineColor>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>

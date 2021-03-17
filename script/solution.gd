@@ -34,23 +34,20 @@ class Solution:
 		
 		
 	func try_start_solution_at(puzzle, pos):
-		if (started):
-			started = false
-			return false
 		var est_start_vertex = get_nearest_start(puzzle, pos)
 		if (est_start_vertex == null):
 			return false
-		start_vertices = []
-		lines = []
+		var new_start_vertices = []
+		var new_lines = []
 		for way in range(puzzle.n_ways):
 			var est_way_start_pos = get_symmetry_point(puzzle, way, est_start_vertex.pos)
 			var way_start_vertex = get_nearest_start(puzzle, est_way_start_pos)
 			if (way_start_vertex == null):
-				start_vertices.clear()
-				lines.clear()
 				return false
-			start_vertices.push_back(way_start_vertex)
-			lines.push_back([])
+			new_start_vertices.push_back(way_start_vertex)
+			new_lines.push_back([])
+		start_vertices = new_start_vertices
+		lines = new_lines
 		progress = []
 		started = true
 		return true
@@ -83,6 +80,23 @@ class Solution:
 			else:
 				crossroad_vertex = previous_edge.end
 		return [crossroad_vertex, previous_edge]
+		
+	func is_completed():
+		if (!started):
+			return false
+		var crossroad_vertex = null
+		var previous_edge = null
+		if (len(lines[MAIN_WAY]) == 0): # line is just started
+			return false
+		elif (progress[-1] >= 1.0):
+			previous_edge = lines[MAIN_WAY][-1][0]
+			if (lines[MAIN_WAY][-1][1]): # the last segment is a backward edge
+				return previous_edge.start.decorator != null and previous_edge.start.decorator.rule == 'end'
+			else:
+				return previous_edge.end.decorator != null and previous_edge.end.decorator.rule == 'end'
+		return false
+			
+		
 		
 	func __try_introduce_segment_at(puzzle, dir, init_progress=1e-6):
 		var result = []
