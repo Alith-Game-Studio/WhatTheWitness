@@ -88,7 +88,7 @@ class Solution:
 		var result = []
 		for way in range(puzzle.n_ways):
 			var way_dir = get_symmetry_vector(puzzle, way, dir)
-			print('Finding %d' % way, way_dir)
+			# print('Finding %d' % way, way_dir)
 			var tuple = __get_crossroad(way)
 			var crossroad_vertex = tuple[0]
 			var previous_edge = tuple[1]
@@ -108,10 +108,10 @@ class Solution:
 					edge_dir = (edge.start.pos - edge.end.pos).normalized()
 				else:
 					continue
-				print((edge_dir - way_dir).length())
+				# print((edge_dir - way_dir).length())
 				if ((edge_dir - way_dir).length() < 1e-6):
 					result.append([edge, end_to_start])
-					print('Found!')
+					# print('Found!')
 					ok = true
 					break
 			if (!ok):
