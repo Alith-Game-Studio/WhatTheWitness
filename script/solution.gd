@@ -1,5 +1,4 @@
 extends Node
-const graph = preload("res://script/graph.gd")
 
 class SolutionLine:
 	var started: bool

@@ -1,7 +1,7 @@
 extends ColorRect
 
 var enabled = false
-var canvas = preload("res://script/visualizer.gd").Canvas.new(self)
+var canvas = Visualizer.Canvas.new(self)
 var puzzle_path
 func _draw():
 	if (!enabled):

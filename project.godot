@@ -25,6 +25,7 @@ Gameplay="*res://script/gameplay.gd"
 Graph="*res://script/graph.gd"
 Solution="*res://script/solution.gd"
 Validation="*res://script/validation.gd"
+Visualizer="*res://script/visualizer.gd"
 
 [rendering]
 

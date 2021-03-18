@@ -1,6 +1,5 @@
 extends Node2D
 
-var visualizer = preload("res://script/visualizer.gd")
 const puzzle_dir = "res://puzzles"
 var puzzle_preview_prefab = preload("res://PuzzlePreview.tscn")
 
