@@ -5,7 +5,7 @@ class Validator:
 	var solution_validity: int # 0: unknown, 1: correct, -1: wrong
 	var errors: Array
 	
-	func validate(puzzle, solution):
+	func validate(puzzle: Graph.Puzzle, solution: Solution.SolutionLine):
 		solution.validity = -1
 	
 	func reset():
