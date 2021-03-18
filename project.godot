@@ -19,6 +19,13 @@ config/name="Custom Witness Puzzles"
 run/main_scene="res://menu_levels.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Gameplay="*res://script/gameplay.gd"
+Graph="*res://script/graph.gd"
+Solution="*res://script/solution.gd"
+Validation="*res://script/validation.gd"
+
 [rendering]
 
 vram_compression/import_etc=true

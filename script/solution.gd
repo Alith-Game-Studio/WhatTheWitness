@@ -1,11 +1,12 @@
 extends Node
 const graph = preload("res://script/graph.gd")
 
-class Solution:
+class SolutionLine:
 	var started: bool
 	var start_vertices: Array
 	var lines: Array
 	var progress: Array
+	var validity = 0
 	const MAIN_WAY = 0
 	
 	func get_symmetry_point(puzzle, way, pos):
@@ -34,6 +35,7 @@ class Solution:
 		
 		
 	func try_start_solution_at(puzzle, pos):
+		validity = 0
 		var est_start_vertex = get_nearest_start(puzzle, pos)
 		if (est_start_vertex == null):
 			return false

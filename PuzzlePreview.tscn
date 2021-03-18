@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://script/puzzle_preview.gd" type="Script" id=1]
+[ext_resource path="res://font/DroidSansMono.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.6, 0.6, 0.6, 0.392157 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.235294, 0.235294, 0.235294, 0.392157 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 36
+font_data = ExtResource( 2 )
+
+[node name="PuzzlePreview" type="ColorRect"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_right = 100.0
+margin_bottom = 100.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
