@@ -97,6 +97,14 @@ class Solution:
 		return false
 			
 		
+	func get_total_length():
+		if (!started):
+			return 0.0
+		var result = 0.0
+		for i in range(len(progress)):
+			var edge = lines[MAIN_WAY][i][0]
+			result += progress[i] * (edge.start.pos - edge.end.pos).length()
+		return result
 		
 	func __try_introduce_segment_at(puzzle, dir, init_progress=1e-6):
 		var result = []
@@ -162,6 +170,14 @@ class Solution:
 					limit = min(limit, 1.0 - puzzle.line_width / edge_length)
 					return limit
 		return limit
+	
+	func __dynamic_obstacle_collide(puzzle, way, solution_length):
+		var end_pos = get_end_position(way)
+		for decorator in puzzle.decorators:
+			if (decorator.rule == 'obstacle'):
+				if (decorator.collide_test(end_pos, solution_length)):
+					return true
+		return false
 		
 	func try_continue_solution(puzzle, delta):
 		if (!started):
@@ -228,7 +244,13 @@ class Solution:
 				return
 			if (projected_progress >= limit):
 				projected_progress = limit
+			var temp = progress[-1]
 			progress[-1] = projected_progress
+			var solution_length = get_total_length()
+			for way in range(puzzle.n_ways):
+				if (__dynamic_obstacle_collide(puzzle, way, solution_length)):
+					progress[-1] = temp
+					return
 	
 		
 		

@@ -44,6 +44,7 @@ class Puzzle:
 	var symmetry_type: int # 0: rotational 1: reflective
 	var symmetry_center: Vector2
 	var symmetry_angle: float
+	var decorators : Array
 	
 func push_vertex_vec(puzzle, pos):
 	var result = len(puzzle.vertices)
@@ -136,10 +137,19 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			var v_end = push_vertex_vec(puzzle, p_end)
 			push_edge_idx(puzzle, id, v_end)
 			puzzle.vertices[v_end].decorator = load('res://script/decorators/end_decorator.gd').new()
-	
+		var text_decorator = __find_decorator(raw_element, "TextDecorator")
+		if (text_decorator):
+			if (text_decorator['Text'] == 'Obs'):
+				var decorator = load('res://script/decorators/obstacle_decorator.gd').new()
+				decorator.center = puzzle.vertices[id].pos
+				decorator.size = 0.5
+				decorator.radius = 1.0
+				puzzle.decorators.append(decorator)
+			else:
+				print('Unknown text decorator %s' % text_decorator['Text'])
 	if ('Decorator' in raw_element):
 		var raw_decorator = raw_element['Decorator']
-		if (!raw_decorator['__consumed']):
+		if (not ('__consumed' in raw_decorator)):
 			print('Unsupported decorator: %s on %s' % [raw_decorator['xsi:type'], ['node', 'edge', 'facet'][element_type]])
 
 	

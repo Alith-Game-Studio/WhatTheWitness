@@ -4,7 +4,7 @@ var rule = 'triangle'
 
 var count
 
-func draw_foreground(canvas, owner, owner_type, puzzle):
+func draw_foreground(canvas, owner, owner_type, puzzle, solution):
 	if (owner_type == 2):
 		var length = 0.2 * (1 - puzzle.line_width)
 		var distance = 0.05 * (1 - puzzle.line_width)

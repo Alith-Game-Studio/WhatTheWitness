@@ -4,7 +4,7 @@ var rule = 'broken'
 
 var direction : Vector2
 
-func draw_foreground(canvas, owner, owner_type, puzzle):
+func draw_foreground(canvas, owner, owner_type, puzzle, solution):
 	if (owner_type == 0):
 		canvas.add_line(
 			owner.pos - direction * puzzle.line_width / 2, 

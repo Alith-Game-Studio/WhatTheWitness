@@ -6,7 +6,7 @@ var solution = preload("res://script/solution.gd").Solution.new()
 var validator = preload("res://script/validation.gd").Validator.new()
 var view_scale = 100.0
 var view_origin = Vector2(200, 300)
-var puzzle = graph.load_from_xml('res://puzzles/symmetry.wit')
+var puzzle = graph.load_from_xml('res://puzzles/obstacles.wit')
 var mouse_start_position = null
 var filament = preload("res://fliament.gd").FilamentSolution.new()
 var is_drawing_solution = false
@@ -57,7 +57,7 @@ func draw_filament(filament_nails):
 			var start = filament.path_points[i][0]
 			var end = filament.end_pos if i + 1 == len(filament.path_points) else filament.path_points[i + 1][0]
 			add_line(start, end, 0.01, Color.lightblue)
-		 
+
 
 func draw_witness():
 	for vertex in puzzle.vertices:
@@ -66,13 +66,15 @@ func draw_witness():
 		add_line(edge.start.pos, edge.end.pos, puzzle.line_width, puzzle.line_color)
 	for vertex in puzzle.vertices:
 		if (vertex.decorator != null):
-			vertex.decorator.draw_foreground(self, vertex, 0, puzzle)
+			vertex.decorator.draw_foreground(self, vertex, 0, puzzle, solution)
 	for edge in puzzle.edges:
 		if (edge.decorator != null):
-			edge.decorator.draw_foreground(self, edge, 1, puzzle)
+			edge.decorator.draw_foreground(self, edge, 1, puzzle, solution)
 	for facet in puzzle.facets:
 		if (facet.decorator != null):
-			facet.decorator.draw_foreground(self, facet, 2, puzzle)
+			facet.decorator.draw_foreground(self, facet, 2, puzzle, solution)
+	for decorator in puzzle.decorators:
+		decorator.draw_foreground(self, null, -1, puzzle, solution)
 	if (solution.started):
 		for way in range(puzzle.n_ways):
 			var color = puzzle.solution_colors[way]
@@ -94,8 +96,17 @@ func draw_witness():
 				add_line(last_pos, pos, puzzle.line_width, color)
 				add_circle(pos, puzzle.line_width / 2.0, color)
 				last_pos = pos
-	
-	
+	for vertex in puzzle.vertices:
+		if (vertex.decorator != null):
+			vertex.decorator.draw_above_solution(self, vertex, 0, puzzle, solution)
+	for edge in puzzle.edges:
+		if (edge.decorator != null):
+			edge.decorator.draw_above_solution(self, edge, 1, puzzle, solution)
+	for facet in puzzle.facets:
+		if (facet.decorator != null):
+			facet.decorator.draw_above_solution(self, facet, 2, puzzle, solution)
+	for decorator in puzzle.decorators:
+		decorator.draw_above_solution(self, null, -1, puzzle, solution)
 func add_circle(pos, radius, color):
 	draw_circle(world_to_screen(pos), radius * view_scale - 0.5, color)
 	draw_arc(world_to_screen(pos), radius * view_scale - 0.5, 0.0, 2 * PI, 64, color, 1.0, true)
@@ -103,6 +114,12 @@ func add_circle(pos, radius, color):
 func add_line(pos1, pos2, width, color):
 	draw_line(world_to_screen(pos1), world_to_screen(pos2), color, width * view_scale, true)
 
+func add_texture(center, size, texture):
+	var origin = world_to_screen(center)
+	var screen_size = size * view_scale
+	var rect = Rect2(origin - screen_size / 2, screen_size)
+	draw_texture_rect(texture, rect, false)
+	
 func add_polygon(pos_list, color):
 	var result_list = []
 	for pos in pos_list:
@@ -114,6 +131,9 @@ func screen_to_world(position):
 
 func world_to_screen(position):
 	return position * view_scale + view_origin
+
+func _physics_process(delta):
+	update()
 
 func _input(event):
 	if (event is InputEventMouseButton and event.is_pressed()):
@@ -131,11 +151,9 @@ func _input(event):
 				mouse_start_position = event.position
 				is_drawing_solution = true
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		self.update()
 	if (event is InputEventMouseMotion):
 		if (is_drawing_solution):
 			var split = 5
 			for i in range(split):
 				solution.try_continue_solution(puzzle, event.relative / view_scale / split)
-			self.update()
 	
