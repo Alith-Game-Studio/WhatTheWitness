@@ -11,13 +11,13 @@ class SolutionLine:
 	func get_symmetry_point(puzzle, way, pos):
 		if (way == 0):
 			return pos
-		if (puzzle.symmetry_type == 0):
+		if (puzzle.symmetry_type == Graph.SYMMETRY_ROTATIONAL):
 			return (pos - puzzle.symmetry_center).rotated(2 * PI * way / puzzle.n_ways) + puzzle.symmetry_center
 		
 	func get_symmetry_vector(puzzle, way, vec):
 		if (way == 0):
 			return vec
-		if (puzzle.symmetry_type == 0):
+		if (puzzle.symmetry_type == Graph.SYMMETRY_ROTATIONAL):
 			return vec.rotated(2 * PI * way / puzzle.n_ways)
 		
 	

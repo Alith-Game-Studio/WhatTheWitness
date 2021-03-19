@@ -4,6 +4,14 @@ const NoDecorator = preload("res://script/decorators/no_decorator.gd")
 var better_xml = preload("res://script/better_xml.gd").new()
 var directory = Directory.new()
 
+const VERTEX_ELEMENT = 0
+const EDGE_ELEMENT = 1
+const FACET_ELEMENT = 2
+const GLOBAL_ELEMENT = 3
+
+const SYMMETRY_ROTATIONAL = 0
+const SYMMETRY_REFLECTIVE = 1
+
 class Vertex:
 	var pos: Vector2
 	var decorator = NoDecorator.new()
@@ -14,6 +22,8 @@ class Vertex:
 class Edge:
 	var start: Vertex
 	var end: Vertex
+	var start_index: int
+	var end_index: int
 	var decorator = NoDecorator.new()
 	func _init(v1, v2):
 		start = v1
@@ -21,6 +31,7 @@ class Edge:
 		
 	
 class Facet:
+	var edge_tuples: Array
 	var vertices: Array
 	var center: Vector2
 	var decorator = NoDecorator.new()
@@ -41,10 +52,12 @@ class Puzzle:
 	var line_width: float
 	var start_size: float
 	var n_ways: int
-	var symmetry_type: int # 0: rotational 1: reflective
+	var symmetry_type: int
 	var symmetry_center: Vector2
 	var symmetry_angle: float
 	var decorators : Array
+	var edge_detector_node = {}
+	var edge_shared_facets = {}
 	
 func push_vertex_vec(puzzle, pos):
 	var result = len(puzzle.vertices)
@@ -53,19 +66,22 @@ func push_vertex_vec(puzzle, pos):
 
 func push_edge_idx(puzzle, idx1, idx2):
 	var result = len(puzzle.edges)
-	puzzle.edges.push_back(Edge.new(puzzle.vertices[idx1], puzzle.vertices[idx2]))
+	var edge = Edge.new(puzzle.vertices[idx1], puzzle.vertices[idx2])
+	edge.start_index = idx1
+	edge.end_index = idx2
+	puzzle.edges.push_back(edge)
 	return result
 	
 func __get_raw_element_center(puzzle, raw_element, element_type, id):
-	if (element_type == 1):
+	if (element_type == EDGE_ELEMENT):
 		var v1 = int(raw_element['Start'])
 		var v2 = int(raw_element['End'])
 		var p1 = puzzle.vertices[v1].pos
 		var p2 = puzzle.vertices[v2].pos
 		return p1 * 0.5 + p2 * 0.5
-	elif (element_type == 0):
+	elif (element_type == VERTEX_ELEMENT):
 		return puzzle.vertices[id].pos
-	elif (element_type == 2):
+	elif (element_type == FACET_ELEMENT):
 		var center = Vector2()
 		for raw_face_node in raw_element['Nodes']['_arr']:
 			center += puzzle.vertices[int(raw_face_node)].pos
@@ -83,39 +99,58 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 	var symmetry_decorator = __find_decorator(raw_element, "ThreeWayPuzzleDecorator")
 	if (symmetry_decorator):
 		puzzle.n_ways = 3
-		puzzle.symmetry_type = 0
+		puzzle.symmetry_type = SYMMETRY_ROTATIONAL
 		puzzle.symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
 		puzzle.symmetry_center += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
 		puzzle.solution_colors.push_back(ColorN(symmetry_decorator['SecondLineColor']))
 		puzzle.solution_colors.push_back(ColorN(symmetry_decorator['ThirdLineColor']))
-	if (element_type == 1):
+	if (element_type == EDGE_ELEMENT):
 		var v1 = int(raw_element['Start'])
 		var v2 = int(raw_element['End'])
 		var p1 = puzzle.vertices[v1].pos
 		var p2 = puzzle.vertices[v2].pos
+		var v3
 		if (__find_decorator(raw_element, "BrokenDecorator")):
 			var p3 = p1 * 0.8 + p2 * 0.2
 			var p4 = p1 * 0.2 + p2 * 0.8
-			var v3 = push_vertex_vec(puzzle, p3)
+			v3 = push_vertex_vec(puzzle, p3)
 			var v4 = push_vertex_vec(puzzle, p4)
 			puzzle.vertices[v3].decorator = load('res://script/decorators/broken_decorator.gd').new()
 			puzzle.vertices[v3].decorator.direction = (p2 - p1).normalized()
 			puzzle.vertices[v4].decorator = puzzle.vertices[v3].decorator
 			push_edge_idx(puzzle, v1, v3)
 			push_edge_idx(puzzle, v2, v4)
-			return
-		var v3 = push_vertex_vec(puzzle, p1 * 0.5 + p2 * 0.5)
-		push_edge_idx(puzzle, v1, v3)
-		push_edge_idx(puzzle, v2, v3)
-		var point_decorator = __find_decorator(raw_element, "PointDecorator")
-		if (point_decorator):
-			puzzle.vertices[v3].decorator = load('res://script/decorators/point_decorator.gd').new()
-			puzzle.vertices[v3].decorator.color = ColorN(point_decorator['Color'])
-	elif (element_type == 2):
+		else:
+			v3 = push_vertex_vec(puzzle, p1 * 0.5 + p2 * 0.5)
+			push_edge_idx(puzzle, v1, v3)
+			push_edge_idx(puzzle, v2, v3)
+			var point_decorator = __find_decorator(raw_element, "PointDecorator")
+			if (point_decorator):
+				puzzle.vertices[v3].decorator = load('res://script/decorators/point_decorator.gd').new()
+				puzzle.vertices[v3].decorator.color = ColorN(point_decorator['Color'])
+		puzzle.edge_detector_node[[v1, v2]] = v3
+		puzzle.edge_detector_node[[v2, v1]] = v3
+		puzzle.edge_shared_facets[[v1, v2]] = []
+		puzzle.edge_shared_facets[[v2, v1]] = []
+	elif (element_type == FACET_ELEMENT):
 		var facet_vertices = []
+		var facet_vertex_indices = []
+		var edge_tuples = []
 		for raw_face_node in raw_element['Nodes']['_arr']:
+			facet_vertex_indices.push_back(int(raw_face_node))
 			facet_vertices.push_back(puzzle.vertices[int(raw_face_node)])
+		if (len(facet_vertex_indices) > 0):
+			facet_vertex_indices.push_back(facet_vertex_indices[0])
+		for i in range(len(facet_vertices)):
+			var edge_tuple = [facet_vertex_indices[i], facet_vertex_indices[i + 1]]
+			if (not (edge_tuple in puzzle.edge_shared_facets)):
+				print('Warning: facet %d missing an edge %d - %d' % [len(puzzle.facets), edge_tuple[0], edge_tuple[1]])
+			else:
+				puzzle.edge_shared_facets[[facet_vertex_indices[i], facet_vertex_indices[i + 1]]].append(len(puzzle.facets))
+				puzzle.edge_shared_facets[[facet_vertex_indices[i + 1], facet_vertex_indices[i]]].append(len(puzzle.facets))
+			edge_tuples.push_back(edge_tuple)
 		var facet = Facet.new(facet_vertices)
+		facet.edge_tuples = edge_tuples
 		puzzle.facets.push_back(facet)
 		var triangle_decorator = __find_decorator(raw_element, "TriangleDecorator")
 		if (triangle_decorator):
@@ -126,7 +161,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		if (star_decorator):
 			facet.decorator = load('res://script/decorators/star_decorator.gd').new()
 			facet.decorator.color = ColorN(star_decorator['Color'])
-	if (element_type == 0):
+	if (element_type == VERTEX_ELEMENT):
 		if (__find_decorator(raw_element, "StartDecorator")):
 			puzzle.vertices[id].decorator = load('res://script/decorators/start_decorator.gd').new()
 		var end_decorator = __find_decorator(raw_element, "EndDecorator")
@@ -170,10 +205,10 @@ func load_from_xml(file):
 		vertices.push_back(Vertex.new(float(raw_node['X']), float(raw_node['Y'])))
 	for i in range(len(raw['Nodes']['_arr'])):
 		var raw_node = raw['Nodes']['_arr'][i]
-		add_element(puzzle, raw_node, 0, i)
+		add_element(puzzle, raw_node, VERTEX_ELEMENT, i)
 	for raw_edge in raw['EdgesID']['_arr']:
-		add_element(puzzle, raw_edge, 1)
+		add_element(puzzle, raw_edge, EDGE_ELEMENT)
 	for raw_face in raw['FacesID']['_arr']:
-		add_element(puzzle, raw_face, 2)
+		add_element(puzzle, raw_face, FACET_ELEMENT)
 	return puzzle
 	
