@@ -202,6 +202,10 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		if (ring_decorator):
 			facet.decorator = load('res://script/decorators/ring_decorator.gd').new()
 			facet.decorator.color = ColorN(ring_decorator['Color'])
+		var eliminator_decorator = __find_decorator(raw_element, "EliminatorDecorator")
+		if (eliminator_decorator):
+			facet.decorator = load('res://script/decorators/eliminator_decorator.gd').new()
+			facet.decorator.color = ColorN(eliminator_decorator['Color'])
 			
 	if (element_type == VERTEX_ELEMENT):
 		__add_vertex_or_edge_decorator(puzzle, raw_element, id)

@@ -1,12 +1,12 @@
 extends ColorRect
 
 var enabled = false
-var canvas = Visualizer.PuzzleCanvas.new(self)
+var canvas = Visualizer.PuzzleCanvas.new()
 var puzzle_path
 func _draw():
 	if (!enabled):
 		return
-	canvas.draw_witness()
+	canvas.draw_puzzle(self)
 		
 func show_puzzle(path):
 	puzzle_path = path

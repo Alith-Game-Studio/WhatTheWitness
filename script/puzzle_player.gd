@@ -9,13 +9,9 @@ onready var solver_drawing_target = $MarginContainer/PuzzleRegion/PuzzleForegrou
 func _ready():
 	Gameplay.puzzle = Graph.load_from_xml(Gameplay.load_puzzle_path)
 	Gameplay.solution = Solution.SolutionLine.new()
-	Gameplay.puzzle_canvas = Visualizer.PuzzleCanvas.new(puzzle_drawing_target)
-	Gameplay.solver_canvas = Visualizer.SolverCanvas.new(solver_drawing_target)
-	Gameplay.puzzle_canvas.puzzle = Gameplay.puzzle
-	Gameplay.solver_canvas.puzzle = Gameplay.puzzle
-	Gameplay.solver_canvas.solution = Gameplay.solution
-	Gameplay.puzzle_canvas.normalize_view(puzzle_drawing_target.get_rect().size)	
-	Gameplay.solver_canvas.normalize_view(solver_drawing_target.get_rect().size)	
+	Gameplay.canvas = Visualizer.PuzzleCanvas.new()
+	Gameplay.canvas.puzzle = Gameplay.puzzle
+	Gameplay.canvas.normalize_view(puzzle_drawing_target.get_rect().size)	
 	puzzle_drawing_target.update()
 	
 func _physics_process(delta):
@@ -34,7 +30,7 @@ func _input(event):
 				Input.warp_mouse_position(mouse_start_position + panel_start_pos)
 				mouse_start_position = null
 		else:
-			if (Gameplay.solution.try_start_solution_at(Gameplay.puzzle, Gameplay.solver_canvas.screen_to_world(position))):
+			if (Gameplay.solution.try_start_solution_at(Gameplay.puzzle, Gameplay.canvas.screen_to_world(position))):
 				validator.reset()
 				mouse_start_position = position
 				is_drawing_solution = true
@@ -43,5 +39,5 @@ func _input(event):
 		if (is_drawing_solution):
 			var split = 5
 			for i in range(split):
-				Gameplay.solution.try_continue_solution(Gameplay.puzzle, event.relative / Gameplay.solver_canvas.view_scale / split)
+				Gameplay.solution.try_continue_solution(Gameplay.puzzle, event.relative / Gameplay.canvas.view_scale / split)
 	

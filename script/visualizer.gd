@@ -1,17 +1,14 @@
 extends Node
 
+class PuzzleCanvas:
+	
 
-class BaseCanvas:
-	
-	func _init():
-		pass
-	
 	var drawing_target
 	var view_scale = 100.0
 	var view_origin = Vector2(200, 300)
 	
 	var puzzle
-	
+		
 	func normalize_view(canvas_size):
 		if (len(puzzle.vertices) == 0):
 			return
@@ -56,14 +53,8 @@ class BaseCanvas:
 	func world_to_screen(position):
 		return position * view_scale + view_origin
 
-	
-
-class PuzzleCanvas extends BaseCanvas:
-	
-	func _init(target):
+	func draw_puzzle(target):
 		drawing_target = target
-
-	func draw_witness():
 		for vertex in puzzle.vertices:
 			add_circle(vertex.pos, puzzle.line_width / 2.0, puzzle.line_color)
 		for edge in puzzle.edges:
@@ -80,14 +71,8 @@ class PuzzleCanvas extends BaseCanvas:
 		for decorator in puzzle.decorators:
 			decorator.draw_foreground(self, null, -1, puzzle)
 
-class SolverCanvas extends BaseCanvas:
-	
-	var solution
-	
-	func _init(target):
+	func draw_solution(target, solution):
 		drawing_target = target
-
-	func draw_witness():
 		if (solution.started):
 			for way in range(puzzle.n_ways):
 				var color = puzzle.solution_colors[way]
