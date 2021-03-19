@@ -94,7 +94,32 @@ func __find_decorator(raw_element, xsi_type):
 			raw_decorator['__consumed'] = true
 			return raw_decorator
 	return null
-	
+
+func __add_vertex_or_edge_decorator(puzzle, raw_element, v):
+	var point_decorator = __find_decorator(raw_element, "PointDecorator")
+	if (point_decorator):
+		puzzle.vertices[v].decorator = load('res://script/decorators/point_decorator.gd').new()
+		puzzle.vertices[v].decorator.color = ColorN(point_decorator['Color'])
+	var end_decorator = __find_decorator(raw_element, "EndDecorator")
+	if (end_decorator):
+		var end_length = float(end_decorator['Length'])
+		var end_angle = deg2rad(float(end_decorator['Angle']))
+		var p_end = puzzle.vertices[v].pos + Vector2(cos(end_angle), sin(end_angle)) * end_length
+		var v_end = push_vertex_vec(puzzle, p_end)
+		push_edge_idx(puzzle, v, v_end)
+		puzzle.vertices[v_end].decorator = load('res://script/decorators/end_decorator.gd').new()
+	var text_decorator = __find_decorator(raw_element, "TextDecorator")
+	if (text_decorator):
+		if (text_decorator['Text'] == 'Obs'):
+			var decorator = load('res://script/decorators/obstacle_decorator.gd').new()
+			decorator.center = puzzle.vertices[v].pos
+			decorator.size = 0.5
+			decorator.radius = 1.0
+			puzzle.decorators.append(decorator)
+		else:
+			print('Unknown text decorator %s' % text_decorator['Text'])
+	if (__find_decorator(raw_element, "StartDecorator")):
+		puzzle.vertices[v].decorator = load('res://script/decorators/start_decorator.gd').new()
 func add_element(puzzle, raw_element, element_type, id=-1):
 	var symmetry_decorator = __find_decorator(raw_element, "ThreeWayPuzzleDecorator")
 	if (symmetry_decorator):
@@ -109,27 +134,32 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		var v2 = int(raw_element['End'])
 		var p1 = puzzle.vertices[v1].pos
 		var p2 = puzzle.vertices[v2].pos
-		var v3
+		var v_mid
 		if (__find_decorator(raw_element, "BrokenDecorator")):
 			var p3 = p1 * 0.8 + p2 * 0.2
 			var p4 = p1 * 0.2 + p2 * 0.8
-			v3 = push_vertex_vec(puzzle, p3)
+			v_mid = push_vertex_vec(puzzle, p3)
 			var v4 = push_vertex_vec(puzzle, p4)
-			puzzle.vertices[v3].decorator = load('res://script/decorators/broken_decorator.gd').new()
-			puzzle.vertices[v3].decorator.direction = (p2 - p1).normalized()
-			puzzle.vertices[v4].decorator = puzzle.vertices[v3].decorator
-			push_edge_idx(puzzle, v1, v3)
+			puzzle.vertices[v_mid].decorator = load('res://script/decorators/broken_decorator.gd').new()
+			puzzle.vertices[v_mid].decorator.direction = (p2 - p1).normalized()
+			puzzle.vertices[v4].decorator = puzzle.vertices[v_mid].decorator
+			push_edge_idx(puzzle, v1, v_mid)
 			push_edge_idx(puzzle, v2, v4)
 		else:
-			v3 = push_vertex_vec(puzzle, p1 * 0.5 + p2 * 0.5)
-			push_edge_idx(puzzle, v1, v3)
-			push_edge_idx(puzzle, v2, v3)
-			var point_decorator = __find_decorator(raw_element, "PointDecorator")
-			if (point_decorator):
-				puzzle.vertices[v3].decorator = load('res://script/decorators/point_decorator.gd').new()
-				puzzle.vertices[v3].decorator.color = ColorN(point_decorator['Color'])
-		puzzle.edge_detector_node[[v1, v2]] = v3
-		puzzle.edge_detector_node[[v2, v1]] = v3
+			v_mid = push_vertex_vec(puzzle, p1 * 0.5 + p2 * 0.5)
+			if (__find_decorator(raw_element, "EndDecorator")):
+				var v4 = push_vertex_vec(puzzle, p1 * 0.75 + p2 * 0.25)
+				var v5 = push_vertex_vec(puzzle, p1 * 0.25 + p2 * 0.75)
+				push_edge_idx(puzzle, v1, v4)
+				push_edge_idx(puzzle, v_mid, v4)
+				push_edge_idx(puzzle, v2, v5)
+				push_edge_idx(puzzle, v_mid, v5)
+			else:
+				push_edge_idx(puzzle, v1, v_mid)
+				push_edge_idx(puzzle, v2, v_mid)
+			__add_vertex_or_edge_decorator(puzzle, raw_element, v_mid)
+		puzzle.edge_detector_node[[v1, v2]] = v_mid
+		puzzle.edge_detector_node[[v2, v1]] = v_mid
 		puzzle.edge_shared_facets[[v1, v2]] = []
 		puzzle.edge_shared_facets[[v2, v1]] = []
 	elif (element_type == FACET_ELEMENT):
@@ -161,27 +191,21 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		if (star_decorator):
 			facet.decorator = load('res://script/decorators/star_decorator.gd').new()
 			facet.decorator.color = ColorN(star_decorator['Color'])
+		var square_decorator = __find_decorator(raw_element, "SquareDecorator")
+		if (square_decorator):
+			facet.decorator = load('res://script/decorators/square_decorator.gd').new()
+			facet.decorator.color = ColorN(square_decorator['Color'])
+		var circle_decorator = __find_decorator(raw_element, "CircleDecorator")
+		if (circle_decorator):
+			facet.decorator = load('res://script/decorators/circle_decorator.gd').new()
+			facet.decorator.color = ColorN(circle_decorator['Color'])
+		var ring_decorator = __find_decorator(raw_element, "RingDecorator")
+		if (ring_decorator):
+			facet.decorator = load('res://script/decorators/ring_decorator.gd').new()
+			facet.decorator.color = ColorN(ring_decorator['Color'])
+			
 	if (element_type == VERTEX_ELEMENT):
-		if (__find_decorator(raw_element, "StartDecorator")):
-			puzzle.vertices[id].decorator = load('res://script/decorators/start_decorator.gd').new()
-		var end_decorator = __find_decorator(raw_element, "EndDecorator")
-		if (end_decorator):
-			var end_length = float(end_decorator['Length'])
-			var end_angle = deg2rad(float(end_decorator['Angle']))
-			var p_end = puzzle.vertices[id].pos + Vector2(cos(end_angle), sin(end_angle)) * end_length
-			var v_end = push_vertex_vec(puzzle, p_end)
-			push_edge_idx(puzzle, id, v_end)
-			puzzle.vertices[v_end].decorator = load('res://script/decorators/end_decorator.gd').new()
-		var text_decorator = __find_decorator(raw_element, "TextDecorator")
-		if (text_decorator):
-			if (text_decorator['Text'] == 'Obs'):
-				var decorator = load('res://script/decorators/obstacle_decorator.gd').new()
-				decorator.center = puzzle.vertices[id].pos
-				decorator.size = 0.5
-				decorator.radius = 1.0
-				puzzle.decorators.append(decorator)
-			else:
-				print('Unknown text decorator %s' % text_decorator['Text'])
+		__add_vertex_or_edge_decorator(puzzle, raw_element, id)
 	if ('Decorator' in raw_element):
 		var raw_decorator = raw_element['Decorator']
 		if (not ('__consumed' in raw_decorator)):

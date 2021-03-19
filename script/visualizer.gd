@@ -82,7 +82,10 @@ class Canvas:
 		
 	func add_line(pos1, pos2, width, color):
 		drawing_target.draw_line(world_to_screen(pos1), world_to_screen(pos2), color, width * view_scale, true)
-
+	
+	func add_rect(pos1, pos2, width, color):
+		drawing_target.draw_line(world_to_screen(Vector2((pos1.x + pos2.x) / 2, pos1.y)), world_to_screen(Vector2((pos1.x + pos2.x) / 2, pos2.y)), color, (pos2.x - pos1.x) * view_scale, true)
+	
 	func add_texture(center, size, texture):
 		var origin = world_to_screen(center)
 		var screen_size = size * view_scale
