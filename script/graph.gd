@@ -119,6 +119,36 @@ func __add_vertex_or_edge_decorator(puzzle, raw_element, v):
 			print('Unknown text decorator %s' % text_decorator['Text'])
 	if (__find_decorator(raw_element, "StartDecorator")):
 		puzzle.vertices[v].decorator = load('res://script/decorators/start_decorator.gd').new()
+
+func __load_tetris(raw_decorator, is_hollow):
+	var shapes = []
+	var min_x = INF
+	var max_x = -INF
+	var min_y = INF
+	var max_y = -INF
+	for raw_shape in raw_decorator['Shapes']['_arr']:
+		var shape = []
+		for raw_node in raw_shape['_arr']:
+			var node = Vector2(float(raw_node['X']), float(raw_node['Y']))
+			min_x = min(min_x, node.x)
+			min_y = min(min_y, node.y)
+			max_x = max(max_x, node.x)
+			max_y = max(max_y, node.y)
+			shape.append(node)
+		shapes.append(shape)
+	var center = Vector2((max_x + min_x) / 2, (max_y + min_y) / 2)
+	for shape in shapes:
+		for i in range(len(shape)):
+			shape[i] -= center
+	var decorator = load('res://script/decorators/tetris_decorator.gd').new()
+	decorator.shapes = shapes
+	decorator.is_hollow = is_hollow
+	if (is_hollow):
+		decorator.border_size = float(raw_decorator['BorderSize'])
+	decorator.color = ColorN(raw_decorator['Color'])
+	decorator.margin_size = float(raw_decorator['MarginSize'])
+	return decorator
+
 func add_element(puzzle, raw_element, element_type, id=-1):
 	var symmetry_decorator = __find_decorator(raw_element, "ThreeWayPuzzleDecorator")
 	if (symmetry_decorator):
@@ -206,7 +236,12 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		if (eliminator_decorator):
 			facet.decorator = load('res://script/decorators/eliminator_decorator.gd').new()
 			facet.decorator.color = ColorN(eliminator_decorator['Color'])
-			
+		var tetris_decorator = __find_decorator(raw_element, "TetrisDecorator")
+		if (tetris_decorator):
+			facet.decorator = __load_tetris(tetris_decorator, false)
+		var hollow_tetris_decorator = __find_decorator(raw_element, "HollowTetrisDecorator")
+		if (hollow_tetris_decorator):
+			facet.decorator = __load_tetris(hollow_tetris_decorator, true)
 	if (element_type == VERTEX_ELEMENT):
 		__add_vertex_or_edge_decorator(puzzle, raw_element, id)
 	if ('Decorator' in raw_element):
