@@ -1,41 +1,47 @@
 extends Node2D
 
 var validator = Validation.Validator.new()
-var canvas = Visualizer.Canvas.new(self)
 var mouse_start_position = null
 var is_drawing_solution = false
-var puzzle
-
-func _draw():
-	canvas.draw_witness()
+onready var puzzle_drawing_target = $MarginContainer/PuzzleRegion/PuzzleBackground
+onready var solver_drawing_target = $MarginContainer/PuzzleRegion/PuzzleForeground
 
 func _ready():
-	canvas.puzzle = Graph.load_from_xml(Gameplay.load_puzzle_path)
-	canvas.solution = Solution.SolutionLine.new()
-	canvas.normalize_view(get_viewport().size)	
-
+	Gameplay.puzzle = Graph.load_from_xml(Gameplay.load_puzzle_path)
+	Gameplay.solution = Solution.SolutionLine.new()
+	Gameplay.puzzle_canvas = Visualizer.PuzzleCanvas.new(puzzle_drawing_target)
+	Gameplay.solver_canvas = Visualizer.SolverCanvas.new(solver_drawing_target)
+	Gameplay.puzzle_canvas.puzzle = Gameplay.puzzle
+	Gameplay.solver_canvas.puzzle = Gameplay.puzzle
+	Gameplay.solver_canvas.solution = Gameplay.solution
+	Gameplay.puzzle_canvas.normalize_view(puzzle_drawing_target.get_rect().size)	
+	Gameplay.solver_canvas.normalize_view(solver_drawing_target.get_rect().size)	
+	puzzle_drawing_target.update()
+	
 func _physics_process(delta):
-	update()
+	solver_drawing_target.update()
 
 func _input(event):
 	if (event is InputEventMouseButton and event.is_pressed()):
+		var panel_start_pos = solver_drawing_target.get_global_rect().position
+		var position = event.position - panel_start_pos
 		if (is_drawing_solution):
-			if (canvas.solution.is_completed()):
-				validator.validate(canvas.puzzle, canvas.solution)
+			if (Gameplay.solution.is_completed()):
+				validator.validate(Gameplay.puzzle, Gameplay.solution)
 			is_drawing_solution = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			if (mouse_start_position != null):
-				Input.warp_mouse_position(mouse_start_position)
+				Input.warp_mouse_position(mouse_start_position + panel_start_pos)
 				mouse_start_position = null
 		else:
-			if (canvas.solution.try_start_solution_at(canvas.puzzle, canvas.screen_to_world(event.position))):
+			if (Gameplay.solution.try_start_solution_at(Gameplay.puzzle, Gameplay.solver_canvas.screen_to_world(position))):
 				validator.reset()
-				mouse_start_position = event.position
+				mouse_start_position = position
 				is_drawing_solution = true
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if (event is InputEventMouseMotion):
 		if (is_drawing_solution):
 			var split = 5
 			for i in range(split):
-				canvas.solution.try_continue_solution(canvas.puzzle, event.relative / canvas.view_scale / split)
+				Gameplay.solution.try_continue_solution(Gameplay.puzzle, event.relative / Gameplay.solver_canvas.view_scale / split)
 	

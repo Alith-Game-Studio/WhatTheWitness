@@ -1,7 +1,7 @@
 extends ColorRect
 
 var enabled = false
-var canvas = Visualizer.Canvas.new(self)
+var canvas = Visualizer.PuzzleCanvas.new(self)
 var puzzle_path
 func _draw():
 	if (!enabled):
@@ -11,7 +11,6 @@ func _draw():
 func show_puzzle(path):
 	puzzle_path = path
 	var puzzle = Graph.load_from_xml(puzzle_path)
-	canvas.solution = Solution.SolutionLine.new()
 	canvas.puzzle = puzzle
 	canvas.normalize_view(self.get_rect().size)
 	enabled = true

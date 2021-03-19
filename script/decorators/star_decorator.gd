@@ -2,7 +2,7 @@ extends "../decorator.gd"
 
 var rule = 'star'
 
-func draw_foreground(canvas, owner, owner_type, puzzle, solution):
+func draw_foreground(canvas: Visualizer.PuzzleCanvas, owner, owner_type: int, puzzle: Graph.Puzzle):
 	var distance = 0.194 * (1 - puzzle.line_width)
 	var skewDistance = distance * 0.7071068
 	var width = distance * 2

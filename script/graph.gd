@@ -1,6 +1,5 @@
 extends Node
 
-const NoDecorator = preload("res://script/decorators/no_decorator.gd")
 var better_xml = preload("res://script/better_xml.gd").new()
 var directory = Directory.new()
 
@@ -14,7 +13,7 @@ const SYMMETRY_REFLECTIVE = 1
 
 class Vertex:
 	var pos: Vector2
-	var decorator = NoDecorator.new()
+	var decorator = load("res://script/decorators/no_decorator.gd").new()
 	func _init(x, y):
 		pos.x = x
 		pos.y = y
@@ -24,7 +23,7 @@ class Edge:
 	var end: Vertex
 	var start_index: int
 	var end_index: int
-	var decorator = NoDecorator.new()
+	var decorator = load("res://script/decorators/no_decorator.gd").new()
 	func _init(v1, v2):
 		start = v1
 		end = v2
@@ -34,7 +33,7 @@ class Facet:
 	var edge_tuples: Array
 	var vertices: Array
 	var center: Vector2
-	var decorator = NoDecorator.new()
+	var decorator = load("res://script/decorators/no_decorator.gd").new()
 	func _init(vs):
 		vertices = vs
 		center = Vector2.ZERO

@@ -2,7 +2,7 @@ extends "../decorator.gd"
 
 var rule = 'square'
 
-func draw_foreground(canvas, owner, owner_type, puzzle, solution):
+func draw_foreground(canvas: Visualizer.PuzzleCanvas, owner, owner_type: int, puzzle: Graph.Puzzle):
 	if (owner_type == Graph.FACET_ELEMENT):
 		var circleRadius = 0.191 * (1 - puzzle.line_width)
 		var distance = 0.067 * (1 - puzzle.line_width)
