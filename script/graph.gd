@@ -21,6 +21,7 @@ class Vertex:
 class Edge:
 	var start: Vertex
 	var end: Vertex
+	var end_is_crossroad: bool
 	var start_index: int
 	var end_index: int
 	var decorator = load("res://script/decorators/no_decorator.gd").new()
@@ -68,8 +69,9 @@ func push_edge_idx(puzzle, idx1, idx2):
 	var edge = Edge.new(puzzle.vertices[idx1], puzzle.vertices[idx2])
 	edge.start_index = idx1
 	edge.end_index = idx2
+	edge.end_is_crossroad = false
 	puzzle.edges.push_back(edge)
-	return result
+	return edge
 	
 func __get_raw_element_center(puzzle, raw_element, element_type, id):
 	if (element_type == EDGE_ELEMENT):
@@ -105,7 +107,8 @@ func __add_vertex_or_edge_decorator(puzzle, raw_element, v):
 		var end_angle = deg2rad(float(end_decorator['Angle']))
 		var p_end = puzzle.vertices[v].pos + Vector2(cos(end_angle), sin(end_angle)) * end_length
 		var v_end = push_vertex_vec(puzzle, p_end)
-		push_edge_idx(puzzle, v, v_end)
+		var e = push_edge_idx(puzzle, v, v_end)
+		e.end_is_crossroad = true
 		puzzle.vertices[v_end].decorator = load('res://script/decorators/end_decorator.gd').new()
 	var text_decorator = __find_decorator(raw_element, "TextDecorator")
 	if (text_decorator):
@@ -166,8 +169,8 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		var p2 = puzzle.vertices[v2].pos
 		var v_mid
 		if (__find_decorator(raw_element, "BrokenDecorator")):
-			var p3 = p1 * 0.8 + p2 * 0.2
-			var p4 = p1 * 0.2 + p2 * 0.8
+			var p3 = p1 * 0.75 + p2 * 0.25
+			var p4 = p1 * 0.25 + p2 * 0.75
 			v_mid = push_vertex_vec(puzzle, p3)
 			var v4 = push_vertex_vec(puzzle, p4)
 			puzzle.vertices[v_mid].decorator = load('res://script/decorators/broken_decorator.gd').new()
@@ -177,16 +180,12 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			push_edge_idx(puzzle, v2, v4)
 		else:
 			v_mid = push_vertex_vec(puzzle, p1 * 0.5 + p2 * 0.5)
+			var e1 = push_edge_idx(puzzle, v1, v_mid)
+			var e2 = push_edge_idx(puzzle, v2, v_mid)
+			
 			if (__find_decorator(raw_element, "EndDecorator")):
-				var v4 = push_vertex_vec(puzzle, p1 * 0.75 + p2 * 0.25)
-				var v5 = push_vertex_vec(puzzle, p1 * 0.25 + p2 * 0.75)
-				push_edge_idx(puzzle, v1, v4)
-				push_edge_idx(puzzle, v_mid, v4)
-				push_edge_idx(puzzle, v2, v5)
-				push_edge_idx(puzzle, v_mid, v5)
-			else:
-				push_edge_idx(puzzle, v1, v_mid)
-				push_edge_idx(puzzle, v2, v_mid)
+				e1.end_is_crossroad = true
+				e2.end_is_crossroad = true
 			__add_vertex_or_edge_decorator(puzzle, raw_element, v_mid)
 		puzzle.edge_detector_node[[v1, v2]] = v_mid
 		puzzle.edge_detector_node[[v2, v1]] = v_mid

@@ -234,7 +234,7 @@ class SolutionLine:
 			if (end_to_start):
 				projected_length = -projected_length
 			var projected_progress = last_progress + projected_length
-			if (end_to_start): # second half is always end to start
+			if ((!edge.end_is_crossroad and end_to_start) or (edge.end_is_crossroad and last_progress > 0.5)): # second half is always end to start
 				projected_progress += projected_det * 0.5 # encourage
 			else:
 				projected_progress -= projected_det * 0.5 # discorage
