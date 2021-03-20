@@ -147,6 +147,7 @@ func __load_tetris(raw_decorator, is_hollow):
 		decorator.border_size = float(raw_decorator['BorderSize'])
 	decorator.color = ColorN(raw_decorator['Color'])
 	decorator.margin_size = float(raw_decorator['MarginSize'])
+	decorator.angle = deg2rad(float(raw_decorator['Angle']))
 	return decorator
 
 func add_element(puzzle, raw_element, element_type, id=-1):
@@ -221,6 +222,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			facet.decorator = load('res://script/decorators/arrow_decorator.gd').new()
 			facet.decorator.color = ColorN(arrow_decorator['Color'])
 			facet.decorator.count = int(arrow_decorator['Count'])
+			facet.decorator.angle = deg2rad(float(arrow_decorator['Angle']))
 		var star_decorator = __find_decorator(raw_element, "StarDecorator")
 		if (star_decorator):
 			facet.decorator = load('res://script/decorators/star_decorator.gd').new()

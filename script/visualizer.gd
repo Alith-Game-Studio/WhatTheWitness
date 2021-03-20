@@ -61,11 +61,11 @@ class PuzzleCanvas:
 			add_line(edge.start.pos, edge.end.pos, puzzle.line_width, puzzle.line_color)
 		for vertex in puzzle.vertices:
 			if (vertex.decorator != null):
-				drawing_target.draw_set_transform(view_origin + vertex.pos * view_scale, 0.0, Vector2(1.0, 1.0))
+				drawing_target.draw_set_transform(view_origin + vertex.pos * view_scale, vertex.decorator.angle, Vector2(1.0, 1.0))
 				vertex.decorator.draw_foreground(self, vertex, 0, puzzle)
 		for facet in puzzle.facets:
 			if (facet.decorator != null):
-				drawing_target.draw_set_transform(view_origin + facet.center * view_scale, 0.0, Vector2(1.0, 1.0))
+				drawing_target.draw_set_transform(view_origin + facet.center * view_scale, facet.decorator.angle, Vector2(1.0, 1.0))
 				facet.decorator.draw_foreground(self, facet, 2, puzzle)
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		for decorator in puzzle.decorators:
@@ -97,11 +97,11 @@ class PuzzleCanvas:
 					last_pos = pos
 		for vertex in puzzle.vertices:
 			if (vertex.decorator != null):
-				drawing_target.draw_set_transform(view_origin + vertex.pos * view_scale, 0.0, Vector2(1.0, 1.0))
+				drawing_target.draw_set_transform(view_origin + vertex.pos * view_scale, vertex.decorator.angle, Vector2(1.0, 1.0))
 				vertex.decorator.draw_above_solution(self, vertex, 0, puzzle, solution)
 		for facet in puzzle.facets:
 			if (facet.decorator != null):
-				drawing_target.draw_set_transform(view_origin + facet.center * view_scale, 0.0, Vector2(1.0, 1.0))
+				drawing_target.draw_set_transform(view_origin + facet.center * view_scale, facet.decorator.angle, Vector2(1.0, 1.0))
 				facet.decorator.draw_above_solution(self, facet, 2, puzzle, solution)
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		for decorator in puzzle.decorators:

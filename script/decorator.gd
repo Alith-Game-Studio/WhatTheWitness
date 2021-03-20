@@ -1,6 +1,7 @@
 extends Node
 
 var color: Color
+var angle: float = 0.0
 var additional_scale: float = 1.0
 
 
