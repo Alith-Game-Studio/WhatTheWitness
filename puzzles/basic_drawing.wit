@@ -47,6 +47,20 @@
       <Y>3</Y>
     </Node>
     <Node>
+      <Decorator xsi:type="TextDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <SerializableFont>
+          <FontFamily>Microsoft YaHei UI</FontFamily>
+          <GraphicsUnit>Point</GraphicsUnit>
+          <Size>9</Size>
+          <Style>Regular</Style>
+        </SerializableFont>
+        <Text>$</Text>
+        <Color>Black</Color>
+      </Decorator>
       <X>2</X>
       <Y>4</Y>
     </Node>
@@ -63,6 +77,20 @@
       <Y>2</Y>
     </Node>
     <Node>
+      <Decorator xsi:type="TextDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <SerializableFont>
+          <FontFamily>Microsoft YaHei UI</FontFamily>
+          <GraphicsUnit>Point</GraphicsUnit>
+          <Size>9</Size>
+          <Style>Regular</Style>
+        </SerializableFont>
+        <Text>$</Text>
+        <Color>Black</Color>
+      </Decorator>
       <X>3</X>
       <Y>3</Y>
     </Node>
@@ -79,6 +107,20 @@
       <Y>1</Y>
     </Node>
     <Node>
+      <Decorator xsi:type="TextDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <SerializableFont>
+          <FontFamily>Microsoft YaHei UI</FontFamily>
+          <GraphicsUnit>Point</GraphicsUnit>
+          <Size>9</Size>
+          <Style>Regular</Style>
+        </SerializableFont>
+        <Text>$</Text>
+        <Color>Black</Color>
+      </Decorator>
       <X>4</X>
       <Y>2</Y>
     </Node>

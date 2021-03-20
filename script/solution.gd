@@ -164,12 +164,13 @@ class SolutionLine:
 				limit = min(limit, 1.0 - (puzzle.start_size + puzzle.line_width / 2) / main_edge_length)
 		
 		# colliding with other lines (or self-colliding)
-		for way_2 in range(puzzle.n_ways):
-			for i in range(len(lines[way_2]) - 1):
-				if (lines[way_2][i][0].start == end_node or 
-					lines[way_2][i][0].end == end_node):
-					limit = min(limit, 1.0 - puzzle.line_width / edge_length)
-					return limit
+		if (end_node.decorator.rule != 'self-intersection'):
+			for way_2 in range(puzzle.n_ways):
+				for i in range(len(lines[way_2]) - 1):
+					if (lines[way_2][i][0].start == end_node or 
+						lines[way_2][i][0].end == end_node):
+						limit = min(limit, 1.0 - puzzle.line_width / edge_length)
+						return limit
 		return limit
 	
 	func __dynamic_obstacle_collide(puzzle, way, solution_length):
@@ -207,6 +208,12 @@ class SolutionLine:
 				if (aligned_score > best_aligned_score):
 					chosen_edge = [edge, end_to_start, backtrace_path, edge_dir]
 			if (chosen_edge != null):
+				if (crossroad_vertex.decorator.rule == 'self-intersection'):
+					# additional check: no overlapping edges
+					for way_2 in range(puzzle.n_ways):
+						for i in range(len(lines[way_2]) - 1):
+							if (lines[way_2][i][0] == chosen_edge[0]):
+								return
 				if (chosen_edge[2]): # backtrace, no extra check
 					progress[-1] = 1.0 - 1e-6
 				else:

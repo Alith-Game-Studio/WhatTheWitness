@@ -118,6 +118,10 @@ func __add_vertex_or_edge_decorator(puzzle, raw_element, v):
 			decorator.size = 0.5
 			decorator.radius = 1.0
 			puzzle.decorators.append(decorator)
+		elif (text_decorator['Text'] == '$'):
+			var decorator = load('res://script/decorators/self_intersection_decorator.gd').new()
+			decorator.color = ColorN(text_decorator['Color'])
+			puzzle.vertices[v].decorator = decorator
 		else:
 			print('Unknown text decorator %s' % text_decorator['Text'])
 	if (__find_decorator(raw_element, "StartDecorator")):
