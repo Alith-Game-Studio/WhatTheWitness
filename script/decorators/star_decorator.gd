@@ -8,14 +8,14 @@ func draw_foreground(canvas: Visualizer.PuzzleCanvas, owner, owner_type: int, pu
 	var width = distance * 2
 	if (owner_type == 2):
 		canvas.add_line(
-			owner.center - Vector2(distance, 0), 
-			owner.center + Vector2(distance, 0), 
+			-Vector2(distance, 0), 
+			Vector2(distance, 0), 
 			width, 
 			color
 		)
 		canvas.add_line(
-			owner.center + Vector2(skewDistance, -skewDistance), 
-			owner.center + Vector2(-skewDistance, skewDistance), 
+			Vector2(skewDistance, -skewDistance), 
+			Vector2(-skewDistance, skewDistance), 
 			width, 
 			color
 		)

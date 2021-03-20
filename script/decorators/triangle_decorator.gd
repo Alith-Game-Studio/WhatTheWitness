@@ -25,9 +25,9 @@ func draw_foreground(canvas: Visualizer.PuzzleCanvas, owner, owner_type: int, pu
 			var p3 = Vector2(-totalWidth / 2 + length, currentHeight)
 			for i in range(numbersPerlevel[level]):
 				canvas.add_polygon([
-					p1 + owner.center,
-					p2 + owner.center,
-					p3 + owner.center
+					p1 ,
+					p2 ,
+					p3 
 				], color)
 				p1 += Vector2(length + distance, 0)
 				p2 += Vector2(length + distance, 0)

@@ -720,19 +720,13 @@
         <int>19</int>
         <int>18</int>
       </Nodes>
-      <Decorator xsi:type="TextDecorator">
+      <Decorator xsi:type="ArrowDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
-        <Angle>-45</Angle>
+        <Angle>135</Angle>
         <ExtraScale>1</ExtraScale>
-        <SerializableFont>
-          <FontFamily>Microsoft YaHei UI</FontFamily>
-          <GraphicsUnit>Point</GraphicsUnit>
-          <Size>9</Size>
-          <Style>Regular</Style>
-        </SerializableFont>
-        <Text>AA</Text>
-        <Color>Black</Color>
+        <Count>2</Count>
+        <Color>Purple</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -792,19 +786,13 @@
         <int>24</int>
         <int>23</int>
       </Nodes>
-      <Decorator xsi:type="TextDecorator">
+      <Decorator xsi:type="ArrowDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
-        <Angle>-90</Angle>
+        <Angle>90</Angle>
         <ExtraScale>1</ExtraScale>
-        <SerializableFont>
-          <FontFamily>Microsoft YaHei UI</FontFamily>
-          <GraphicsUnit>Point</GraphicsUnit>
-          <Size>9</Size>
-          <Style>Regular</Style>
-        </SerializableFont>
-        <Text>AAA</Text>
-        <Color>Black</Color>
+        <Count>3</Count>
+        <Color>Purple</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
