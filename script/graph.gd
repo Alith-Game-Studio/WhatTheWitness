@@ -59,6 +59,12 @@ class Puzzle:
 	var edge_detector_node = {}
 	var edge_shared_facets = {}
 	
+	func get_vertex_at(position, eps=1e-3):
+		for vertex in vertices:
+			if ((vertex.pos - position).length() <= eps):
+				return vertex
+		return null
+	
 func push_vertex_vec(puzzle, pos):
 	var result = len(puzzle.vertices)
 	puzzle.vertices.push_back(Vertex.new(pos.x, pos.y))
@@ -122,6 +128,11 @@ func __add_vertex_or_edge_decorator(puzzle, raw_element, v):
 			var decorator = load('res://script/decorators/self_intersection_decorator.gd').new()
 			decorator.color = ColorN(text_decorator['Color'])
 			puzzle.vertices[v].decorator = decorator
+		elif (text_decorator['Text'] == '[ ]'):
+			var decorator = load('res://script/decorators/box_decorator.gd').new()
+			decorator.color = ColorN(text_decorator['Color'])
+			decorator.init_location = puzzle.vertices[v].pos
+			puzzle.decorators.append(decorator)
 		else:
 			print('Unknown text decorator %s' % text_decorator['Text'])
 	if (__find_decorator(raw_element, "StartDecorator")):

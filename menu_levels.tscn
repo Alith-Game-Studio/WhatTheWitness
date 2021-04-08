@@ -50,4 +50,4 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 15
 custom_constants/hseparation = 15
-columns = 6
+columns = 5

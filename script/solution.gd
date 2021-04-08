@@ -51,6 +51,9 @@ class SolutionLine:
 		lines = new_lines
 		progress = []
 		started = true
+		for decorator in puzzle.decorators:
+			if (decorator.rule == 'box'):
+				decorator.location_stack.clear()
 		return true
 				
 	func det(v1, v2):
@@ -142,7 +145,32 @@ class SolutionLine:
 		for way in range(puzzle.n_ways):
 			lines[way].append(result[way])
 		progress.append(init_progress)
+		for decorator in puzzle.decorators:
+			if (decorator.rule == 'box'):
+				var old_pos = decorator.get_location()
+				var new_pos = old_pos
+				for way in range(puzzle.n_ways):
+					var end_to_start = lines[way][-1][1]
+					var edge = lines[way][-1][0]
+					var edge_dir = (edge.start.pos - edge.end.pos).normalized() if end_to_start else (edge.end.pos - edge.start.pos).normalized()
+					var edge_end_pos = edge.start.pos if end_to_start else edge.end.pos
+					if ((edge_end_pos - old_pos).length() < 1e-3):
+						new_pos = old_pos + edge_dir
+					var vertex = puzzle.get_vertex_at(new_pos)
+					if (vertex != null):
+						new_pos = vertex.pos
+					else:
+						new_pos = old_pos
+				decorator.location_stack.append(new_pos)
 		return true
+		
+	func __pop_segment(puzzle):
+		for way in range(puzzle.n_ways):
+			lines[way].pop_back()
+		progress.pop_back()
+		for decorator in puzzle.decorators:
+			if (decorator.rule == 'box'):
+				decorator.location_stack.pop_back()
 		
 	func __calc_way_limit(puzzle, way, main_edge_length):
 		var limit = 1.0 + 1e-6
@@ -178,6 +206,9 @@ class SolutionLine:
 		for decorator in puzzle.decorators:
 			if (decorator.rule == 'obstacle'):
 				if (decorator.collide_test(end_pos, solution_length)):
+					return true
+			if (decorator.rule == 'box'):
+				if (decorator.collide_test(end_pos)):
 					return true
 		return false
 		
@@ -246,9 +277,7 @@ class SolutionLine:
 			else:
 				projected_progress -= projected_det * 0.5 # discorage
 			if (projected_progress <= 0.0):
-				for way in range(puzzle.n_ways):
-					lines[way].pop_back()
-				progress.pop_back()
+				__pop_segment(puzzle)
 				return
 			if (projected_progress >= limit):
 				projected_progress = limit
