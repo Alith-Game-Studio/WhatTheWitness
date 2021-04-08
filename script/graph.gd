@@ -13,6 +13,7 @@ const SYMMETRY_REFLECTIVE = 1
 
 class Vertex:
 	var pos: Vector2
+	var index: int
 	var decorator = load("res://script/decorators/no_decorator.gd").new()
 	func _init(x, y):
 		pos.x = x
@@ -67,7 +68,9 @@ class Puzzle:
 	
 func push_vertex_vec(puzzle, pos):
 	var result = len(puzzle.vertices)
-	puzzle.vertices.push_back(Vertex.new(pos.x, pos.y))
+	var vertex = Vertex.new(pos.x, pos.y)
+	vertex.index = len(puzzle.vertices)
+	puzzle.vertices.push_back(vertex)
 	return result
 
 func push_edge_idx(puzzle, idx1, idx2):
@@ -285,7 +288,7 @@ func load_from_xml(file):
 	var edges = puzzle.edges
 	var facets = puzzle.facets
 	for raw_node in raw['Nodes']['_arr']:
-		vertices.push_back(Vertex.new(float(raw_node['X']), float(raw_node['Y'])))
+		push_vertex_vec(puzzle, Vector2(float(raw_node['X']), float(raw_node['Y'])))
 	for i in range(len(raw['Nodes']['_arr'])):
 		var raw_node = raw['Nodes']['_arr'][i]
 		add_element(puzzle, raw_node, VERTEX_ELEMENT, i)

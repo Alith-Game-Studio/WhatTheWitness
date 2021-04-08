@@ -7,6 +7,7 @@ class SolutionLine:
 	var progress: Array
 	var validity = 0
 	const MAIN_WAY = 0
+	var vertices_occupied: Array
 	
 	func get_symmetry_point(puzzle, way, pos):
 		if (way == 0):
@@ -51,6 +52,7 @@ class SolutionLine:
 		lines = new_lines
 		progress = []
 		started = true
+		update_vertex_occupation(puzzle)
 		for decorator in puzzle.decorators:
 			if (decorator.rule == 'box'):
 				decorator.location_stack.clear()
@@ -145,6 +147,7 @@ class SolutionLine:
 		for way in range(puzzle.n_ways):
 			lines[way].append(result[way])
 		progress.append(init_progress)
+		update_vertex_occupation(puzzle)
 		for decorator in puzzle.decorators:
 			if (decorator.rule == 'box'):
 				var old_pos = decorator.get_location()
@@ -161,16 +164,17 @@ class SolutionLine:
 						new_pos = vertex.pos
 					else:
 						new_pos = old_pos
-				decorator.location_stack.append(new_pos)
+				decorator.push_location(new_pos)
 		return true
 		
 	func __pop_segment(puzzle):
 		for way in range(puzzle.n_ways):
 			lines[way].pop_back()
 		progress.pop_back()
+		update_vertex_occupation(puzzle)
 		for decorator in puzzle.decorators:
 			if (decorator.rule == 'box'):
-				decorator.location_stack.pop_back()
+				decorator.pop_location()
 		
 	func __calc_way_limit(puzzle, way, main_edge_length):
 		var limit = 1.0 + 1e-6
@@ -186,19 +190,16 @@ class SolutionLine:
 			if (edge_length < main_edge_length):
 				limit = min(limit, 1.0 * edge_length / main_edge_length)
 		
-		# colliding with starts
-		for start_vertex in start_vertices:
-			if (end_node == start_vertex):
+		var end_node_index = end_node.index
+		if (end_node_index >= 0):
+			# colliding with starts
+			if (vertices_occupied[end_node_index] == 2):
 				limit = min(limit, 1.0 - (puzzle.start_size + puzzle.line_width / 2) / main_edge_length)
-		
-		# colliding with other lines (or self-colliding)
-		if (end_node.decorator.rule != 'self-intersection'):
-			for way_2 in range(puzzle.n_ways):
-				for i in range(len(lines[way_2]) - 1):
-					if (lines[way_2][i][0].start == end_node or 
-						lines[way_2][i][0].end == end_node):
-						limit = min(limit, 1.0 - puzzle.line_width / edge_length)
-						return limit
+			
+			# colliding with other lines (or self-colliding)
+			if (end_node.decorator.rule != 'self-intersection'):
+				if (vertices_occupied[end_node_index] > 0):
+					limit = min(limit, 1.0 - puzzle.line_width / edge_length)
 		return limit
 	
 	func __dynamic_obstacle_collide(puzzle, way, solution_length):
@@ -211,6 +212,28 @@ class SolutionLine:
 				if (decorator.collide_test(end_pos)):
 					return true
 		return false
+		
+	func __update_vertex_occupation_at(puzzle, vertex, delta_shift, value):
+		var target_vertex = vertex
+		if (delta_shift.length() > 1e-6): 
+			# the line is shifted, we need to re-estimate the vertex
+			target_vertex = puzzle.get_vertex_at(vertex.pos + delta_shift)
+		if (target_vertex != null and target_vertex.index >= 0):
+			vertices_occupied[target_vertex.index] = value
+		
+	func update_vertex_occupation(puzzle):
+		vertices_occupied = []
+		for i in range(len(puzzle.vertices)):
+			vertices_occupied.append(0)
+		if (!started):
+			return
+		var delta_shift = Vector2.ZERO
+		for way in range(puzzle.n_ways):
+			# We assume the last vertex is not occupied, so start from n - 2 to 0
+			for i in range(len(lines[way]) - 2, -1, -1):
+				for vertex in [lines[way][i][0].start, lines[way][i][0].end]:
+					__update_vertex_occupation_at(puzzle, vertex, delta_shift, 1)
+			__update_vertex_occupation_at(puzzle, start_vertices[way], delta_shift, 2)
 		
 	func try_continue_solution(puzzle, delta):
 		if (!started):
