@@ -25,6 +25,7 @@ class Edge:
 	var end_is_crossroad: bool
 	var start_index: int
 	var end_index: int
+	var contains_wall: bool
 	var decorator = load("res://script/decorators/no_decorator.gd").new()
 	func _init(v1, v2):
 		start = v1
@@ -105,7 +106,7 @@ func __find_decorator(raw_element, xsi_type):
 			return raw_decorator
 	return null
 
-func __add_vertex_or_edge_decorator(puzzle, raw_element, v):
+func __add_vertex_or_edge_decorator(puzzle, raw_element, v, e1=null, e2=null):
 	var point_decorator = __find_decorator(raw_element, "PointDecorator")
 	if (point_decorator):
 		puzzle.vertices[v].decorator = load('res://script/decorators/point_decorator.gd').new()
@@ -136,6 +137,13 @@ func __add_vertex_or_edge_decorator(puzzle, raw_element, v):
 			decorator.color = ColorN(text_decorator['Color'])
 			decorator.init_location = puzzle.vertices[v].pos
 			puzzle.decorators.append(decorator)
+		elif (text_decorator['Text'] == 'X'):
+			var decorator = load('res://script/decorators/wall_decorator.gd').new()
+			decorator.color = ColorN(text_decorator['Color'])
+			puzzle.vertices[v].decorator = decorator
+			if (e1 != null):
+				e1.contains_wall = true
+				e2.contains_wall = true
 		else:
 			print('Unknown text decorator %s' % text_decorator['Text'])
 	if (__find_decorator(raw_element, "StartDecorator")):
@@ -204,7 +212,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			if (__find_decorator(raw_element, "EndDecorator")):
 				e1.end_is_crossroad = true
 				e2.end_is_crossroad = true
-			__add_vertex_or_edge_decorator(puzzle, raw_element, v_mid)
+			__add_vertex_or_edge_decorator(puzzle, raw_element, v_mid, e1, e2)
 		puzzle.edge_detector_node[[v1, v2]] = v_mid
 		puzzle.edge_detector_node[[v2, v1]] = v_mid
 		puzzle.edge_shared_facets[[v1, v2]] = []

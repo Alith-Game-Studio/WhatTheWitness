@@ -81,7 +81,7 @@ class SolutionLine:
 			crossroad_vertex = start_vertices[way]
 		elif (progress[-1] >= 1.0): # all lines are at cross road
 			previous_edge = lines[way][-1][0]
-			if (lines[way][-1][1]): # the last segment is a backward edge
+			if (lines[way][-1][1] or previous_edge.contains_wall): # the last segment is a backward edge
 				crossroad_vertex = previous_edge.start
 			else:
 				crossroad_vertex = previous_edge.end
@@ -215,7 +215,7 @@ class SolutionLine:
 		
 	func __update_vertex_occupation_at(puzzle, vertex, delta_shift, value):
 		var target_vertex = vertex
-		if (delta_shift.length() > 1e-6): 
+		if (delta_shift.length() >= 0): 
 			# the line is shifted, we need to re-estimate the vertex
 			target_vertex = puzzle.get_vertex_at(vertex.pos + delta_shift)
 		if (target_vertex != null and target_vertex.index >= 0):
@@ -231,8 +231,13 @@ class SolutionLine:
 		for way in range(puzzle.n_ways):
 			# We assume the last vertex is not occupied, so start from n - 2 to 0
 			for i in range(len(lines[way]) - 2, -1, -1):
-				for vertex in [lines[way][i][0].start, lines[way][i][0].end]:
-					__update_vertex_occupation_at(puzzle, vertex, delta_shift, 1)
+				var edge = lines[way][i][0]
+				var percentage = progress[i]
+				if (edge.contains_wall):
+					delta_shift -= (edge.end.pos - edge.start.pos) * percentage * 2
+				else:
+					for vertex in [lines[way][i][0].start, lines[way][i][0].end]:
+						__update_vertex_occupation_at(puzzle, vertex, delta_shift, 1)
 			__update_vertex_occupation_at(puzzle, start_vertices[way], delta_shift, 2)
 		
 	func try_continue_solution(puzzle, delta):

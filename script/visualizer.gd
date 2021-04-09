@@ -79,9 +79,9 @@ class PuzzleCanvas:
 				var color = puzzle.solution_colors[way]
 				if (solution.validity == -1):
 					color = Color.black
-				add_circle(solution.start_vertices[way].pos, puzzle.start_size, color)
-				var last_pos = solution.start_vertices[way].pos
-				for i in range(len(solution.progress)):
+				var last_pos = null
+				var delta_shift = Vector2.ZERO
+				for i in range(len(solution.progress) - 1, -1, -1):
 					var segment = solution.lines[way][i]
 					var segment_main = solution.lines[solution.MAIN_WAY][i]
 					var main_line_length = (segment_main[0].start.pos - segment_main[0].end.pos).length()
@@ -91,10 +91,19 @@ class PuzzleCanvas:
 					var percentage = solution.progress[i] * main_line_length / line_length
 					if (segment[1]):
 						percentage = 1.0 - percentage
-					var pos = edge.start.pos * (1.0 - percentage) + edge.end.pos * percentage
-					add_line(last_pos, pos, puzzle.line_width, color)
-					add_circle(pos, puzzle.line_width / 2.0, color)
+					var pos = edge.start.pos * (1.0 - percentage) + edge.end.pos * percentage + delta_shift				
+					if (edge.contains_wall):
+						pos = edge.start.pos + delta_shift
+						delta_shift -= (edge.end.pos - edge.start.pos) * percentage * 2
+
+					if (last_pos != null):
+						add_line(last_pos, pos, puzzle.line_width, color)
+						add_circle(last_pos, puzzle.line_width / 2.0, color)
 					last_pos = pos
+				if (last_pos != null):
+					add_line(last_pos, solution.start_vertices[way].pos + delta_shift, puzzle.line_width, color)
+					add_circle(last_pos, puzzle.line_width / 2.0, color)
+				add_circle(solution.start_vertices[way].pos + delta_shift, puzzle.start_size, color)
 		for vertex in puzzle.vertices:
 			if (vertex.decorator != null):
 				drawing_target.draw_set_transform(view_origin + vertex.pos * view_scale, vertex.decorator.angle, Vector2(1.0, 1.0))
