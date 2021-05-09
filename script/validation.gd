@@ -16,14 +16,6 @@ class Validator:
 			vertex_covered.append(false)
 			if (vertex.decorator.rule != 'none'):
 				decorator_list.append([vertex.decorator.rule, vertex, i, Graph.VERTEX_ELEMENT])
-		for i in range(len(puzzle.edges)):
-			var edge = puzzle.edges[i]
-			if (edge.decorator.rule != 'none'):
-				decorator_list.append([edge.decorator.rule, edge, i, Graph.EDGE_ELEMENT])
-		for i in range(len(puzzle.facets)):
-			var facet = puzzle.facets[i]
-			if (facet.decorator.rule != 'none'):
-				decorator_list.append([facet.decorator.rule, facet, i, Graph.FACET_ELEMENT])
 		for line in solution.lines:
 			for segment in line:
 				vertex_covered[segment[0].start_index] = true

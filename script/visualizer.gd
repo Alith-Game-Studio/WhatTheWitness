@@ -56,17 +56,15 @@ class PuzzleCanvas:
 		drawing_target = target
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		for vertex in puzzle.vertices:
-			add_circle(vertex.pos, puzzle.line_width / 2.0, puzzle.line_color)
+			if (!vertex.hidden):
+				add_circle(vertex.pos, puzzle.line_width / 2.0, puzzle.line_color)
 		for edge in puzzle.edges:
 			add_line(edge.start.pos, edge.end.pos, puzzle.line_width, puzzle.line_color)
 		for vertex in puzzle.vertices:
 			if (vertex.decorator != null):
 				drawing_target.draw_set_transform(view_origin + vertex.pos * view_scale, vertex.decorator.angle, Vector2(1.0, 1.0))
 				vertex.decorator.draw_foreground(self, vertex, 0, puzzle)
-		for facet in puzzle.facets:
-			if (facet.decorator != null):
-				drawing_target.draw_set_transform(view_origin + facet.center * view_scale, facet.decorator.angle, Vector2(1.0, 1.0))
-				facet.decorator.draw_foreground(self, facet, 2, puzzle)
+
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		for decorator in puzzle.decorators:
 			decorator.draw_foreground(self, null, -1, puzzle)
@@ -92,9 +90,9 @@ class PuzzleCanvas:
 					if (segment[1]):
 						percentage = 1.0 - percentage
 					var pos = edge.start.pos * (1.0 - percentage) + edge.end.pos * percentage + delta_shift				
-					if (edge.contains_wall):
-						pos = edge.start.pos + delta_shift
-						delta_shift -= (edge.end.pos - edge.start.pos) * percentage * 2
+					# if (edge.contains_wall):
+					# 	pos = edge.start.pos + delta_shift
+					#	delta_shift -= (edge.end.pos - edge.start.pos) * percentage * 2
 
 					if (last_pos != null):
 						add_line(last_pos, pos, puzzle.line_width, color)
@@ -108,10 +106,6 @@ class PuzzleCanvas:
 			if (vertex.decorator != null):
 				drawing_target.draw_set_transform(view_origin + vertex.pos * view_scale, vertex.decorator.angle, Vector2(1.0, 1.0))
 				vertex.decorator.draw_above_solution(self, vertex, 0, puzzle, solution)
-		for facet in puzzle.facets:
-			if (facet.decorator != null):
-				drawing_target.draw_set_transform(view_origin + facet.center * view_scale, facet.decorator.angle, Vector2(1.0, 1.0))
-				facet.decorator.draw_above_solution(self, facet, 2, puzzle, solution)
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		for decorator in puzzle.decorators:
 			decorator.draw_above_solution(self, null, -1, puzzle, solution)

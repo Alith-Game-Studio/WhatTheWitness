@@ -14,6 +14,7 @@ const SYMMETRY_REFLECTIVE = 1
 class Vertex:
 	var pos: Vector2
 	var index: int
+	var hidden: bool
 	var decorator = load("res://script/decorators/no_decorator.gd").new()
 	func _init(x, y):
 		pos.x = x
@@ -25,8 +26,6 @@ class Edge:
 	var end_is_crossroad: bool
 	var start_index: int
 	var end_index: int
-	var contains_wall: bool
-	var decorator = load("res://script/decorators/no_decorator.gd").new()
 	func _init(v1, v2):
 		start = v1
 		end = v2
@@ -36,7 +35,7 @@ class Facet:
 	var edge_tuples: Array
 	var vertices: Array
 	var center: Vector2
-	var decorator = load("res://script/decorators/no_decorator.gd").new()
+	var center_vertex_index: int
 	func _init(vs):
 		vertices = vs
 		center = Vector2.ZERO
@@ -67,9 +66,10 @@ class Puzzle:
 				return vertex
 		return null
 	
-func push_vertex_vec(puzzle, pos):
+func push_vertex_vec(puzzle, pos, hidden=false):
 	var result = len(puzzle.vertices)
 	var vertex = Vertex.new(pos.x, pos.y)
+	vertex.hidden = hidden
 	vertex.index = len(puzzle.vertices)
 	puzzle.vertices.push_back(vertex)
 	return result
@@ -106,7 +106,7 @@ func __find_decorator(raw_element, xsi_type):
 			return raw_decorator
 	return null
 
-func __add_vertex_or_edge_decorator(puzzle, raw_element, v, e1=null, e2=null):
+func __add_decorator(puzzle, raw_element, v):
 	var point_decorator = __find_decorator(raw_element, "PointDecorator")
 	if (point_decorator):
 		puzzle.vertices[v].decorator = load('res://script/decorators/point_decorator.gd').new()
@@ -141,11 +141,54 @@ func __add_vertex_or_edge_decorator(puzzle, raw_element, v, e1=null, e2=null):
 			var decorator = load('res://script/decorators/wall_decorator.gd').new()
 			decorator.color = ColorN(text_decorator['Color'])
 			puzzle.vertices[v].decorator = decorator
-			if (e1 != null):
-				e1.contains_wall = true
-				e2.contains_wall = true
 		else:
 			print('Unknown text decorator %s' % text_decorator['Text'])
+	var triangle_decorator = __find_decorator(raw_element, "TriangleDecorator")
+	if (triangle_decorator):
+		var decorator = load('res://script/decorators/triangle_decorator.gd').new()
+		decorator.color = ColorN(triangle_decorator['Color'])
+		decorator.count = int(triangle_decorator['Count'])
+		puzzle.vertices[v].decorator = decorator
+	var arrow_decorator = __find_decorator(raw_element, "ArrowDecorator")
+	if (arrow_decorator):
+		var decorator = load('res://script/decorators/arrow_decorator.gd').new()
+		decorator.color = ColorN(arrow_decorator['Color'])
+		decorator.count = int(arrow_decorator['Count'])
+		decorator.angle = deg2rad(float(arrow_decorator['Angle']))
+		puzzle.vertices[v].decorator = decorator
+	var star_decorator = __find_decorator(raw_element, "StarDecorator")
+	if (star_decorator):
+		var decorator = load('res://script/decorators/star_decorator.gd').new()
+		decorator.color = ColorN(star_decorator['Color'])
+		puzzle.vertices[v].decorator = decorator
+	var square_decorator = __find_decorator(raw_element, "SquareDecorator")
+	if (square_decorator):
+		var decorator = load('res://script/decorators/square_decorator.gd').new()
+		decorator.color = ColorN(square_decorator['Color'])
+		puzzle.vertices[v].decorator = decorator
+	var circle_decorator = __find_decorator(raw_element, "CircleDecorator")
+	if (circle_decorator):
+		var decorator = load('res://script/decorators/circle_decorator.gd').new()
+		decorator.color = ColorN(circle_decorator['Color'])
+		puzzle.vertices[v].decorator = decorator
+	var ring_decorator = __find_decorator(raw_element, "RingDecorator")
+	if (ring_decorator):
+		var decorator = load('res://script/decorators/ring_decorator.gd').new()
+		decorator.color = ColorN(ring_decorator['Color'])
+		puzzle.vertices[v].decorator = decorator
+	var eliminator_decorator = __find_decorator(raw_element, "EliminatorDecorator")
+	if (eliminator_decorator):
+		var decorator = load('res://script/decorators/eliminator_decorator.gd').new()
+		decorator.color = ColorN(eliminator_decorator['Color'])
+		puzzle.vertices[v].decorator = decorator
+	var tetris_decorator = __find_decorator(raw_element, "TetrisDecorator")
+	if (tetris_decorator):
+		var decorator = __load_tetris(tetris_decorator, false)
+		puzzle.vertices[v].decorator = decorator
+	var hollow_tetris_decorator = __find_decorator(raw_element, "HollowTetrisDecorator")
+	if (hollow_tetris_decorator):
+		var decorator = __load_tetris(hollow_tetris_decorator, true)
+		puzzle.vertices[v].decorator = decorator
 	if (__find_decorator(raw_element, "StartDecorator")):
 		puzzle.vertices[v].decorator = load('res://script/decorators/start_decorator.gd').new()
 
@@ -212,7 +255,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			if (__find_decorator(raw_element, "EndDecorator")):
 				e1.end_is_crossroad = true
 				e2.end_is_crossroad = true
-			__add_vertex_or_edge_decorator(puzzle, raw_element, v_mid, e1, e2)
+			__add_decorator(puzzle, raw_element, v_mid)
 		puzzle.edge_detector_node[[v1, v2]] = v_mid
 		puzzle.edge_detector_node[[v2, v1]] = v_mid
 		puzzle.edge_shared_facets[[v1, v2]] = []
@@ -236,46 +279,11 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			edge_tuples.push_back(edge_tuple)
 		var facet = Facet.new(facet_vertices)
 		facet.edge_tuples = edge_tuples
+		facet.center_vertex_index = push_vertex_vec(puzzle, facet.center, true)
+		__add_decorator(puzzle, raw_element, facet.center_vertex_index)
 		puzzle.facets.push_back(facet)
-		var triangle_decorator = __find_decorator(raw_element, "TriangleDecorator")
-		if (triangle_decorator):
-			facet.decorator = load('res://script/decorators/triangle_decorator.gd').new()
-			facet.decorator.color = ColorN(triangle_decorator['Color'])
-			facet.decorator.count = int(triangle_decorator['Count'])
-		var arrow_decorator = __find_decorator(raw_element, "ArrowDecorator")
-		if (arrow_decorator):
-			facet.decorator = load('res://script/decorators/arrow_decorator.gd').new()
-			facet.decorator.color = ColorN(arrow_decorator['Color'])
-			facet.decorator.count = int(arrow_decorator['Count'])
-			facet.decorator.angle = deg2rad(float(arrow_decorator['Angle']))
-		var star_decorator = __find_decorator(raw_element, "StarDecorator")
-		if (star_decorator):
-			facet.decorator = load('res://script/decorators/star_decorator.gd').new()
-			facet.decorator.color = ColorN(star_decorator['Color'])
-		var square_decorator = __find_decorator(raw_element, "SquareDecorator")
-		if (square_decorator):
-			facet.decorator = load('res://script/decorators/square_decorator.gd').new()
-			facet.decorator.color = ColorN(square_decorator['Color'])
-		var circle_decorator = __find_decorator(raw_element, "CircleDecorator")
-		if (circle_decorator):
-			facet.decorator = load('res://script/decorators/circle_decorator.gd').new()
-			facet.decorator.color = ColorN(circle_decorator['Color'])
-		var ring_decorator = __find_decorator(raw_element, "RingDecorator")
-		if (ring_decorator):
-			facet.decorator = load('res://script/decorators/ring_decorator.gd').new()
-			facet.decorator.color = ColorN(ring_decorator['Color'])
-		var eliminator_decorator = __find_decorator(raw_element, "EliminatorDecorator")
-		if (eliminator_decorator):
-			facet.decorator = load('res://script/decorators/eliminator_decorator.gd').new()
-			facet.decorator.color = ColorN(eliminator_decorator['Color'])
-		var tetris_decorator = __find_decorator(raw_element, "TetrisDecorator")
-		if (tetris_decorator):
-			facet.decorator = __load_tetris(tetris_decorator, false)
-		var hollow_tetris_decorator = __find_decorator(raw_element, "HollowTetrisDecorator")
-		if (hollow_tetris_decorator):
-			facet.decorator = __load_tetris(hollow_tetris_decorator, true)
 	if (element_type == VERTEX_ELEMENT):
-		__add_vertex_or_edge_decorator(puzzle, raw_element, id)
+		__add_decorator(puzzle, raw_element, id)
 	if ('Decorator' in raw_element):
 		var raw_decorator = raw_element['Decorator']
 		if (not ('__consumed' in raw_decorator)):

@@ -2,8 +2,7 @@ extends Node
 
 class SolutionLine:
 	var started: bool
-	var start_vertices: Array
-	var lines: Array
+	var points: Array
 	var progress: Array
 	var validity = 0
 	const MAIN_WAY = 0
@@ -39,17 +38,14 @@ class SolutionLine:
 		var est_start_vertex = get_nearest_start(puzzle, pos)
 		if (est_start_vertex == null):
 			return false
-		var new_start_vertices = []
-		var new_lines = []
+		var new_points = []
 		for way in range(puzzle.n_ways):
 			var est_way_start_pos = get_symmetry_point(puzzle, way, est_start_vertex.pos)
 			var way_start_vertex = get_nearest_start(puzzle, est_way_start_pos)
 			if (way_start_vertex == null):
 				return false
-			new_start_vertices.push_back(way_start_vertex)
-			new_lines.push_back([])
-		start_vertices = new_start_vertices
-		lines = new_lines
+			new_points.push_back([way_start_vertex])
+		points = new_points
 		progress = []
 		started = true
 		update_vertex_occupation(puzzle)
@@ -64,52 +60,38 @@ class SolutionLine:
 	func get_end_position(way):
 		if (!started):
 			return null
-		if (len(lines[way]) == 0):
-			return start_vertices[way].pos
-		var segment = lines[way][-1]
-		var edge = segment[0]
+		if (len(points[way]) == 1):
+			return points[way][-1]
+		var last_point = points[way][-1]
+		var second_to_last_point = points[way][-2]
 		var percentage = progress[-1]
-		if (segment[1]):
-			percentage = 1.0 - percentage
-		var pos = edge.start.pos * (1.0 - percentage) + edge.end.pos * percentage
+		var pos = second_to_last_point * (1.0 - percentage) + last_point * percentage
 		return pos
 		
-	func __get_crossroad(way):
+	func __get_crossroad(puzzle, way):
 		var crossroad_vertex = null
 		var previous_edge = null
-		if (len(lines[way]) == 0): # line is just started
-			crossroad_vertex = start_vertices[way]
-		elif (progress[-1] >= 1.0): # all lines are at cross road
-			previous_edge = lines[way][-1][0]
-			if (lines[way][-1][1] or previous_edge.contains_wall): # the last segment is a backward edge
-				crossroad_vertex = previous_edge.start
-			else:
-				crossroad_vertex = previous_edge.end
+		crossroad_vertex = puzzle.get_vertex_at(points[way][-1])
+		if (len(points[way]) > 1 and progress[-1] >= 1.0):
+			previous_edge = puzzle.get_edge_at(points[way][-2], points[way][-1])
 		return [crossroad_vertex, previous_edge]
 		
-	func is_completed():
+	func is_completed(puzzle):
 		if (!started):
 			return false
-		var crossroad_vertex = null
-		var previous_edge = null
-		if (len(lines[MAIN_WAY]) == 0): # line is just started
+		var crossroad_vertex = puzzle.get_vertex_at(points[MAIN_WAY][-1])
+		if (crossroad_vertex == null):
 			return false
-		elif (progress[-1] >= 1.0):
-			previous_edge = lines[MAIN_WAY][-1][0]
-			if (lines[MAIN_WAY][-1][1]): # the last segment is a backward edge
-				return previous_edge.start.decorator != null and previous_edge.start.decorator.rule == 'end'
-			else:
-				return previous_edge.end.decorator != null and previous_edge.end.decorator.rule == 'end'
-		return false
-			
+		return crossroad_vertex.decorator != null and crossroad_vertex.decorator.rule == 'end'
 		
 	func get_total_length():
 		if (!started):
 			return 0.0
 		var result = 0.0
 		for i in range(len(progress)):
-			var edge = lines[MAIN_WAY][i][0]
-			result += progress[i] * (edge.start.pos - edge.end.pos).length()
+			var pos1 = points[MAIN_WAY][i][0]
+			var pos2 = points[MAIN_WAY][i + 1][0]
+			result += progress[i] * (pos1 - pos2).length()
 		return result
 		
 	func __try_introduce_segment_at(puzzle, dir, init_progress=1e-6):
@@ -117,7 +99,7 @@ class SolutionLine:
 		for way in range(puzzle.n_ways):
 			var way_dir = get_symmetry_vector(puzzle, way, dir)
 			# print('Finding %d' % way, way_dir)
-			var tuple = __get_crossroad(way)
+			var tuple = __get_crossroad(puzzle, way)
 			var crossroad_vertex = tuple[0]
 			var previous_edge = tuple[1]
 			if (crossroad_vertex == null):
@@ -126,50 +108,35 @@ class SolutionLine:
 			for edge in puzzle.edges:
 				if (edge == previous_edge):
 					continue
-				var end_to_start
+				var new_vertex_pos
 				var edge_dir
 				if (edge.start == crossroad_vertex):
-					end_to_start = false
-					edge_dir = (edge.end.pos - edge.start.pos).normalized()
+					new_vertex_pos = edge.end.pos
 				elif (edge.end == crossroad_vertex):
-					end_to_start = true
-					edge_dir = (edge.start.pos - edge.end.pos).normalized()
+					new_vertex_pos = edge.start.pos
 				else:
 					continue
 				# print((edge_dir - way_dir).length())
 				if ((edge_dir - way_dir).length() < 1e-6):
-					result.append([edge, end_to_start])
+					result.append(new_vertex_pos)
 					# print('Found!')
 					ok = true
 					break
 			if (!ok):
 				return false
 		for way in range(puzzle.n_ways):
-			lines[way].append(result[way])
+			points[way].append(result[way])
 		progress.append(init_progress)
 		update_vertex_occupation(puzzle)
 		for decorator in puzzle.decorators:
 			if (decorator.rule == 'box'):
 				var old_pos = decorator.get_location()
-				var new_pos = old_pos
-				for way in range(puzzle.n_ways):
-					var end_to_start = lines[way][-1][1]
-					var edge = lines[way][-1][0]
-					var edge_dir = (edge.start.pos - edge.end.pos).normalized() if end_to_start else (edge.end.pos - edge.start.pos).normalized()
-					var edge_end_pos = edge.start.pos if end_to_start else edge.end.pos
-					if ((edge_end_pos - old_pos).length() < 1e-3):
-						new_pos = old_pos + edge_dir
-					var vertex = puzzle.get_vertex_at(new_pos)
-					if (vertex != null):
-						new_pos = vertex.pos
-					else:
-						new_pos = old_pos
-				decorator.push_location(new_pos)
+				decorator.push_location(old_pos)
 		return true
 		
 	func __pop_segment(puzzle):
 		for way in range(puzzle.n_ways):
-			lines[way].pop_back()
+			points[way].pop_back()
 		progress.pop_back()
 		update_vertex_occupation(puzzle)
 		for decorator in puzzle.decorators:
@@ -178,11 +145,8 @@ class SolutionLine:
 		
 	func __calc_way_limit(puzzle, way, main_edge_length):
 		var limit = 1.0 + 1e-6
-		var edge = lines[way][-1][0]
-		var edge_vec = edge.end.pos - edge.start.pos
-		var edge_length = edge_vec.length()
-		var end_to_start = lines[way][-1][1]
-		var end_node = edge.start if end_to_start else edge.end
+		var edge_length = (points[way][-2] - points[way][-1]).length()
+		var end_node = puzzle.get_vertex_at(points[way][-1])
 		
 		# different length from the main line (asymmetrical edges)
 		if (abs(edge_length - main_edge_length) > 1e-2):
@@ -227,17 +191,14 @@ class SolutionLine:
 			vertices_occupied.append(0)
 		if (!started):
 			return
-		var delta_shift = Vector2.ZERO
 		for way in range(puzzle.n_ways):
 			# We assume the last vertex is not occupied, so start from n - 2 to 0
-			for i in range(len(lines[way]) - 2, -1, -1):
+			for i in range(points[way]):
+				var target_vertex = puzzle.get_vertex_at(points[i])
 				var edge = lines[way][i][0]
 				var percentage = progress[i]
-				if (edge.contains_wall):
-					delta_shift -= (edge.end.pos - edge.start.pos) * percentage * 2
-				else:
-					for vertex in [lines[way][i][0].start, lines[way][i][0].end]:
-						__update_vertex_occupation_at(puzzle, vertex, delta_shift, 1)
+				for vertex in [lines[way][i][0].start, lines[way][i][0].end]:
+					__update_vertex_occupation_at(puzzle, vertex, delta_shift, 1)
 			__update_vertex_occupation_at(puzzle, start_vertices[way], delta_shift, 2)
 		
 	func try_continue_solution(puzzle, delta):
