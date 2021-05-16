@@ -33,8 +33,6 @@ class DiscreteSolutionState:
 		return puzzle.vertices[vertices[way][-1]]
 		
 	func is_retraction(puzzle, main_way_vertex_id):
-		print(vertices)
-		
 		if (solution_stage == SOLUTION_STAGE_EXTENSION):
 			if (len(vertices[MAIN_WAY]) >= 2):
 				return main_way_vertex_id == vertices[MAIN_WAY][-2]
@@ -162,7 +160,9 @@ class SolutionLine:
 			else:
 				return
 		if (len(state_stack) > 1):
-			var edge_vec = state_stack[-1].get_end_position(puzzle, MAIN_WAY) - state_stack[-2].get_end_position(puzzle, MAIN_WAY)
+			var v1 = state_stack[-1].get_end_vertex(puzzle, MAIN_WAY)
+			var v2 = state_stack[-2].get_end_vertex(puzzle, MAIN_WAY)
+			var edge_vec = v1.pos - v2.pos
 			var edge_length = edge_vec.length()
 			
 			# calculate upper limit (lower limit is always 0)
@@ -171,6 +171,16 @@ class SolutionLine:
 			var projected_length = edge_vec.normalized().dot(delta) / edge_length
 			var projected_det = abs(det(edge_vec.normalized(), delta)) / edge_length
 			var projected_progress = progress + projected_length
+			var encourage_extension = false
+			if (v1.is_attractor):
+				if (v2.is_attractor):
+					encourage_extension = progress > 0.5
+				else:
+					encourage_extension = true
+			if (encourage_extension):
+				projected_progress += projected_det * 0.5 # encourage
+			else:
+				projected_progress -= projected_det * 0.5 # discorage
 			if (projected_progress <= 0.0):
 				state_stack.pop_back()
 				progress = 1.0 - 1e-6

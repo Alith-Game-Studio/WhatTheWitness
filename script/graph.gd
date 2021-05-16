@@ -16,6 +16,7 @@ class Vertex:
 	var index: int
 	var hidden: bool
 	var decorator = load("res://script/decorators/no_decorator.gd").new()
+	var is_attractor: bool
 	func _init(x, y):
 		pos.x = x
 		pos.y = y
@@ -23,7 +24,6 @@ class Vertex:
 class Edge:
 	var start: Vertex
 	var end: Vertex
-	var end_is_crossroad: bool
 	var start_index: int
 	var end_index: int
 	func _init(v1, v2):
@@ -79,7 +79,6 @@ func push_edge_idx(puzzle, idx1, idx2):
 	var edge = Edge.new(puzzle.vertices[idx1], puzzle.vertices[idx2])
 	edge.start_index = idx1
 	edge.end_index = idx2
-	edge.end_is_crossroad = false
 	puzzle.edges.push_back(edge)
 	return edge
 	
@@ -118,7 +117,7 @@ func __add_decorator(puzzle, raw_element, v):
 		var p_end = puzzle.vertices[v].pos + Vector2(cos(end_angle), sin(end_angle)) * end_length
 		var v_end = push_vertex_vec(puzzle, p_end)
 		var e = push_edge_idx(puzzle, v, v_end)
-		e.end_is_crossroad = true
+		puzzle.vertices[v_end].is_attractor = true
 		puzzle.vertices[v_end].decorator = load('res://script/decorators/end_decorator.gd').new()
 	var text_decorator = __find_decorator(raw_element, "TextDecorator")
 	if (text_decorator):
@@ -251,10 +250,6 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			v_mid = push_vertex_vec(puzzle, p1 * 0.5 + p2 * 0.5)
 			var e1 = push_edge_idx(puzzle, v1, v_mid)
 			var e2 = push_edge_idx(puzzle, v2, v_mid)
-			
-			if (__find_decorator(raw_element, "EndDecorator")):
-				e1.end_is_crossroad = true
-				e2.end_is_crossroad = true
 			__add_decorator(puzzle, raw_element, v_mid)
 		puzzle.edge_detector_node[[v1, v2]] = v_mid
 		puzzle.edge_detector_node[[v2, v1]] = v_mid
@@ -304,7 +299,8 @@ func load_from_xml(file):
 	var edges = puzzle.edges
 	var facets = puzzle.facets
 	for raw_node in raw['Nodes']['_arr']:
-		push_vertex_vec(puzzle, Vector2(float(raw_node['X']), float(raw_node['Y'])))
+		var v = push_vertex_vec(puzzle, Vector2(float(raw_node['X']), float(raw_node['Y'])))
+		puzzle.vertices[v].is_attractor = true
 	for i in range(len(raw['Nodes']['_arr'])):
 		var raw_node = raw['Nodes']['_arr'][i]
 		add_element(puzzle, raw_node, VERTEX_ELEMENT, i)
