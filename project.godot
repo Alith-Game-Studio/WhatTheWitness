@@ -10,7 +10,6 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
@@ -26,6 +25,10 @@ Graph="*res://script/graph.gd"
 Solution="*res://script/solution.gd"
 Validation="*res://script/validation.gd"
 Visualizer="*res://script/visualizer.gd"
+
+[debug]
+
+settings/fps/force_fps=120
 
 [display]
 

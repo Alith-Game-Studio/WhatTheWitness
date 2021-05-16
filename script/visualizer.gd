@@ -57,7 +57,7 @@ class PuzzleCanvas:
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		for vertex in puzzle.vertices:
 			if (!vertex.hidden):
-				add_circle(vertex.pos, puzzle.line_width / 2.0, puzzle.line_color)
+				add_circle(vertex.pos, puzzle.line_width * 0.5, puzzle.line_color)
 		for edge in puzzle.edges:
 			add_line(edge.start.pos, edge.end.pos, puzzle.line_width, puzzle.line_color)
 		for vertex in puzzle.vertices:

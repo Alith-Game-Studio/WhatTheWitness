@@ -23,6 +23,7 @@ font_data = ExtResource( 2 )
 margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
+rect_pivot_offset = Vector2( 32, 32 )
 color = Color( 0.0313726, 1, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -50,4 +51,7 @@ custom_fonts/font = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="mouse_entered" from="Button" to="PuzzleVisualizer" method="_on_Button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="PuzzleVisualizer" method="_on_Button_mouse_exited"]
 [connection signal="pressed" from="Button" to="PuzzleVisualizer" method="_on_Button_pressed"]
