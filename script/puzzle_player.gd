@@ -22,7 +22,7 @@ func _input(event):
 		var panel_start_pos = solver_drawing_target.get_global_rect().position
 		var position = event.position - panel_start_pos
 		if (is_drawing_solution):
-			if (Gameplay.solution.is_completed()):
+			if (Gameplay.solution.is_completed(Gameplay.puzzle)):
 				validator.validate(Gameplay.puzzle, Gameplay.solution)
 			is_drawing_solution = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

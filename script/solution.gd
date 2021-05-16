@@ -1,11 +1,56 @@
 extends Node
 
+const SOLUTION_STAGE_EXTENSION = 0
+const SOLUTION_STAGE_SNAKE = 1
+const SOLUTION_STATE_LINE_TRANSLATION = 2
+
+const MAIN_WAY = 0
+
+class DiscreteSolutionState:
+	var vertices: Array
+	var event_properties: Array
+	var solution_stage: int
+	
+	func _init():
+		vertices = []
+		event_properties = []
+		solution_stage = SOLUTION_STAGE_EXTENSION
+		
+	func copy():
+		var result = DiscreteSolutionState.new()
+		result.vertices = vertices.duplicate(true)
+		result.event_properties = event_properties.duplicate(true)
+		result.solution_stage = solution_stage
+		return result
+		
+	func get_vertex_position(puzzle, way, id):
+		return puzzle.vertices[vertices[way][id]].pos
+		
+	func get_end_position(puzzle, way):
+		return puzzle.vertices[vertices[way][-1]].pos
+		
+	func get_end_vertex(puzzle, way):
+		return puzzle.vertices[vertices[way][-1]]
+		
+	func is_retraction(puzzle, main_way_vertex_id):
+		if (solution_stage == SOLUTION_STAGE_EXTENSION):
+			if (len(vertices) >= 2):
+				return main_way_vertex_id == vertices[MAIN_WAY][-2]
+			return false
+		
+	func transist(puzzle, new_vertex_ids):
+		if (solution_stage == SOLUTION_STAGE_EXTENSION):
+			var new_state = copy()
+			for way in range(puzzle.n_ways):
+				new_state.vertices[way].push_back(new_vertex_ids[way])
+			return new_state
+			
+
 class SolutionLine:
 	var started: bool
-	var points: Array
-	var progress: Array
+	var state_stack: Array
+	var progress: float
 	var validity = 0
-	const MAIN_WAY = 0
 	var vertices_occupied: Array
 	
 	func get_symmetry_point(puzzle, way, pos):
@@ -38,245 +83,104 @@ class SolutionLine:
 		var est_start_vertex = get_nearest_start(puzzle, pos)
 		if (est_start_vertex == null):
 			return false
-		var new_points = []
+		var init_state = DiscreteSolutionState.new()
 		for way in range(puzzle.n_ways):
 			var est_way_start_pos = get_symmetry_point(puzzle, way, est_start_vertex.pos)
 			var way_start_vertex = get_nearest_start(puzzle, est_way_start_pos)
 			if (way_start_vertex == null):
 				return false
-			new_points.push_back([way_start_vertex])
-		points = new_points
-		progress = []
+			init_state.vertices.push_back([way_start_vertex.index])
+		init_state.solution_stage = SOLUTION_STAGE_EXTENSION
+		state_stack = [init_state]
+		progress = 1.0
 		started = true
-		update_vertex_occupation(puzzle)
-		for decorator in puzzle.decorators:
-			if (decorator.rule == 'box'):
-				decorator.location_stack.clear()
 		return true
 				
 	func det(v1, v2):
 		return v1.x * v2.y - v2.x * v1.y
 		
-	func get_end_position(way):
+	func get_end_position(puzzle, way):
 		if (!started):
 			return null
-		if (len(points[way]) == 1):
-			return points[way][-1]
-		var last_point = points[way][-1]
-		var second_to_last_point = points[way][-2]
-		var percentage = progress[-1]
-		var pos = second_to_last_point * (1.0 - percentage) + last_point * percentage
+		if (len(state_stack) == 1):
+			return state_stack[-1].get_end_position(puzzle, way)
+		var last_point = state_stack[-1].get_end_position(puzzle, way)
+		var second_to_last_point = state_stack[-2].get_end_position(puzzle, way)
+		var pos = second_to_last_point * (1.0 - progress) + last_point * progress
 		return pos
-		
-	func __get_crossroad(puzzle, way):
-		var crossroad_vertex = null
-		var previous_edge = null
-		crossroad_vertex = puzzle.get_vertex_at(points[way][-1])
-		if (len(points[way]) > 1 and progress[-1] >= 1.0):
-			previous_edge = puzzle.get_edge_at(points[way][-2], points[way][-1])
-		return [crossroad_vertex, previous_edge]
 		
 	func is_completed(puzzle):
 		if (!started):
 			return false
-		var crossroad_vertex = puzzle.get_vertex_at(points[MAIN_WAY][-1])
+		var crossroad_vertex = state_stack[-1].get_end_vertex(puzzle, MAIN_WAY)
 		if (crossroad_vertex == null):
 			return false
 		return crossroad_vertex.decorator != null and crossroad_vertex.decorator.rule == 'end'
 		
-	func get_total_length():
+	func get_total_length(puzzle):
 		if (!started):
 			return 0.0
 		var result = 0.0
-		for i in range(len(progress)):
-			var pos1 = points[MAIN_WAY][i][0]
-			var pos2 = points[MAIN_WAY][i + 1][0]
-			result += progress[i] * (pos1 - pos2).length()
+		for i in range(len(state_stack[-1].vertices) - 1):
+			var pos1 = state_stack[-1].get_vertex_position(puzzle, MAIN_WAY, i)
+			var pos2 = state_stack[-1].get_vertex_position(puzzle, MAIN_WAY, i + 1)
+			if (i + 2 == len(state_stack[-1].vertices)):
+				result += (pos1 - pos2).length() * progress
+			else:
+				result += (pos1 - pos2).length() 
 		return result
-		
-	func __try_introduce_segment_at(puzzle, dir, init_progress=1e-6):
-		var result = []
-		for way in range(puzzle.n_ways):
-			var way_dir = get_symmetry_vector(puzzle, way, dir)
-			# print('Finding %d' % way, way_dir)
-			var tuple = __get_crossroad(puzzle, way)
-			var crossroad_vertex = tuple[0]
-			var previous_edge = tuple[1]
-			if (crossroad_vertex == null):
-				return false
-			var ok = false
-			for edge in puzzle.edges:
-				if (edge == previous_edge):
-					continue
-				var new_vertex_pos
-				var edge_dir
-				if (edge.start == crossroad_vertex):
-					new_vertex_pos = edge.end.pos
-				elif (edge.end == crossroad_vertex):
-					new_vertex_pos = edge.start.pos
-				else:
-					continue
-				# print((edge_dir - way_dir).length())
-				if ((edge_dir - way_dir).length() < 1e-6):
-					result.append(new_vertex_pos)
-					# print('Found!')
-					ok = true
-					break
-			if (!ok):
-				return false
-		for way in range(puzzle.n_ways):
-			points[way].append(result[way])
-		progress.append(init_progress)
-		update_vertex_occupation(puzzle)
-		for decorator in puzzle.decorators:
-			if (decorator.rule == 'box'):
-				var old_pos = decorator.get_location()
-				decorator.push_location(old_pos)
-		return true
-		
-	func __pop_segment(puzzle):
-		for way in range(puzzle.n_ways):
-			points[way].pop_back()
-		progress.pop_back()
-		update_vertex_occupation(puzzle)
-		for decorator in puzzle.decorators:
-			if (decorator.rule == 'box'):
-				decorator.pop_location()
-		
-	func __calc_way_limit(puzzle, way, main_edge_length):
-		var limit = 1.0 + 1e-6
-		var edge_length = (points[way][-2] - points[way][-1]).length()
-		var end_node = puzzle.get_vertex_at(points[way][-1])
-		
-		# different length from the main line (asymmetrical edges)
-		if (abs(edge_length - main_edge_length) > 1e-2):
-			limit = min(limit, 1.0 - 1e-6)
-			if (edge_length < main_edge_length):
-				limit = min(limit, 1.0 * edge_length / main_edge_length)
-		
-		var end_node_index = end_node.index
-		if (end_node_index >= 0):
-			# colliding with starts
-			if (vertices_occupied[end_node_index] == 2):
-				limit = min(limit, 1.0 - (puzzle.start_size + puzzle.line_width / 2) / main_edge_length)
-			
-			# colliding with other lines (or self-colliding)
-			if (end_node.decorator.rule != 'self-intersection'):
-				if (vertices_occupied[end_node_index] > 0):
-					limit = min(limit, 1.0 - puzzle.line_width / edge_length)
-		return limit
 	
-	func __dynamic_obstacle_collide(puzzle, way, solution_length):
-		var end_pos = get_end_position(way)
-		for decorator in puzzle.decorators:
-			if (decorator.rule == 'obstacle'):
-				if (decorator.collide_test(end_pos, solution_length)):
-					return true
-			if (decorator.rule == 'box'):
-				if (decorator.collide_test(end_pos)):
-					return true
-		return false
-		
-	func __update_vertex_occupation_at(puzzle, vertex, delta_shift, value):
-		var target_vertex = vertex
-		if (delta_shift.length() >= 0): 
-			# the line is shifted, we need to re-estimate the vertex
-			target_vertex = puzzle.get_vertex_at(vertex.pos + delta_shift)
-		if (target_vertex != null and target_vertex.index >= 0):
-			vertices_occupied[target_vertex.index] = value
-		
-	func update_vertex_occupation(puzzle):
-		vertices_occupied = []
-		for i in range(len(puzzle.vertices)):
-			vertices_occupied.append(0)
-		if (!started):
-			return
-		for way in range(puzzle.n_ways):
-			# We assume the last vertex is not occupied, so start from n - 2 to 0
-			for i in range(points[way]):
-				var target_vertex = puzzle.get_vertex_at(points[i])
-				var edge = lines[way][i][0]
-				var percentage = progress[i]
-				for vertex in [lines[way][i][0].start, lines[way][i][0].end]:
-					__update_vertex_occupation_at(puzzle, vertex, delta_shift, 1)
-			__update_vertex_occupation_at(puzzle, start_vertices[way], delta_shift, 2)
-		
 	func try_continue_solution(puzzle, delta):
 		if (!started):
 			return
 		if (delta.length() < 1e-6):
 			return
-		var tuple = __get_crossroad(MAIN_WAY)
-		var crossroad_vertex = tuple[0]
-		var previous_edge = tuple[1]
-		if (crossroad_vertex != null):
+		var crossroad_vertex = state_stack[-1].get_end_vertex(puzzle, MAIN_WAY)
+		if (len(state_stack) == 1 or progress >= 1.0):
 			var chosen_edge = null
 			var best_aligned_score = 0.0
 			for edge in puzzle.edges:
-				var end_to_start
+				var target_vertex
 				var edge_dir
 				if (edge.start == crossroad_vertex):
-					end_to_start = false
+					target_vertex = edge.end
 					edge_dir = (edge.end.pos - edge.start.pos).normalized()
 				elif (edge.end == crossroad_vertex):
-					end_to_start = true
+					target_vertex = edge.start
 					edge_dir = (edge.start.pos - edge.end.pos).normalized()
 				else:
 					continue
-				var backtrace_path = edge == previous_edge
 				var aligned_score = edge_dir.dot(delta)
 				if (aligned_score > best_aligned_score):
-					chosen_edge = [edge, end_to_start, backtrace_path, edge_dir]
+					chosen_edge = [edge, target_vertex, edge_dir]
 			if (chosen_edge != null):
-				if (crossroad_vertex.decorator.rule == 'self-intersection'):
-					# additional check: no overlapping edges
-					for way_2 in range(puzzle.n_ways):
-						for i in range(len(lines[way_2]) - 1):
-							if (lines[way_2][i][0] == chosen_edge[0]):
-								return
-				if (chosen_edge[2]): # backtrace, no extra check
-					progress[-1] = 1.0 - 1e-6
+				var edge = chosen_edge[0]
+				var vertex_id = chosen_edge[1].index
+				if (state_stack[-1].is_retraction(puzzle, vertex_id)):
+					progress = 1.0 - 1e-6
 				else:
-					# introducing new segment, some extra checks apply here
-					# todo: extra multiline conditions
-					if(!__try_introduce_segment_at(puzzle, chosen_edge[3])):
-						return
+					var new_state = state_stack[-1].transist(puzzle, [vertex_id])
+					state_stack.push_back(new_state)
+					progress = 1e-6
 			else:
 				return
-		if(len(lines[MAIN_WAY]) > 0):
-			var edge = lines[MAIN_WAY][-1][0]
-			var end_to_start = lines[MAIN_WAY][-1][1]
-			var last_progress = progress[-1]
-			var edge_vec = edge.end.pos - edge.start.pos
+		if (len(state_stack) > 1):
+			var edge_vec = state_stack[-1].get_end_position(puzzle, MAIN_WAY) - state_stack[-2].get_end_position(puzzle, MAIN_WAY)
 			var edge_length = edge_vec.length()
 			
 			# calculate upper limit (lower limit is always 0)
 			var limit = 1.0 + 1e-6
-			for way in range(puzzle.n_ways):
-				limit = min(limit, __calc_way_limit(puzzle, way, edge_length))
-				
 			# calculate new progress
 			var projected_length = edge_vec.normalized().dot(delta) / edge_length
 			var projected_det = abs(det(edge_vec.normalized(), delta)) / edge_length
-			if (end_to_start):
-				projected_length = -projected_length
-			var projected_progress = last_progress + projected_length
-			if ((!edge.end_is_crossroad and end_to_start) or (edge.end_is_crossroad and last_progress > 0.5)): # second half is always end to start
-				projected_progress += projected_det * 0.5 # encourage
-			else:
-				projected_progress -= projected_det * 0.5 # discorage
+			var projected_progress = progress + projected_length
 			if (projected_progress <= 0.0):
-				__pop_segment(puzzle)
+				state_stack.pop_back()
+				progress = 1.0 - 1e-6
 				return
 			if (projected_progress >= limit):
 				projected_progress = limit
-			var temp = progress[-1]
-			progress[-1] = projected_progress
-			var solution_length = get_total_length()
-			for way in range(puzzle.n_ways):
-				if (__dynamic_obstacle_collide(puzzle, way, solution_length)):
-					progress[-1] = temp
-					return
+			progress = projected_progress
 	
 		
 		

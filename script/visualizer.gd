@@ -73,35 +73,30 @@ class PuzzleCanvas:
 		drawing_target = target
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		if (solution.started):
+			var state = solution.state_stack[-1]
+			var main_way = Solution.MAIN_WAY
+			var vertices_main_way = state.vertices[main_way]
 			for way in range(puzzle.n_ways):
+				var vertices_way = state.vertices[way]
 				var color = puzzle.solution_colors[way]
 				if (solution.validity == -1):
 					color = Color.black
-				var last_pos = null
+				var last_pos = puzzle.vertices[vertices_way[0]].pos
 				var delta_shift = Vector2.ZERO
-				for i in range(len(solution.progress) - 1, -1, -1):
-					var segment = solution.lines[way][i]
-					var segment_main = solution.lines[solution.MAIN_WAY][i]
-					var main_line_length = (segment_main[0].start.pos - segment_main[0].end.pos).length()
-					var line_length = (segment[0].start.pos - segment[0].end.pos).length()
-					
-					var edge = segment[0]
-					var percentage = solution.progress[i] * main_line_length / line_length
-					if (segment[1]):
-						percentage = 1.0 - percentage
-					var pos = edge.start.pos * (1.0 - percentage) + edge.end.pos * percentage + delta_shift				
-					# if (edge.contains_wall):
-					# 	pos = edge.start.pos + delta_shift
-					#	delta_shift -= (edge.end.pos - edge.start.pos) * percentage * 2
-
+				add_circle(puzzle.vertices[vertices_way[0]].pos, puzzle.start_size, color)
+				for i in range(1, len(vertices_way)):
+					var segment = [puzzle.vertices[vertices_way[i - 1]].pos, puzzle.vertices[vertices_way[i]].pos]
+					var segment_main = [puzzle.vertices[vertices_main_way[i - 1]].pos, puzzle.vertices[vertices_main_way[i]].pos]
+					var main_line_length = (segment_main[1] - segment_main[0]).length()
+					var line_length = (segment[1] - segment[0]).length()
+					var segment_progress = 1 if len(vertices_way) > i + 1 else solution.progress
+					var percentage = segment_progress * main_line_length / line_length
+					var pos = segment[0] * (1.0 - percentage) + segment[1] * percentage
 					if (last_pos != null):
 						add_line(last_pos, pos, puzzle.line_width, color)
-						add_circle(last_pos, puzzle.line_width / 2.0, color)
+						add_circle(pos, puzzle.line_width / 2.0, color)
 					last_pos = pos
-				if (last_pos != null):
-					add_line(last_pos, solution.start_vertices[way].pos + delta_shift, puzzle.line_width, color)
-					add_circle(last_pos, puzzle.line_width / 2.0, color)
-				add_circle(solution.start_vertices[way].pos + delta_shift, puzzle.start_size, color)
+
 		for vertex in puzzle.vertices:
 			if (vertex.decorator != null):
 				drawing_target.draw_set_transform(view_origin + vertex.pos * view_scale, vertex.decorator.angle, Vector2(1.0, 1.0))
