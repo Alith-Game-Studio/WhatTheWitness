@@ -33,8 +33,10 @@ class DiscreteSolutionState:
 		return puzzle.vertices[vertices[way][-1]]
 		
 	func is_retraction(puzzle, main_way_vertex_id):
+		print(vertices)
+		
 		if (solution_stage == SOLUTION_STAGE_EXTENSION):
-			if (len(vertices) >= 2):
+			if (len(vertices[MAIN_WAY]) >= 2):
 				return main_way_vertex_id == vertices[MAIN_WAY][-2]
 			return false
 		
@@ -44,14 +46,6 @@ class DiscreteSolutionState:
 			for way in range(puzzle.n_ways):
 				new_state.vertices[way].push_back(new_vertex_ids[way])
 			return new_state
-			
-
-class SolutionLine:
-	var started: bool
-	var state_stack: Array
-	var progress: float
-	var validity = 0
-	var vertices_occupied: Array
 	
 	func get_symmetry_point(puzzle, way, pos):
 		if (way == 0):
@@ -65,7 +59,6 @@ class SolutionLine:
 		if (puzzle.symmetry_type == Graph.SYMMETRY_ROTATIONAL):
 			return vec.rotated(2 * PI * way / puzzle.n_ways)
 		
-	
 	func get_nearest_start(puzzle, pos):
 		var best_dist = puzzle.start_size
 		var result = null
@@ -77,38 +70,42 @@ class SolutionLine:
 					best_dist = dist
 		return result
 		
-		
-	func try_start_solution_at(puzzle, pos):
-		validity = 0
+	func initialize(puzzle, pos):
 		var est_start_vertex = get_nearest_start(puzzle, pos)
 		if (est_start_vertex == null):
 			return false
-		var init_state = DiscreteSolutionState.new()
+		vertices.clear()
 		for way in range(puzzle.n_ways):
 			var est_way_start_pos = get_symmetry_point(puzzle, way, est_start_vertex.pos)
 			var way_start_vertex = get_nearest_start(puzzle, est_way_start_pos)
 			if (way_start_vertex == null):
 				return false
-			init_state.vertices.push_back([way_start_vertex.index])
-		init_state.solution_stage = SOLUTION_STAGE_EXTENSION
-		state_stack = [init_state]
-		progress = 1.0
-		started = true
+			vertices.push_back([way_start_vertex.index])
+		solution_stage = SOLUTION_STAGE_EXTENSION
 		return true
-				
+
+class SolutionLine:
+	var started: bool
+	var state_stack: Array
+	var progress: float
+	var validity = 0
+	var vertices_occupied: Array
+	
 	func det(v1, v2):
 		return v1.x * v2.y - v2.x * v1.y
-		
-	func get_end_position(puzzle, way):
-		if (!started):
-			return null
-		if (len(state_stack) == 1):
-			return state_stack[-1].get_end_position(puzzle, way)
-		var last_point = state_stack[-1].get_end_position(puzzle, way)
-		var second_to_last_point = state_stack[-2].get_end_position(puzzle, way)
-		var pos = second_to_last_point * (1.0 - progress) + last_point * progress
-		return pos
-		
+	
+	func try_start_solution_at(puzzle, pos):
+		var state = DiscreteSolutionState.new()
+		if (state.initialize(puzzle, pos)):
+			started = true
+			progress = 1.0
+			state_stack.clear()
+			state_stack.push_back(state)
+		else:
+			started = false
+			state_stack.clear()
+		return started
+	
 	func is_completed(puzzle):
 		if (!started):
 			return false
