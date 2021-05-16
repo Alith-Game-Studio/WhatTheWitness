@@ -1,0 +1,116 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://level_lines.tres" type="TileSet" id=1]
+[ext_resource path="res://script/level_map.gd" type="Script" id=2]
+
+[node name="LevelMap" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Lines" type="TileMap" parent="."]
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131074, 1, 5, 131075, 1, 8, 131076, 1, 8, 131077, 1, 8, 131078, 1, 65539, 196614, 1, 65538, 262150, 1, 65538, 327686, 1, 131083, 327687, 1, 8, 327688, 1, 8, 327689, 1, 8, 327690, 1, 65545, 327691, 1, 8, 327692, 1, 2, 393222, 1, 65538, 393226, 1, 65538, 458758, 1, 65538, 458762, 1, 7, 458763, 1, 8, 458764, 1, 2, 524294, 1, 65538, 589830, 1, 65538, 655366, 1, 1 )
+
+[node name="PuzzlePlaceHolders" type="Node2D" parent="."]
+
+[node name="TextEdit" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 128.0
+margin_top = 128.0
+margin_right = 192.0
+margin_bottom = 192.0
+text = "1-intro-1-a"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit2" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 384.0
+margin_top = 128.0
+margin_right = 448.0
+margin_bottom = 192.0
+text = "1-intro-1-b"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit3" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 448.0
+margin_top = 320.0
+margin_right = 512.0
+margin_bottom = 384.0
+text = "2-a"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit4" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 512.0
+margin_top = 320.0
+margin_right = 576.0
+margin_bottom = 384.0
+text = "2-b"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit5" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 320.0
+margin_right = 640.0
+margin_bottom = 384.0
+text = "2-c"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit6" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 704.0
+margin_top = 320.0
+margin_right = 768.0
+margin_bottom = 384.0
+text = "2-d"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit7" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 768.0
+margin_top = 320.0
+margin_right = 832.0
+margin_bottom = 384.0
+text = "2-e"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit8" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 704.0
+margin_top = 448.0
+margin_right = 768.0
+margin_bottom = 512.0
+text = "3-d"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit9" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 768.0
+margin_top = 448.0
+margin_right = 832.0
+margin_bottom = 512.0
+text = "3-e"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

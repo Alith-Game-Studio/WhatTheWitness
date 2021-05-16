@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Custom Witness Puzzles"
-run/main_scene="res://menu_levels.tscn"
+run/main_scene="res://level_map.tscn"
 config/icon="res://icon.png"
 
 [autoload]

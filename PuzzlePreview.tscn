@@ -20,9 +20,19 @@ size = 36
 font_data = ExtResource( 2 )
 
 [node name="PuzzlePreview" type="ColorRect"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+color = Color( 0.0313726, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PuzzleVisualizer" type="ColorRect" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 62.0
+margin_bottom = 62.0
 color = Color( 0, 0, 0, 1 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -30,8 +40,8 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="."]
-margin_right = 100.0
-margin_bottom = 100.0
+margin_right = 64.0
+margin_bottom = 64.0
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )

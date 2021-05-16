@@ -20,8 +20,8 @@ class PuzzleCanvas:
 			min_x = min(min_x, vertex.pos.x)
 			max_y = max(max_y, vertex.pos.y)
 			min_y = min(min_y, vertex.pos.y)
-		view_scale = min(canvas_size.x * 0.8 / (max_x - min_x), 
-						 canvas_size.y * 0.8 / (max_y - min_y))
+		view_scale = min(canvas_size.x * 0.8 / (max_x - min_x + 0.8), 
+						 canvas_size.y * 0.8 / (max_y - min_y + 0.8))
 		view_origin = canvas_size / 2 - Vector2((max_x + min_x) / 2, (max_y + min_y) / 2) * view_scale
 	
 	func add_circle(pos, radius, color):
