@@ -75,7 +75,9 @@ class DiscreteSolutionState:
 			var occupied_vertices = {}
 			var endpoint_occupied = 0
 			for way in range(puzzle.n_ways):
-				var edge_length = (puzzle.vertices[new_state.vertices[way][-1]].pos - puzzle.vertices[new_state.vertices[way][-2]].pos).length()
+				var second_point = puzzle.vertices[new_state.vertices[way][-2]]
+				var end_point = puzzle.vertices[new_state.vertices[way][-1]]
+				var edge_length = (end_point.pos - second_point.pos).length()
 				if (abs(edge_length - main_edge_length) > 1e-3):
 					limit = min(limit, 1.0 - 1e-6)
 					if (edge_length < main_edge_length):
@@ -85,10 +87,14 @@ class DiscreteSolutionState:
 						if (new_state.vertices[way][i] in occupied_vertices):
 							endpoint_occupied = max(endpoint_occupied, occupied_vertices[new_state.vertices[way][i]])
 					occupied_vertices[new_state.vertices[way][i]] = 2 if i == 0 else 1
-				if (endpoint_occupied == 1): # colliding with other lines / self-colliding
-					limit = min(limit, 1.0 - puzzle.line_width / edge_length)
-				elif (endpoint_occupied == 2): # colliding with start points
-					limit = min(limit, 1.0 - (puzzle.start_size + puzzle.line_width / 2) / edge_length)
+				if (second_point.decorator.rule == 'self-intersection' and endpoint_occupied != 0):
+					return [null, null]
+				if end_point.decorator.rule != 'self-intersection':
+					if (endpoint_occupied == 1): # colliding with other lines / self-colliding
+						limit = min(limit, 1.0 - puzzle.line_width / edge_length)
+					elif (endpoint_occupied == 2): # colliding with start points
+						limit = min(limit, 1.0 - (puzzle.start_size + puzzle.line_width / 2) / edge_length)
+
 			return [new_state, limit]
 		assert(false)
 	
