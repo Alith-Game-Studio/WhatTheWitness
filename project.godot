@@ -10,6 +10,7 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
+
 }
 
 [application]
@@ -28,7 +29,8 @@ Visualizer="*res://script/visualizer.gd"
 
 [debug]
 
-settings/fps/force_fps=120
+settings/fps/force_fps=60
+settings/stdout/print_fps=true
 
 [display]
 
