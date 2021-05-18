@@ -1,26 +1,41 @@
 extends Node
 
+class DecoratorResponse:
+	var decorator
+	var rule: String
+	var pos: Vector2
+	var vertex_index: int
+	var state: int
+	var data: Object
+	
+	const NORMAL = 0
+	const ERROR = 1
+	const ELIMINATED = 2
+	const CONVERTED = 3
+
 class Validator:
 	
 	var solution_validity: int # 0: unknown, 1: correct, -1: wrong
-	var errors: Array
-	var decorator_list: Array
+	var decorator_responses: Array
 	var regions: Array
 	var vertex_covered: Array
 	
 	func validate(puzzle: Graph.Puzzle, solution: Solution.SolutionLine):
-		decorator_list.clear()
+		decorator_responses.clear()
 		vertex_covered.clear()
 		for i in range(len(puzzle.vertices)):
 			var vertex = puzzle.vertices[i]
 			vertex_covered.append(false)
 			if (vertex.decorator.rule != 'none'):
-				decorator_list.append([vertex.decorator.rule, vertex, i, Graph.VERTEX_ELEMENT])
-		for line in solution.lines:
-			for segment in line:
-				vertex_covered[segment[0].start_index] = true
-				vertex_covered[segment[0].end_index] = true
-		get_regions(puzzle)
+				var response = DecoratorResponse.new()
+				response.decorator = vertex.decorator
+				response.rule = vertex.decorator.rule
+				response.pos = vertex.pos
+				response.vertex_index = vertex.index
+				response.state = DecoratorResponse.ERROR
+				response.data = null
+				decorator_responses.append(response)
+		# get_regions(puzzle)
 		print(regions)
 		solution.validity = -1
 	

@@ -7,6 +7,7 @@ class PuzzleCanvas:
 	var view_origin = Vector2(200, 300)
 	
 	var puzzle
+	var override_color = null
 		
 	func normalize_view(canvas_size):
 		if (len(puzzle.vertices) == 0):
@@ -25,14 +26,14 @@ class PuzzleCanvas:
 		view_origin = canvas_size / 2 - Vector2((max_x + min_x) / 2, (max_y + min_y) / 2) * view_scale
 	
 	func add_circle(pos, radius, color):
-		drawing_target.draw_circle(pos * view_scale, radius * view_scale - 0.5, color)
-		drawing_target.draw_arc(pos * view_scale, radius * view_scale - 0.5, 0.0, 2 * PI, 64, color, 1.0, true)
+		drawing_target.draw_circle(pos * view_scale, radius * view_scale - 0.5, color if override_color == null else override_color)
+		drawing_target.draw_arc(pos * view_scale, radius * view_scale - 0.5, 0.0, 2 * PI, 64, color if override_color == null else override_color, 1.0, true)
 		
 	func add_line(pos1, pos2, width, color):
-		drawing_target.draw_line(pos1 * view_scale, pos2 * view_scale, color, width * view_scale, true)
+		drawing_target.draw_line(pos1 * view_scale, pos2 * view_scale, color if override_color == null else override_color, width * view_scale, true)
 	
 	func add_rect(pos1, pos2, width, color):
-		drawing_target.draw_line(Vector2((pos1.x + pos2.x) / 2, pos1.y) * view_scale, Vector2((pos1.x + pos2.x) / 2, pos2.y) * view_scale, color, (pos2.x - pos1.x) * view_scale, true)
+		drawing_target.draw_line(Vector2((pos1.x + pos2.x) / 2, pos1.y) * view_scale, Vector2((pos1.x + pos2.x) / 2, pos2.y) * view_scale, color if override_color == null else override_color, (pos2.x - pos1.x) * view_scale, true)
 	
 	func add_texture(center, size, texture):
 		var origin = center * view_scale
@@ -44,7 +45,7 @@ class PuzzleCanvas:
 		var result_list = []
 		for pos in pos_list:
 			result_list.push_back(pos * view_scale)
-		drawing_target.draw_polygon(result_list, PoolColorArray([color]), [], null, null, true)
+		drawing_target.draw_polygon(result_list, PoolColorArray([color if override_color == null else override_color]), [], null, null, true)
 
 	func screen_to_world(position):
 		return (position - view_origin) / view_scale
@@ -68,7 +69,22 @@ class PuzzleCanvas:
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		for decorator in puzzle.decorators:
 			decorator.draw_foreground(self, null, -1, puzzle)
-
+	
+	func draw_validation(target, puzzle, validator, time):
+		if (validator == null): # unknown
+			return
+		var error_transparency = (sin(time * 6 + PI / 4) + 1) / 2
+		drawing_target = target
+		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
+		override_color = Color(1.0, 0.0, 0.0, error_transparency)
+		for decorator_response in validator.decorator_responses:
+			if (decorator_response.state == Validation.DecoratorResponse.ERROR):
+				drawing_target.draw_set_transform(view_origin + decorator_response.pos * view_scale, decorator_response.decorator.angle, Vector2(1.0, 1.0))
+				decorator_response.decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)
+		override_color = null
+			
+		
+		
 	func draw_solution(target, solution):
 		drawing_target = target
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))

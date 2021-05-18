@@ -1,6 +1,5 @@
 extends Node2D
 
-var validator = Validation.Validator.new()
 var mouse_start_position = null
 var is_drawing_solution = false
 onready var puzzle_drawing_target = $MarginContainer/PuzzleRegion/PuzzleBackground
@@ -9,12 +8,15 @@ onready var solver_drawing_target = $MarginContainer/PuzzleRegion/PuzzleForegrou
 func _ready():
 	Gameplay.puzzle = Graph.load_from_xml(Gameplay.load_puzzle_path)
 	Gameplay.solution = Solution.SolutionLine.new()
+	Gameplay.validator = null
 	Gameplay.canvas = Visualizer.PuzzleCanvas.new()
 	Gameplay.canvas.puzzle = Gameplay.puzzle
 	Gameplay.canvas.normalize_view(puzzle_drawing_target.get_rect().size)	
 	puzzle_drawing_target.update()
 	
 func _physics_process(delta):
+	if (Gameplay.validator != null):
+		Gameplay.validation_elasped_time += delta
 	solver_drawing_target.update()
 
 func _input(event):
@@ -23,7 +25,9 @@ func _input(event):
 		var position = event.position - panel_start_pos
 		if (is_drawing_solution):
 			if (Gameplay.solution.is_completed(Gameplay.puzzle)):
-				validator.validate(Gameplay.puzzle, Gameplay.solution)
+				Gameplay.validator = Validation.Validator.new()
+				Gameplay.validator.validate(Gameplay.puzzle, Gameplay.solution)
+				Gameplay.validation_elasped_time = 0.0
 			is_drawing_solution = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			if (mouse_start_position != null):
@@ -32,7 +36,7 @@ func _input(event):
 		else:
 			if (Gameplay.solution.try_start_solution_at(Gameplay.puzzle, Gameplay.canvas.screen_to_world(position))):
 				print('started')
-				validator.reset()
+				Gameplay.validator = null
 				mouse_start_position = position
 				is_drawing_solution = true
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

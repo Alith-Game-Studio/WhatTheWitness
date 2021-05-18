@@ -36,6 +36,7 @@ class Facet:
 	var vertices: Array
 	var center: Vector2
 	var center_vertex_index: int
+	var index: int
 	func _init(vs):
 		vertices = vs
 		center = Vector2.ZERO
@@ -276,6 +277,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		facet.edge_tuples = edge_tuples
 		facet.center_vertex_index = push_vertex_vec(puzzle, facet.center, true)
 		__add_decorator(puzzle, raw_element, facet.center_vertex_index)
+		facet.index = len(puzzle.facets)
 		puzzle.facets.push_back(facet)
 	if (element_type == VERTEX_ELEMENT):
 		__add_decorator(puzzle, raw_element, id)

@@ -155,6 +155,7 @@ class SolutionLine:
 		return v1.x * v2.y - v2.x * v1.y
 	
 	func try_start_solution_at(puzzle, pos):
+		validity = 0
 		var state = DiscreteSolutionState.new()
 		if (state.initialize(puzzle, pos)):
 			started = true
