@@ -26,6 +26,7 @@ Graph="*res://script/graph.gd"
 Solution="*res://script/solution.gd"
 Validation="*res://script/validation.gd"
 Visualizer="*res://script/visualizer.gd"
+BasicJudgers="*res://script/judgers/basic_judgers.gd"
 
 [debug]
 

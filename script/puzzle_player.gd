@@ -26,7 +26,10 @@ func _input(event):
 		if (is_drawing_solution):
 			if (Gameplay.solution.is_completed(Gameplay.puzzle)):
 				Gameplay.validator = Validation.Validator.new()
-				Gameplay.validator.validate(Gameplay.puzzle, Gameplay.solution)
+				if (Gameplay.validator.validate(Gameplay.puzzle, Gameplay.solution)):
+					Gameplay.solution.validity = 1
+				else:
+					Gameplay.solution.validity = -1
 				Gameplay.validation_elasped_time = 0.0
 			is_drawing_solution = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

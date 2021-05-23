@@ -17,6 +17,8 @@ class Vertex:
 	var hidden: bool
 	var decorator = load("res://script/decorators/no_decorator.gd").new()
 	var is_attractor: bool
+	var linked_facet
+	var linked_edge_tuple
 	func _init(x, y):
 		pos.x = x
 		pos.y = y
@@ -30,7 +32,6 @@ class Edge:
 		start = v1
 		end = v2
 		
-	
 class Facet:
 	var edge_tuples: Array
 	var vertices: Array
@@ -119,6 +120,7 @@ func __add_decorator(puzzle, raw_element, v):
 		var v_end = push_vertex_vec(puzzle, p_end)
 		var e = push_edge_idx(puzzle, v, v_end)
 		puzzle.vertices[v_end].is_attractor = true
+		puzzle.vertices[v].is_attractor = true
 		puzzle.vertices[v_end].decorator = load('res://script/decorators/end_decorator.gd').new()
 	var text_decorator = __find_decorator(raw_element, "TextDecorator")
 	if (text_decorator):
@@ -249,6 +251,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			push_edge_idx(puzzle, v2, v4)
 		else:
 			v_mid = push_vertex_vec(puzzle, p1 * 0.5 + p2 * 0.5)
+			puzzle.vertices[v_mid].linked_edge_tuple = [v1, v2]
 			var e1 = push_edge_idx(puzzle, v1, v_mid)
 			var e2 = push_edge_idx(puzzle, v2, v_mid)
 			__add_decorator(puzzle, raw_element, v_mid)
@@ -275,9 +278,11 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 			edge_tuples.push_back(edge_tuple)
 		var facet = Facet.new(facet_vertices)
 		facet.edge_tuples = edge_tuples
-		facet.center_vertex_index = push_vertex_vec(puzzle, facet.center, true)
+		var v_f = push_vertex_vec(puzzle, facet.center, true)
+		facet.center_vertex_index = v_f
 		__add_decorator(puzzle, raw_element, facet.center_vertex_index)
 		facet.index = len(puzzle.facets)
+		puzzle.vertices[v_f].linked_facet = facet
 		puzzle.facets.push_back(facet)
 	if (element_type == VERTEX_ELEMENT):
 		__add_decorator(puzzle, raw_element, id)
