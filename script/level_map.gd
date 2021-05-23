@@ -35,7 +35,7 @@ func _ready():
 			target.set_position(placeholder.get_position())
 			print(target.get_rect().size)
 			target.get_child(0).show_puzzle(puzzle_dir + '/' + puzzle_file)
-	view.remove_child($View/PuzzlePlaceHolders)
+			placeholder.get_parent().remove_child(placeholder)
 
 func update_view():
 	var window_size = get_viewport().size
