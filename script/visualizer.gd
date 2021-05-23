@@ -102,6 +102,8 @@ class PuzzleCanvas:
 				var color = puzzle.solution_colors[way]
 				if (solution.validity == -1):
 					color = Color.black
+				elif (solution.validity == 0): # drawing illumination
+					color = Color(1 - (1 - color.r) * 0.6, 1 - (1 - color.g) * 0.6, 1 - (1 - color.b) * 0.6, color.a)
 				var last_pos = puzzle.vertices[vertices_way[0]].pos
 				var delta_shift = Vector2.ZERO
 				add_circle(puzzle.vertices[vertices_way[0]].pos, puzzle.start_size, color)
