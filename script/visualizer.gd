@@ -8,6 +8,7 @@ class PuzzleCanvas:
 	
 	var puzzle
 	var override_color = null
+	var canvas_size = null
 		
 	func normalize_view(canvas_size):
 		if (len(puzzle.vertices) == 0):
@@ -21,6 +22,7 @@ class PuzzleCanvas:
 			min_x = min(min_x, vertex.pos.x)
 			max_y = max(max_y, vertex.pos.y)
 			min_y = min(min_y, vertex.pos.y)
+		self.canvas_size = canvas_size
 		view_scale = min(canvas_size.x * 0.8 / (max_x - min_x + 0.8), 
 						 canvas_size.y * 0.8 / (max_y - min_y + 0.8))
 		view_origin = canvas_size / 2 - Vector2((max_x + min_x) / 2, (max_y + min_y) / 2) * view_scale
@@ -54,7 +56,10 @@ class PuzzleCanvas:
 		return position * view_scale
 
 	func draw_puzzle(target):
+		if (canvas_size == null):
+			return
 		drawing_target = target
+		drawing_target.draw_line(Vector2(0, canvas_size.y / 2), Vector2(canvas_size.x, canvas_size.y / 2), puzzle.background_color, canvas_size.y)
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		for vertex in puzzle.vertices:
 			if (!vertex.hidden):

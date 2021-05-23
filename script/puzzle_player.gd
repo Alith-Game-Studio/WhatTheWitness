@@ -38,7 +38,6 @@ func _input(event):
 				mouse_start_position = null
 		else:
 			if (Gameplay.solution.try_start_solution_at(Gameplay.puzzle, Gameplay.canvas.screen_to_world(position))):
-				print('started')
 				Gameplay.validator = null
 				mouse_start_position = position
 				is_drawing_solution = true

@@ -78,7 +78,7 @@ margin_left = 704.0
 margin_top = 320.0
 margin_right = 768.0
 margin_bottom = 384.0
-text = "2-d"
+text = "1-intro-square-8"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -86,10 +86,10 @@ __meta__ = {
 
 [node name="TextEdit7" type="TextEdit" parent="View/PuzzlePlaceHolders"]
 margin_left = 768.0
-margin_top = 320.0
+margin_top = 318.941
 margin_right = 832.0
-margin_bottom = 384.0
-text = "2-e"
+margin_bottom = 382.941
+text = "1-intro-square-9"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false

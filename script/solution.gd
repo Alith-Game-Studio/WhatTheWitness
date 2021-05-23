@@ -211,6 +211,7 @@ class SolutionLine:
 				var aligned_score = edge_dir.dot(delta)
 				if (aligned_score > best_aligned_score):
 					chosen_edge = [edge, target_vertex, edge_dir]
+					best_aligned_score = aligned_score
 			if (chosen_edge != null):
 				var edge = chosen_edge[0]
 				var vertex_id = chosen_edge[1].index
