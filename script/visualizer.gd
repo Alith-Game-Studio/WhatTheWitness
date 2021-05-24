@@ -79,18 +79,32 @@ class PuzzleCanvas:
 		if (validator == null): # unknown
 			return
 		var error_transparency = (sin(time * 6 + PI / 4) + 1) / 2
+		var eliminator_fading = min(1.0, max(0.0, time - 1.0)) * 0.65
 		drawing_target = target
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
-		override_color = Color(1.0, 0.0, 0.0, error_transparency)
 		for decorator_response in validator.decorator_responses:
-			if (decorator_response.state == Validation.DecoratorResponse.ERROR):
+			var draw_error = false
+			var draw_eliminated = 0.0
+			if (validator.elimination_happended and time < 1.0):
+				draw_error = decorator_response.state_before_elimination == Validation.DecoratorResponse.ERROR
+			else:
+				draw_error = decorator_response.state == Validation.DecoratorResponse.ERROR
+				draw_eliminated = decorator_response.state == Validation.DecoratorResponse.ELIMINATED
+				
+			if (draw_error):
+				override_color = Color(1.0, 0.0, 0.0, error_transparency)
 				drawing_target.draw_set_transform(view_origin + decorator_response.pos * view_scale, decorator_response.decorator.angle, Vector2(1.0, 1.0))
 				decorator_response.decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)
+			elif (draw_eliminated):
+				override_color = Color(puzzle.background_color.r, puzzle.background_color.g, puzzle.background_color.b, eliminator_fading)
+				drawing_target.draw_set_transform(view_origin + decorator_response.pos * view_scale, decorator_response.decorator.angle, Vector2(1.0, 1.0))
+				decorator_response.decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)
+				
 		override_color = null
 			
 		
 		
-	func draw_solution(target, solution):
+	func draw_solution(target, solution, validator, time):
 		drawing_target = target
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		if (solution.started):
@@ -100,6 +114,8 @@ class PuzzleCanvas:
 			for way in range(puzzle.n_ways):
 				var vertices_way = state.vertices[way]
 				var color = puzzle.solution_colors[way]
+				if (validator != null and validator.elimination_happended and time < 1.0):
+					color = Color.black
 				if (solution.validity == -1):
 					color = Color.black
 				elif (solution.validity == 0): # drawing illumination

@@ -1,6 +1,7 @@
 extends Node
 
 const region_judgers = [
+	'judge_region_eliminators',
 	'judge_region_points',
 	'judge_region_squares',
 	'judge_region_stars',
@@ -18,6 +19,9 @@ func judge_all(validator: Validation.Validator):
 	
 	
 func judge_region(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	if ('eliminator' in region.decorator_dict):
+		return judge_region_elimination(validator, region, require_errors)
+	
 	var ok = true
 	for region_judger in region_judgers:
 		var region_judger_ok = call(region_judger, validator, region, require_errors)
@@ -60,11 +64,12 @@ func judge_region_stars(validator: Validation.Validator, region: Validation.Regi
 	var color_dict = {}
 	for decorator_id in region.decorator_indices:
 		var response = validator.decorator_responses[decorator_id]
-		if ('color' in response.decorator):
-			if (response.decorator.color in color_dict):
-				color_dict[response.decorator.color] += 1
-			else:
-				color_dict[response.decorator.color] = 1
+		if (!response.rule.begins_with('!eliminated_')):
+			if ('color' in response.decorator):
+				if (response.decorator.color in color_dict):
+					color_dict[response.decorator.color] += 1
+				else:
+					color_dict[response.decorator.color] = 1
 	for decorator_id in region.decorator_dict['star']:
 		var response = validator.decorator_responses[decorator_id]
 		if (color_dict[response.decorator.color] != 2):
@@ -128,3 +133,70 @@ func judge_region_tetris(validator: Validation.Validator, region: Validation.Reg
 		return true
 	return TetrisJudger.judge_region_tetris_implementation(validator, region, require_errors)
 	
+func judge_region_eliminators(validator: Validation.Validator, region: Validation.Region, require_errors: bool):  # only for uneliminated eliminators
+	if (!('eliminator' in region.decorator_dict)):
+		return true
+	if (require_errors):
+		for decorator_id in region.decorator_dict['eliminator']:
+			var response = validator.decorator_responses[decorator_id]
+			response.state = Validation.DecoratorResponse.ERROR
+	return false
+
+func __judge_region_elimination_case(validator: Validation.Validator, region: Validation.Region, require_errors: bool, \
+	error_list: Array, eliminator_list: Array, eliminator_targets: Array):
+	for i in range(len(eliminator_list)):
+		for id in [eliminator_list[i], error_list[eliminator_targets[i]]]:
+			validator.decorator_responses[id].rule = '!eliminated_' + validator.decorator_responses[id].rule
+	var ok = true
+	for region_judger in region_judgers:
+		var region_judger_ok = call(region_judger, validator, region, require_errors)
+		ok = ok and region_judger_ok
+		if (!ok and !require_errors):
+			break
+	for i in range(len(eliminator_list)):
+		for id in [eliminator_list[i], error_list[eliminator_targets[i]]]:
+			validator.decorator_responses[id].rule = validator.decorator_responses[id].rule.substr(12)
+	if (!ok and require_errors):
+		for i in range(len(eliminator_list)):
+			for id in [eliminator_list[i], error_list[eliminator_targets[i]]]:
+				validator.decorator_responses[id].state = Validation.DecoratorResponse.ELIMINATED
+	return ok
+		
+	
+func judge_region_elimination(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	var ok = true
+	for region_judger in region_judgers:
+		if (region_judger == 'judge_region_eliminators'):
+			continue
+		var region_judger_ok = call(region_judger, validator, region, true)
+		ok = ok and region_judger_ok
+	var error_list = []
+	var eliminator_list = []
+	for decorator_id in region.decorator_indices:
+		var response = validator.decorator_responses[decorator_id]
+		if (response.state == Validation.DecoratorResponse.ERROR):
+			error_list.append(decorator_id)
+		if (response.rule == 'eliminator'):
+			eliminator_list.append(decorator_id)
+		response.state_before_elimination = response.state
+		response.state = Validation.DecoratorResponse.NORMAL
+	if (len(error_list) == 0 and len(eliminator_list) == 1): 
+		# special case: only one eliminator exists and there is no error
+		# the eliminator cannot erase itself
+		if (require_errors):
+			validator.decorator_responses[eliminator_list[0]].state = Validation.DecoratorResponse.ERROR
+		return false
+	validator.elimination_happended = true
+	# otherwise, one eliminator can erase any error (which is the assumption in searching)
+	# if it happens to eliminate itself, it is still a valid solution
+	# since we can swap the targets of two eliminators to bypass this
+	for i in range(len(error_list), len(eliminator_list)): # number of errors is insufficient
+		error_list.append(eliminator_list[i]) # mark the eliminator as error
+		validator.decorator_responses[eliminator_list[i]].state_before_elimination = Validation.DecoratorResponse.ERROR
+	var eliminator_targets = []
+	for i in range(len(eliminator_list)):
+		eliminator_targets.append(i)
+	while true:
+		break
+		
+	return __judge_region_elimination_case(validator, region, require_errors, error_list, eliminator_list, eliminator_targets)

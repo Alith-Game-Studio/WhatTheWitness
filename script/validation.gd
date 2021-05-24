@@ -6,6 +6,7 @@ class DecoratorResponse:
 	var pos: Vector2
 	var vertex_index: int
 	var state: int
+	var state_before_elimination: int
 	var data: Object
 	var index: int
 	
@@ -28,6 +29,7 @@ class Region:
 
 class Validator:
 	
+	var elimination_happended: bool
 	var solution_validity: int # 0: unknown, 1: correct, -1: wrong
 	var decorator_responses: Array
 	var decorator_response_of_vertex: Dictionary
@@ -42,6 +44,7 @@ class Validator:
 		solution = input_solution.state_stack[-1]
 		decorator_responses = []
 		decorator_response_of_vertex = {}
+		elimination_happended = false
 		for i in range(len(puzzle.vertices)):
 			var vertex = puzzle.vertices[i]
 			if (vertex.decorator.rule != 'none'):
