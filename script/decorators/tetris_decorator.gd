@@ -1,6 +1,6 @@
 extends "../decorator.gd"
 
-var rule = 'triangle'
+var rule = 'tetris'
 
 var shapes
 var is_hollow

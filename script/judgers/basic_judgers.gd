@@ -6,6 +6,7 @@ const region_judgers = [
 	'judge_region_stars',
 	'judge_region_triangles',
 	'judge_region_arrows',
+	'judge_region_tetris',
 ]
 
 func judge_all(validator: Validation.Validator):
@@ -121,4 +122,9 @@ func judge_region_arrows(validator: Validation.Validator, region: Validation.Reg
 				return false
 	return true
 	
-		
+	
+func judge_region_tetris(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	if (!('tetris' in region.decorator_dict)):
+		return true
+	return TetrisJudger.judge_region_tetris_implementation(validator, region, require_errors)
+	

@@ -57,7 +57,7 @@ margin_left = 512.0
 margin_top = 320.0
 margin_right = 576.0
 margin_bottom = 384.0
-text = "2-b"
+text = "0-test-tetris-1"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
