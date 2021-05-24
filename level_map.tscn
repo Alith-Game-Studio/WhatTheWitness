@@ -17,6 +17,7 @@ format = 1
 tile_data = PoolIntArray( 131074, 1, 5, 131075, 1, 8, 131076, 1, 8, 131077, 1, 8, 131078, 1, 65539, 196614, 1, 65538, 262150, 1, 65538, 327686, 1, 131083, 327687, 1, 8, 327688, 1, 8, 327689, 1, 8, 327690, 1, 65545, 327691, 1, 8, 327692, 1, 2, 393222, 1, 65538, 393226, 1, 65538, 458758, 1, 65538, 458762, 1, 7, 458763, 1, 8, 458764, 1, 2, 524294, 1, 65538, 589830, 1, 65538, 655366, 1, 1 )
 
 [node name="PuzzlePlaceHolders" type="Node2D" parent="View"]
+position = Vector2( 0, 1 )
 
 [node name="TextEdit" type="TextEdit" parent="View/PuzzlePlaceHolders"]
 margin_left = 128.0
@@ -67,7 +68,7 @@ margin_left = 576.0
 margin_top = 320.0
 margin_right = 640.0
 margin_bottom = 384.0
-text = "2-c"
+text = "1ex-cave-arrow"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -100,7 +101,7 @@ margin_left = 704.0
 margin_top = 448.0
 margin_right = 768.0
 margin_bottom = 512.0
-text = "3-d"
+text = "1-treehouse-orange-9"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -111,7 +112,7 @@ margin_left = 768.0
 margin_top = 448.0
 margin_right = 832.0
 margin_bottom = 512.0
-text = "3-ex"
+text = "1-cave-triangle"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
