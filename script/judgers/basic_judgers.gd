@@ -185,6 +185,7 @@ func judge_region_elimination(validator: Validation.Validator, region: Validatio
 		# the eliminator cannot erase itself
 		if (require_errors):
 			validator.decorator_responses[eliminator_list[0]].state = Validation.DecoratorResponse.ERROR
+			validator.decorator_responses[eliminator_list[0]].state_before_elimination = Validation.DecoratorResponse.ERROR
 		return false
 	validator.elimination_happended = true
 	# otherwise, one eliminator can erase any error (which is the assumption in searching)

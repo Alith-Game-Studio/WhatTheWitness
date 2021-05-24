@@ -86,7 +86,9 @@ class PuzzleCanvas:
 			var draw_error = false
 			var draw_eliminated = 0.0
 			if (validator.elimination_happended and time < 1.0):
-				draw_error = decorator_response.state_before_elimination == Validation.DecoratorResponse.ERROR
+				draw_error = decorator_response.state_before_elimination == Validation.DecoratorResponse.ERROR or \
+					(decorator_response.state_before_elimination == Validation.DecoratorResponse.NO_ELIMINATION_CHANGES and \
+					decorator_response.state == Validation.DecoratorResponse.ERROR)
 			else:
 				draw_error = decorator_response.state == Validation.DecoratorResponse.ERROR
 				draw_eliminated = decorator_response.state == Validation.DecoratorResponse.ELIMINATED

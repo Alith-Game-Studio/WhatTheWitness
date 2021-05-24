@@ -14,6 +14,7 @@ class DecoratorResponse:
 	const ERROR = 1
 	const ELIMINATED = 2
 	const CONVERTED = 3
+	const NO_ELIMINATION_CHANGES = -1
 	
 class Region:
 	
@@ -54,6 +55,7 @@ class Validator:
 				response.pos = vertex.pos
 				response.vertex_index = vertex.index
 				response.state = DecoratorResponse.NORMAL
+				response.state_before_elimination = DecoratorResponse.NO_ELIMINATION_CHANGES
 				response.data = null
 				response.index = len(decorator_responses)
 				decorator_responses.append(response)
