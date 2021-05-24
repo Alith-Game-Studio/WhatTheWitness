@@ -1,6 +1,7 @@
 extends Node
 
 const region_judgers = [
+	'judge_region_rings',
 	'judge_region_eliminators',
 	'judge_region_points',
 	'judge_region_squares',
@@ -11,9 +12,55 @@ const region_judgers = [
 ]
 
 func judge_all(validator: Validation.Validator):
+	return judge_ring(validator, true)
+	
+func judge_ring(validator: Validation.Validator, require_errors: bool):
+	var clonable_decorators = []
+	var paste_positions = []
+	for region in validator.regions:
+		if (region.has_any('ring')):
+			for decorator_id in region.decorator_indices:
+				if (!(validator.decorator_responses[decorator_id].rule in ['ring', 'circle', 'point'])):
+					if ('color' in validator.decorator_responses[decorator_id].decorator):
+						clonable_decorators.append(decorator_id)
+			for decorator_id in region.decorator_dict['ring']:
+				paste_positions.append([decorator_id, region])
+		if (region.has_any('circle')):
+			for decorator_id in region.decorator_dict['circle']:
+				paste_positions.append([decorator_id, region])
+	if (len(clonable_decorators) == 0):
+		return judge_all_regions(validator, require_errors)
+	else:
+		for cloned_decorator_id in clonable_decorators:
+			for paste_position in paste_positions:
+				var decorator_response = validator.decorator_responses[paste_position[0]]
+				validator.alter_rule(paste_position[0], paste_position[1], validator.decorator_responses[cloned_decorator_id].rule)
+				decorator_response.clone_source_decorator = decorator_response.decorator
+				decorator_response.decorator = validator.decorator_responses[cloned_decorator_id].decorator
+			if (judge_all_regions(validator, false)):
+				if (require_errors):
+					return judge_all_regions(validator, require_errors)
+				else:
+					return true
+			for paste_position in paste_positions:
+				var decorator_response = validator.decorator_responses[paste_position[0]]
+				decorator_response.decorator = decorator_response.clone_source_decorator
+	if (require_errors):
+		var rnd = clonable_decorators[randi() % len(clonable_decorators)]
+		for paste_position in paste_positions:
+			var decorator_response = validator.decorator_responses[paste_position[0]]
+			validator.alter_rule(paste_position[0], paste_position[1], validator.decorator_responses[rnd].rule)
+			decorator_response.clone_source_decorator = decorator_response.decorator
+			decorator_response.decorator = validator.decorator_responses[rnd].decorator
+			print('current: ', decorator_response.rule)
+		return judge_all_regions(validator, require_errors)
+	else:
+		return false
+	
+func judge_all_regions(validator: Validation.Validator, require_errors: bool):
 	var ok = true
 	for region in validator.regions:
-		var judger_ok = judge_region(validator, region, true)
+		var judger_ok = judge_region(validator, region, require_errors)
 		ok = judger_ok and ok
 	return ok
 	
@@ -37,9 +84,9 @@ func judge_region_squares(validator: Validation.Validator, region: Validation.Re
 	var ok = true
 	for decorator_id in region.decorator_dict['square']:
 		var response = validator.decorator_responses[decorator_id]
-		if (response.decorator.color != color):
+		if (response.color != color):
 			if (color == null):
-				color = response.decorator.color
+				color = response.color
 			else:
 				ok = false
 				break
@@ -65,14 +112,14 @@ func judge_region_stars(validator: Validation.Validator, region: Validation.Regi
 	for decorator_id in region.decorator_indices:
 		var response = validator.decorator_responses[decorator_id]
 		if (!response.rule.begins_with('!eliminated_')):
-			if ('color' in response.decorator):
-				if (response.decorator.color in color_dict):
-					color_dict[response.decorator.color] += 1
+			if (response.color != null):
+				if (response.color in color_dict):
+					color_dict[response.color] += 1
 				else:
-					color_dict[response.decorator.color] = 1
+					color_dict[response.color] = 1
 	for decorator_id in region.decorator_dict['star']:
 		var response = validator.decorator_responses[decorator_id]
-		if (color_dict[response.decorator.color] != 2):
+		if (color_dict[response.color] != 2):
 			if (require_errors):
 				response.state = Validation.DecoratorResponse.ERROR
 			else:
@@ -133,6 +180,20 @@ func judge_region_tetris(validator: Validation.Validator, region: Validation.Reg
 		return true
 	return TetrisJudger.judge_region_tetris_implementation(validator, region, require_errors)
 	
+func judge_region_rings(validator: Validation.Validator, region: Validation.Region, require_errors: bool):  # only for uneliminated eliminators
+	if (!region.has_any('ring') and !region.has_any('circle')):
+		return true
+	if (require_errors):
+		if (region.has_any('ring')):
+			for decorator_id in region.decorator_dict['ring']:
+				var response = validator.decorator_responses[decorator_id]
+				response.state = Validation.DecoratorResponse.ERROR
+		if (region.has_any('circle')):
+			for decorator_id in region.decorator_dict['circle']:
+				var response = validator.decorator_responses[decorator_id]
+				response.state = Validation.DecoratorResponse.ERROR
+	return false
+	
 func judge_region_eliminators(validator: Validation.Validator, region: Validation.Region, require_errors: bool):  # only for uneliminated eliminators
 	if (!region.has_any('eliminator')):
 		return true
@@ -146,9 +207,7 @@ func __judge_region_elimination_case(validator: Validation.Validator, region: Va
 	error_list: Array, eliminator_list: Array, eliminator_targets: Array):
 	for i in range(len(eliminator_list)):
 		for id in [eliminator_list[i], error_list[eliminator_targets[i]]]:
-			if (!validator.decorator_responses[id].rule.begins_with('!')):
-				region.decorator_dict[validator.decorator_responses[id].rule].erase(id)
-				validator.decorator_responses[id].rule = '!eliminated_' + validator.decorator_responses[id].rule
+			validator.alter_rule(id, region, '!eliminated_' + validator.decorator_responses[id].rule)
 			
 	var ok = true
 	for region_judger in region_judgers:
@@ -158,9 +217,7 @@ func __judge_region_elimination_case(validator: Validation.Validator, region: Va
 			break
 	for i in range(len(eliminator_list)):
 		for id in [eliminator_list[i], error_list[eliminator_targets[i]]]:
-			if (validator.decorator_responses[id].rule.begins_with('!')):
-				validator.decorator_responses[id].rule = validator.decorator_responses[id].rule.substr(12)
-				region.decorator_dict[validator.decorator_responses[id].rule].append(id)
+			validator.alter_rule(id, region, validator.decorator_responses[id].rule.substr(12))
 	if (require_errors):
 		for i in range(len(eliminator_list)):
 			for id in [eliminator_list[i], error_list[eliminator_targets[i]]]:

@@ -80,11 +80,13 @@ class PuzzleCanvas:
 			return
 		var error_transparency = (sin(time * 6 + PI / 4) + 1) / 2
 		var eliminator_fading = min(1.0, max(0.0, time - 1.0)) * 0.65
+		var clone_fading = min(0.5, max(0.0, time)) * 2
 		drawing_target = target
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		for decorator_response in validator.decorator_responses:
 			var draw_error = false
 			var draw_eliminated = 0.0
+			var draw_cloned = decorator_response.clone_source_decorator != null
 			if (validator.elimination_happended and time < 1.0):
 				draw_error = decorator_response.state_before_elimination == Validation.DecoratorResponse.ERROR or \
 					(decorator_response.state_before_elimination == Validation.DecoratorResponse.NO_ELIMINATION_CHANGES and \
@@ -92,8 +94,14 @@ class PuzzleCanvas:
 			else:
 				draw_error = decorator_response.state == Validation.DecoratorResponse.ERROR
 				draw_eliminated = decorator_response.state == Validation.DecoratorResponse.ELIMINATED
-				
-			if (draw_error):
+			if (draw_cloned):
+				override_color = Color(puzzle.background_color.r, puzzle.background_color.g, puzzle.background_color.b, clone_fading * 0.9)
+				drawing_target.draw_set_transform(view_origin + decorator_response.pos * view_scale, decorator_response.decorator.angle, Vector2(1.0, 1.0))
+				decorator_response.clone_source_decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)
+				override_color = Color(decorator_response.color.r, decorator_response.color.g, decorator_response.color.b, clone_fading)
+				drawing_target.draw_set_transform(view_origin + decorator_response.pos * view_scale, decorator_response.decorator.angle, Vector2(1.0, 1.0))
+				decorator_response.decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)
+			if (draw_error and (!draw_cloned or time > 0.5)):
 				override_color = Color(1.0, 0.0, 0.0, error_transparency)
 				drawing_target.draw_set_transform(view_origin + decorator_response.pos * view_scale, decorator_response.decorator.angle, Vector2(1.0, 1.0))
 				decorator_response.decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)

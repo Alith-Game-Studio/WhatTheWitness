@@ -3,11 +3,12 @@ extends Node
 class DecoratorResponse:
 	var decorator
 	var rule: String
+	var color: Color
 	var pos: Vector2
 	var vertex_index: int
 	var state: int
 	var state_before_elimination: int
-	var data: Object
+	var clone_source_decorator
 	var index: int
 	
 	const NORMAL = 0
@@ -42,6 +43,16 @@ class Validator:
 	var puzzle: Graph.Puzzle
 	var solution: Solution.DiscreteSolutionState
 	
+	func alter_rule(decorator_index, region, new_rule):
+		var old_rule = decorator_responses[decorator_index].rule
+		if (!old_rule.begins_with('!')):
+			region.decorator_dict[old_rule].erase(decorator_index)
+		decorator_responses[decorator_index].rule = new_rule
+		if (!new_rule.begins_with('!')):
+			if (!(new_rule in region.decorator_dict)):
+				region.decorator_dict[new_rule] = []
+			region.decorator_dict[new_rule].append(decorator_index)
+	
 	func validate(input_puzzle: Graph.Puzzle, input_solution: Solution.SolutionLine):
 		puzzle = input_puzzle
 		solution = input_solution.state_stack[-1]
@@ -54,11 +65,12 @@ class Validator:
 				var response = DecoratorResponse.new()
 				response.decorator = vertex.decorator
 				response.rule = vertex.decorator.rule
+				if ('color' in vertex.decorator):
+					response.color = vertex.decorator.color
 				response.pos = vertex.pos
 				response.vertex_index = vertex.index
 				response.state = DecoratorResponse.NORMAL
 				response.state_before_elimination = DecoratorResponse.NO_ELIMINATION_CHANGES
-				response.data = null
 				response.index = len(decorator_responses)
 				decorator_responses.append(response)
 				decorator_response_of_vertex[i] = response

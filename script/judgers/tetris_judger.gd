@@ -19,7 +19,7 @@ func calc_area_vertices(vertex_array: Array):
 		result += calc_triangle_area(vertex_array[0], vertex_array[i - 1], vertex_array[i])
 	return abs(result)
 	
-func judge_region_tetris_implementation(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+func judge_region_tetris_implementation(validator, region: Validation.Region, require_errors: bool):
 	var cell_count = 0
 	var area_sum = 0.0
 	for decorator_id in region.decorator_dict['tetris']:
