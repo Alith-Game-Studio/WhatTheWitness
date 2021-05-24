@@ -19,7 +19,7 @@ func judge_all(validator: Validation.Validator):
 	
 	
 func judge_region(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
-	if ('eliminator' in region.decorator_dict):
+	if (region.has_any('eliminator')):
 		return judge_region_elimination(validator, region, require_errors)
 	
 	var ok = true
@@ -31,7 +31,7 @@ func judge_region(validator: Validation.Validator, region: Validation.Region, re
 	return ok
 	
 func judge_region_squares(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
-	if (!('square' in region.decorator_dict)):
+	if (!region.has_any('square')):
 		return true
 	var color = null
 	var ok = true
@@ -50,7 +50,7 @@ func judge_region_squares(validator: Validation.Validator, region: Validation.Re
 	return ok
 
 func judge_region_points(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
-	if (!('point' in region.decorator_dict)):
+	if (!region.has_any('point')):
 		return true
 	if (require_errors):
 		for decorator_id in region.decorator_dict['point']:
@@ -59,7 +59,7 @@ func judge_region_points(validator: Validation.Validator, region: Validation.Reg
 	return false
 	
 func judge_region_stars(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
-	if (!('star' in region.decorator_dict)):
+	if (!region.has_any('star')):
 		return true
 	var color_dict = {}
 	for decorator_id in region.decorator_indices:
@@ -80,7 +80,7 @@ func judge_region_stars(validator: Validation.Validator, region: Validation.Regi
 	return true
 	
 func judge_region_triangles(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
-	if (!('triangle' in region.decorator_dict)):
+	if (!region.has_any('triangle')):
 		return true
 	for decorator_id in region.decorator_dict['triangle']:
 		var ok = true
@@ -104,7 +104,7 @@ func judge_region_triangles(validator: Validation.Validator, region: Validation.
 	return true
 	
 func judge_region_arrows(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
-	if (!('arrow' in region.decorator_dict)):
+	if (!region.has_any('arrow')):
 		return true
 	for decorator_id in region.decorator_dict['arrow']:
 		var response = validator.decorator_responses[decorator_id]
@@ -129,12 +129,12 @@ func judge_region_arrows(validator: Validation.Validator, region: Validation.Reg
 	
 	
 func judge_region_tetris(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
-	if (!('tetris' in region.decorator_dict)):
+	if (!region.has_any('tetris')):
 		return true
 	return TetrisJudger.judge_region_tetris_implementation(validator, region, require_errors)
 	
 func judge_region_eliminators(validator: Validation.Validator, region: Validation.Region, require_errors: bool):  # only for uneliminated eliminators
-	if (!('eliminator' in region.decorator_dict)):
+	if (!region.has_any('eliminator')):
 		return true
 	if (require_errors):
 		for decorator_id in region.decorator_dict['eliminator']:
@@ -146,7 +146,10 @@ func __judge_region_elimination_case(validator: Validation.Validator, region: Va
 	error_list: Array, eliminator_list: Array, eliminator_targets: Array):
 	for i in range(len(eliminator_list)):
 		for id in [eliminator_list[i], error_list[eliminator_targets[i]]]:
-			validator.decorator_responses[id].rule = '!eliminated_' + validator.decorator_responses[id].rule
+			if (!validator.decorator_responses[id].rule.begins_with('!')):
+				region.decorator_dict[validator.decorator_responses[id].rule].erase(id)
+				validator.decorator_responses[id].rule = '!eliminated_' + validator.decorator_responses[id].rule
+			
 	var ok = true
 	for region_judger in region_judgers:
 		var region_judger_ok = call(region_judger, validator, region, require_errors)
@@ -155,8 +158,10 @@ func __judge_region_elimination_case(validator: Validation.Validator, region: Va
 			break
 	for i in range(len(eliminator_list)):
 		for id in [eliminator_list[i], error_list[eliminator_targets[i]]]:
-			validator.decorator_responses[id].rule = validator.decorator_responses[id].rule.substr(12)
-	if (!ok and require_errors):
+			if (validator.decorator_responses[id].rule.begins_with('!')):
+				validator.decorator_responses[id].rule = validator.decorator_responses[id].rule.substr(12)
+				region.decorator_dict[validator.decorator_responses[id].rule].append(id)
+	if (require_errors):
 		for i in range(len(eliminator_list)):
 			for id in [eliminator_list[i], error_list[eliminator_targets[i]]]:
 				validator.decorator_responses[id].state = Validation.DecoratorResponse.ELIMINATED
@@ -195,9 +200,34 @@ func judge_region_elimination(validator: Validation.Validator, region: Validatio
 		error_list.append(eliminator_list[i]) # mark the eliminator as error
 		validator.decorator_responses[eliminator_list[i]].state_before_elimination = Validation.DecoratorResponse.ERROR
 	var eliminator_targets = []
+	var random_eliminator_targets = []
+	var max_random_weights = randf()
 	for i in range(len(eliminator_list)):
 		eliminator_targets.append(i)
+		random_eliminator_targets.append(i)
+	var diff = len(error_list) - len(eliminator_list) 
 	while true:
-		break
-		
-	return __judge_region_elimination_case(validator, region, require_errors, error_list, eliminator_list, eliminator_targets)
+		if (__judge_region_elimination_case(validator, region, false, error_list, eliminator_list, eliminator_targets)):
+			if (require_errors):
+				return __judge_region_elimination_case(validator, region, require_errors, error_list, eliminator_list, eliminator_targets)
+			else:
+				return true
+		var rnd = randf()
+		if (rnd > max_random_weights):
+			max_random_weights = rnd
+			for i in range(len(eliminator_list)):
+				random_eliminator_targets[i] = eliminator_targets[i]
+		for j in range(len(eliminator_list) - 1, -1, -1):
+			if (eliminator_targets[j] < j + diff):
+				eliminator_targets[j] += 1
+				for k in range(j + 1, len(eliminator_list)):
+					eliminator_targets[k] = eliminator_targets[k - 1] + 1
+				break
+			if (j == 0): # all combination fails
+				for i in range(len(eliminator_list)):
+					if (require_errors):
+						eliminator_targets[i] = random_eliminator_targets[i]
+						return __judge_region_elimination_case(validator, region, require_errors, error_list, eliminator_list, eliminator_targets)
+					else:
+						return false
+	

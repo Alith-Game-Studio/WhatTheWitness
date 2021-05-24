@@ -27,6 +27,8 @@ class Region:
 	func _to_string():
 		return '[%d] Facets: %s, Decorators: %s\n' % [index, str(facet_indices), str(decorator_dict)]
 	
+	func has_any(rule):
+		return rule in decorator_dict and len(decorator_dict[rule]) != 0
 
 class Validator:
 	
