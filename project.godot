@@ -28,6 +28,8 @@ Validation="*res://script/validation.gd"
 Visualizer="*res://script/visualizer.gd"
 BasicJudgers="*res://script/judgers/basic_judgers.gd"
 TetrisJudger="*res://script/judgers/tetris_judger.gd"
+CSP="*res://script/judgers/csp.gd"
+CSPHelper="*res://script/judgers/csp_helper.gd"
 
 [debug]
 
@@ -38,6 +40,10 @@ settings/stdout/print_fps=true
 
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
+
+[network]
+
+limits/debugger_stdout/max_chars_per_second=20480
 
 [rendering]
 

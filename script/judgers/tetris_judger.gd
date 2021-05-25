@@ -48,3 +48,5 @@ func judge_region_tetris_implementation(validator, region: Validation.Region, re
 			var response = validator.decorator_responses[decorator_id]
 			response.state = Validation.DecoratorResponse.ERROR
 	return false
+
+

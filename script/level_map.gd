@@ -24,16 +24,15 @@ func list_files(path):
 	
 	
 func _ready():
+	CSP.test()
 	var puzzle_files = list_files(puzzle_dir)
 	var files = list_files(puzzle_dir)
 	for placeholder in puzzle_placeholders:
-		print(placeholder.text)
 		var puzzle_file = placeholder.text.to_lower() + '.wit'
 		if (puzzle_file in files):
 			var target = puzzle_preview_prefab.instance()
 			view.add_child(target)
 			target.set_position(placeholder.get_position())
-			print(target.get_rect().size)
 			target.get_child(0).show_puzzle(puzzle_dir + '/' + puzzle_file)
 			placeholder.get_parent().remove_child(placeholder)
 
