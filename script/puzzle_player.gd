@@ -11,6 +11,7 @@ func _ready():
 	Gameplay.validator = null
 	Gameplay.canvas = Visualizer.PuzzleCanvas.new()
 	Gameplay.canvas.puzzle = Gameplay.puzzle
+	Gameplay.puzzle.preprocess_tetris_covering()
 	Gameplay.canvas.normalize_view(puzzle_drawing_target.get_rect().size)	
 	puzzle_drawing_target.update()
 	

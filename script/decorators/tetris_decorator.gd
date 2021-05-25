@@ -6,7 +6,63 @@ var shapes
 var is_hollow
 var margin_size
 var border_size
+var covering: Array
+const ROTATION_ANGLES = [0, PI / 3, 2 * PI / 3, PI / 2, PI, 3 * PI / 2]
 
+func angle_equal_zero(angle, eps=1e-3):
+	var d = round(angle / (2 * PI))
+	return abs(angle - (2 * d * PI)) < eps
+
+func calculate_covering(puzzle):
+	var rotatable = true 
+	# test if the tetris is skewed
+	# in the level editor we usually use 15 degrees or -15 degrees of angle
+	# to represent that a tetris is skewed
+	for std_angle in ROTATION_ANGLES:
+		if (angle_equal_zero(angle - std_angle)):
+			rotatable = false
+			break
+	var test_angles = ROTATION_ANGLES if rotatable else [angle]
+	var shape_centers = []
+	for shape in shapes:
+		var center = Vector2(0, 0)
+		for pos in shape:
+			center += pos
+		shape_centers.append(center / len(shape))
+	covering = []
+	var covering_dict = {}
+	for angle in test_angles:
+		var transform = Transform2D().rotated(angle)
+		for i in range(len(puzzle.facets)):
+			var ok = true
+			var facet_center = puzzle.facets[i].center
+			# align the facet center with the shape center
+			var relative_pos = facet_center - transform.xform(shape_centers[0])
+			transform[2] += relative_pos
+			# check if all centers aligned
+			var alignment = []
+			for k in range(len(shape_centers)):
+				var shape_center = shape_centers[k]
+				var edge_count = len(shapes[k])
+				var transformed_center = transform.xform(shape_center)
+				var found_alignment = false
+				for j in range(len(puzzle.facets)):
+					if (len(puzzle.facets[j].vertices) == edge_count and
+						puzzle.facets[j].center.distance_squared_to(transformed_center) < 1e-4):
+						alignment.append(j)
+						found_alignment = true
+						break
+				if (!found_alignment):
+					ok = false
+					break
+			# todo: check if all vertices are aligned
+			if (ok):
+				alignment.sort()
+				if (!(alignment in covering_dict)):
+					covering_dict[alignment] = true
+					covering.append(alignment)
+	# print('Covering of %d:' % len(shapes), covering)
+			
 func __shrink_corner(p0, p1, p2, depth):
 	var e1 = (p0 - p1).normalized()
 	var e2 = (p2 - p1).normalized()

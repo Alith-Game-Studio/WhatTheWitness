@@ -73,6 +73,11 @@ class Puzzle:
 			if ((vertex.pos - position).length() <= eps):
 				return vertex
 		return null
+		
+	func preprocess_tetris_covering():
+		for v in vertices:
+			if (v.decorator.rule == 'tetris'):
+				v.decorator.calculate_covering(self)
 	
 func push_vertex_vec(puzzle, pos, hidden=false):
 	var result = len(puzzle.vertices)
