@@ -13,18 +13,18 @@ class CSPClause:
 		if (variable_count == 0 and sum == 0):
 			return -1
 		var max_eq = min(positive_count, negative_count + sum)
-		var min_eq = max(0, sum - negative_count)
+		var min_eq = max(0, sum)
 		if (max_eq < min_eq):
 			return 0
 		# use approximation here
 		var eq = (max_eq + min_eq) / 2
 		var lhs_result = CSPHelper.get_binomial(positive_count, eq)
 		var rhs_result = CSPHelper.get_binomial(negative_count, eq - sum)
-		if (float(lhs_result) * rhs_result > 1e8):
+		if (float(lhs_result) * rhs_result * (max_eq - min_eq + 1) > 1e8):
 			# prevent overflow and return a huge number
 			return CSPHelper.BINOMIAL_LIMIT + lhs_result + rhs_result
 		else:
-			return lhs_result * rhs_result
+			return lhs_result * rhs_result * (max_eq - min_eq + 1)
 			
 	func unlink(x, value):
 		assert(x in variables)
@@ -86,7 +86,7 @@ class CSPSolver:
 	
 	func update_weight(clause_id):
 		var weight = clauses[clause_id].get_weight()
-		print('C%d has new weight %d' % [clause_id, weight] )
+		# print('C%d has new weight %d' % [clause_id, weight] )
 		if (weight == -1):
 			weight_dict.erase(clause_id)
 		else:
@@ -94,9 +94,9 @@ class CSPSolver:
 		return weight
 	
 	func satisfiable():
-		print('Searching!')
+		# print('Searching!')
 		if (weight_dict.empty()):
-			print('Ok!')
+			# print('Ok!')
 			return true
 		var min_weight = -1
 		var min_id = -1
@@ -108,14 +108,14 @@ class CSPSolver:
 		for variable in clauses[min_id].variables:
 			for assignment in [1, 0]:
 				var ok = true
-				print('Set v%d to %d' % [variable, assignment])
+				# print('Set v%d to %d' % [variable, assignment])
 				variables[variable].value = assignment
 				for affected_clause in variables[variable].clauses:
 					clauses[affected_clause].unlink(variable, assignment)
 				for affected_clause in variables[variable].clauses:
 					var new_weight = update_weight(affected_clause)
 					if (new_weight == 0):
-						print('Clause %d failed!' % affected_clause)
+						# print('Clause %d failed!' % affected_clause)
 						ok = false
 						break
 				if (ok):
@@ -126,13 +126,20 @@ class CSPSolver:
 				if (ok):
 					return true
 				variables[variable].value = -1
-				print('Unset v%d from %d' % [variable, assignment])
+				# print('Unset v%d from %d' % [variable, assignment])
 			break
 		return false
 			
 		
 func test():
 	var solver = CSPSolver.new()
+	solver.add_clause({0: 1, 1: 1, 2: -1}, 2)
+	print(solver.satisfiable())
+	for i in range(len(solver.variables)):
+		print('v%d: %d' % [i, solver.variables[i].value])
+	# solution: [1, 1, 0]
+	
+	solver = CSPSolver.new()
 	solver.add_clause({2: 1, 4: 1}, 1)
 	solver.add_clause({3: 1, 5: 1}, 1)
 	solver.add_clause({1: 1, 3: 1}, 1)
@@ -140,10 +147,7 @@ func test():
 	solver.add_clause({1: 1, 6: 1}, 1)
 	solver.add_clause({1: 1, 3: 1}, 1)
 	solver.add_clause({2: 1, 5: 1, 6: 1}, 1)
-	solver.add_clause({4: 1, 5: 1, 7: 1}, 3)
-	solver.add_clause({4: 1, 5: 1, 8: 1}, 2)
-	solver.add_clause({4: 1, 5: 1, 9: -1, 10: 1}, 1)
 	print(solver.satisfiable())
 	for i in range(len(solver.variables)):
 		print('v%d: %d' % [i, solver.variables[i].value])
-	# solution: 
+	# solution: [-1, 1, 0, 0, 1, 1, 0]
