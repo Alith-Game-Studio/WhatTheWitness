@@ -28,7 +28,7 @@ func judge_ring(validator: Validation.Validator, require_errors: bool):
 		if (region.has_any('circle')):
 			for decorator_id in region.decorator_dict['circle']:
 				paste_positions.append([decorator_id, region])
-	if (len(clonable_decorators) == 0):
+	if (len(paste_positions) == 0 or len(clonable_decorators) == 0):
 		return judge_all_regions(validator, require_errors)
 	else:
 		for cloned_decorator_id in clonable_decorators:
@@ -52,7 +52,7 @@ func judge_ring(validator: Validation.Validator, require_errors: bool):
 			validator.alter_rule(paste_position[0], paste_position[1], validator.decorator_responses[rnd].rule)
 			decorator_response.clone_source_decorator = decorator_response.decorator
 			decorator_response.decorator = validator.decorator_responses[rnd].decorator
-			print('current: ', decorator_response.rule)
+			# print('current: ', decorator_response.rule)
 		return judge_all_regions(validator, require_errors)
 	else:
 		return false
@@ -117,14 +117,16 @@ func judge_region_stars(validator: Validation.Validator, region: Validation.Regi
 					color_dict[response.color] += 1
 				else:
 					color_dict[response.color] = 1
+	var ok = true
 	for decorator_id in region.decorator_dict['star']:
 		var response = validator.decorator_responses[decorator_id]
 		if (color_dict[response.color] != 2):
+			ok = false
 			if (require_errors):
 				response.state = Validation.DecoratorResponse.ERROR
 			else:
 				return false
-	return true
+	return ok
 	
 func judge_region_triangles(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('triangle')):

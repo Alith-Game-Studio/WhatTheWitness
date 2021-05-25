@@ -35,7 +35,20 @@ margin_left = 384.0
 margin_top = 128.0
 margin_right = 448.0
 margin_bottom = 192.0
+rect_pivot_offset = Vector2( 64, 127 )
 text = "1-intro-1-b"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit13" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+margin_left = 384.0
+margin_top = 511.0
+margin_right = 448.0
+margin_bottom = 575.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "wc2-weicheng"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
