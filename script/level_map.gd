@@ -24,7 +24,6 @@ func list_files(path):
 	
 	
 func _ready():
-	CSP.test()
 	var puzzle_files = list_files(puzzle_dir)
 	var files = list_files(puzzle_dir)
 	for placeholder in puzzle_placeholders:

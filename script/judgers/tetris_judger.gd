@@ -30,23 +30,47 @@ func judge_region_tetris_implementation(validator, region: Validation.Region, re
 		for shape in shapes:
 			var area = calc_area(shape)
 			area_sum += -area if is_hollow else area
+	var ok = false
 	if (cell_count == 0 and abs(area_sum) <= 1e-2): # zero sum
-		return true
-	var total_facet_area = 0.0
-	for facet_index in region.facet_indices:
-		var facet = validator.puzzle.facets[facet_index]
-		var facet_area = 0.0
-		for i in range(2, len(facet.vertices)):
-			facet_area += calc_triangle_area(facet.vertices[0].pos, facet.vertices[i - 1].pos, facet.vertices[i].pos)
-		total_facet_area += abs(facet_area)
-	print(cell_count, ' vs ', len(region.facet_indices))
-	print(area_sum, ' vs_f ', total_facet_area)
-	if (cell_count == len(region.facet_indices) and abs(area_sum - total_facet_area) <= 1e-2):
-		return true
-	if (require_errors):
+		ok = judge_csp(validator, region, false)
+	else:
+		var total_facet_area = 0.0
+		for facet_index in region.facet_indices:
+			var facet = validator.puzzle.facets[facet_index]
+			var facet_area = 0.0
+			for i in range(2, len(facet.vertices)):
+				facet_area += calc_triangle_area(facet.vertices[0].pos, facet.vertices[i - 1].pos, facet.vertices[i].pos)
+			total_facet_area += abs(facet_area)
+		print(cell_count, ' vs ', len(region.facet_indices))
+		print(area_sum, ' vs_f ', total_facet_area)
+		if (cell_count == len(region.facet_indices) and abs(area_sum - total_facet_area) <= 1e-2):
+			ok = judge_csp(validator, region, true)
+	if (!ok and require_errors):
 		for decorator_id in region.decorator_dict['tetris']:
 			var response = validator.decorator_responses[decorator_id]
 			response.state = Validation.DecoratorResponse.ERROR
-	return false
+	return ok
 
-
+func judge_csp(validator, region: Validation.Region, fill: bool):
+	var clauses = []
+	var n_id = len(validator.region_of_facet)
+	for i in range(n_id):
+		var occupy = 1 if fill and validator.region_of_facet[i].index == region.index else 0
+		clauses.append([{}, occupy])
+	for decorator_id in region.decorator_dict['tetris']:
+		var response = validator.decorator_responses[decorator_id]
+		var shape_clause = [{}, 1]
+		var is_hollow = response.decorator.is_hollow
+		for covering in response.decorator.covering:
+			shape_clause[0][n_id] = 1
+			for f_id in covering:
+				clauses[f_id][0][n_id] = -1 if is_hollow else 1
+			n_id += 1
+		clauses.append(shape_clause)
+	var solver = CSP.CSPSolver.new()
+	for clause in clauses:
+		# print('Add clause:', clause)
+		solver.add_clause(clause[0], clause[1])
+	var result = solver.satisfiable()
+	# print('Result:', result)
+	return result

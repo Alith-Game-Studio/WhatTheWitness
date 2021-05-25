@@ -78,11 +78,13 @@ class CSPSolver:
 		var clause_id = len(clauses)
 		var weight = clause.get_weight()
 		clauses.append(clause)
-		weight_dict[clause_id] = weight
+		if (weight != -1): # -1 means already satisfied (empty clause 0 = 0)
+			weight_dict[clause_id] = weight
 		for variable in variable_coef_map:
 			while (variable >= len(variables)):
 				variables.append(CSPVariable.new())
 			variables[variable].clauses.append(clause_id)
+		
 	
 	func update_weight(clause_id):
 		var weight = clauses[clause_id].get_weight()
@@ -105,6 +107,8 @@ class CSPSolver:
 			if (min_weight > weight or min_id == -1):
 				min_id = id
 				min_weight = weight
+		if (min_weight == 0):
+			return false
 		for variable in clauses[min_id].variables:
 			for assignment in [1, 0]:
 				var ok = true
@@ -150,4 +154,4 @@ func test():
 	print(solver.satisfiable())
 	for i in range(len(solver.variables)):
 		print('v%d: %d' % [i, solver.variables[i].value])
-	# solution: [-1, 1, 0, 0, 1, 1, 0]
+	# solution: [any, 1, 0, 0, 1, 1, 0]
