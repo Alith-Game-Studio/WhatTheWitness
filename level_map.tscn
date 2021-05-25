@@ -1,7 +1,24 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://level_lines.tres" type="TileSet" id=1]
 [ext_resource path="res://script/level_map.gd" type="Script" id=2]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+background_color = Color( 1, 0, 0.376471, 1 )
+dof_blur_far_distance = 17.91
+dof_blur_far_transition = 4057.25
+dof_blur_far_amount = 1.0
+dof_blur_near_distance = 1.61
+dof_blur_near_transition = 2.58
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/3 = false
+glow_levels/5 = false
+glow_intensity = 2.12
+glow_strength = 0.93
+glow_bloom = 0.45
 
 [node name="LevelMap" type="Node2D"]
 script = ExtResource( 2 )
@@ -17,7 +34,6 @@ format = 1
 tile_data = PoolIntArray( 131074, 1, 5, 131075, 1, 8, 131076, 1, 8, 131077, 1, 8, 131078, 1, 65539, 196614, 1, 65538, 262150, 1, 65538, 327686, 1, 131083, 327687, 1, 8, 327688, 1, 8, 327689, 1, 8, 327690, 1, 65545, 327691, 1, 8, 327692, 1, 2, 393222, 1, 65538, 393226, 1, 65538, 458758, 1, 65538, 458762, 1, 7, 458763, 1, 8, 458764, 1, 2, 524294, 1, 65538, 589830, 1, 65538, 655366, 1, 1 )
 
 [node name="PuzzlePlaceHolders" type="Node2D" parent="View"]
-position = Vector2( 0, 1 )
 
 [node name="TextEdit" type="TextEdit" parent="View/PuzzlePlaceHolders"]
 margin_left = 128.0
@@ -44,9 +60,9 @@ __meta__ = {
 
 [node name="TextEdit13" type="TextEdit" parent="View/PuzzlePlaceHolders"]
 margin_left = 384.0
-margin_top = 511.0
+margin_top = 512.0
 margin_right = 448.0
-margin_bottom = 575.0
+margin_bottom = 576.0
 rect_pivot_offset = Vector2( 64, 127 )
 text = "wc2-weicheng"
 wrap_enabled = true
@@ -78,9 +94,9 @@ __meta__ = {
 
 [node name="TextEdit10" type="TextEdit" parent="View/PuzzlePlaceHolders"]
 margin_left = 832.0
-margin_top = 447.0
+margin_top = 448.0
 margin_right = 896.0
-margin_bottom = 511.0
+margin_bottom = 512.0
 text = "0-test-eliminator-1"
 wrap_enabled = true
 __meta__ = {
@@ -89,9 +105,9 @@ __meta__ = {
 
 [node name="TextEdit11" type="TextEdit" parent="View/PuzzlePlaceHolders"]
 margin_left = 896.0
-margin_top = 447.0
+margin_top = 448.0
 margin_right = 960.0
-margin_bottom = 511.0
+margin_bottom = 512.0
 text = "0-test-ring-1"
 wrap_enabled = true
 __meta__ = {
@@ -100,9 +116,9 @@ __meta__ = {
 
 [node name="TextEdit12" type="TextEdit" parent="View/PuzzlePlaceHolders"]
 margin_left = 960.0
-margin_top = 447.0
+margin_top = 448.0
 margin_right = 1024.0
-margin_bottom = 511.0
+margin_bottom = 512.0
 text = "0-test-tetris-2"
 wrap_enabled = true
 __meta__ = {
@@ -133,9 +149,9 @@ __meta__ = {
 
 [node name="TextEdit7" type="TextEdit" parent="View/PuzzlePlaceHolders"]
 margin_left = 768.0
-margin_top = 318.941
+margin_top = 320.0
 margin_right = 832.0
-margin_bottom = 382.941
+margin_bottom = 384.0
 text = "1-intro-square-9"
 wrap_enabled = true
 __meta__ = {
@@ -163,3 +179,6 @@ wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
