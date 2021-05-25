@@ -29,12 +29,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PuzzleVisualizer" type="ColorRect" parent="."]
+[node name="PuzzleVisualizer" type="TextureRect" parent="."]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 62.0
 margin_bottom = 62.0
-color = Color( 0, 0, 0, 1 )
+expand = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

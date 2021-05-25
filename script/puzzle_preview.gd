@@ -1,22 +1,19 @@
-extends ColorRect
+extends TextureRect
 
 var enabled = false
 var canvas = Visualizer.PuzzleCanvas.new()
 onready var parent = get_node('..')
 onready var grandparent = get_node('../..')
 var puzzle_path
-func _draw():
-	if (!enabled):
-		return
-	canvas.draw_puzzle(self)
 		
-func show_puzzle(path):
+func show_puzzle(path, rendered_image):
+	var image_texture = ImageTexture.new()
+	image_texture.create_from_image(rendered_image)
+	texture = image_texture
 	puzzle_path = path
 	var puzzle = Graph.load_from_xml(puzzle_path)
 	canvas.puzzle = puzzle
 	canvas.normalize_view(self.get_rect().size)
-	enabled = true
-	update()
 
 
 func _on_Button_pressed():
