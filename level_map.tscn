@@ -27,21 +27,38 @@ script = ExtResource( 2 )
 
 [node name="View" type="Node2D" parent="Menu"]
 
+[node name="LevelAreaLimit" type="ReferenceRect" parent="Menu/View"]
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 1835.0
+margin_bottom = 1362.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Lines" type="TileMap" parent="Menu/View"]
-scale = Vector2( 4, 4 )
+scale = Vector2( 6, 6 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 131074, 1, 5, 131075, 1, 8, 131076, 1, 8, 131077, 1, 8, 131078, 1, 65539, 196614, 1, 65538, 262150, 1, 65538, 327686, 1, 131083, 327687, 1, 8, 327688, 1, 8, 327689, 1, 8, 327690, 1, 65545, 327691, 1, 8, 327692, 1, 2, 393222, 1, 65538, 393226, 1, 65538, 458758, 1, 65538, 458762, 1, 7, 458763, 1, 8, 458764, 1, 2, 524294, 1, 65538, 589830, 1, 65538, 655366, 1, 1 )
+tile_data = PoolIntArray( 131074, 0, 5, 131075, 0, 8, 131076, 0, 8, 131077, 0, 8, 131078, 0, 131074, 196614, 0, 65538, 262150, 0, 65538, 327686, 0, 65543, 327687, 0, 8, 327688, 0, 8, 327689, 0, 8, 327690, 0, 65545, 327691, 0, 8, 327692, 0, 2, 393222, 0, 65538, 393226, 0, 65538, 458758, 0, 65538, 458762, 0, 7, 458763, 0, 8, 458764, 0, 8, 458765, 0, 8, 458766, 0, 8, 458767, 0, 2, 524294, 0, 65538, 589830, 0, 65538, 655366, 0, 1 )
+
+[node name="Lights" type="TileMap" parent="Menu/View"]
+scale = Vector2( 6, 6 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131074, 1, 0 )
 
 [node name="PuzzlePlaceHolders" type="Node2D" parent="Menu/View"]
 
 [node name="TextEdit" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 128.0
-margin_top = 128.0
-margin_right = 192.0
-margin_bottom = 192.0
+margin_left = 192.0
+margin_top = 192.0
+margin_right = 288.0
+margin_bottom = 288.0
 text = "1-intro-1-a"
 wrap_enabled = true
 __meta__ = {
@@ -49,10 +66,10 @@ __meta__ = {
 }
 
 [node name="TextEdit2" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 384.0
-margin_top = 128.0
-margin_right = 448.0
-margin_bottom = 192.0
+margin_left = 576.0
+margin_top = 192.0
+margin_right = 672.0
+margin_bottom = 288.0
 rect_pivot_offset = Vector2( 64, 127 )
 text = "1-intro-1-b"
 wrap_enabled = true
@@ -61,10 +78,10 @@ __meta__ = {
 }
 
 [node name="TextEdit13" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 384.0
-margin_top = 512.0
-margin_right = 448.0
-margin_bottom = 576.0
+margin_left = 576.0
+margin_top = 672.0
+margin_right = 672.0
+margin_bottom = 768.0
 rect_pivot_offset = Vector2( 64, 127 )
 text = "wc2-weicheng"
 wrap_enabled = true
@@ -73,10 +90,10 @@ __meta__ = {
 }
 
 [node name="TextEdit3" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 448.0
-margin_top = 320.0
-margin_right = 512.0
-margin_bottom = 384.0
+margin_left = 672.0
+margin_top = 480.0
+margin_right = 768.0
+margin_bottom = 576.0
 text = "0-test-tetris-3"
 wrap_enabled = true
 __meta__ = {
@@ -84,10 +101,10 @@ __meta__ = {
 }
 
 [node name="TextEdit4" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 512.0
-margin_top = 320.0
-margin_right = 576.0
-margin_bottom = 384.0
+margin_left = 768.0
+margin_top = 480.0
+margin_right = 864.0
+margin_bottom = 576.0
 text = "0-test-tetris-1"
 wrap_enabled = true
 __meta__ = {
@@ -95,10 +112,10 @@ __meta__ = {
 }
 
 [node name="TextEdit10" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 832.0
-margin_top = 448.0
-margin_right = 896.0
-margin_bottom = 512.0
+margin_left = 1248.0
+margin_top = 672.0
+margin_right = 1344.0
+margin_bottom = 768.0
 text = "0-test-eliminator-1"
 wrap_enabled = true
 __meta__ = {
@@ -106,10 +123,10 @@ __meta__ = {
 }
 
 [node name="TextEdit11" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 896.0
-margin_top = 448.0
-margin_right = 960.0
-margin_bottom = 512.0
+margin_left = 1344.0
+margin_top = 672.0
+margin_right = 1440.0
+margin_bottom = 768.0
 text = "0-test-ring-1"
 wrap_enabled = true
 __meta__ = {
@@ -117,10 +134,10 @@ __meta__ = {
 }
 
 [node name="TextEdit12" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 960.0
-margin_top = 448.0
-margin_right = 1024.0
-margin_bottom = 512.0
+margin_left = 1440.0
+margin_top = 672.0
+margin_right = 1536.0
+margin_bottom = 768.0
 text = "0-test-tetris-2"
 wrap_enabled = true
 __meta__ = {
@@ -128,10 +145,10 @@ __meta__ = {
 }
 
 [node name="TextEdit5" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 576.0
-margin_top = 320.0
-margin_right = 640.0
-margin_bottom = 384.0
+margin_left = 864.0
+margin_top = 480.0
+margin_right = 960.0
+margin_bottom = 576.0
 text = "1ex-cave-arrow"
 wrap_enabled = true
 __meta__ = {
@@ -139,10 +156,10 @@ __meta__ = {
 }
 
 [node name="TextEdit6" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 704.0
-margin_top = 320.0
-margin_right = 768.0
-margin_bottom = 384.0
+margin_left = 1056.0
+margin_top = 480.0
+margin_right = 1152.0
+margin_bottom = 576.0
 text = "1-intro-square-8"
 wrap_enabled = true
 __meta__ = {
@@ -150,10 +167,10 @@ __meta__ = {
 }
 
 [node name="TextEdit7" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 768.0
-margin_top = 320.0
-margin_right = 832.0
-margin_bottom = 384.0
+margin_left = 1152.0
+margin_top = 480.0
+margin_right = 1248.0
+margin_bottom = 576.0
 text = "1-intro-square-9"
 wrap_enabled = true
 __meta__ = {
@@ -161,10 +178,10 @@ __meta__ = {
 }
 
 [node name="TextEdit8" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 704.0
-margin_top = 448.0
-margin_right = 768.0
-margin_bottom = 512.0
+margin_left = 1056.0
+margin_top = 672.0
+margin_right = 1152.0
+margin_bottom = 768.0
 text = "1-treehouse-orange-9"
 wrap_enabled = true
 __meta__ = {
@@ -172,21 +189,12 @@ __meta__ = {
 }
 
 [node name="TextEdit9" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 768.0
-margin_top = 448.0
-margin_right = 832.0
-margin_bottom = 512.0
+margin_left = 1152.0
+margin_top = 672.0
+margin_right = 1248.0
+margin_bottom = 768.0
 text = "1-cave-triangle"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LevelAreaLimit" type="ReferenceRect" parent="Menu/View"]
-margin_left = 109.0
-margin_top = 99.0
-margin_right = 1848.0
-margin_bottom = 1365.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

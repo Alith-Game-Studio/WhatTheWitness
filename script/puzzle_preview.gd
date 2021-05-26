@@ -5,9 +5,13 @@ onready var frame = $PuzzlePreview
 onready var visualizer = $PuzzlePreview/PuzzleVisualizer
 onready var parent = $".."
 var puzzle_name
+var puzzle_unlocked
 		
-func show_puzzle(load_puzzle_name):
+func show_puzzle(load_puzzle_name, unlocked=true):
 	puzzle_name = load_puzzle_name
+	puzzle_unlocked = unlocked
+	if (!unlocked):
+		return
 	var vport = Viewport.new()
 	vport.size = Vector2(256, 256)
 	vport.render_target_update_mode = Viewport.UPDATE_ALWAYS 
@@ -30,22 +34,23 @@ func show_puzzle(load_puzzle_name):
 	image_texture.create_from_image(vport_img)
 	visualizer.texture = image_texture
 	
-func update_puzzle():
-	show_puzzle(puzzle_name)
+func update_puzzle(unlocked=true):
+	show_puzzle(puzzle_name, unlocked)
 
 func _on_Button_pressed():
-	_on_Button_mouse_exited()
-	Gameplay.puzzle_name = puzzle_name
-	$"/root/LevelMap/PuzzleUI".load_puzzle()
-	$"/root/LevelMap/PuzzleUI".show()
-	$"/root/LevelMap/Menu".hide()
+	if (puzzle_unlocked):
+		_on_Button_mouse_exited()
+		Gameplay.puzzle_name = puzzle_name
+		$"/root/LevelMap/PuzzleUI".load_puzzle()
+		$"/root/LevelMap/PuzzleUI".show()
+		$"/root/LevelMap/Menu".hide()
+		MenuData.can_drag_map = false
 	
-
-
 func _on_Button_mouse_entered():
-	parent.move_child(self, parent.get_child_count() - 1)
-	frame.rect_scale = Vector2(1.2, 1.2)
-	MenuData.can_drag_map = false
+	if (puzzle_unlocked):
+		parent.move_child(self, parent.get_child_count() - 1)
+		frame.rect_scale = Vector2(1.2, 1.2)
+		MenuData.can_drag_map = false
 
 
 func _on_Button_mouse_exited():

@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://script/puzzle_player.gd" type="Script" id=1]
 [ext_resource path="res://script/ui_puzzle_back.gd" type="Script" id=2]
 [ext_resource path="res://script/ui_puzzle_fore.gd" type="Script" id=3]
+[ext_resource path="res://img/right_arrow.png" type="Texture" id=4]
+[ext_resource path="res://img/left_arrow.png" type="Texture" id=5]
 
 [node name="PuzzleUI" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,30 +18,28 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_top = 2.0
 margin_right = 1025.0
 margin_bottom = 602.0
-custom_constants/margin_right = 100
-custom_constants/margin_top = 80
-custom_constants/margin_left = 100
-custom_constants/margin_bottom = 80
+custom_constants/margin_right = 150
+custom_constants/margin_top = 0
+custom_constants/margin_left = 150
+custom_constants/margin_bottom = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PuzzleRegion" type="ColorRect" parent="MarginContainer"]
-margin_left = 100.0
-margin_top = 80.0
-margin_right = 925.0
-margin_bottom = 520.0
+margin_left = 150.0
+margin_right = 875.0
+margin_bottom = 602.0
 color = Color( 1, 1, 1, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PuzzleBackground" type="ColorRect" parent="MarginContainer/PuzzleRegion"]
-margin_right = 821.0
-margin_bottom = 436.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 1, 1, 1, 0 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -47,10 +47,33 @@ __meta__ = {
 }
 
 [node name="PuzzleForeground" type="ColorRect" parent="MarginContainer/PuzzleRegion"]
-margin_right = 821.0
-margin_bottom = 436.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 6.10352e-05
 color = Color( 1, 1, 1, 0 )
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightArrowButton" type="TextureButton" parent="."]
+margin_left = 919.464
+margin_top = 268.997
+margin_right = 983.464
+margin_bottom = 332.997
+texture_normal = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftArrowButton" type="TextureButton" parent="."]
+margin_left = 39.8235
+margin_top = 268.997
+margin_right = 103.824
+margin_bottom = 332.997
+texture_normal = ExtResource( 5 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

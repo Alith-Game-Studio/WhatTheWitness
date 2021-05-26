@@ -3,6 +3,9 @@ extends Node
 var saved_solutions = {}
 const SAVE_PATH = "user://savegame.save"
 
+func puzzle_solved(puzzle_name):
+	return puzzle_name in saved_solutions
+
 func update(puzzle_name: String, solution_string: String):
 	saved_solutions[puzzle_name] = solution_string
 	save_all()
