@@ -280,7 +280,7 @@ class SolutionLine:
 				way_vertices.append(int(vertex_string))
 			state.vertices.append(way_vertices)
 		var solution = SolutionLine.new()
-		solution.stated = true
+		solution.started = true
 		solution.validity = 1
 		solution.state_stack = [state]
 		solution.progress = 1.0

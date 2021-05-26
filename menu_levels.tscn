@@ -2,7 +2,7 @@
 
 [ext_resource path="res://font/DroidSansMono.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
 const puzzle_dir = \"res://puzzles\"
@@ -33,12 +33,12 @@ func _ready():
 		target.show_puzzle(puzzle_dir + '/' + puzzle_file)
 "
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 24
 font_data = ExtResource( 2 )
 
 [node name="MenuLevels" type="Node2D"]
-script = SubResource( 2 )
+script = SubResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = -3.0
@@ -62,7 +62,7 @@ margin_bottom = 502.0
 margin_right = 626.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[center]Level Selection[/center]"
 text = "Level Selection"

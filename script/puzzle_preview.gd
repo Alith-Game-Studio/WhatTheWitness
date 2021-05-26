@@ -4,10 +4,10 @@ var enabled = false
 onready var frame = $PuzzlePreview
 onready var visualizer = $PuzzlePreview/PuzzleVisualizer
 onready var parent = $".."
-var puzzle_path
+var puzzle_name
 		
-func show_puzzle(puzzle_name):
-	puzzle_path = 'res://puzzles/' + puzzle_name
+func show_puzzle(load_puzzle_name):
+	puzzle_name = load_puzzle_name
 	var vport = Viewport.new()
 	vport.size = Vector2(256, 256)
 	vport.render_target_update_mode = Viewport.UPDATE_ALWAYS 
@@ -29,13 +29,16 @@ func show_puzzle(puzzle_name):
 	var image_texture = ImageTexture.new()
 	image_texture.create_from_image(vport_img)
 	visualizer.texture = image_texture
+	
+func update_puzzle():
+	show_puzzle(puzzle_name)
 
 func _on_Button_pressed():
 	_on_Button_mouse_exited()
-	Gameplay.load_puzzle_path = puzzle_path
+	Gameplay.puzzle_name = puzzle_name
 	$"/root/LevelMap/PuzzleUI".load_puzzle()
-	$"/root/LevelMap/View".hide()
 	$"/root/LevelMap/PuzzleUI".show()
+	$"/root/LevelMap/Menu".hide()
 	
 
 

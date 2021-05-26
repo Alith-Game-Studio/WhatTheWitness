@@ -17,16 +17,17 @@ glow_levels/1 = true
 glow_levels/2 = true
 glow_levels/3 = false
 glow_levels/5 = false
-glow_intensity = 2.12
-glow_strength = 0.93
-glow_bloom = 0.45
+glow_strength = 0.44
+glow_bloom = 0.42
 
 [node name="LevelMap" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="View" type="Node2D" parent="."]
+[node name="Menu" type="Node2D" parent="."]
 
-[node name="Lines" type="TileMap" parent="View"]
+[node name="View" type="Node2D" parent="Menu"]
+
+[node name="Lines" type="TileMap" parent="Menu/View"]
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
@@ -34,9 +35,9 @@ cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
 format = 1
 tile_data = PoolIntArray( 131074, 1, 5, 131075, 1, 8, 131076, 1, 8, 131077, 1, 8, 131078, 1, 65539, 196614, 1, 65538, 262150, 1, 65538, 327686, 1, 131083, 327687, 1, 8, 327688, 1, 8, 327689, 1, 8, 327690, 1, 65545, 327691, 1, 8, 327692, 1, 2, 393222, 1, 65538, 393226, 1, 65538, 458758, 1, 65538, 458762, 1, 7, 458763, 1, 8, 458764, 1, 2, 524294, 1, 65538, 589830, 1, 65538, 655366, 1, 1 )
 
-[node name="PuzzlePlaceHolders" type="Node2D" parent="View"]
+[node name="PuzzlePlaceHolders" type="Node2D" parent="Menu/View"]
 
-[node name="TextEdit" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 128.0
 margin_top = 128.0
 margin_right = 192.0
@@ -47,7 +48,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit2" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit2" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 384.0
 margin_top = 128.0
 margin_right = 448.0
@@ -59,7 +60,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit13" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit13" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 384.0
 margin_top = 512.0
 margin_right = 448.0
@@ -71,7 +72,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit3" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit3" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 448.0
 margin_top = 320.0
 margin_right = 512.0
@@ -82,7 +83,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit4" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit4" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 512.0
 margin_top = 320.0
 margin_right = 576.0
@@ -93,7 +94,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit10" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit10" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 832.0
 margin_top = 448.0
 margin_right = 896.0
@@ -104,7 +105,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit11" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit11" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 896.0
 margin_top = 448.0
 margin_right = 960.0
@@ -115,7 +116,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit12" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit12" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 960.0
 margin_top = 448.0
 margin_right = 1024.0
@@ -126,7 +127,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit5" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit5" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 576.0
 margin_top = 320.0
 margin_right = 640.0
@@ -137,7 +138,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit6" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit6" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 704.0
 margin_top = 320.0
 margin_right = 768.0
@@ -148,7 +149,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit7" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit7" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 768.0
 margin_top = 320.0
 margin_right = 832.0
@@ -159,7 +160,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit8" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit8" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 704.0
 margin_top = 448.0
 margin_right = 768.0
@@ -170,7 +171,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit9" type="TextEdit" parent="View/PuzzlePlaceHolders"]
+[node name="TextEdit9" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 768.0
 margin_top = 448.0
 margin_right = 832.0
@@ -181,8 +182,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Extra" type="Node2D" parent="Menu"]
+
+[node name="ClearSaveButton" type="Button" parent="Menu/Extra"]
+margin_left = 15.0
+margin_top = 18.0
+margin_right = 119.0
+margin_bottom = 43.0
+text = "Clear Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExportSaveButton" type="Button" parent="Menu/Extra"]
+margin_left = 15.0
+margin_top = 61.0
+margin_right = 120.0
+margin_bottom = 86.0
+text = "Export Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
 [node name="PuzzleUI" parent="." instance=ExtResource( 3 )]
 visible = false
+[connection signal="pressed" from="Menu/Extra/ClearSaveButton" to="." method="_on_clear_save_button_pressed"]

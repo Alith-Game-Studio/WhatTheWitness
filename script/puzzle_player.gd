@@ -6,9 +6,18 @@ onready var puzzle_drawing_target = $MarginContainer/PuzzleRegion/PuzzleBackgrou
 onready var solver_drawing_target = $MarginContainer/PuzzleRegion/PuzzleForeground
 var loaded = false
 func load_puzzle():
-	Gameplay.puzzle = Graph.load_from_xml(Gameplay.load_puzzle_path)
-	Gameplay.solution = Solution.SolutionLine.new()
-	Gameplay.validator = null
+	Gameplay.puzzle = Graph.load_from_xml(Gameplay.get_absolute_puzzle_path())
+	if (Gameplay.puzzle_name in SaveData.saved_solutions):
+		Gameplay.solution = Solution.SolutionLine.load_from_string(SaveData.saved_solutions[Gameplay.puzzle_name])
+		Gameplay.validator = Validation.Validator.new()
+		if (Gameplay.validator.validate(Gameplay.puzzle, Gameplay.solution)):
+			Gameplay.solution.validity = 1
+			Gameplay.validation_elasped_time = 10.0 # skip animations
+		else:
+			Gameplay.solution.validity = -1 # maybe the problem is changed
+	else:
+		Gameplay.validator = null
+		Gameplay.solution = Solution.SolutionLine.new()
 	Gameplay.canvas = Visualizer.PuzzleCanvas.new()
 	Gameplay.canvas.puzzle = Gameplay.puzzle
 	Gameplay.puzzle.preprocess_tetris_covering()
@@ -34,7 +43,9 @@ func _input(event):
 					Gameplay.validator = Validation.Validator.new()
 					if (Gameplay.validator.validate(Gameplay.puzzle, Gameplay.solution)):
 						Gameplay.solution.validity = 1
-						SaveData.update(Gameplay.load_puzzle_path, Gameplay.solution.to_string())
+						SaveData.update(Gameplay.puzzle_name, Gameplay.solution.to_string())
+						if (Gameplay.puzzle_name in MenuData.puzzle_preview_panels):
+							MenuData.puzzle_preview_panels[Gameplay.puzzle_name].update_puzzle()
 					else:
 						Gameplay.solution.validity = -1
 					Gameplay.validation_elasped_time = 0.0
@@ -60,7 +71,7 @@ func _input(event):
 
 func back_to_menu():
 	loaded = false
-	$"/root/LevelMap/View".show()
+	$"/root/LevelMap/Menu".show()
 	hide()
 
 func _on_back_button_pressed():

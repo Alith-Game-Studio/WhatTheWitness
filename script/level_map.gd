@@ -1,8 +1,9 @@
 extends Node2D
 
 const puzzle_dir = "res://puzzles"
-onready var puzzle_placeholders = $View/PuzzlePlaceHolders.get_children()
-onready var view = $View
+onready var puzzle_placeholders = $Menu/View/PuzzlePlaceHolders
+onready var clear_save_button = $Menu/Extra/ClearSaveButton
+onready var view = $Menu/View
 onready var view_origin = -get_viewport().size / 2
 onready var drag_start = null
 var view_scale = 1.0
@@ -21,14 +22,17 @@ func list_files(path):
 		
 	
 func _ready():
-	$View/PuzzlePlaceHolders.hide()
+	puzzle_placeholders.hide()
+	SaveData.load_all()
 	var puzzle_files = list_files(puzzle_dir)
 	var files = list_files(puzzle_dir)
 	var viewports = []
-	for placeholder in puzzle_placeholders:
+	var placeholders = puzzle_placeholders.get_children()
+	for placeholder in placeholders:
 		var puzzle_file = placeholder.text.to_lower() + '.wit'
 		if (puzzle_file in files):
 			var target = MenuData.puzzle_preview_prefab.instance()
+			MenuData.puzzle_preview_panels[puzzle_file] = target
 			view.add_child(target)
 			target.set_position(placeholder.get_position())
 			target.show_puzzle(puzzle_file)
@@ -55,4 +59,15 @@ func _input(event):
 			view_origin += (event.position - drag_start) / view_scale
 			drag_start = event.position
 	update_view()
+	
+
+
+func _on_clear_save_button_pressed():
+	if (clear_save_button.text == 'Are you sure?'):
+		SaveData.clear()
+		clear_save_button.text = 'Clear Save'
+		for puzzle_name in MenuData.puzzle_preview_panels:
+			MenuData.puzzle_preview_panels[puzzle_name].update_puzzle()
+	else:
+		clear_save_button.text = 'Are you sure?'
 	
