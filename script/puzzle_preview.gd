@@ -1,21 +1,34 @@
 extends TextureRect
 
 var enabled = false
-var canvas = Visualizer.PuzzleCanvas.new()
 onready var parent = get_node('..')
 onready var grandparent = get_node('../..')
 onready var grandgrandparent = get_node('../../..')
 var puzzle_path
 		
-func show_puzzle(path, rendered_image):
+func show_puzzle(puzzle_name):
+	puzzle_path = 'res://puzzles/' + puzzle_name
+	var vport = Viewport.new()
+	vport.size = Vector2(256, 256)
+	vport.render_target_update_mode = Viewport.UPDATE_ALWAYS 
+	# vport.msaa = Viewport.MSAA_4X # useless for 2D
+	self.add_child(vport)
+	var cvitem = Control.new()
+	vport.add_child(cvitem)
+	cvitem.rect_min_size = Vector2(256, 256)
+	cvitem.name = puzzle_name.replace('.', '|')
+	cvitem.set_script(load("res://script/puzzle_renderer.gd"))
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	var vport_img = vport.get_texture().get_data()
+	vport_img.flip_y()
+	# vport_img.save_png("res://img/render/%s.png" % cvitem.name.replace('|', '.'))
+	remove_child(vport)
+	# will the texture be freed?
+	vport.queue_free()
 	var image_texture = ImageTexture.new()
-	image_texture.create_from_image(rendered_image)
+	image_texture.create_from_image(vport_img)
 	texture = image_texture
-	puzzle_path = path
-	var puzzle = Graph.load_from_xml(puzzle_path)
-	canvas.puzzle = puzzle
-	canvas.normalize_view(self.get_rect().size)
-
 
 func _on_Button_pressed():
 	_on_Button_mouse_exited()
