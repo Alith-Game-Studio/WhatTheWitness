@@ -6,6 +6,8 @@ onready var clear_save_button = $Menu/Extra/ClearSaveButton
 onready var view = $Menu/View
 onready var view_origin = -get_viewport().size / 2
 onready var drag_start = null
+onready var level_area_limit = $Menu/View/LevelAreaLimit
+var window_size
 var view_scale = 1.0
 func list_files(path):
 	var files = {}
@@ -22,6 +24,7 @@ func list_files(path):
 		
 	
 func _ready():
+	window_size = get_viewport().size
 	puzzle_placeholders.hide()
 	SaveData.load_all()
 	var puzzle_files = list_files(puzzle_dir)
@@ -39,12 +42,30 @@ func _ready():
 			placeholder.get_parent().remove_child(placeholder)
 
 func update_view():
-	var window_size = get_viewport().size
+	window_size = get_viewport().size
+	view.position = window_size / 2 + (view_origin) * view_scale
+	view.scale = Vector2(view_scale, view_scale)
+	var limit_pos = level_area_limit.rect_global_position
+	var limit_size = level_area_limit.rect_size * view_scale
+	var dx = 0.0
+	var dy = 0.0
+	var extra_margin = 100
+	if (limit_pos.x > extra_margin):
+		dx += limit_pos.x - extra_margin
+	elif (limit_pos.x + limit_size.x < window_size.x - extra_margin):
+		dx += limit_pos.x + limit_size.x - window_size.x + extra_margin
+	if (limit_pos.y > extra_margin):
+		dy += limit_pos.y - extra_margin
+	elif (limit_pos.y + limit_size.y < window_size.y - extra_margin):
+		dy += limit_pos.y + limit_size.y - window_size.y + extra_margin
+	view_origin -= Vector2(dx, dy) / view_scale
 	view.position = window_size / 2 + (view_origin) * view_scale
 	view.scale = Vector2(view_scale, view_scale)
 
 func _input(event):
 	if (event is InputEventMouseButton):
+		if (not MenuData.can_drag_map):
+			return
 		if (event.button_index == BUTTON_WHEEL_DOWN):
 			view_scale = max(view_scale * 0.8, 0.512)
 		elif (event.button_index == BUTTON_WHEEL_UP):
@@ -59,8 +80,6 @@ func _input(event):
 			view_origin += (event.position - drag_start) / view_scale
 			drag_start = event.position
 	update_view()
-	
-
 
 func _on_clear_save_button_pressed():
 	if (clear_save_button.text == 'Are you sure?'):

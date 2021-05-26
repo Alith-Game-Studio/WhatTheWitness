@@ -182,6 +182,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LevelAreaLimit" type="ReferenceRect" parent="Menu/View"]
+margin_left = 109.0
+margin_top = 99.0
+margin_right = 1848.0
+margin_bottom = 1365.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Extra" type="Node2D" parent="Menu"]
 
 [node name="ClearSaveButton" type="Button" parent="Menu/Extra"]

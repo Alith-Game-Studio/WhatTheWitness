@@ -45,9 +45,9 @@ func _on_Button_pressed():
 func _on_Button_mouse_entered():
 	parent.move_child(self, parent.get_child_count() - 1)
 	frame.rect_scale = Vector2(1.2, 1.2)
-	pass # Replace with function body.
+	MenuData.can_drag_map = false
 
 
 func _on_Button_mouse_exited():
 	frame.rect_scale = Vector2(1.0, 1.0)
-	pass # Replace with function body.
+	MenuData.can_drag_map = true

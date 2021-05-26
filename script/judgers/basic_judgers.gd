@@ -131,6 +131,7 @@ func judge_region_stars(validator: Validation.Validator, region: Validation.Regi
 func judge_region_triangles(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('triangle')):
 		return true
+	var all_ok = true
 	for decorator_id in region.decorator_dict['triangle']:
 		var ok = true
 		var response = validator.decorator_responses[decorator_id]
@@ -148,9 +149,10 @@ func judge_region_triangles(validator: Validation.Validator, region: Validation.
 		if (!ok):
 			if (require_errors):
 				response.state = Validation.DecoratorResponse.ERROR
+				all_ok = false
 			else:
 				return false
-	return true
+	return all_ok
 	
 func judge_region_arrows(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('arrow')):
