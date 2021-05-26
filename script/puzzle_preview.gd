@@ -1,9 +1,9 @@
-extends TextureRect
+extends Node2D
 
 var enabled = false
-onready var parent = get_node('..')
-onready var grandparent = get_node('../..')
-onready var grandgrandparent = get_node('../../..')
+onready var frame = $PuzzlePreview
+onready var visualizer = $PuzzlePreview/PuzzleVisualizer
+onready var parent = $".."
 var puzzle_path
 		
 func show_puzzle(puzzle_name):
@@ -28,7 +28,7 @@ func show_puzzle(puzzle_name):
 	vport.queue_free()
 	var image_texture = ImageTexture.new()
 	image_texture.create_from_image(vport_img)
-	texture = image_texture
+	visualizer.texture = image_texture
 
 func _on_Button_pressed():
 	_on_Button_mouse_exited()
@@ -40,11 +40,11 @@ func _on_Button_pressed():
 
 
 func _on_Button_mouse_entered():
-	grandgrandparent.move_child(grandparent, grandgrandparent.get_child_count() - 1)
-	parent.rect_scale = Vector2(1.2, 1.2)
+	parent.move_child(self, parent.get_child_count() - 1)
+	frame.rect_scale = Vector2(1.2, 1.2)
 	pass # Replace with function body.
 
 
 func _on_Button_mouse_exited():
-	parent.rect_scale = Vector2(1.0, 1.0)
+	frame.rect_scale = Vector2(1.0, 1.0)
 	pass # Replace with function body.

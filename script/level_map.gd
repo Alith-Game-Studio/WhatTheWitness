@@ -31,7 +31,7 @@ func _ready():
 			var target = MenuData.puzzle_preview_prefab.instance()
 			view.add_child(target)
 			target.set_position(placeholder.get_position())
-			target.get_child(0).get_child(0).show_puzzle(puzzle_file)
+			target.show_puzzle(puzzle_file)
 			placeholder.get_parent().remove_child(placeholder)
 
 func update_view():
