@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://level_lines.tres" type="TileSet" id=1]
 [ext_resource path="res://script/level_map.gd" type="Script" id=2]
+[ext_resource path="res://main.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -182,3 +183,6 @@ __meta__ = {
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
+
+[node name="PuzzleUI" parent="." instance=ExtResource( 3 )]
+visible = false

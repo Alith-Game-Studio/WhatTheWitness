@@ -1,14 +1,44 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://font/DroidSansMono.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://script/menu_levels.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node2D
+
+const puzzle_dir = \"res://puzzles\"
+var puzzle_preview_prefab = preload(\"res://PuzzlePreview.tscn\")
+
+func list_files(path):
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+	while true:
+		var file = dir.get_next()
+		if (file == ''):
+			return files
+		if (file == '.' or file == '..'):
+			continue
+		files.append(file)
+		
+	
+	
+func _ready():
+	var grid = $MarginContainer/VBoxContainer/ScrollContainer/GridContainer
+	var puzzle_files = list_files(puzzle_dir)
+	var i = 0
+	for puzzle_file in puzzle_files:
+		var target = puzzle_preview_prefab.instance()
+		grid.add_child(target)
+		target.show_puzzle(puzzle_dir + '/' + puzzle_file)
+"
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 2 )
 
 [node name="MenuLevels" type="Node2D"]
-script = ExtResource( 3 )
+script = SubResource( 2 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = -3.0

@@ -17,8 +17,12 @@ func show_puzzle(path, rendered_image):
 
 
 func _on_Button_pressed():
+	_on_Button_mouse_exited()
 	Gameplay.load_puzzle_path = puzzle_path
-	get_tree().change_scene("res://main.tscn")
+	$"/root/LevelMap/PuzzleUI".load_puzzle()
+	$"/root/LevelMap/View".hide()
+	$"/root/LevelMap/PuzzleUI".show()
+	
 
 
 func _on_Button_mouse_entered():

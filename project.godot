@@ -30,6 +30,7 @@ BasicJudgers="*res://script/judgers/basic_judgers.gd"
 TetrisJudger="*res://script/judgers/tetris_judger.gd"
 CSP="*res://script/judgers/csp.gd"
 CSPHelper="*res://script/judgers/csp_helper.gd"
+MenuData="*res://script/menu_data.gd"
 
 [debug]
 
@@ -38,7 +39,6 @@ settings/stdout/print_fps=true
 
 [display]
 
-window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
 

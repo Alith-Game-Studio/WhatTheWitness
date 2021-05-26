@@ -1,7 +1,6 @@
 extends Node2D
 
 const puzzle_dir = "res://puzzles"
-var puzzle_preview_prefab = preload("res://PuzzlePreview.tscn")
 onready var puzzle_placeholders = $View/PuzzlePlaceHolders.get_children()
 onready var view = $View
 onready var view_origin = -get_viewport().size / 2
@@ -53,7 +52,7 @@ func _ready():
 	for placeholder in puzzle_placeholders:
 		var puzzle_file = placeholder.text.to_lower() + '.wit'
 		if (puzzle_file in files):
-			var target = puzzle_preview_prefab.instance()
+			var target = MenuData.puzzle_preview_prefab.instance()
 			view.add_child(target)
 			target.set_position(placeholder.get_position())
 			target.get_child(0).show_puzzle(puzzle_dir + '/' + puzzle_file, texture_list[puzzle_file])
