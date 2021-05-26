@@ -34,6 +34,7 @@ func _input(event):
 					Gameplay.validator = Validation.Validator.new()
 					if (Gameplay.validator.validate(Gameplay.puzzle, Gameplay.solution)):
 						Gameplay.solution.validity = 1
+						SaveData.update(Gameplay.load_puzzle_path, Gameplay.solution.to_string())
 					else:
 						Gameplay.solution.validity = -1
 					Gameplay.validation_elasped_time = 0.0

@@ -22,6 +22,7 @@ func list_files(path):
 		
 	
 func _ready():
+	$View/PuzzlePlaceHolders.hide()
 	var puzzle_files = list_files(puzzle_dir)
 	var files = list_files(puzzle_dir)
 	var viewports = []
@@ -55,7 +56,7 @@ func _ready():
 			var target = MenuData.puzzle_preview_prefab.instance()
 			view.add_child(target)
 			target.set_position(placeholder.get_position())
-			target.get_child(0).show_puzzle(puzzle_dir + '/' + puzzle_file, texture_list[puzzle_file])
+			target.get_child(0).get_child(0).show_puzzle(puzzle_dir + '/' + puzzle_file, texture_list[puzzle_file])
 			placeholder.get_parent().remove_child(placeholder)
 
 func update_view():

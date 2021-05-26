@@ -19,30 +19,34 @@ bg_color = Color( 0.6, 0.6, 0.6, 0 )
 size = 36
 font_data = ExtResource( 2 )
 
-[node name="PuzzlePreview" type="ColorRect"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-rect_pivot_offset = Vector2( 32, 32 )
+[node name="Node2D" type="Node2D"]
+scale = Vector2( 0.25, 0.25 )
+
+[node name="PuzzlePreview" type="ColorRect" parent="."]
+anchor_right = 0.603
+margin_right = 256.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 1, 1 )
+rect_pivot_offset = Vector2( 128, 128 )
 color = Color( 0.0313726, 1, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PuzzleVisualizer" type="TextureRect" parent="."]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 62.0
-margin_bottom = 62.0
+[node name="PuzzleVisualizer" type="TextureRect" parent="PuzzlePreview"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 252.0
+margin_bottom = 252.0
 expand = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
-margin_right = 64.0
-margin_bottom = 64.0
+[node name="Button" type="Button" parent="PuzzlePreview"]
+margin_right = 256.0
+margin_bottom = 256.0
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
@@ -51,6 +55,6 @@ custom_fonts/font = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="mouse_entered" from="Button" to="PuzzleVisualizer" method="_on_Button_mouse_entered"]
-[connection signal="mouse_exited" from="Button" to="PuzzleVisualizer" method="_on_Button_mouse_exited"]
-[connection signal="pressed" from="Button" to="PuzzleVisualizer" method="_on_Button_pressed"]
+[connection signal="mouse_entered" from="PuzzlePreview/Button" to="PuzzlePreview/PuzzleVisualizer" method="_on_Button_mouse_entered"]
+[connection signal="mouse_exited" from="PuzzlePreview/Button" to="PuzzlePreview/PuzzleVisualizer" method="_on_Button_mouse_exited"]
+[connection signal="pressed" from="PuzzlePreview/Button" to="PuzzlePreview/PuzzleVisualizer" method="_on_Button_pressed"]

@@ -258,5 +258,32 @@ class SolutionLine:
 				projected_progress = limit
 			progress = projected_progress
 	
+	
+	func to_string():
+		var state = state_stack[-1]
+		var line_result = []
+		for state_way in state.vertices:
+			var way_result = []
+			for v in state_way:
+				way_result.append(str(v))
+			line_result.append( PoolStringArray(way_result).join(','))
+		return PoolStringArray(line_result).join('|')
+		
+	static func load_from_string(string):
+		var state = DiscreteSolutionState.new()
+		state.vertices = []
+		var line_result = string.split('|')
+		for way_string in line_result:
+			var way_vertices = []
+			var way_result = way_string.split(',')
+			for vertex_string in way_result:
+				way_vertices.append(int(vertex_string))
+			state.vertices.append(way_vertices)
+		var solution = SolutionLine.new()
+		solution.stated = true
+		solution.validity = 1
+		solution.state_stack = [state]
+		solution.progress = 1.0
+		return solution
 		
 		

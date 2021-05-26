@@ -4,6 +4,7 @@ var enabled = false
 var canvas = Visualizer.PuzzleCanvas.new()
 onready var parent = get_node('..')
 onready var grandparent = get_node('../..')
+onready var grandgrandparent = get_node('../../..')
 var puzzle_path
 		
 func show_puzzle(path, rendered_image):
@@ -26,11 +27,11 @@ func _on_Button_pressed():
 
 
 func _on_Button_mouse_entered():
-	grandparent.move_child(parent, grandparent.get_child_count() - 1)
+	grandgrandparent.move_child(grandparent, grandgrandparent.get_child_count() - 1)
 	parent.rect_scale = Vector2(1.2, 1.2)
 	pass # Replace with function body.
 
 
 func _on_Button_mouse_exited():
-	parent.rect_scale = Vector2(1, 1)
+	parent.rect_scale = Vector2(1.0, 1.0)
 	pass # Replace with function body.
