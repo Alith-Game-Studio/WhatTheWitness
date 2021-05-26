@@ -37,20 +37,20 @@ __meta__ = {
 }
 
 [node name="Lines" type="TileMap" parent="Menu/View"]
-scale = Vector2( 6, 6 )
+scale = Vector2( 3, 3 )
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 16, 16 )
-cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 131074, 0, 5, 131075, 0, 8, 131076, 0, 8, 131077, 0, 8, 131078, 0, 131074, 196614, 0, 65538, 262150, 0, 65538, 327686, 0, 65543, 327687, 0, 8, 327688, 0, 8, 327689, 0, 8, 327690, 0, 65545, 327691, 0, 8, 327692, 0, 2, 393222, 0, 65538, 393226, 0, 65538, 458758, 0, 65538, 458762, 0, 7, 458763, 0, 8, 458764, 0, 8, 458765, 0, 8, 458766, 0, 8, 458767, 0, 2, 524294, 0, 65538, 589830, 0, 65538, 655366, 0, 1 )
+tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 65539, 196614, 2, 65538, 262150, 2, 65538, 327686, 2, 65543, 327687, 2, 8, 327688, 2, 8, 327689, 2, 8, 327690, 2, 131077, 327691, 2, 8, 327692, 2, 2, 393222, 2, 65538, 393226, 2, 65538, 458758, 2, 1, 458762, 2, 7, 458763, 2, 8, 458764, 2, 8, 458765, 2, 8, 458766, 2, 8, 458767, 2, 2, 524294, 0, 0, 589830, 0, 65538, 655366, 0, 1 )
 
 [node name="Lights" type="TileMap" parent="Menu/View"]
-scale = Vector2( 6, 6 )
+scale = Vector2( 3, 3 )
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 16, 16 )
-cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 131074, 1, 0 )
+tile_data = PoolIntArray( 131074, 3, 0 )
 
 [node name="PuzzlePlaceHolders" type="Node2D" parent="Menu/View"]
 

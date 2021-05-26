@@ -9,6 +9,7 @@ onready var drag_start = null
 onready var level_area_limit = $Menu/View/LevelAreaLimit
 onready var line_map = $Menu/View/Lines
 onready var light_map = $Menu/View/Lights
+onready var light_tile_id = $Menu/View/Lights.tile_set.find_tile_by_name('light')
 var window_size
 var view_scale = 1.0
 var puzzle_grid_pos = {}
@@ -80,7 +81,7 @@ func update_light():
 				continue
 			if (line_map.get_cellv(new_pos) == -1):
 				continue
-			light_map.set_cellv(new_pos, 1)
+			light_map.set_cellv(new_pos, light_tile_id)
 			light_map.update_bitmask_area(new_pos)
 			if (get_puzzle_on_cell(new_pos) == null):
 				stack.append(new_pos)
