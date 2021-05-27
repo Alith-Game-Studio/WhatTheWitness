@@ -1,5 +1,7 @@
 extends Node
 
+const UPSAMPLING_FACTOR = 2
+
 class PuzzleCanvas:
 	
 	var drawing_target
@@ -54,10 +56,7 @@ class PuzzleCanvas:
 		drawing_target.draw_polygon(result_list, PoolColorArray([color if override_color == null else override_color]))
 		
 	func screen_to_world(position):
-		return (position - view_origin) / view_scale
-
-	func world_to_screen(position):
-		return position * view_scale
+		return (position * UPSAMPLING_FACTOR - view_origin) / view_scale
 
 	func draw_puzzle(target):
 		if (canvas_size == null):

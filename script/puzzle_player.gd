@@ -2,16 +2,18 @@ extends Node2D
 
 var mouse_start_position = null
 var is_drawing_solution = false
-onready var puzzle_drawing_target = $MarginContainer/PuzzleRegion/PuzzleBackground
-onready var solver_drawing_target = $MarginContainer/PuzzleRegion/PuzzleForeground
+onready var drawing_target = $MarginContainer/PuzzleRegion/PuzzleForeground
+onready var viewport = $MarginContainer/PuzzleRegion/PuzzleForeground/Viewport
 onready var level_map = $"/root/LevelMap"
 onready var left_arrow_button = $LeftArrowButton
 onready var right_arrow_button = $RightArrowButton
 onready var menu_bar_button = $"/root/LevelMap/SideMenu/MenuBarButton"
 onready var puzzle_counter_text = $"/root/LevelMap/SideMenu/PuzzleCounter"
 onready var back_button = $BackButton
+onready var drawing_control = $MarginContainer/PuzzleRegion/PuzzleForeground/Viewport/Control
 var loaded = false
 func load_puzzle():
+	Gameplay.background_texture = null
 	Gameplay.puzzle = Graph.load_from_xml(Gameplay.get_absolute_puzzle_path())
 	Gameplay.puzzle.preprocess_tetris_covering()
 	if (Gameplay.puzzle_name in SaveData.saved_solutions):
@@ -29,7 +31,7 @@ func load_puzzle():
 		hide_right_arrow_button()
 	Gameplay.canvas = Visualizer.PuzzleCanvas.new()
 	Gameplay.canvas.puzzle = Gameplay.puzzle
-	Gameplay.canvas.normalize_view(puzzle_drawing_target.get_rect().size)	
+	Gameplay.canvas.normalize_view(drawing_control.get_rect().size)	
 	var back_color = Gameplay.puzzle.background_color
 	var front_color = Gameplay.puzzle.line_color
 	$ColorRect.color = back_color
@@ -38,7 +40,7 @@ func load_puzzle():
 	menu_bar_button.modulate = Color (front_color.r, front_color.g, front_color.b, menu_bar_button.modulate.a)
 	back_button.modulate = front_color
 	puzzle_counter_text.modulate = front_color
-	puzzle_drawing_target.draw_background()
+	drawing_control.draw_background()
 	loaded = true
 	
 	# test if there are previous puzzles
@@ -52,12 +54,12 @@ func _physics_process(delta):
 	if (loaded):
 		if (Gameplay.validator != null):
 			Gameplay.validation_elasped_time += delta
-		solver_drawing_target.update()
+		drawing_control.update()
 
 func _input(event):
 	if (loaded):
 		if (event is InputEventMouseButton and event.is_pressed()):
-			var panel_start_pos = solver_drawing_target.get_global_rect().position
+			var panel_start_pos = drawing_target.get_global_rect().position
 			var position = event.position - panel_start_pos
 			if (is_drawing_solution):
 				if (Gameplay.solution.is_completed(Gameplay.puzzle)):

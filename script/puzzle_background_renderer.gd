@@ -5,3 +5,4 @@ func _draw():
 	canvas.puzzle = Gameplay.puzzle
 	canvas.normalize_view(self.get_rect().size)
 	canvas.draw_puzzle(self)
+
