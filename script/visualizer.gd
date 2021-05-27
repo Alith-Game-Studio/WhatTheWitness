@@ -98,7 +98,7 @@ class PuzzleCanvas:
 				draw_error = decorator_response.state == Validation.DecoratorResponse.ERROR
 				draw_eliminated = decorator_response.state == Validation.DecoratorResponse.ELIMINATED
 			if (draw_cloned):
-				override_color = Color(puzzle.background_color.r, puzzle.background_color.g, puzzle.background_color.b, clone_fading * 0.9)
+				override_color = Color(puzzle.background_color.r, puzzle.background_color.g, puzzle.background_color.b, clone_fading * 0.8)
 				drawing_target.draw_set_transform(view_origin + decorator_response.pos * view_scale, decorator_response.decorator.angle, Vector2(1.0, 1.0))
 				decorator_response.clone_source_decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)
 				override_color = Color(decorator_response.color.r, decorator_response.color.g, decorator_response.color.b, clone_fading)

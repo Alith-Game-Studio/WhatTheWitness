@@ -89,7 +89,8 @@ func _input(event):
 			if (is_drawing_solution):
 				var split = 5
 				for i in range(split):
-					Gameplay.solution.try_continue_solution(Gameplay.puzzle, event.relative / Gameplay.canvas.view_scale / split)
+					Gameplay.solution.try_continue_solution(Gameplay.puzzle, 
+					event.relative * Visualizer.UPSAMPLING_FACTOR / Gameplay.canvas.view_scale / split)
 		if (event is InputEventKey):
 			if (event.pressed):
 				if (event.scancode == KEY_ESCAPE):
