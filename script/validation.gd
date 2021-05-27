@@ -3,7 +3,7 @@ extends Node
 class DecoratorResponse:
 	var decorator
 	var rule: String
-	var color: Color
+	var color = null
 	var pos: Vector2
 	var vertex_index: int
 	var state: int
@@ -66,7 +66,7 @@ class Validator:
 				var response = DecoratorResponse.new()
 				response.decorator = vertex.decorator
 				response.rule = vertex.decorator.rule
-				if ('color' in vertex.decorator):
+				if (vertex.decorator.color != null):
 					response.color = vertex.decorator.color
 				response.pos = vertex.pos
 				response.vertex_index = vertex.index

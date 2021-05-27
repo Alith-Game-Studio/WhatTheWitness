@@ -9,18 +9,22 @@
       </Decorator>
       <X>1</X>
       <Y>1</Y>
+      <Hidden>false</Hidden>
     </Node>
     <Node>
       <X>2</X>
       <Y>1</Y>
+      <Hidden>false</Hidden>
     </Node>
     <Node>
       <X>3</X>
       <Y>1</Y>
+      <Hidden>false</Hidden>
     </Node>
     <Node>
       <X>3</X>
       <Y>2</Y>
+      <Hidden>false</Hidden>
     </Node>
     <Node>
       <Decorator xsi:type="StartDecorator">
@@ -28,6 +32,7 @@
       </Decorator>
       <X>3</X>
       <Y>3</Y>
+      <Hidden>false</Hidden>
     </Node>
   </Nodes>
   <EdgesID>
@@ -54,9 +59,9 @@
   </EdgesID>
   <FacesID />
   <MetaData>
-    <PuzzleTitle>Square/SquarePuzzle_2x2</PuzzleTitle>
-    <BackgroundColor>LightGray</BackgroundColor>
-    <ForegroundColor>DarkGray</ForegroundColor>
+    <PuzzleTitle />
+    <BackgroundColor>#804000</BackgroundColor>
+    <ForegroundColor>Black</ForegroundColor>
     <EdgeWidth>0.2</EdgeWidth>
     <TetrisTemplate>
       <Shapes>
@@ -64,648 +69,792 @@
           <Node>
             <X>1</X>
             <Y>1</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>1</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>1</X>
             <Y>2</Y>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>1</X>
-            <Y>2</Y>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>2</Y>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>3</Y>
-          </Node>
-          <Node>
-            <X>1</X>
-            <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>1</X>
-            <Y>3</Y>
+            <Y>2</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>2</X>
+            <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>3</Y>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>1</X>
-            <Y>4</Y>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>1</X>
-            <Y>4</Y>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>4</Y>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>5</Y>
-          </Node>
-          <Node>
-            <X>1</X>
-            <Y>5</Y>
+            <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>1</X>
-            <Y>5</Y>
+            <Y>3</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>2</X>
+            <Y>3</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>2</X>
+            <Y>4</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>1</X>
+            <Y>4</Y>
+            <Hidden>false</Hidden>
+          </Node>
+        </ArrayOfNode>
+        <ArrayOfNode>
+          <Node>
+            <X>1</X>
+            <Y>4</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>2</X>
+            <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>1</X>
+            <Y>5</Y>
+            <Hidden>false</Hidden>
+          </Node>
+        </ArrayOfNode>
+        <ArrayOfNode>
+          <Node>
+            <X>1</X>
+            <Y>5</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>2</X>
+            <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>1</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>1</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>7</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>1</X>
             <Y>7</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>2</X>
             <Y>1</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>1</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>2</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>2</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>2</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>2</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>2</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>7</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>2</X>
             <Y>7</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>3</X>
             <Y>1</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>1</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>3</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>3</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>3</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>3</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>3</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>7</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>3</X>
             <Y>7</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>4</X>
             <Y>1</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>1</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>4</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>4</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>4</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>4</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>4</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>7</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>4</X>
             <Y>7</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>5</X>
             <Y>1</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>1</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>5</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>5</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>5</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>5</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>5</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>7</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>5</X>
             <Y>7</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>6</X>
             <Y>1</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>7</X>
             <Y>1</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>7</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>6</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>7</X>
             <Y>2</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>7</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>6</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>7</X>
             <Y>3</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>7</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>6</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>7</X>
             <Y>4</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>7</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>6</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>7</X>
             <Y>5</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>7</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
             <X>6</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>7</X>
             <Y>6</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>7</X>
             <Y>7</Y>
+            <Hidden>false</Hidden>
           </Node>
           <Node>
             <X>6</X>
             <Y>7</Y>
+            <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
       </Shapes>
@@ -714,6 +863,6 @@
     <FaceDecorationScale>1</FaceDecorationScale>
     <ExportWidth>768</ExportWidth>
     <ExportHeight>768</ExportHeight>
-    <LineColor>Yellow</LineColor>
+    <LineColor>Orange</LineColor>
   </MetaData>
 </SaveState>

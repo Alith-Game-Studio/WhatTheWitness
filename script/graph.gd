@@ -15,6 +15,10 @@ func color(name):
 	if (name.begins_with('#')):
 		return Color(name)
 	else:
+		if (name == 'Navy'):
+			return Color.navyblue
+		elif (name == 'CornflowerBlue'):
+			return Color.cornflower
 		return ColorN(name)
 
 class Vertex:
@@ -64,7 +68,7 @@ class Puzzle:
 	var select_one_subpuzzle = false # multi-panels
 	var symmetry_type: int
 	var symmetry_center: Vector2
-	var symmetry_angle: float
+	var symmetry_normal: Vector2
 	var decorators : Array
 	var edge_detector_node = {}
 	var edge_shared_facets = {}
@@ -248,6 +252,17 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		puzzle.symmetry_center += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
 		puzzle.solution_colors.push_back(color(symmetry_decorator['SecondLineColor']))
 		puzzle.solution_colors.push_back(color(symmetry_decorator['ThirdLineColor']))
+	symmetry_decorator = __find_decorator(raw_element, "SymmetryPuzzleDecorator")
+	if (symmetry_decorator):
+		var is_rotational = symmetry_decorator['IsRotational']
+		assert(is_rotational in ['true', 'false'])
+		puzzle.n_ways = 2
+		puzzle.symmetry_type = SYMMETRY_ROTATIONAL if is_rotational == 'true' else SYMMETRY_REFLECTIVE
+		puzzle.symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
+		puzzle.symmetry_center += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
+		var symmetry_angle = float(symmetry_decorator['Angle'])
+		puzzle.symmetry_normal = Vector2(-sin(symmetry_angle), cos(symmetry_angle))
+		puzzle.solution_colors.push_back(color(symmetry_decorator['SecondLineColor']))
 	if (element_type == EDGE_ELEMENT):
 		var v1 = int(raw_element['Start'])
 		var v2 = int(raw_element['End'])

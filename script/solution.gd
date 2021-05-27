@@ -103,6 +103,8 @@ class DiscreteSolutionState:
 			return pos
 		if (puzzle.symmetry_type == Graph.SYMMETRY_ROTATIONAL):
 			return (pos - puzzle.symmetry_center).rotated(2 * PI * way / puzzle.n_ways) + puzzle.symmetry_center
+		elif (puzzle.symmetry_type == Graph.SYMMETRY_REFLECTIVE):
+			return (pos - puzzle.symmetry_center).reflect(puzzle.symmetry_normal) + puzzle.symmetry_center
 		assert(false)
 		
 	func get_symmetry_vector(puzzle, way, vec):
@@ -110,6 +112,8 @@ class DiscreteSolutionState:
 			return vec
 		if (puzzle.symmetry_type == Graph.SYMMETRY_ROTATIONAL):
 			return vec.rotated(2 * PI * way / puzzle.n_ways)
+		elif (puzzle.symmetry_type == Graph.SYMMETRY_REFLECTIVE):
+			return vec.reflect(puzzle.symmetry_normal)
 		assert(false)
 			
 	func pos_to_vertex_id(puzzle, pos, eps=1e-3):

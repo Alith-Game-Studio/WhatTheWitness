@@ -48,7 +48,7 @@ func judge_rings(validator: Validation.Validator, require_errors: bool):
 		if (region.has_any('ring')):
 			for decorator_id in region.decorator_indices:
 				if (!(validator.decorator_responses[decorator_id].rule in ['ring', 'circle', 'point'])):
-					if ('color' in validator.decorator_responses[decorator_id].decorator):
+					if (validator.decorator_responses[decorator_id].decorator.color != null):
 						clonable_decorators.append(decorator_id)
 			for decorator_id in region.decorator_dict['ring']:
 				paste_positions.append([decorator_id, region])

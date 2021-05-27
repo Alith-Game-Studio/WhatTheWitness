@@ -10,7 +10,10 @@ onready var drag_start = null
 onready var level_area_limit = $Menu/View/LevelAreaLimit
 onready var line_map = $Menu/View/Lines
 onready var light_map = $Menu/View/Lights
-onready var light_tile_id = $Menu/View/Lights.tile_set.find_tile_by_name('light')
+onready var gadget_map = $Menu/View/Gadgets
+onready var light_tile_id = light_map.tile_set.find_tile_by_name('light')
+onready var and_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('and_gate')
+onready var or_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('or_gate')
 onready var puzzle_counter_text = $SideMenu/PuzzleCounter
 onready var menu_bar_button = $SideMenu/MenuBarButton
 var window_size
@@ -73,6 +76,14 @@ func update_counter():
 		puzzle_count += 1
 	puzzle_counter_text.bbcode_text = '[right]%d / %d[/right]' % [solved_count, puzzle_count]
 
+func get_gadget_direction(tile_map: TileMap, pos: Vector2):
+	var x = int(round(pos.x))
+	var y = int(round(pos.y))
+	if (tile_map.is_cell_transposed(x, y)):
+		return Vector2(0, -1) if tile_map.is_cell_y_flipped(x, y) else Vector2(0, 1)
+	else:
+		return Vector2(-1, 0) if tile_map.is_cell_x_flipped(x, y) else Vector2(1, 0)
+
 func update_light():
 	var stack = []
 	for puzzle_file in MenuData.puzzle_grid_pos:
@@ -82,15 +93,32 @@ func update_light():
 	while (!stack.empty()):
 		var pos = stack.pop_back()
 		# print('Visiting ', pos)
+		var deltas = []
 		for dir in range(4):
-			var new_pos = pos + Vector2(DIR_X[dir], DIR_Y[dir])
-			if (get_light_state(new_pos)):
-				continue
+			var delta = Vector2(DIR_X[dir], DIR_Y[dir])
+			var new_pos = pos + delta
 			if (line_map.get_cellv(new_pos) == -1):
+				continue
+			deltas.append(delta)
+			if (gadget_map.get_cellv(new_pos) == or_gadget_tile_id):
+				deltas.append(delta + get_gadget_direction(gadget_map, new_pos))
+			if (gadget_map.get_cellv(new_pos) == and_gadget_tile_id):
+				var non_activated_neighbor = 0
+				for dir2 in range(4):
+					var new_pos2 = new_pos + Vector2(DIR_X[dir2], DIR_Y[dir2])
+					if (line_map.get_cellv(new_pos2) != -1 and !get_light_state(new_pos2)):
+						non_activated_neighbor += 1
+				print('non-activated_neighbor = ', non_activated_neighbor)
+				if (non_activated_neighbor == 1):
+					deltas.append(delta + get_gadget_direction(gadget_map, new_pos))
+		for delta in deltas:
+			var new_pos = pos + delta
+			if (get_light_state(new_pos)):
 				continue
 			light_map.set_cellv(new_pos, light_tile_id)
 			light_map.update_bitmask_area(new_pos)
-			if (MenuData.get_puzzle_on_cell(new_pos) == null):
+			if (gadget_map.get_cellv(new_pos) == -1 and
+				MenuData.get_puzzle_on_cell(new_pos) == null):
 				stack.append(new_pos)
 	for puzzle_file in MenuData.puzzle_grid_pos:
 		var pos = MenuData.puzzle_grid_pos[puzzle_file]
