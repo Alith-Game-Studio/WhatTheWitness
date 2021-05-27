@@ -125,4 +125,4 @@ class Validator:
 					regions[vertex_region[i]].decorator_dict[rule].append(decorator_response_of_vertex[i].index)
 				regions[vertex_region[i]].vertice_indices.append(i)
 		
-		return BasicJudgers.judge_all(self)
+		return BasicJudgers.judge_all(self, true)

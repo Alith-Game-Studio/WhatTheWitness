@@ -251,6 +251,8 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 	if (element_type == EDGE_ELEMENT):
 		var v1 = int(raw_element['Start'])
 		var v2 = int(raw_element['End'])
+		if (v1 == v2): # edges due to a bug in level editor
+			return
 		var p1 = puzzle.vertices[v1].pos
 		var p2 = puzzle.vertices[v2].pos
 		var v_mid

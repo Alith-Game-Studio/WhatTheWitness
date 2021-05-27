@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://level_lines.tres" type="TileSet" id=1]
 [ext_resource path="res://script/level_map.gd" type="Script" id=2]
 [ext_resource path="res://main.tscn" type="PackedScene" id=3]
 [ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://img/menu_bar.png" type="Texture" id=5]
+[ext_resource path="res://img/hand_drawing/vanilla.png" type="Texture" id=6]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -38,6 +39,20 @@ margin_left = 4.0
 margin_top = -10.0
 margin_right = 1945.0
 margin_bottom = 1403.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tags" type="Node2D" parent="Menu/View"]
+
+[node name="TextureRect" type="TextureRect" parent="Menu/View/Tags"]
+modulate = Color( 1, 1, 1, 0.254902 )
+margin_left = 768.0
+margin_top = 288.0
+margin_right = 864.0
+margin_bottom = 384.0
+texture = ExtResource( 6 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -89,6 +104,18 @@ margin_right = 672.0
 margin_bottom = 288.0
 rect_pivot_offset = Vector2( 64, 127 )
 text = "1-intro-1-b"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit15" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 480.0
+margin_top = 192.0
+margin_right = 576.0
+margin_bottom = 288.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "0-test-symmetry-2"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false

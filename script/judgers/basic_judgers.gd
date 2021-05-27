@@ -1,5 +1,10 @@
 extends Node
 
+const global_judgers = [
+	'judge_covered_points',
+	'judge_rings',
+]
+
 const region_judgers = [
 	'judge_region_rings',
 	'judge_region_eliminators',
@@ -11,10 +16,32 @@ const region_judgers = [
 	'judge_region_tetris',
 ]
 
-func judge_all(validator: Validation.Validator):
-	return judge_ring(validator, true)
+func judge_all(validator: Validation.Validator, require_errors: bool):
+	var ok = true
+	for global_judger in global_judgers:
+		var judger_ok = call(global_judger, validator, require_errors)
+		ok = ok and judger_ok
+		if (!ok and !require_errors):
+			return false
+	return ok
 	
-func judge_ring(validator: Validation.Validator, require_errors: bool):
+func judge_covered_points(validator: Validation.Validator, require_errors: bool):
+	var ok = true
+	for v in validator.decorator_response_of_vertex:
+		var response = validator.decorator_response_of_vertex[v]
+		if (response.rule == 'point' and validator.vertex_region[v] < -1): # covered point
+			var way_id = -validator.vertex_region[v] - 2
+			var color = response.color
+			if (color != Color.black and color != validator.puzzle.solution_colors[way_id]): 
+				# black matches everything
+				ok = false
+				if (require_errors):
+					response.state = Validation.DecoratorResponse.ERROR
+				else:
+					return false
+	return ok
+
+func judge_rings(validator: Validation.Validator, require_errors: bool):
 	var clonable_decorators = []
 	var paste_positions = []
 	for region in validator.regions:
@@ -261,9 +288,11 @@ func judge_region_elimination(validator: Validation.Validator, region: Validatio
 	# otherwise, one eliminator can erase any error (which is the assumption in searching)
 	# if it happens to eliminate itself, it is still a valid solution
 	# since we can swap the targets of two eliminators to bypass this
-	for i in range(len(error_list), len(eliminator_list)): # number of errors is insufficient
-		error_list.append(eliminator_list[i]) # mark the eliminator as error
-		validator.decorator_responses[eliminator_list[i]].state_before_elimination = Validation.DecoratorResponse.ERROR
+	while(len(error_list) < len(eliminator_list)): # number of errors is insufficient
+		var last_eliminator = eliminator_list.back()
+		error_list.append(last_eliminator) # mark the eliminator as error
+		eliminator_list.pop_back()
+		validator.decorator_responses[last_eliminator].state_before_elimination = Validation.DecoratorResponse.ERROR
 	var eliminator_targets = []
 	var random_eliminator_targets = []
 	var max_random_weights = randf()
