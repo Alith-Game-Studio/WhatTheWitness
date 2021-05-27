@@ -35,7 +35,7 @@ func list_files(path):
 	
 func _ready():
 	window_size = get_viewport().size
-	puzzle_placeholders.hide()
+	# puzzle_placeholders.hide()
 	SaveData.load_all()
 	var puzzle_files = list_files(puzzle_dir)
 	var files = list_files(puzzle_dir)

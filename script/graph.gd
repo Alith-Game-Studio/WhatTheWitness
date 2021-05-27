@@ -61,6 +61,7 @@ class Puzzle:
 	var line_width: float
 	var start_size: float
 	var n_ways: int
+	var select_one_subpuzzle = false # multi-panels
 	var symmetry_type: int
 	var symmetry_center: Vector2
 	var symmetry_angle: float
@@ -154,6 +155,9 @@ func __add_decorator(puzzle, raw_element, v):
 			var decorator = load('res://script/decorators/wall_decorator.gd').new()
 			decorator.color = color(text_decorator['Color'])
 			puzzle.vertices[v].decorator = decorator
+		elif (text_decorator['Text'].to_lower() == 'select 1'):
+			puzzle.vertices[v].hidden = true
+			puzzle.select_one_subpuzzle = true
 		else:
 			print('Unknown text decorator %s' % text_decorator['Text'])
 	var triangle_decorator = __find_decorator(raw_element, "TriangleDecorator")

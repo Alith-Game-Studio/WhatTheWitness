@@ -29,7 +29,7 @@ class PuzzleCanvas:
 	
 	func add_circle(pos, radius, color):
 		drawing_target.draw_circle(pos * view_scale, radius * view_scale - 0.5, color if override_color == null else override_color)
-		drawing_target.draw_arc(pos * view_scale, radius * view_scale - 0.5, 0.0, 2 * PI, 64, color if override_color == null else override_color, 1.0, true)
+		drawing_target.draw_arc(pos * view_scale, radius / 2 * view_scale, 0.0, 2 * PI, 64, color if override_color == null else override_color, radius / 2 * view_scale, true)
 		
 	func add_line(pos1, pos2, width, color):
 		drawing_target.draw_line(pos1 * view_scale, pos2 * view_scale, color if override_color == null else override_color, width * view_scale, true)

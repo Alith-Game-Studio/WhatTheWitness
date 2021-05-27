@@ -60,6 +60,8 @@ func judge_ring(validator: Validation.Validator, require_errors: bool):
 func judge_all_regions(validator: Validation.Validator, require_errors: bool):
 	var ok = true
 	for region in validator.regions:
+		if (validator.puzzle.select_one_subpuzzle and !region.is_near_solution_line):
+			continue
 		var judger_ok = judge_region(validator, region, require_errors)
 		ok = judger_ok and ok
 	return ok

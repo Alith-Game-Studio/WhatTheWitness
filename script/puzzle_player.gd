@@ -8,6 +8,7 @@ onready var level_map = $"/root/LevelMap"
 onready var left_arrow_button = $LeftArrowButton
 onready var right_arrow_button = $RightArrowButton
 onready var menu_bar_button = $"/root/LevelMap/SideMenu/MenuBarButton"
+onready var puzzle_counter_text = $"/root/LevelMap/SideMenu/PuzzleCounter"
 onready var back_button = $BackButton
 var loaded = false
 func load_puzzle():
@@ -36,6 +37,7 @@ func load_puzzle():
 	right_arrow_button.modulate = Color(front_color.r, front_color.g, front_color.b, right_arrow_button.modulate.a)
 	menu_bar_button.modulate = Color (front_color.r, front_color.g, front_color.b, menu_bar_button.modulate.a)
 	back_button.modulate = front_color
+	puzzle_counter_text.modulate = front_color
 	puzzle_drawing_target.update()
 	loaded = true
 	
@@ -104,6 +106,7 @@ func back_to_menu():
 	hide()
 	MenuData.can_drag_map = true
 	menu_bar_button.modulate = Color.white
+	puzzle_counter_text.modulate = Color.white
 
 func switch_puzzle(delta_pos):
 	var puzzle_grid_pos = MenuData.puzzle_grid_pos[Gameplay.puzzle_name]

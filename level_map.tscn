@@ -34,10 +34,10 @@ script = ExtResource( 2 )
 [node name="View" type="Node2D" parent="Menu"]
 
 [node name="LevelAreaLimit" type="ReferenceRect" parent="Menu/View"]
-margin_left = 96.0
-margin_top = 96.0
-margin_right = 1835.0
-margin_bottom = 1362.0
+margin_left = 4.0
+margin_top = -10.0
+margin_right = 1945.0
+margin_bottom = 1403.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -66,6 +66,17 @@ margin_top = 192.0
 margin_right = 288.0
 margin_bottom = 288.0
 text = "1-intro-1-a"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit14" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 384.0
+margin_top = 192.0
+margin_right = 480.0
+margin_bottom = 288.0
+text = "wc1-A104"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false

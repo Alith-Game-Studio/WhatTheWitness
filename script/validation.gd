@@ -23,6 +23,7 @@ class Region:
 	var vertice_indices: Array
 	var decorator_indices: Array
 	var decorator_dict: Dictionary
+	var is_near_solution_line: bool
 	var index
 	
 	func _to_string():
@@ -102,6 +103,8 @@ class Validator:
 								if (!visit[j]):
 									stack.push_back(j)
 									visit[j] = true
+						elif (vertex_region[mid_v] < -1):
+							single_region.is_near_solution_line = true
 				single_region.index = len(regions)
 				for f in single_region.facet_indices:
 					region_of_facet[f] = single_region
