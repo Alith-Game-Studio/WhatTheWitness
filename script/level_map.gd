@@ -2,7 +2,8 @@ extends Node2D
 
 const puzzle_dir = "res://puzzles"
 onready var puzzle_placeholders = $Menu/View/PuzzlePlaceHolders
-onready var clear_save_button = $Menu/Extra/ClearSaveButton
+onready var extra_menu = $SideMenu/Extra
+onready var clear_save_button = $SideMenu/Extra/ClearSaveButton
 onready var view = $Menu/View
 onready var view_origin = -get_viewport().size / 2
 onready var drag_start = null
@@ -10,10 +11,10 @@ onready var level_area_limit = $Menu/View/LevelAreaLimit
 onready var line_map = $Menu/View/Lines
 onready var light_map = $Menu/View/Lights
 onready var light_tile_id = $Menu/View/Lights.tile_set.find_tile_by_name('light')
+onready var puzzle_counter_text = $SideMenu/PuzzleCounter
+onready var menu_bar_button = $SideMenu/MenuBarButton
 var window_size
 var view_scale = 1.0
-var puzzle_grid_pos = {}
-var grid_pos_puzzle = {}
 
 const DIR_X = [-1, 0, 1, 0]
 const DIR_Y = [0, -1, 0, 1]
@@ -49,27 +50,33 @@ func _ready():
 			target.set_position(placeholder.get_position())
 			var cell_pos = target.global_position / 96
 			cell_pos = Vector2(round(cell_pos.x), round(cell_pos.y))
-			puzzle_grid_pos[puzzle_file] = cell_pos
-			grid_pos_puzzle[[int(cell_pos.x), int(cell_pos.y)]] = puzzle_file
+			MenuData.puzzle_grid_pos[puzzle_file] = cell_pos
+			MenuData.grid_pos_puzzle[[int(cell_pos.x), int(cell_pos.y)]] = puzzle_file
 			target.show_puzzle(puzzle_file, get_light_state(cell_pos))
 			placeholder.get_parent().remove_child(placeholder)
 	update_light()
+	update_counter()
 
 func get_light_state(pos):
 	if (light_map.get_cellv(pos) >= 0):
 		return true
 	else:
 		return false
-func get_puzzle_on_cell(pos):
-	var int_pos = [int(round(pos.x)), int(round(pos.y))]
-	if (int_pos in grid_pos_puzzle):
-		return grid_pos_puzzle[int_pos]
-	return null
+
+func update_counter():
+	var puzzle_count = 0
+	var solved_count = 0
+	for puzzle_file in MenuData.puzzle_grid_pos:
+		var pos = MenuData.puzzle_grid_pos[puzzle_file]
+		if(SaveData.puzzle_solved(puzzle_file)):
+			solved_count += 1
+		puzzle_count += 1
+	puzzle_counter_text.bbcode_text = '[right]%d / %d[/right]' % [solved_count, puzzle_count]
 
 func update_light():
 	var stack = []
-	for puzzle_file in puzzle_grid_pos:
-		var pos = puzzle_grid_pos[puzzle_file]
+	for puzzle_file in MenuData.puzzle_grid_pos:
+		var pos = MenuData.puzzle_grid_pos[puzzle_file]
 		if(SaveData.puzzle_solved(puzzle_file)):
 			stack.append(pos)
 	while (!stack.empty()):
@@ -83,10 +90,10 @@ func update_light():
 				continue
 			light_map.set_cellv(new_pos, light_tile_id)
 			light_map.update_bitmask_area(new_pos)
-			if (get_puzzle_on_cell(new_pos) == null):
+			if (MenuData.get_puzzle_on_cell(new_pos) == null):
 				stack.append(new_pos)
-	for puzzle_file in puzzle_grid_pos:
-		var pos = puzzle_grid_pos[puzzle_file]
+	for puzzle_file in MenuData.puzzle_grid_pos:
+		var pos = MenuData.puzzle_grid_pos[puzzle_file]
 		if(get_light_state(pos) and !MenuData.puzzle_preview_panels[puzzle_file].puzzle_unlocked):
 			MenuData.puzzle_preview_panels[puzzle_file].update_puzzle(true)
 
@@ -139,3 +146,15 @@ func _on_clear_save_button_pressed():
 	else:
 		clear_save_button.text = 'Are you sure?'
 	
+
+
+func _on_menu_bar_button_mouse_entered():
+	menu_bar_button.modulate = Color(menu_bar_button.modulate.r, menu_bar_button.modulate.g, menu_bar_button.modulate.b, 0.5)
+
+func _on_menu_bar_button_mouse_exited():
+	menu_bar_button.modulate = Color(menu_bar_button.modulate.r, menu_bar_button.modulate.g, menu_bar_button.modulate.b, 1.0)
+
+
+
+func _on_menu_bar_button_pressed():
+	extra_menu.visible = !extra_menu.visible

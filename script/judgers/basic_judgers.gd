@@ -157,6 +157,7 @@ func judge_region_triangles(validator: Validation.Validator, region: Validation.
 func judge_region_arrows(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('arrow')):
 		return true
+	var ok = true
 	for decorator_id in region.decorator_dict['arrow']:
 		var response = validator.decorator_responses[decorator_id]
 		var origin = validator.puzzle.vertices[response.vertex_index].pos
@@ -174,9 +175,10 @@ func judge_region_arrows(validator: Validation.Validator, region: Validation.Reg
 		if (count != response.decorator.count):
 			if (require_errors):
 				response.state = Validation.DecoratorResponse.ERROR
+				ok = false
 			else:
 				return false
-	return true
+	return ok
 	
 	
 func judge_region_tetris(validator: Validation.Validator, region: Validation.Region, require_errors: bool):

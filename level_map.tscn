@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://level_lines.tres" type="TileSet" id=1]
 [ext_resource path="res://script/level_map.gd" type="Script" id=2]
 [ext_resource path="res://main.tscn" type="PackedScene" id=3]
+[ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://img/menu_bar.png" type="Texture" id=5]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -19,6 +21,10 @@ glow_levels/3 = false
 glow_levels/5 = false
 glow_strength = 0.44
 glow_bloom = 0.42
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 4 )
 
 [node name="LevelMap" type="Node2D"]
 script = ExtResource( 2 )
@@ -199,31 +205,64 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Extra" type="Node2D" parent="Menu"]
-
-[node name="ClearSaveButton" type="Button" parent="Menu/Extra"]
-margin_left = 15.0
-margin_top = 18.0
-margin_right = 119.0
-margin_bottom = 43.0
-text = "Clear Save"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ExportSaveButton" type="Button" parent="Menu/Extra"]
-margin_left = 15.0
-margin_top = 61.0
-margin_right = 120.0
-margin_bottom = 86.0
-text = "Export Save"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
 [node name="PuzzleUI" parent="." instance=ExtResource( 3 )]
 visible = false
-[connection signal="pressed" from="Menu/Extra/ClearSaveButton" to="." method="_on_clear_save_button_pressed"]
+
+[node name="SideMenu" type="Node2D" parent="."]
+
+[node name="PuzzleCounter" type="RichTextLabel" parent="SideMenu"]
+margin_left = 713.0
+margin_top = 14.0
+margin_right = 1004.0
+margin_bottom = 60.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[right]0 / 0[/right]
+"
+text = "0 / 0
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuBarButton" type="TextureButton" parent="SideMenu"]
+margin_left = 10.5858
+margin_top = 11.0
+margin_right = 50.5858
+margin_bottom = 51.0
+texture_normal = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Extra" type="Node2D" parent="SideMenu"]
+visible = false
+
+[node name="ClearSaveButton" type="Button" parent="SideMenu/Extra"]
+margin_left = 15.7071
+margin_top = 66.0833
+margin_right = 119.707
+margin_bottom = 91.0833
+text = "Clear Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExportSaveButton" type="Button" parent="SideMenu/Extra"]
+margin_left = 15.7071
+margin_top = 109.083
+margin_right = 120.707
+margin_bottom = 134.083
+text = "Export Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="mouse_entered" from="SideMenu/MenuBarButton" to="." method="_on_menu_bar_button_mouse_entered"]
+[connection signal="mouse_exited" from="SideMenu/MenuBarButton" to="." method="_on_menu_bar_button_mouse_exited"]
+[connection signal="pressed" from="SideMenu/MenuBarButton" to="." method="_on_menu_bar_button_pressed"]
+[connection signal="pressed" from="SideMenu/Extra/ClearSaveButton" to="." method="_on_clear_save_button_pressed"]

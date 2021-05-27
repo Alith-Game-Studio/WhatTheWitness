@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://script/puzzle_player.gd" type="Script" id=1]
 [ext_resource path="res://script/ui_puzzle_back.gd" type="Script" id=2]
 [ext_resource path="res://script/ui_puzzle_fore.gd" type="Script" id=3]
 [ext_resource path="res://img/right_arrow.png" type="Texture" id=4]
 [ext_resource path="res://img/left_arrow.png" type="Texture" id=5]
+[ext_resource path="res://img/cross.png" type="Texture" id=6]
 
 [node name="PuzzleUI" type="Node2D"]
 script = ExtResource( 1 )
@@ -78,13 +79,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackButton" type="Button" parent="."]
-margin_left = 19.0
-margin_top = 22.0
-margin_right = 121.0
-margin_bottom = 55.0
-text = "Back (Esc)"
+[node name="BackButton" type="TextureButton" parent="."]
+margin_left = 51.0
+margin_top = 9.0
+margin_right = 96.0
+margin_bottom = 54.0
+texture_normal = ExtResource( 6 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="mouse_entered" from="RightArrowButton" to="." method="_on_right_arrow_button_mouse_entered"]
+[connection signal="mouse_exited" from="RightArrowButton" to="." method="_on_right_arrow_button_mouse_exited"]
+[connection signal="pressed" from="RightArrowButton" to="." method="_on_right_arrow_button_pressed"]
+[connection signal="mouse_entered" from="LeftArrowButton" to="." method="_on_left_arrow_button_mouse_entered"]
+[connection signal="mouse_exited" from="LeftArrowButton" to="." method="_on_left_arrow_button_mouse_exited"]
+[connection signal="pressed" from="LeftArrowButton" to="." method="_on_left_arrow_button_pressed"]
+[connection signal="mouse_entered" from="BackButton" to="." method="_on_back_button_mouse_entered"]
+[connection signal="mouse_exited" from="BackButton" to="." method="_on_back_button_mouse_exited"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
