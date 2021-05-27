@@ -230,10 +230,10 @@ __meta__ = {
 }
 
 [node name="MenuBarButton" type="TextureButton" parent="SideMenu"]
-margin_left = 10.5858
-margin_top = 11.0
-margin_right = 50.5858
-margin_bottom = 51.0
+margin_left = 22.0
+margin_top = 22.0
+margin_right = 62.0
+margin_bottom = 62.0
 texture_normal = ExtResource( 5 )
 expand = true
 __meta__ = {

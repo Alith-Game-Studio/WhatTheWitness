@@ -87,8 +87,15 @@ func _input(event):
 				for i in range(split):
 					Gameplay.solution.try_continue_solution(Gameplay.puzzle, event.relative / Gameplay.canvas.view_scale / split)
 		if (event is InputEventKey):
-			if (event.scancode == KEY_ESCAPE):
-				back_to_menu()
+			if (event.pressed):
+				if (event.scancode == KEY_ESCAPE):
+					back_to_menu()
+				elif (event.scancode == KEY_LEFT):
+					if (left_arrow_button.visible):
+						_on_left_arrow_button_pressed()
+				elif (event.scancode == KEY_RIGHT):
+					if (right_arrow_button.visible):
+						_on_right_arrow_button_pressed()
 
 func back_to_menu():
 	loaded = false
