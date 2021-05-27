@@ -14,3 +14,6 @@ func _on_reset_progress_button_pressed():
 			MenuData.puzzle_preview_panels[puzzle_name].update_puzzle(false)
 	else:
 		clear_save_button.text = 'Are you sure?'
+
+func _ready():
+	CSPHelper.initialize()

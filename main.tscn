@@ -38,14 +38,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PuzzleBackground" type="ColorRect" parent="MarginContainer/PuzzleRegion"]
+[node name="PuzzleBackground" type="TextureRect" parent="MarginContainer/PuzzleRegion"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 1, 1, 1, 0 )
+expand = true
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PuzzleForeground" type="ColorRect" parent="MarginContainer/PuzzleRegion"]
 anchor_right = 1.0

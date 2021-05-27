@@ -30,7 +30,7 @@ func list_files(path):
 			return files
 		if (file == '.' or file == '..'):
 			continue
-		files[file.to_lower()] = true
+		files[file] = true
 
 	
 func _ready():
@@ -42,7 +42,7 @@ func _ready():
 	var viewports = []
 	var placeholders = puzzle_placeholders.get_children()
 	for placeholder in placeholders:
-		var puzzle_file = placeholder.text.to_lower() + '.wit'
+		var puzzle_file = placeholder.text + '.wit'
 		if (puzzle_file in files):
 			var target = MenuData.puzzle_preview_prefab.instance()
 			MenuData.puzzle_preview_panels[puzzle_file] = target
@@ -146,7 +146,6 @@ func _on_clear_save_button_pressed():
 	else:
 		clear_save_button.text = 'Are you sure?'
 	
-
 
 func _on_menu_bar_button_mouse_entered():
 	menu_bar_button.modulate = Color(menu_bar_button.modulate.r, menu_bar_button.modulate.g, menu_bar_button.modulate.b, 0.5)

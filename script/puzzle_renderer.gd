@@ -11,3 +11,4 @@ func _draw():
 	if (puzzle_name in SaveData.saved_solutions):
 		var solution = Solution.SolutionLine.load_from_string(SaveData.saved_solutions[puzzle_name])
 		canvas.draw_solution(self, solution, null, 10.0)
+

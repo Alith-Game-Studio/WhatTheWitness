@@ -28,15 +28,18 @@ class PuzzleCanvas:
 		view_origin = canvas_size / 2 - Vector2((max_x + min_x) / 2, (max_y + min_y) / 2) * view_scale
 	
 	func add_circle(pos, radius, color):
-		drawing_target.draw_circle(pos * view_scale, radius * view_scale - 0.5, color if override_color == null else override_color)
-		drawing_target.draw_arc(pos * view_scale, radius / 2 * view_scale, 0.0, 2 * PI, 64, color if override_color == null else override_color, radius / 2 * view_scale, true)
+		# drawing_target.draw_circle(pos * view_scale, radius * view_scale - 0.5, color if override_color == null else override_color)
+		# drawing_target.draw_arc(pos * view_scale, radius / 2 * view_scale, 0.0, 2 * PI, 64, color if override_color == null else override_color, radius / 2 * view_scale, true)
+		drawing_target.draw_circle(pos * view_scale, radius * view_scale, color if override_color == null else override_color)
 		
 	func add_line(pos1, pos2, width, color):
-		drawing_target.draw_line(pos1 * view_scale, pos2 * view_scale, color if override_color == null else override_color, width * view_scale, true)
+		# drawing_target.draw_line(pos1 * view_scale, pos2 * view_scale, color if override_color == null else override_color, width * view_scale, true)
+		drawing_target.draw_line(pos1 * view_scale, pos2 * view_scale, color if override_color == null else override_color, width * view_scale)
 	
 	func add_rect(pos1, pos2, width, color):
-		drawing_target.draw_line(Vector2((pos1.x + pos2.x) / 2, pos1.y) * view_scale, Vector2((pos1.x + pos2.x) / 2, pos2.y) * view_scale, color if override_color == null else override_color, (pos2.x - pos1.x) * view_scale, true)
-	
+		# drawing_target.draw_line(Vector2((pos1.x + pos2.x) / 2, pos1.y) * view_scale, Vector2((pos1.x + pos2.x) / 2, pos2.y) * view_scale, color if override_color == null else override_color, (pos2.x - pos1.x) * view_scale, true)
+		drawing_target.draw_line(Vector2((pos1.x + pos2.x) / 2, pos1.y) * view_scale, Vector2((pos1.x + pos2.x) / 2, pos2.y) * view_scale, color if override_color == null else override_color, (pos2.x - pos1.x) * view_scale)
+		
 	func add_texture(center, size, texture):
 		var origin = center * view_scale
 		var screen_size = size * view_scale
@@ -47,8 +50,9 @@ class PuzzleCanvas:
 		var result_list = []
 		for pos in pos_list:
 			result_list.push_back(pos * view_scale)
-		drawing_target.draw_polygon(result_list, PoolColorArray([color if override_color == null else override_color]), [], null, null, true)
-
+		# drawing_target.draw_polygon(result_list, PoolColorArray([color if override_color == null else override_color]), [], null, null, true)
+		drawing_target.draw_polygon(result_list, PoolColorArray([color if override_color == null else override_color]))
+		
 	func screen_to_world(position):
 		return (position - view_origin) / view_scale
 

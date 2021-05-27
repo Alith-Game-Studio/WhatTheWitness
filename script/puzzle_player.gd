@@ -38,7 +38,7 @@ func load_puzzle():
 	menu_bar_button.modulate = Color (front_color.r, front_color.g, front_color.b, menu_bar_button.modulate.a)
 	back_button.modulate = front_color
 	puzzle_counter_text.modulate = front_color
-	puzzle_drawing_target.update()
+	puzzle_drawing_target.draw_background()
 	loaded = true
 	
 	# test if there are previous puzzles
