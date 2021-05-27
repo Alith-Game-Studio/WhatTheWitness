@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Custom Witness Puzzles"
-run/main_scene="res://level_map.tscn"
+run/main_scene="res://menu_main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -36,7 +36,6 @@ SaveData="*res://script/save_data.gd"
 [debug]
 
 settings/fps/force_fps=60
-settings/stdout/print_fps=true
 
 [display]
 

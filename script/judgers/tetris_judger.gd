@@ -41,8 +41,8 @@ func judge_region_tetris_implementation(validator, region: Validation.Region, re
 			for i in range(2, len(facet.vertices)):
 				facet_area += calc_triangle_area(facet.vertices[0].pos, facet.vertices[i - 1].pos, facet.vertices[i].pos)
 			total_facet_area += abs(facet_area)
-		print(cell_count, ' vs ', len(region.facet_indices))
-		print(area_sum, ' vs_f ', total_facet_area)
+		# print(cell_count, ' vs ', len(region.facet_indices))
+		# print(area_sum, ' vs_f ', total_facet_area)
 		if (cell_count == len(region.facet_indices) and abs(area_sum - total_facet_area) <= 1e-2):
 			ok = judge_csp(validator, region, true)
 	if (!ok and require_errors):

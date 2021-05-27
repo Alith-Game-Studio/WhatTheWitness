@@ -81,7 +81,7 @@ func update_light():
 			stack.append(pos)
 	while (!stack.empty()):
 		var pos = stack.pop_back()
-		print('Visiting ', pos)
+		# print('Visiting ', pos)
 		for dir in range(4):
 			var new_pos = pos + Vector2(DIR_X[dir], DIR_Y[dir])
 			if (get_light_state(new_pos)):
