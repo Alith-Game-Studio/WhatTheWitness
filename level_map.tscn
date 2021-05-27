@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://level_lines.tres" type="TileSet" id=1]
 [ext_resource path="res://script/level_map.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://img/menu_bar.png" type="Texture" id=5]
 [ext_resource path="res://img/hand_drawing/vanilla.png" type="Texture" id=6]
+[ext_resource path="res://img/hand_drawing/ring.png" type="Texture" id=7]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -55,13 +56,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureRect2" type="TextureRect" parent="Menu/View/Tags"]
+modulate = Color( 1, 1, 1, 0.254902 )
+margin_left = 730.0
+margin_top = 1186.0
+margin_right = 826.0
+margin_bottom = 1282.0
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Lines" type="TileMap" parent="Menu/View"]
 scale = Vector2( 3, 3 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 65539, 196614, 2, 65538, 262150, 2, 65538, 327686, 2, 65538, 327695, 2, 65542, 327696, 2, 2, 393222, 2, 65538, 393231, 2, 65538, 458758, 2, 7, 458759, 2, 8, 458760, 2, 8, 458761, 2, 8, 458762, 2, 8, 458763, 2, 8, 458764, 2, 8, 458765, 2, 8, 458766, 2, 8, 458767, 2, 131078, 458768, 2, 8, 458769, 2, 8, 458770, 2, 8, 458771, 2, 8, 458772, 2, 8, 458773, 2, 8, 458774, 2, 131074, 524294, 0, 0, 524303, 2, 65538, 524310, 2, 65543, 524311, 2, 8, 524312, 2, 2, 589830, 0, 65538, 589839, 2, 6, 589840, 2, 8, 589841, 2, 8, 589842, 2, 8, 589843, 2, 8, 589844, 2, 8, 589845, 2, 8, 589846, 2, 4, 655366, 0, 1 )
+tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 65539, 196614, 2, 65538, 262150, 2, 65538, 327686, 2, 65538, 327695, 2, 65542, 327696, 2, 2, 393222, 2, 65538, 393231, 2, 65538, 458758, 2, 65543, 458759, 2, 8, 458760, 2, 8, 458761, 2, 8, 458762, 2, 8, 458763, 2, 8, 458764, 2, 8, 458765, 2, 8, 458766, 2, 8, 458767, 2, 131072, 458768, 2, 8, 458769, 2, 8, 458770, 2, 8, 458771, 2, 8, 458772, 2, 8, 458773, 2, 8, 458774, 2, 131074, 524294, 2, 65538, 524303, 2, 65538, 524310, 2, 65543, 524311, 2, 8, 524312, 2, 2, 589830, 2, 65538, 589839, 2, 6, 589840, 2, 8, 589841, 2, 8, 589842, 2, 8, 589843, 2, 8, 589844, 2, 8, 589845, 2, 8, 589846, 2, 4, 655366, 2, 65538, 720902, 2, 65538, 786438, 2, 65538, 851974, 2, 6, 851975, 2, 8, 851976, 2, 8, 851977, 2, 8, 851978, 2, 8, 851979, 2, 8, 851980, 2, 8, 851981, 2, 8, 851982, 2, 2 )
 
 [node name="Lights" type="TileMap" parent="Menu/View"]
 scale = Vector2( 3, 3 )
@@ -77,7 +90,7 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 524310, 5, 0 )
+tile_data = PoolIntArray( 524310, 4, 0 )
 
 [node name="PuzzlePlaceHolders" type="Node2D" parent="Menu/View"]
 
@@ -87,6 +100,28 @@ margin_top = 192.0
 margin_right = 288.0
 margin_bottom = 288.0
 text = "1-intro-1-a"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit30" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 1248.0
+margin_right = 960.0
+margin_bottom = 1344.0
+text = "wc1-B101"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit31" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 1248.0
+margin_right = 1056.0
+margin_bottom = 1344.0
+text = "wc1-B102"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
