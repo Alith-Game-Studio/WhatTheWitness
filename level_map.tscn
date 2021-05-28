@@ -510,10 +510,10 @@ __meta__ = {
 }
 
 [node name="TextEdit67" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1920.0
-margin_top = 1248.0
-margin_right = 2016.0
-margin_bottom = 1344.0
+margin_left = 3360.0
+margin_top = 1152.0
+margin_right = 3456.0
+margin_bottom = 1248.0
 text = "wc1-B501"
 wrap_enabled = true
 __meta__ = {
