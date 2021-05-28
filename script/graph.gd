@@ -10,6 +10,7 @@ const GLOBAL_ELEMENT = 3
 
 const SYMMETRY_ROTATIONAL = 0
 const SYMMETRY_REFLECTIVE = 1
+const SYMMETRY_PARALLEL = 2
 
 func color(name):
 	if (name.begins_with('#')):
@@ -263,6 +264,14 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		var symmetry_angle = float(symmetry_decorator['Angle'])
 		puzzle.symmetry_normal = Vector2(-sin(symmetry_angle), cos(symmetry_angle))
 		puzzle.solution_colors.push_back(color(symmetry_decorator['SecondLineColor']))
+	symmetry_decorator = __find_decorator(raw_element, "ParallelPuzzleDecorator")
+	if (symmetry_decorator):
+		puzzle.n_ways = 2
+		puzzle.symmetry_type = SYMMETRY_PARALLEL
+		puzzle.symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
+		puzzle.symmetry_center += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
+		puzzle.symmetry_normal = Vector2(float(symmetry_decorator['TranslationX']), float(symmetry_decorator['TranslationY']))
+		puzzle.solution_colors.push_back(color(symmetry_decorator['SecondLineColor']))
 	if (element_type == EDGE_ELEMENT):
 		var v1 = int(raw_element['Start'])
 		var v2 = int(raw_element['End'])
@@ -339,7 +348,7 @@ func load_from_xml(file):
 	var edges = puzzle.edges
 	var facets = puzzle.facets
 	for raw_node in raw['Nodes']['_arr']:
-		var v = push_vertex_vec(puzzle, Vector2(float(raw_node['X']), float(raw_node['Y'])))
+		var v = push_vertex_vec(puzzle, Vector2(float(raw_node['X']), float(raw_node['Y'])), raw_node['Hidden'] == 'true')
 		puzzle.vertices[v].is_attractor = true
 	for i in range(len(raw['Nodes']['_arr'])):
 		var raw_node = raw['Nodes']['_arr'][i]

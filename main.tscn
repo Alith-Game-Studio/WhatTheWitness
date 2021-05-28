@@ -49,7 +49,6 @@ margin_right = -4.99994
 margin_bottom = -2.0
 texture = SubResource( 1 )
 expand = true
-flip_v = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

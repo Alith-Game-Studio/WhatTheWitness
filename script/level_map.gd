@@ -5,7 +5,6 @@ onready var puzzle_placeholders = $Menu/View/PuzzlePlaceHolders
 onready var extra_menu = $SideMenu/Extra
 onready var clear_save_button = $SideMenu/Extra/ClearSaveButton
 onready var view = $Menu/View
-onready var view_origin = -get_viewport().size / 2
 onready var drag_start = null
 onready var level_area_limit = $Menu/View/LevelAreaLimit
 onready var line_map = $Menu/View/Lines
@@ -16,7 +15,8 @@ onready var and_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('and_gate
 onready var or_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('or_gate')
 onready var puzzle_counter_text = $SideMenu/PuzzleCounter
 onready var menu_bar_button = $SideMenu/MenuBarButton
-var window_size
+var window_size = Vector2(1024, 600)
+var view_origin = -window_size / 2
 var view_scale = 1.0
 
 const DIR_X = [-1, 0, 1, 0]
@@ -34,10 +34,8 @@ func list_files(path):
 		if (file == '.' or file == '..'):
 			continue
 		files[file] = true
-
 	
 func _ready():
-	window_size = get_viewport().size
 	# puzzle_placeholders.hide()
 	SaveData.load_all()
 	var puzzle_files = list_files(puzzle_dir)
@@ -126,7 +124,6 @@ func update_light():
 			MenuData.puzzle_preview_panels[puzzle_file].update_puzzle(true)
 
 func update_view():
-	window_size = get_viewport().size
 	view.position = window_size / 2 + (view_origin) * view_scale
 	view.scale = Vector2(view_scale, view_scale)
 	var limit_pos = level_area_limit.rect_global_position

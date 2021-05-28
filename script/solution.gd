@@ -105,6 +105,8 @@ class DiscreteSolutionState:
 			return (pos - puzzle.symmetry_center).rotated(2 * PI * way / puzzle.n_ways) + puzzle.symmetry_center
 		elif (puzzle.symmetry_type == Graph.SYMMETRY_REFLECTIVE):
 			return (pos - puzzle.symmetry_center).reflect(puzzle.symmetry_normal) + puzzle.symmetry_center
+		elif (puzzle.symmetry_type == Graph.SYMMETRY_PARALLEL):
+			return pos + puzzle.symmetry_normal
 		assert(false)
 		
 	func get_symmetry_vector(puzzle, way, vec):
@@ -114,6 +116,8 @@ class DiscreteSolutionState:
 			return vec.rotated(2 * PI * way / puzzle.n_ways)
 		elif (puzzle.symmetry_type == Graph.SYMMETRY_REFLECTIVE):
 			return vec.reflect(puzzle.symmetry_normal)
+		elif (puzzle.symmetry_type == Graph.SYMMETRY_PARALLEL):
+			return vec
 		assert(false)
 			
 	func pos_to_vertex_id(puzzle, pos, eps=1e-3):
@@ -134,18 +138,26 @@ class DiscreteSolutionState:
 		return result
 		
 	func initialize(puzzle, pos):
-		var est_start_vertex = get_nearest_start(puzzle, pos)
-		if (est_start_vertex == null):
-			return false
-		vertices.clear()
-		for way in range(puzzle.n_ways):
-			var est_way_start_pos = get_symmetry_point(puzzle, way, est_start_vertex.pos)
-			var way_start_vertex = get_nearest_start(puzzle, est_way_start_pos)
-			if (way_start_vertex == null):
-				return false
-			vertices.push_back([way_start_vertex.index])
-		solution_stage = SOLUTION_STAGE_EXTENSION
-		return true
+		var possible_start_pos = [pos]
+		if (puzzle.symmetry_type == Graph.SYMMETRY_PARALLEL):
+			possible_start_pos.append(pos - puzzle.symmetry_normal)
+		for pos in possible_start_pos:
+			vertices.clear()
+			var est_start_vertex = get_nearest_start(puzzle, pos)
+			if (est_start_vertex == null):
+				continue
+			var ok = true
+			for way in range(puzzle.n_ways):
+				var est_way_start_pos = get_symmetry_point(puzzle, way, est_start_vertex.pos)
+				var way_start_vertex = get_nearest_start(puzzle, est_way_start_pos)
+				if (way_start_vertex == null):
+					ok = false
+					break
+				vertices.push_back([way_start_vertex.index])
+			if (ok):
+				solution_stage = SOLUTION_STAGE_EXTENSION
+				return true
+		return false
 
 class SolutionLine:
 	var started: bool
