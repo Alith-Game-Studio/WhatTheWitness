@@ -31,7 +31,7 @@ func load_puzzle():
 		hide_right_arrow_button()
 	Gameplay.canvas = Visualizer.PuzzleCanvas.new()
 	Gameplay.canvas.puzzle = Gameplay.puzzle
-	Gameplay.canvas.normalize_view(drawing_control.get_rect().size)	
+	Gameplay.canvas.normalize_view(drawing_control.get_rect().size, 0.95, 0.8)	
 	var back_color = Gameplay.puzzle.background_color
 	var front_color = Gameplay.puzzle.line_color
 	$ColorRect.color = back_color
