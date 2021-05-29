@@ -150,6 +150,11 @@ func __add_decorator(puzzle, raw_element, v):
 	if (point_decorator):
 		puzzle.vertices[v].decorator = load('res://script/decorators/point_decorator.gd').new()
 		puzzle.vertices[v].decorator.color = color(point_decorator['Color'])
+	var self_intersection_decorator = __find_decorator(raw_element, "SelfIntersectionDecorator")
+	if (self_intersection_decorator):
+		puzzle.vertices[v].decorator = load('res://script/decorators/self_intersection_decorator.gd').new()
+		puzzle.vertices[v].decorator.color1 = color(self_intersection_decorator['Color1'])
+		puzzle.vertices[v].decorator.color2 = color(self_intersection_decorator['Color2'])
 	var end_decorator = __find_decorator(raw_element, "EndDecorator")
 	if (end_decorator):
 		var end_length = float(end_decorator['Length'])
@@ -168,10 +173,6 @@ func __add_decorator(puzzle, raw_element, v):
 			decorator.size = 0.5
 			decorator.radius = 1.0
 			puzzle.decorators.append(decorator)
-		elif (text_decorator['Text'] == '$'):
-			var decorator = load('res://script/decorators/self_intersection_decorator.gd').new()
-			decorator.color = color(text_decorator['Color'])
-			puzzle.vertices[v].decorator = decorator
 		elif (text_decorator['Text'] == '[ ]'):
 			var decorator = load('res://script/decorators/box_decorator.gd').new()
 			decorator.color = color(text_decorator['Color'])

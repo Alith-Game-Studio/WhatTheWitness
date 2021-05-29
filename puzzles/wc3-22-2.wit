@@ -30,38 +30,26 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <Decorator xsi:type="TextDecorator">
+      <Decorator xsi:type="SelfIntersectionDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <SerializableFont>
-          <FontFamily>Microsoft YaHei UI</FontFamily>
-          <GraphicsUnit>Point</GraphicsUnit>
-          <Size>9</Size>
-          <Style>Regular</Style>
-        </SerializableFont>
-        <Text>$</Text>
-        <Color>Black</Color>
+        <Color1>Black</Color1>
+        <Color2>Black</Color2>
       </Decorator>
       <X>2</X>
       <Y>2</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <Decorator xsi:type="TextDecorator">
+      <Decorator xsi:type="SelfIntersectionDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <SerializableFont>
-          <FontFamily>Microsoft YaHei UI</FontFamily>
-          <GraphicsUnit>Point</GraphicsUnit>
-          <Size>9</Size>
-          <Style>Regular</Style>
-        </SerializableFont>
-        <Text>$</Text>
-        <Color>Black</Color>
+        <Color1>Black</Color1>
+        <Color2>Black</Color2>
       </Decorator>
       <X>2</X>
       <Y>3</Y>
@@ -78,38 +66,26 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <Decorator xsi:type="TextDecorator">
+      <Decorator xsi:type="SelfIntersectionDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <SerializableFont>
-          <FontFamily>Microsoft YaHei UI</FontFamily>
-          <GraphicsUnit>Point</GraphicsUnit>
-          <Size>9</Size>
-          <Style>Regular</Style>
-        </SerializableFont>
-        <Text>$</Text>
-        <Color>Black</Color>
+        <Color1>Black</Color1>
+        <Color2>Black</Color2>
       </Decorator>
       <X>3</X>
       <Y>2</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <Decorator xsi:type="TextDecorator">
+      <Decorator xsi:type="SelfIntersectionDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <SerializableFont>
-          <FontFamily>Microsoft YaHei UI</FontFamily>
-          <GraphicsUnit>Point</GraphicsUnit>
-          <Size>9</Size>
-          <Style>Regular</Style>
-        </SerializableFont>
-        <Text>$</Text>
-        <Color>Black</Color>
+        <Color1>Black</Color1>
+        <Color2>Black</Color2>
       </Decorator>
       <X>3</X>
       <Y>3</Y>

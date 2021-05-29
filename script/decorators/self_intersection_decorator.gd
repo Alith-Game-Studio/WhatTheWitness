@@ -1,6 +1,8 @@
 extends "../decorator.gd"
 
 var rule = 'self-intersection'
+var color1: Color
+var color2: Color
 
 func draw_shape(canvas, puzzle, color):
 	var radius = 0.45 * puzzle.line_width
@@ -15,13 +17,13 @@ func draw_shape(canvas, puzzle, color):
 		radius * dirs[2],
 		-radius * dirs[0],
 		-radius * dirs[1] + space * dirs[2]
-	], color)
+	], color1)
 	canvas.add_polygon([
 		-radius * dirs[1] + space * dirs[0],
 		-radius * dirs[2],
 		radius * dirs[0],
 		radius * dirs[1] - space * dirs[2]
-	], color)
+	], color2)
 
 func draw_foreground(canvas: Visualizer.PuzzleCanvas, owner, owner_type: int, puzzle: Graph.Puzzle):
 	draw_shape(canvas, puzzle, color)
