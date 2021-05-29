@@ -9,6 +9,7 @@ const region_judgers = [
 	'judge_region_rings',
 	'judge_region_eliminators',
 	'judge_region_points',
+	'judge_region_self_intersections',
 	'judge_region_squares',
 	'judge_region_stars',
 	'judge_region_triangles',
@@ -26,20 +27,26 @@ func judge_all(validator: Validation.Validator, require_errors: bool):
 	return ok
 	
 func judge_covered_points(validator: Validation.Validator, require_errors: bool):
-	var ok = true
+	var all_ok = true
 	for v in validator.decorator_response_of_vertex:
 		var response = validator.decorator_response_of_vertex[v]
-		if (response.rule == 'point' and validator.vertex_region[v] < -1): # covered point
-			var way_id = -validator.vertex_region[v] - 2
-			var color = response.color
-			if (color != Color.black and color != validator.puzzle.solution_colors[way_id]): 
-				# black matches everything
+		if (response.rule == 'point' or response.rule == 'self-intersection'):
+			var ok = true
+			if (validator.vertex_region[v] < -1): # covered point
+				var way_id = -validator.vertex_region[v] - 2
+				var color = response.color
+				if (color != Color.black and color != validator.puzzle.solution_colors[way_id]): 
+					# black matches everything
+					ok = false
+			elif (validator.vertex_region[v] == -1): # points that do not belong to any region, neither covered
 				ok = false
+			if (!ok):
 				if (require_errors):
 					response.state = Validation.DecoratorResponse.ERROR
+					all_ok = false
 				else:
 					return false
-	return ok
+	return all_ok
 
 func judge_rings(validator: Validation.Validator, require_errors: bool):
 	var clonable_decorators = []
@@ -130,6 +137,15 @@ func judge_region_points(validator: Validation.Validator, region: Validation.Reg
 		return true
 	if (require_errors):
 		for decorator_id in region.decorator_dict['point']:
+			var response = validator.decorator_responses[decorator_id]
+			response.state = Validation.DecoratorResponse.ERROR
+	return false
+	
+func judge_region_self_intersections(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	if (!region.has_any('self-intersection')):
+		return true
+	if (require_errors):
+		for decorator_id in region.decorator_dict['self-intersection']:
 			var response = validator.decorator_responses[decorator_id]
 			response.state = Validation.DecoratorResponse.ERROR
 	return false

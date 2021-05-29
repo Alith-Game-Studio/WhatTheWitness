@@ -67,6 +67,8 @@ class PuzzleCanvas:
 		for vertex in puzzle.vertices:
 			if (!vertex.hidden):
 				add_circle(vertex.pos, puzzle.line_width * 0.5, puzzle.line_color)
+				if (vertex.is_puzzle_start):
+					add_circle(vertex.pos, puzzle.start_size, puzzle.line_color)
 		for edge in puzzle.edges:
 			add_line(edge.start.pos, edge.end.pos, puzzle.line_width, puzzle.line_color)
 		for vertex in puzzle.vertices:

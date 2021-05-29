@@ -30,6 +30,8 @@ class Vertex:
 	var is_attractor: bool
 	var linked_facet
 	var linked_edge_tuple
+	var is_puzzle_start: bool
+	var is_puzzle_end: bool
 	func _init(x, y):
 		pos.x = x
 		pos.y = y
@@ -116,13 +118,32 @@ func __get_raw_element_center(puzzle, raw_element, element_type, id):
 			center += puzzle.vertices[int(raw_face_node)].pos
 		return center / len(raw_element['Nodes']['_arr'])
 		
+
+func __match_decorator(raw_decorator, xsi_type):
+	if (raw_decorator['xsi:type'] == xsi_type):
+		raw_decorator['__consumed'] = true
+		return raw_decorator
+	if (raw_decorator['xsi:type'] == 'CombinedDecorator'):
+		var first = __match_decorator(raw_decorator['First'], xsi_type)
+		if (first != null):
+			return first
+		return __match_decorator(raw_decorator['Second'], xsi_type)
+	return null
+
 func __find_decorator(raw_element, xsi_type):
 	if ('Decorator' in raw_element):
 		var raw_decorator = raw_element['Decorator']
-		if (raw_decorator['xsi:type'] == xsi_type):
-			raw_decorator['__consumed'] = true
-			return raw_decorator
+		return __match_decorator(raw_decorator, xsi_type)
 	return null
+
+func __check_decorator_consumed(raw_decorator, element_type):
+	if (raw_decorator['xsi:type'] == 'CombinedDecorator'):
+		__check_decorator_consumed(raw_decorator['First'], element_type)
+		__check_decorator_consumed(raw_decorator['Second'], element_type)
+	elif (not ('__consumed' in raw_decorator)):
+		print('Unsupported decorator: %s on %s' % [raw_decorator['xsi:type'], ['node', 'edge', 'facet'][element_type]])
+
+		
 
 func __add_decorator(puzzle, raw_element, v):
 	var point_decorator = __find_decorator(raw_element, "PointDecorator")
@@ -138,7 +159,7 @@ func __add_decorator(puzzle, raw_element, v):
 		var e = push_edge_idx(puzzle, v, v_end)
 		puzzle.vertices[v_end].is_attractor = true
 		puzzle.vertices[v].is_attractor = true
-		puzzle.vertices[v_end].decorator = load('res://script/decorators/end_decorator.gd').new()
+		puzzle.vertices[v_end].is_puzzle_end = true
 	var text_decorator = __find_decorator(raw_element, "TextDecorator")
 	if (text_decorator):
 		if (text_decorator['Text'] == 'Obs'):
@@ -163,6 +184,9 @@ func __add_decorator(puzzle, raw_element, v):
 		elif (text_decorator['Text'].to_lower() == 'select 1'):
 			puzzle.vertices[v].hidden = true
 			puzzle.select_one_subpuzzle = true
+		elif (text_decorator['Text'].to_lower() == 'exit'):
+			# another way to add an end
+			puzzle.vertices[v].is_puzzle_end = true
 		else:
 			print('Unknown text decorator %s' % text_decorator['Text'])
 	var triangle_decorator = __find_decorator(raw_element, "TriangleDecorator")
@@ -212,7 +236,8 @@ func __add_decorator(puzzle, raw_element, v):
 		var decorator = __load_tetris(hollow_tetris_decorator, true)
 		puzzle.vertices[v].decorator = decorator
 	if (__find_decorator(raw_element, "StartDecorator")):
-		puzzle.vertices[v].decorator = load('res://script/decorators/start_decorator.gd').new()
+		puzzle.vertices[v].is_puzzle_start = true
+
 
 func __load_tetris(raw_decorator, is_hollow):
 	var shapes = []
@@ -329,9 +354,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		__add_decorator(puzzle, raw_element, id)
 	if ('Decorator' in raw_element):
 		var raw_decorator = raw_element['Decorator']
-		if (not ('__consumed' in raw_decorator)):
-			print('Unsupported decorator: %s on %s' % [raw_decorator['xsi:type'], ['node', 'edge', 'facet'][element_type]])
-
+		__check_decorator_consumed(raw_decorator, element_type)
 	
 func load_from_xml(file):
 	var puzzle = Puzzle.new()

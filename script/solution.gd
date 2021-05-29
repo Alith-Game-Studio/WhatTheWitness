@@ -130,7 +130,7 @@ class DiscreteSolutionState:
 		var best_dist = puzzle.start_size
 		var result = null
 		for vertex in puzzle.vertices:
-			if (vertex.decorator.rule == 'start'):
+			if (vertex.is_puzzle_start):
 				var dist = (pos - vertex.pos).length()
 				if (dist < best_dist):
 					result = vertex
@@ -189,7 +189,7 @@ class SolutionLine:
 		var crossroad_vertex = state_stack[-1].get_end_vertex(puzzle, MAIN_WAY)
 		if (crossroad_vertex == null):
 			return false
-		return crossroad_vertex.decorator != null and crossroad_vertex.decorator.rule == 'end'
+		return crossroad_vertex.decorator != null and crossroad_vertex.is_puzzle_end
 		
 	func get_total_length(puzzle):
 		if (!started):
