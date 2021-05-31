@@ -33,39 +33,39 @@ func __match_color(solution_color, point_color):
 
 func judge_covered_points(validator: Validation.Validator, require_errors: bool):
 	var all_ok = true
-	for v in validator.decorator_response_of_vertex:
-		var response = validator.decorator_response_of_vertex[v]
-		if (response.rule == 'point' or response.rule == 'self-intersection'):
-			var ok = true
-			if (validator.vertex_region[v] < -1): # covered point
-				if (response.rule == 'self-intersection'):
-					var intersection_colors = []
-					for way in range(validator.puzzle.n_ways):
-						for solution_vertex_id in validator.solution.vertices[way]:
-							if (solution_vertex_id == v):
-								intersection_colors.append(validator.puzzle.solution_colors[way])
-					if (len(intersection_colors) != 2): # must pass 2 times
-						ok = false
+	for v in validator.decorator_responses_of_vertex:
+		for response in validator.decorator_responses_of_vertex[v]:
+			if (response.rule == 'point' or response.rule == 'self-intersection'):
+				var ok = true
+				if (validator.vertex_region[v] < -1): # covered point
+					if (response.rule == 'self-intersection'):
+						var intersection_colors = []
+						for way in range(validator.puzzle.n_ways):
+							for solution_vertex_id in validator.solution.vertices[way]:
+								if (solution_vertex_id == v):
+									intersection_colors.append(validator.puzzle.solution_colors[way])
+						if (len(intersection_colors) != 2): # must pass 2 times
+							ok = false
+						else:
+							if (!__match_color(intersection_colors[0], response.decorator.color1) or
+								!__match_color(intersection_colors[1], response.decorator.color2)):
+								if (!__match_color(intersection_colors[1], response.decorator.color1) or
+									!__match_color(intersection_colors[0], response.decorator.color2)):
+									ok = false
+					else: # point
+						var way_id = -validator.vertex_region[v] - 2
+						var color = response.color
+						if (!__match_color(validator.puzzle.solution_colors[way_id], color)): 
+							
+							ok = false
+				elif (validator.vertex_region[v] == -1): # points that do not belong to any region, neither covered
+					ok = false
+				if (!ok):
+					if (require_errors):
+						response.state = Validation.DecoratorResponse.ERROR
+						all_ok = false
 					else:
-						if (!__match_color(intersection_colors[0], response.decorator.color1) or
-							!__match_color(intersection_colors[1], response.decorator.color2)):
-							if (!__match_color(intersection_colors[1], response.decorator.color1) or
-								!__match_color(intersection_colors[0], response.decorator.color2)):
-								ok = false
-				else: # point
-					var way_id = -validator.vertex_region[v] - 2
-					var color = response.color
-					if (!__match_color(validator.puzzle.solution_colors[way_id], color)): 
-						
-						ok = false
-			elif (validator.vertex_region[v] == -1): # points that do not belong to any region, neither covered
-				ok = false
-			if (!ok):
-				if (require_errors):
-					response.state = Validation.DecoratorResponse.ERROR
-					all_ok = false
-				else:
-					return false
+						return false
 	return all_ok
 
 func judge_rings(validator: Validation.Validator, require_errors: bool):

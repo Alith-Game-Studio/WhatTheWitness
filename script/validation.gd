@@ -37,7 +37,7 @@ class Validator:
 	var elimination_happended: bool
 	var solution_validity: int # 0: unknown, 1: correct, -1: wrong
 	var decorator_responses: Array
-	var decorator_response_of_vertex: Dictionary
+	var decorator_responses_of_vertex: Dictionary
 	var regions: Array
 	var region_of_facet: Array
 	var vertex_region: Array # -1: unknown; -2, -3, ...: covered by solution; 0, 1, ...: in regions
@@ -53,28 +53,42 @@ class Validator:
 			if (!(new_rule in region.decorator_dict)):
 				region.decorator_dict[new_rule] = []
 			region.decorator_dict[new_rule].append(decorator_index)
+
+	func add_decorator(decorator, pos, vertex_index):
+		var response = DecoratorResponse.new()
+		response.decorator = decorator
+		response.rule = decorator.rule
+		if (decorator.color != null):
+			response.color = decorator.color
+		response.pos = pos
+		response.vertex_index = vertex_index
+		response.state = DecoratorResponse.NORMAL
+		response.state_before_elimination = DecoratorResponse.NO_ELIMINATION_CHANGES
+		response.index = len(decorator_responses)
+		decorator_responses.append(response)
+		return response
 	
 	func validate(input_puzzle: Graph.Puzzle, input_solution: Solution.SolutionLine):
 		puzzle = input_puzzle
 		solution = input_solution.state_stack[-1]
 		decorator_responses = []
-		decorator_response_of_vertex = {}
+		decorator_responses_of_vertex = {}
 		elimination_happended = false
 		for i in range(len(puzzle.vertices)):
 			var vertex = puzzle.vertices[i]
 			if (vertex.decorator.rule != 'none'):
-				var response = DecoratorResponse.new()
-				response.decorator = vertex.decorator
-				response.rule = vertex.decorator.rule
-				if (vertex.decorator.color != null):
-					response.color = vertex.decorator.color
-				response.pos = vertex.pos
-				response.vertex_index = vertex.index
-				response.state = DecoratorResponse.NORMAL
-				response.state_before_elimination = DecoratorResponse.NO_ELIMINATION_CHANGES
-				response.index = len(decorator_responses)
-				decorator_responses.append(response)
-				decorator_response_of_vertex[i] = response
+				var response = add_decorator(vertex.decorator, vertex.pos, i)
+				decorator_responses_of_vertex[i] = [response]
+		for i in range(len(puzzle.decorators)):
+			var decorator = puzzle.decorators[i]
+			if (decorator.rule == 'box'):
+				if (len(solution.event_properties) > i):
+					var v = solution.event_properties[i]
+					if (!(v in decorator_responses_of_vertex)):
+						decorator_responses_of_vertex[v] = []
+					var vertex = puzzle.vertices[v]
+					var response = add_decorator(puzzle.decorators[i].inner_decorator, vertex.pos, v)
+					decorator_responses_of_vertex[v].append(response)
 		vertex_region = []
 		for i in range(len(puzzle.vertices)):
 			vertex_region.push_back(-1)
@@ -117,12 +131,13 @@ class Validator:
 				regions.append(single_region)
 		for i in range(len(puzzle.vertices)):
 			if (vertex_region[i] >= 0):
-				if (i in decorator_response_of_vertex):
-					regions[vertex_region[i]].decorator_indices.append(decorator_response_of_vertex[i].index)
-					var rule = decorator_response_of_vertex[i].rule
-					if (!(rule in regions[vertex_region[i]].decorator_dict)):
-						regions[vertex_region[i]].decorator_dict[rule] = []
-					regions[vertex_region[i]].decorator_dict[rule].append(decorator_response_of_vertex[i].index)
+				if (i in decorator_responses_of_vertex):
+					for response in decorator_responses_of_vertex[i]:
+						regions[vertex_region[i]].decorator_indices.append(response.index)
+						var rule = response.rule
+						if (!(rule in regions[vertex_region[i]].decorator_dict)):
+							regions[vertex_region[i]].decorator_dict[rule] = []
+						regions[vertex_region[i]].decorator_dict[rule].append(response.index)
 				regions[vertex_region[i]].vertice_indices.append(i)
 		
 		return BasicJudgers.judge_all(self, true)

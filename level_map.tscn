@@ -116,6 +116,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextEdit13" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 480.0
+margin_right = 672.0
+margin_bottom = 576.0
+text = "wc4-box-test"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TextEdit30" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 1440.0
 margin_top = 1152.0

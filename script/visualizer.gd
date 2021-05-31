@@ -150,13 +150,17 @@ class PuzzleCanvas:
 						add_line(last_pos, pos, puzzle.line_width, color)
 						add_circle(pos, puzzle.line_width / 2.0, color)
 					last_pos = pos
-
+		
 		for vertex in puzzle.vertices:
 			if (vertex.decorator != null):
 				drawing_target.draw_set_transform(view_origin + vertex.pos * view_scale, vertex.decorator.angle, Vector2(1.0, 1.0))
 				vertex.decorator.draw_above_solution(self, vertex, 0, puzzle, solution)
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
-		for decorator in puzzle.decorators:
-			decorator.draw_above_solution(self, null, -1, puzzle, solution)
+		for i in range(len(puzzle.decorators)):
+			puzzle.decorators[i].draw_above_solution(self, i, -1, puzzle, solution)
 
-	
+	func set_transform(new_pos=null, new_angle=null):
+		if (new_pos == null):
+			drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
+		else:
+			drawing_target.draw_set_transform(view_origin + new_pos * view_scale, new_angle, Vector2(1.0, 1.0))

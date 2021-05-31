@@ -146,6 +146,7 @@ func __check_decorator_consumed(raw_decorator, element_type):
 		
 
 func __add_decorator(puzzle, raw_element, v):
+	var boxed_decorator = false
 	var point_decorator = __find_decorator(raw_element, "PointDecorator")
 	if (point_decorator):
 		puzzle.vertices[v].decorator = load('res://script/decorators/point_decorator.gd').new()
@@ -174,10 +175,7 @@ func __add_decorator(puzzle, raw_element, v):
 			decorator.radius = 1.0
 			puzzle.decorators.append(decorator)
 		elif (text_decorator['Text'] == '[ ]'):
-			var decorator = load('res://script/decorators/box_decorator.gd').new()
-			decorator.color = color(text_decorator['Color'])
-			decorator.init_location = puzzle.vertices[v].pos
-			puzzle.decorators.append(decorator)
+			boxed_decorator = true
 		elif (text_decorator['Text'] == 'X'):
 			var decorator = load('res://script/decorators/wall_decorator.gd').new()
 			decorator.color = color(text_decorator['Color'])
@@ -238,8 +236,13 @@ func __add_decorator(puzzle, raw_element, v):
 		puzzle.vertices[v].decorator = decorator
 	if (__find_decorator(raw_element, "StartDecorator")):
 		puzzle.vertices[v].is_puzzle_start = true
-
-
+	if (boxed_decorator):
+		var decorator = load('res://script/decorators/box_decorator.gd').new()
+		decorator.color = color(text_decorator['Color'])
+		decorator.init_vertex = v
+		decorator.inner_decorator = puzzle.vertices[v].decorator
+		puzzle.decorators.append(decorator)
+		puzzle.vertices[v].decorator = load("res://script/decorators/no_decorator.gd").new()
 func __load_tetris(raw_decorator, is_hollow):
 	var shapes = []
 	var min_x = INF

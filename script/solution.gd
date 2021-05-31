@@ -42,6 +42,7 @@ class DiscreteSolutionState:
 	func transist(puzzle, main_way_vertex_id):
 		var limit = 1.0 + 1e-6
 		var main_way_pos = puzzle.vertices[main_way_vertex_id].pos
+		var blocked_by_boxes = false
 		if (solution_stage == SOLUTION_STAGE_EXTENSION):
 			var new_state = copy()
 			var main_way_dir = (main_way_pos - puzzle.vertices[vertices[MAIN_WAY][-1]].pos).normalized()
@@ -71,6 +72,7 @@ class DiscreteSolutionState:
 				if (way_vertex_id == -1):
 					return [null, null]
 				new_state.vertices[way].push_back(way_vertex_id)
+
 			var main_edge_length = (puzzle.vertices[new_state.vertices[MAIN_WAY][-1]].pos - puzzle.vertices[new_state.vertices[MAIN_WAY][-2]].pos).length()
 			var occupied_vertices = {}
 			var endpoint_occupied = 0
@@ -94,9 +96,57 @@ class DiscreteSolutionState:
 						limit = min(limit, 1.0 - puzzle.line_width / edge_length)
 					elif (endpoint_occupied == 2): # colliding with start points
 						limit = min(limit, 1.0 - (puzzle.start_size + puzzle.line_width / 2) / edge_length)
-
+			for i in range(len(puzzle.decorators)):
+				if (puzzle.decorators[i].rule == 'box'):
+					var box_v = new_state.event_properties[i]
+					if (!(box_v in occupied_vertices)):
+						occupied_vertices[box_v] = 3 # box - box collision
+			for i in range(len(puzzle.decorators)):
+				if (puzzle.decorators[i].rule == 'box'):
+					var box_v = new_state.event_properties[i]
+					if (box_v in occupied_vertices and occupied_vertices[box_v] <= 2):
+						var colliding_way = -1
+						for way in range(puzzle.n_ways):
+							var way_end_v = new_state.vertices[way][-1]
+							if (way_end_v == box_v):
+								if (colliding_way == -1):
+									colliding_way = way
+								else:
+									colliding_way = -2
+						if (colliding_way >= 0):
+							var way_end_v = new_state.vertices[colliding_way][-1]
+							var way_secondary_end_v = new_state.vertices[colliding_way][-2]
+							var old_box_position = puzzle.vertices[way_end_v].pos
+							var way_edge_dir = (old_box_position - puzzle.vertices[way_secondary_end_v].pos).normalized()
+							if (!self.__perform_push(puzzle, new_state, i, way_edge_dir, occupied_vertices)):
+								blocked_by_boxes = true
+						else:
+							blocked_by_boxes = true
+			if (blocked_by_boxes):
+				limit = min(limit, 0.3)
 			return [new_state, limit]
 		assert(false)
+	
+	func __perform_push(puzzle, state, box_id, dir, occupied_vertices):
+		var old_vertex_id = state.event_properties[box_id]
+		var old_box_position = puzzle.vertices[old_vertex_id].pos
+		var new_box_position = old_box_position + dir
+		var new_vertex = puzzle.get_vertex_at(new_box_position)
+		if (new_vertex == null):
+			return false # out of bounds
+		if (new_vertex.index in occupied_vertices):
+			if (occupied_vertices[new_vertex.index] == 3): # recursive box-box pushing
+				for i in range(len(puzzle.decorators)):
+					if (puzzle.decorators[i].rule == 'box'):
+						var box_v = state.event_properties[i]
+						if (box_v == new_vertex.index):
+							if (!__perform_push(puzzle, state, i, dir, occupied_vertices)):
+								return false
+			else:
+				return false
+		# todo: update occupied vertices in case multiple pushes
+		state.event_properties[box_id] = new_vertex.index
+		return true
 	
 	func get_symmetry_point(puzzle, way, pos):
 		if (way == 0):
@@ -156,6 +206,9 @@ class DiscreteSolutionState:
 				vertices.push_back([way_start_vertex.index])
 			if (ok):
 				solution_stage = SOLUTION_STAGE_EXTENSION
+				event_properties.clear()
+				for decorator in puzzle.decorators:
+					event_properties.append(decorator.init_property(puzzle, self))
 				return true
 		return false
 
@@ -283,23 +336,38 @@ class SolutionLine:
 			for v in state_way:
 				way_result.append(str(v))
 			line_result.append( PoolStringArray(way_result).join(','))
-		return PoolStringArray(line_result).join('|')
+		var line_string = PoolStringArray(line_result).join('|')
+		var event_property_result = []
+		for event_property in state.event_properties:
+			event_property_result.append(str(event_property))
+		var event_string = PoolStringArray(event_property_result).join('|')
+		return PoolStringArray([line_string, event_string]).join('$')
 		
 	static func load_from_string(string):
 		var state = DiscreteSolutionState.new()
+		var line_string_event_string = string.split('$')
+		var line_string = line_string_event_string[0]
+		var event_string = ''
+		if (len(line_string_event_string) > 1):
+			event_string = line_string_event_string[1]
 		state.vertices = []
-		var line_result = string.split('|')
+		var line_result = line_string.split('|')
 		for way_string in line_result:
 			var way_vertices = []
 			var way_result = way_string.split(',')
 			for vertex_string in way_result:
 				way_vertices.append(int(vertex_string))
 			state.vertices.append(way_vertices)
+		state.event_properties = []
+		var event_result = event_string.split('|')
+		for event_property_string in event_result:
+			state.event_properties.append(int(event_property_string))
 		var solution = SolutionLine.new()
 		solution.started = true
 		solution.validity = 1
 		solution.state_stack = [state]
 		solution.progress = 1.0
+		
 		return solution
 		
 		
