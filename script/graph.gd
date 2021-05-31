@@ -287,7 +287,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		puzzle.symmetry_type = SYMMETRY_ROTATIONAL if is_rotational == 'true' else SYMMETRY_REFLECTIVE
 		puzzle.symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
 		puzzle.symmetry_center += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
-		var symmetry_angle = float(symmetry_decorator['Angle'])
+		var symmetry_angle = deg2rad(float(symmetry_decorator['Angle']))
 		puzzle.symmetry_normal = Vector2(-sin(symmetry_angle), cos(symmetry_angle))
 		puzzle.solution_colors.push_back(color(symmetry_decorator['SecondLineColor']))
 	symmetry_decorator = __find_decorator(raw_element, "ParallelPuzzleDecorator")
