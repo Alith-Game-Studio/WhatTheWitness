@@ -180,6 +180,7 @@ func __add_decorator(puzzle, raw_element, v):
 		elif (text_decorator['Text'] == 'F'):
 			var decorator = load('res://script/decorators/filament_decorator.gd').new()
 			decorator.color = color(text_decorator['Color'])
+			decorator.center = puzzle.vertices[v].pos
 			puzzle.vertices[v].decorator = decorator
 			var filament_start_decorator = null
 			for global_decorator in puzzle.decorators:
@@ -190,6 +191,7 @@ func __add_decorator(puzzle, raw_element, v):
 				filament_start_decorator = load('res://script/decorators/filament_start_decorator.gd').new()
 				puzzle.decorators.append(filament_start_decorator)
 			filament_start_decorator.add_pillar(puzzle.vertices[v].pos)
+			decorator.filament_start_decorator = filament_start_decorator
 		elif (text_decorator['Text'].to_lower() == 'select 1'):
 			puzzle.vertices[v].hidden = true
 			puzzle.select_one_subpuzzle = true

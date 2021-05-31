@@ -32,6 +32,7 @@ CSP="*res://script/judgers/csp.gd"
 CSPHelper="*res://script/judgers/csp_helper.gd"
 MenuData="*res://script/menu_data.gd"
 SaveData="*res://script/save_data.gd"
+Filament="*res://script/filament.gd"
 
 [debug]
 

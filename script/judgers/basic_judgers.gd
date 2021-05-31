@@ -2,12 +2,14 @@ extends Node
 
 const global_judgers = [
 	'judge_covered_points',
+	'preprocess_filament',
 	'judge_rings',
 ]
 
 const region_judgers = [
 	'judge_region_rings',
 	'judge_region_eliminators',
+	'judge_region_filament',
 	'judge_region_points',
 	'judge_region_self_intersections',
 	'judge_region_squares',
@@ -30,6 +32,13 @@ func __match_color(solution_color, point_color):
 	if (point_color == Color.black): # black point matches every color
 		return true
 	return point_color == solution_color 
+
+func preprocess_filament(validator: Validation.Validator, require_errors: bool):
+	for v in validator.decorator_responses_of_vertex:
+		for response in validator.decorator_responses_of_vertex[v]:
+			if (response.rule == 'filament-pillar'):
+				response.decorator.calculate_validity()
+	return true
 
 func judge_covered_points(validator: Validation.Validator, require_errors: bool):
 	var all_ok = true
@@ -74,7 +83,7 @@ func judge_rings(validator: Validation.Validator, require_errors: bool):
 	for region in validator.regions:
 		if (region.has_any('ring')):
 			for decorator_id in region.decorator_indices:
-				if (!(validator.decorator_responses[decorator_id].rule in ['ring', 'circle', 'point'])):
+				if (!(validator.decorator_responses[decorator_id].rule in ['ring', 'circle', 'point', 'filament'])):
 					if (validator.decorator_responses[decorator_id].decorator.color != null):
 						clonable_decorators.append(decorator_id)
 			for decorator_id in region.decorator_dict['ring']:
@@ -287,6 +296,20 @@ func judge_region_eliminators(validator: Validation.Validator, region: Validatio
 			var response = validator.decorator_responses[decorator_id]
 			response.state = Validation.DecoratorResponse.ERROR
 	return false
+
+func judge_region_filament(validator: Validation.Validator, region: Validation.Region, require_errors: bool):  # only for uneliminated eliminators
+	if (!region.has_any('filament-pillar')):
+		return true
+	var all_ok = true
+	for decorator_id in region.decorator_dict['filament-pillar']:
+		var response = validator.decorator_responses[decorator_id]
+		if (!response.decorator.valid):
+			if (require_errors):
+				response.state = Validation.DecoratorResponse.ERROR
+				all_ok = false
+			else:
+				return false
+	return all_ok
 
 func __judge_region_elimination_case(validator: Validation.Validator, region: Validation.Region, require_errors: bool, \
 	error_list: Array, eliminator_list: Array, eliminator_targets: Array):

@@ -30,8 +30,9 @@ class FilamentSolution:
 		if (!started):
 			return 0.0
 		var original_step = delta.length()
+		# print(original_step)
 		if (original_step < 1e-10):
-			return 0.0
+			return 1.0
 		var min_delta_step = delta.length()
 		for i in range(len(path_points) - 1):
 			var col = Geometry.segment_intersects_segment_2d (path_points[i][0],
@@ -81,7 +82,7 @@ class FilamentSolution:
 				var sin_b = abs(det(delta.normalized(), nail_dir))
 				var forward = filament_vector.length() / sin_b * sin_a
 				var far = (target_nail_pos - last_nail_pos).length()
-				print(target_nail_pos, ':', forward, ',', far, 'ok')
+				# print(target_nail_pos, ':', forward, ',', far, 'ok')
 				if (nearest_collision_forward > forward + 1e-6 or
 					(abs(nearest_collision_forward - forward) < 1e-6) and
 					far > nearest_collision_far):
@@ -92,15 +93,15 @@ class FilamentSolution:
 		if (nearest_collision_nail != null):
 			if (nearest_collision_nail == last_nail_pos):
 				if (len(path_points) > 1):
-					print('pop!')
+					# print('pop!')
 					path_points.pop_back()
 			else:
-				print('push!')
+				# print('push!')
 				path_points.push_back([nearest_collision_nail, nearest_collision_bend_direction])
 		if (delta.length() > nearest_collision_forward):
 			delta = delta / delta.length() * (nearest_collision_forward + 1e-6)
 		var moved_percentage = delta.length() / original_step
-		print(moved_percentage, '!!')
+		# print(moved_percentage, '!!')
 		if (moved_percentage > 1e-6):
 			end_pos += delta
 			return moved_percentage
