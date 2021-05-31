@@ -36,7 +36,7 @@ func draw_above_solution(canvas, owner, owner_type, puzzle, solution):
 		Vector2(inner_radius, inner_radius) + render_location,
 	], color)
 
-func init_property(puzzle, solution_state):
+func init_property(puzzle, solution_state, start_vertex):
 	return init_vertex
 	
 func property_to_string(property):

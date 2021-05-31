@@ -87,9 +87,10 @@ class Puzzle:
 			if (v.decorator.rule == 'tetris'):
 				v.decorator.calculate_covering(self)
 		for decorator in decorators:
-			if (decorator.inner_decorator.rule == 'tetris'):
-				decorator.inner_decorator.calculate_covering(self)
-	
+			if (decorator.rule == 'box'):
+				if (decorator.inner_decorator.rule == 'tetris'):
+					decorator.inner_decorator.calculate_covering(self)
+		
 func push_vertex_vec(puzzle, pos, hidden=false):
 	var result = len(puzzle.vertices)
 	var vertex = Vertex.new(pos.x, pos.y)
@@ -176,6 +177,19 @@ func __add_decorator(puzzle, raw_element, v):
 			var decorator = load('res://script/decorators/wall_decorator.gd').new()
 			decorator.color = color(text_decorator['Color'])
 			puzzle.vertices[v].decorator = decorator
+		elif (text_decorator['Text'] == 'F'):
+			var decorator = load('res://script/decorators/filament_decorator.gd').new()
+			decorator.color = color(text_decorator['Color'])
+			puzzle.vertices[v].decorator = decorator
+			var filament_start_decorator = null
+			for global_decorator in puzzle.decorators:
+				if (global_decorator.rule == 'filament-start'):
+					filament_start_decorator = global_decorator
+					break
+			if (filament_start_decorator == null):
+				filament_start_decorator = load('res://script/decorators/filament_start_decorator.gd').new()
+				puzzle.decorators.append(filament_start_decorator)
+			filament_start_decorator.add_pillar(puzzle.vertices[v].pos)
 		elif (text_decorator['Text'].to_lower() == 'select 1'):
 			puzzle.vertices[v].hidden = true
 			puzzle.select_one_subpuzzle = true

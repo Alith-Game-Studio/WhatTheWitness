@@ -208,7 +208,7 @@ class DiscreteSolutionState:
 				solution_stage = SOLUTION_STAGE_EXTENSION
 				event_properties.clear()
 				for decorator in puzzle.decorators:
-					event_properties.append(decorator.init_property(puzzle, self))
+					event_properties.append(decorator.init_property(puzzle, self, est_start_vertex))
 				return true
 		return false
 
@@ -324,7 +324,15 @@ class SolutionLine:
 				return
 			if (projected_progress >= limit):
 				projected_progress = limit
-			progress = projected_progress
+				
+			var projected_position = v1.pos * projected_progress + v2.pos * (1 - projected_progress)
+			var ok = true
+			for decorator in puzzle.decorators:
+				if (decorator.rule == 'filament-start'):
+					var filament_percentage = decorator.filament_solution.try_continue_solution(decorator.nails, projected_position - decorator.filament_solution.end_pos)
+					projected_progress = (projected_progress - progress) * filament_percentage + progress
+			if (ok):
+				progress = projected_progress
 	
 	
 	func save_to_string(puzzle):
