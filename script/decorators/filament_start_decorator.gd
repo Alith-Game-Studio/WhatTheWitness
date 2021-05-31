@@ -17,6 +17,7 @@ func draw_above_solution(canvas: Visualizer.PuzzleCanvas, owner, owner_type, puz
 				end_pos,
 				puzzle.line_width / 4,
 				Color.white)
+			canvas.add_circle(end_pos, puzzle.line_width / 8, Color.white)
 		var circleRadius = 0.1 * (1 - puzzle.line_width)
 		canvas.add_circle(filament_solution.start_pos, circleRadius, Color.black)
 		
@@ -57,4 +58,5 @@ func string_to_property(string):
 			filament_solution.path_points.append([string_to_vector(point), -1])
 		filament_solution.end_pos = filament_solution.path_points[-1][0]
 		filament_solution.path_points.pop_back()
+		filament_solution.start_pos = filament_solution.path_points[0][0]
 	return filament_solution
