@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://level_lines.tres" type="TileSet" id=1]
 [ext_resource path="res://script/level_map.gd" type="Script" id=2]
@@ -11,6 +11,10 @@
 [ext_resource path="res://img/hand_drawing/intersection.png" type="Texture" id=9]
 [ext_resource path="res://img/hand_drawing/box.png" type="Texture" id=10]
 [ext_resource path="res://img/hand_drawing/filament.png" type="Texture" id=11]
+
+[sub_resource type="DynamicFont" id=2]
+size = 36
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -25,9 +29,8 @@ script = ExtResource( 2 )
 
 [node name="LevelAreaLimit" type="ReferenceRect" parent="Menu/View"]
 margin_right = 3744.0
-margin_bottom = 3648.0
+margin_bottom = 3936.0
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -137,17 +140,6 @@ margin_top = 192.0
 margin_right = 288.0
 margin_bottom = 288.0
 text = "1-intro-1-a"
-wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextEdit13" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1152.0
-margin_top = 192.0
-margin_right = 1248.0
-margin_bottom = 288.0
-text = "wc4-box-test"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -869,30 +861,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit15" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1344.0
-margin_top = 192.0
-margin_right = 1440.0
-margin_bottom = 288.0
-rect_pivot_offset = Vector2( 64, 127 )
-text = "0-test-symmetry-2"
-wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextEdit29" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1920.0
-margin_top = 192.0
-margin_right = 2016.0
-margin_bottom = 288.0
-rect_pivot_offset = Vector2( 64, 127 )
-text = "wc1-AT01"
-wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="TextEdit3" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 864.0
 margin_top = 768.0
@@ -1036,56 +1004,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit10" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1632.0
-margin_top = 192.0
-margin_right = 1728.0
-margin_bottom = 288.0
-text = "0-test-eliminator-1"
-wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextEdit11" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1728.0
-margin_top = 192.0
-margin_right = 1824.0
-margin_bottom = 288.0
-text = "0-test-ring-1"
-wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextEdit12" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1824.0
-margin_top = 192.0
-margin_right = 1920.0
-margin_bottom = 288.0
-text = "0-test-tetris-2"
-wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="TextEdit5" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 1056.0
 margin_top = 768.0
 margin_right = 1152.0
 margin_bottom = 864.0
 text = "wc1-A103"
-wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextEdit6" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 960.0
-margin_top = 192.0
-margin_right = 1056.0
-margin_bottom = 288.0
-text = "1-intro-square-8"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1102,35 +1026,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit7" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1056.0
-margin_top = 192.0
-margin_right = 1152.0
-margin_bottom = 288.0
-text = "1-intro-square-9"
-wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextEdit8" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1440.0
-margin_top = 192.0
-margin_right = 1536.0
-margin_bottom = 288.0
-text = "1-treehouse-orange-9"
-wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextEdit9" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1536.0
-margin_top = 192.0
-margin_right = 1632.0
-margin_bottom = 288.0
-text = "1-cave-triangle"
-wrap_enabled = true
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 3168.0
+margin_top = 3648.0
+margin_right = 3648.0
+margin_bottom = 3744.0
+rect_rotation = -20.4531
+custom_fonts/normal_font = SubResource( 2 )
+text = "There is no puzzle..."
 __meta__ = {
 "_edit_use_anchors_": false
 }
