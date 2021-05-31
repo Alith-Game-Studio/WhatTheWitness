@@ -123,7 +123,7 @@ class DiscreteSolutionState:
 						else:
 							blocked_by_boxes = true
 			if (blocked_by_boxes):
-				limit = min(limit, 0.3)
+				limit = min(limit, 0.22)
 			return [new_state, limit]
 		assert(false)
 	

@@ -241,6 +241,9 @@ func __add_decorator(puzzle, raw_element, v):
 		decorator.color = color(text_decorator['Color'])
 		decorator.init_vertex = v
 		decorator.inner_decorator = puzzle.vertices[v].decorator
+		if (decorator.inner_decorator.rule == 'none'):
+			decorator.inner_decorator = load('res://script/decorators/heart_decorator.gd').new()
+			decorator.inner_decorator.color = Color.pink
 		puzzle.decorators.append(decorator)
 		puzzle.vertices[v].decorator = load("res://script/decorators/no_decorator.gd").new()
 func __load_tetris(raw_decorator, is_hollow):

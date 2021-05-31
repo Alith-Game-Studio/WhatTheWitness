@@ -141,6 +141,29 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
+      <Decorator xsi:type="CombinedDecorator">
+        <First xsi:type="TextDecorator">
+          <DeltaX>0</DeltaX>
+          <DeltaY>0</DeltaY>
+          <Angle>0</Angle>
+          <ExtraScale>1</ExtraScale>
+          <SerializableFont>
+            <FontFamily>Microsoft YaHei UI</FontFamily>
+            <GraphicsUnit>Point</GraphicsUnit>
+            <Size>48</Size>
+            <Style>Regular</Style>
+          </SerializableFont>
+          <Text>[ ]</Text>
+          <Color>Black</Color>
+        </First>
+        <Second xsi:type="SquareDecorator">
+          <DeltaX>0</DeltaX>
+          <DeltaY>0</DeltaY>
+          <Angle>0</Angle>
+          <ExtraScale>1</ExtraScale>
+          <Color>Pink</Color>
+        </Second>
+      </Decorator>
       <X>4</X>
       <Y>4</Y>
       <Hidden>false</Hidden>

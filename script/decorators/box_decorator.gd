@@ -4,7 +4,7 @@ var rule = 'box'
 var init_vertex
 var render_location = null
 var location_stack = []
-var box_radius = 0.25
+var box_radius = 0.28
 var inner_decorator = null
 
 func draw_above_solution(canvas, owner, owner_type, puzzle, solution):
@@ -13,7 +13,7 @@ func draw_above_solution(canvas, owner, owner_type, puzzle, solution):
 	if (render_location == null):
 		render_location = target_location
 	render_location = render_location * 0.8 + target_location * 0.2
-	var inner_radius = box_radius * 0.8
+	var inner_radius = box_radius * 0.85
 	canvas.add_polygon([
 		Vector2(inner_radius, inner_radius) + render_location,
 		Vector2(-inner_radius, inner_radius) + render_location,
