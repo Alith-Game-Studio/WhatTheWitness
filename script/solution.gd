@@ -224,17 +224,16 @@ class SolutionLine:
 		return v1.x * v2.y - v2.x * v1.y
 	
 	func try_start_solution_at(puzzle, pos):
-		validity = 0
 		var state = DiscreteSolutionState.new()
 		if (state.initialize(puzzle, pos)):
+			validity = 0
 			started = true
 			progress = 1.0
 			state_stack.clear()
 			state_stack.push_back(state)
+			return true
 		else:
-			started = false
-			state_stack.clear()
-		return started
+			return false
 	
 	func is_completed(puzzle):
 		if (!started):

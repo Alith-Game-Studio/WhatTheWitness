@@ -79,6 +79,8 @@ func _input(event):
 				if (mouse_start_position != null):
 					Input.warp_mouse_position(mouse_start_position + panel_start_pos)
 					mouse_start_position = null
+				if (len(Gameplay.solution.state_stack) == 1):
+					Gameplay.solution.started = false
 			else:
 				if (Gameplay.solution.try_start_solution_at(Gameplay.puzzle, Gameplay.canvas.screen_to_world(position))):
 					Gameplay.validator = null
