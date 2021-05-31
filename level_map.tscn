@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://level_lines.tres" type="TileSet" id=1]
 [ext_resource path="res://script/level_map.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://img/hand_drawing/ring.png" type="Texture" id=7]
 [ext_resource path="res://img/hand_drawing/hex.png" type="Texture" id=8]
 [ext_resource path="res://img/hand_drawing/intersection.png" type="Texture" id=9]
+[ext_resource path="res://img/hand_drawing/box.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -23,7 +24,7 @@ script = ExtResource( 2 )
 
 [node name="LevelAreaLimit" type="ReferenceRect" parent="Menu/View"]
 margin_right = 3744.0
-margin_bottom = 3072.0
+margin_bottom = 3648.0
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -33,10 +34,10 @@ __meta__ = {
 
 [node name="TextureRect" type="TextureRect" parent="Menu/View/Tags"]
 modulate = Color( 1, 1, 1, 0.254902 )
-margin_left = 720.695
-margin_top = 608.963
-margin_right = 816.695
-margin_bottom = 704.963
+margin_left = 710.695
+margin_top = 668.963
+margin_right = 806.695
+margin_bottom = 764.963
 texture = ExtResource( 6 )
 expand = true
 __meta__ = {
@@ -79,13 +80,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureRect5" type="TextureRect" parent="Menu/View/Tags"]
+modulate = Color( 1, 1, 1, 0.254902 )
+margin_left = 705.493
+margin_top = 2999.76
+margin_right = 801.493
+margin_bottom = 3095.76
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Lines" type="TileMap" parent="Menu/View"]
 scale = Vector2( 3, 3 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 65539, 196614, 2, 65538, 262150, 2, 65538, 327686, 2, 65538, 327695, 2, 65542, 327696, 2, 2, 393222, 2, 65538, 393231, 2, 65538, 458758, 2, 65543, 458759, 2, 8, 458760, 2, 8, 458761, 2, 8, 458762, 2, 8, 458763, 2, 8, 458764, 2, 8, 458765, 2, 8, 458766, 2, 8, 458767, 2, 131072, 458768, 2, 8, 458769, 2, 8, 458770, 2, 8, 458771, 2, 8, 458772, 2, 8, 458773, 2, 8, 458774, 2, 131074, 458776, 2, 65542, 458777, 2, 8, 458778, 2, 65539, 524294, 2, 65538, 524303, 2, 65538, 524310, 2, 65543, 524311, 2, 8, 524312, 2, 131075, 524314, 2, 65544, 524315, 2, 8, 524316, 2, 8, 524317, 2, 8, 524318, 2, 8, 524319, 2, 8, 524320, 2, 8, 524321, 2, 131074, 589830, 2, 65538, 589839, 2, 6, 589840, 2, 8, 589841, 2, 8, 589842, 2, 8, 589843, 2, 8, 589844, 2, 8, 589845, 2, 8, 589846, 2, 3, 589848, 2, 7, 589849, 2, 8, 589850, 2, 3, 589857, 2, 65538, 655366, 2, 65538, 655393, 2, 65538, 720902, 2, 65538, 720929, 2, 65538, 786438, 2, 65538, 786446, 2, 65542, 786447, 2, 8, 786448, 2, 8, 786449, 2, 8, 786450, 2, 131074, 786460, 2, 65542, 786461, 2, 8, 786462, 2, 8, 786463, 2, 131074, 786465, 2, 131083, 786466, 2, 8, 786467, 2, 8, 786468, 2, 8, 786469, 2, 2, 851974, 2, 196608, 851975, 2, 8, 851976, 2, 8, 851977, 2, 8, 851978, 2, 8, 851979, 2, 196609, 851980, 2, 8, 851981, 2, 8, 851982, 2, 131075, 851986, 2, 196608, 851987, 2, 8, 851988, 2, 196614, 851989, 2, 8, 851990, 2, 8, 851991, 2, 8, 851992, 2, 8, 851993, 2, 8, 851994, 2, 8, 851995, 2, 8, 851996, 2, 65541, 851999, 2, 131083, 852000, 2, 8, 852001, 2, 3, 917510, 2, 65538, 917515, 2, 65538, 917518, 2, 7, 917519, 2, 8, 917520, 2, 8, 917521, 2, 8, 917522, 2, 4, 917524, 2, 65538, 917532, 2, 6, 917533, 2, 8, 917534, 2, 8, 917535, 2, 3, 983046, 2, 65538, 983051, 2, 1, 983060, 2, 65538, 1048582, 2, 65538, 1048596, 2, 65538, 1048601, 2, 131082, 1048602, 2, 8, 1048603, 2, 8, 1048604, 2, 131074, 1114118, 2, 65538, 1114132, 2, 131083, 1114133, 2, 8, 1114134, 2, 8, 1114135, 2, 8, 1114136, 2, 8, 1114137, 2, 131076, 1114140, 2, 131083, 1114141, 2, 2, 1179654, 2, 65538, 1179668, 2, 65538, 1179673, 2, 7, 1179674, 2, 8, 1179675, 2, 8, 1179676, 2, 3, 1245190, 2, 65538, 1245198, 2, 131082, 1245199, 2, 8, 1245200, 2, 8, 1245201, 2, 8, 1245202, 2, 8, 1245203, 2, 8, 1245204, 2, 3, 1310726, 2, 65538, 1310734, 2, 65538, 1376262, 2, 196608, 1376263, 2, 8, 1376264, 2, 8, 1376265, 2, 8, 1376266, 2, 8, 1376267, 2, 8, 1376268, 2, 8, 1376269, 2, 8, 1376270, 2, 196615, 1376271, 2, 8, 1376272, 2, 8, 1376273, 2, 2, 1441798, 2, 65538, 1441806, 2, 65538, 1507334, 2, 65538, 1507342, 2, 7, 1507343, 2, 8, 1507344, 2, 8, 1507345, 2, 2, 1572870, 2, 65538, 1638406, 2, 65538, 1703942, 2, 65538, 1703951, 2, 131082, 1703952, 2, 8, 1703953, 2, 8, 1703954, 2, 65539, 1769478, 2, 7, 1769479, 2, 8, 1769480, 2, 8, 1769481, 2, 8, 1769482, 2, 8, 1769483, 2, 8, 1769484, 2, 8, 1769485, 2, 8, 1769486, 2, 8, 1769487, 2, 65541, 1769490, 2, 131083, 1769491, 2, 8, 1769492, 2, 2, 1835023, 2, 6, 1835024, 2, 8, 1835025, 2, 8, 1835026, 2, 3 )
+tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 65539, 196614, 2, 65538, 262150, 2, 65538, 327686, 2, 65538, 393222, 2, 65538, 458758, 2, 65538, 458767, 2, 131082, 458768, 2, 8, 458769, 2, 8, 458770, 2, 8, 458771, 2, 8, 458772, 2, 8, 458773, 2, 8, 458774, 2, 131074, 458776, 2, 65542, 458777, 2, 8, 458778, 2, 65539, 524294, 2, 196608, 524295, 2, 8, 524296, 2, 8, 524297, 2, 8, 524298, 2, 8, 524299, 2, 8, 524300, 2, 8, 524301, 2, 8, 524302, 2, 8, 524303, 2, 65541, 524310, 2, 65543, 524311, 2, 8, 524312, 2, 131075, 524314, 2, 65544, 524315, 2, 8, 524316, 2, 8, 524317, 2, 8, 524318, 2, 8, 524319, 2, 8, 524320, 2, 8, 524321, 2, 131074, 589830, 2, 65538, 589839, 2, 6, 589840, 2, 8, 589841, 2, 8, 589842, 2, 8, 589843, 2, 8, 589844, 2, 8, 589845, 2, 8, 589846, 2, 3, 589848, 2, 7, 589849, 2, 8, 589850, 2, 3, 589857, 2, 65538, 655366, 2, 65538, 655393, 2, 65538, 720902, 2, 65538, 720929, 2, 65538, 786438, 2, 65538, 786446, 2, 65542, 786447, 2, 8, 786448, 2, 8, 786449, 2, 8, 786450, 2, 131074, 786460, 2, 65542, 786461, 2, 8, 786462, 2, 8, 786463, 2, 131074, 786465, 2, 131083, 786466, 2, 8, 786467, 2, 8, 786468, 2, 8, 786469, 2, 2, 851974, 2, 196608, 851975, 2, 8, 851976, 2, 8, 851977, 2, 8, 851978, 2, 8, 851979, 2, 196609, 851980, 2, 8, 851981, 2, 8, 851982, 2, 131075, 851986, 2, 196608, 851987, 2, 8, 851988, 2, 196614, 851989, 2, 8, 851990, 2, 8, 851991, 2, 8, 851992, 2, 8, 851993, 2, 8, 851994, 2, 8, 851995, 2, 8, 851996, 2, 65541, 851999, 2, 131083, 852000, 2, 8, 852001, 2, 3, 917510, 2, 65538, 917515, 2, 65538, 917518, 2, 7, 917519, 2, 8, 917520, 2, 8, 917521, 2, 8, 917522, 2, 4, 917524, 2, 65538, 917532, 2, 6, 917533, 2, 8, 917534, 2, 8, 917535, 2, 3, 983046, 2, 65538, 983051, 2, 1, 983060, 2, 65538, 1048582, 2, 65538, 1048596, 2, 65538, 1048601, 2, 131082, 1048602, 2, 8, 1048603, 2, 8, 1048604, 2, 131074, 1114118, 2, 65538, 1114132, 2, 131083, 1114133, 2, 8, 1114134, 2, 8, 1114135, 2, 8, 1114136, 2, 8, 1114137, 2, 131076, 1114140, 2, 131083, 1114141, 2, 2, 1179654, 2, 65538, 1179668, 2, 65538, 1179673, 2, 7, 1179674, 2, 8, 1179675, 2, 8, 1179676, 2, 3, 1245190, 2, 65538, 1245198, 2, 131082, 1245199, 2, 8, 1245200, 2, 8, 1245201, 2, 8, 1245202, 2, 8, 1245203, 2, 8, 1245204, 2, 3, 1310726, 2, 65538, 1310734, 2, 65538, 1376262, 2, 196608, 1376263, 2, 8, 1376264, 2, 8, 1376265, 2, 8, 1376266, 2, 8, 1376267, 2, 8, 1376268, 2, 8, 1376269, 2, 8, 1376270, 2, 196615, 1376271, 2, 8, 1376272, 2, 8, 1376273, 2, 2, 1441798, 2, 65538, 1441806, 2, 65538, 1507334, 2, 65538, 1507342, 2, 7, 1507343, 2, 8, 1507344, 2, 8, 1507345, 2, 2, 1572870, 2, 65538, 1638406, 2, 65538, 1703942, 2, 65538, 1703951, 2, 131082, 1703952, 2, 8, 1703953, 2, 8, 1703954, 2, 65539, 1769478, 2, 65543, 1769479, 2, 8, 1769480, 2, 8, 1769481, 2, 8, 1769482, 2, 8, 1769483, 2, 8, 1769484, 2, 8, 1769485, 2, 8, 1769486, 2, 8, 1769487, 2, 65541, 1769490, 2, 131083, 1769491, 2, 8, 1769492, 2, 2, 1835014, 2, 65538, 1835023, 2, 6, 1835024, 2, 8, 1835025, 2, 8, 1835026, 2, 3, 1900550, 2, 65538, 1966086, 2, 65538, 2031622, 2, 65538, 2031631, 2, 131082, 2031632, 2, 8, 2031633, 2, 8, 2031634, 2, 65539, 2097158, 2, 7, 2097159, 2, 8, 2097160, 2, 8, 2097161, 2, 8, 2097162, 2, 8, 2097163, 2, 8, 2097164, 2, 8, 2097165, 2, 8, 2097166, 2, 8, 2097167, 2, 65541, 2097170, 2, 65544, 2097171, 2, 8, 2097172, 2, 2, 2162703, 2, 6, 2162704, 2, 8, 2162705, 2, 8, 2162706, 2, 4 )
 
 [node name="Lights" type="TileMap" parent="Menu/View"]
 scale = Vector2( 3, 3 )
@@ -101,7 +114,7 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 524310, 4, 0, 524314, 5, 0, 786465, 4, 0, 786469, 6, 0, 851986, 4, 0, 851999, 5, 0, 1114132, 4, 0, 1114140, 4, 0, 1769490, 4, 0, 1769492, 6, 0 )
+tile_data = PoolIntArray( 524310, 4, 0, 524314, 5, 0, 786465, 4, 0, 786469, 6, 0, 851986, 4, 0, 851999, 5, 0, 1114132, 4, 0, 1114140, 4, 0, 1769490, 4, 0, 1769492, 6, 0, 2097170, 4, 0, 2097172, 6, 0 )
 
 [node name="PuzzlePlaceHolders" type="Node2D" parent="Menu/View"]
 
@@ -117,10 +130,10 @@ __meta__ = {
 }
 
 [node name="TextEdit13" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 576.0
-margin_top = 480.0
-margin_right = 672.0
-margin_bottom = 576.0
+margin_left = 1152.0
+margin_top = 192.0
+margin_right = 1248.0
+margin_bottom = 288.0
 text = "wc4-box-test"
 wrap_enabled = true
 __meta__ = {
@@ -166,6 +179,105 @@ margin_top = 2592.0
 margin_right = 960.0
 margin_bottom = 2688.0
 text = "wc3-22-1"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit78" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 3072.0
+margin_right = 1056.0
+margin_bottom = 3168.0
+text = "wc4-6-2"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit79" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 3072.0
+margin_right = 1152.0
+margin_bottom = 3168.0
+text = "wc4-6-3"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit80" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 3072.0
+margin_right = 1248.0
+margin_bottom = 3168.0
+text = "wc4-6-4"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit81" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 3072.0
+margin_right = 1344.0
+margin_bottom = 3168.0
+text = "wc4-6-5"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit82" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 1536.0
+margin_top = 2976.0
+margin_right = 1632.0
+margin_bottom = 3072.0
+text = "wc4-6-6"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit83" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 3072.0
+margin_right = 960.0
+margin_bottom = 3168.0
+text = "wc4-6-1"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit84" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 1536.0
+margin_top = 3168.0
+margin_right = 1632.0
+margin_bottom = 3264.0
+text = "wc4-6-7"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit85" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 2976.0
+margin_right = 1728.0
+margin_bottom = 3072.0
+text = "wc4-6-8"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit86" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 3168.0
+margin_right = 1728.0
+margin_bottom = 3264.0
+text = "wc4-6-9"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -646,9 +758,9 @@ __meta__ = {
 
 [node name="TextEdit14" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 1152.0
-margin_top = 672.0
+margin_top = 768.0
 margin_right = 1248.0
-margin_bottom = 768.0
+margin_bottom = 864.0
 text = "wc1-A104"
 wrap_enabled = true
 __meta__ = {
@@ -657,9 +769,9 @@ __meta__ = {
 
 [node name="TextEdit16" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 1248.0
-margin_top = 672.0
+margin_top = 768.0
 margin_right = 1344.0
-margin_bottom = 768.0
+margin_bottom = 864.0
 text = "wc1-A105"
 wrap_enabled = true
 __meta__ = {
@@ -668,9 +780,9 @@ __meta__ = {
 
 [node name="TextEdit17" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 1344.0
-margin_top = 672.0
+margin_top = 768.0
 margin_right = 1440.0
-margin_bottom = 768.0
+margin_bottom = 864.0
 text = "wc1-A106"
 wrap_enabled = true
 __meta__ = {
@@ -702,10 +814,10 @@ __meta__ = {
 }
 
 [node name="TextEdit29" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1536.0
-margin_top = 480.0
-margin_right = 1632.0
-margin_bottom = 576.0
+margin_left = 1920.0
+margin_top = 192.0
+margin_right = 2016.0
+margin_bottom = 288.0
 rect_pivot_offset = Vector2( 64, 127 )
 text = "wc1-AT01"
 wrap_enabled = true
@@ -715,9 +827,9 @@ __meta__ = {
 
 [node name="TextEdit3" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 864.0
-margin_top = 672.0
+margin_top = 768.0
 margin_right = 960.0
-margin_bottom = 768.0
+margin_bottom = 864.0
 text = "wc1-A101"
 wrap_enabled = true
 __meta__ = {
@@ -792,9 +904,9 @@ __meta__ = {
 
 [node name="TextEdit4" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 960.0
-margin_top = 672.0
+margin_top = 768.0
 margin_right = 1056.0
-margin_bottom = 768.0
+margin_bottom = 864.0
 text = "wc1-A102"
 wrap_enabled = true
 __meta__ = {
@@ -891,9 +1003,9 @@ __meta__ = {
 
 [node name="TextEdit5" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 1056.0
-margin_top = 672.0
+margin_top = 768.0
 margin_right = 1152.0
-margin_bottom = 768.0
+margin_bottom = 864.0
 text = "wc1-A103"
 wrap_enabled = true
 __meta__ = {

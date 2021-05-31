@@ -86,6 +86,9 @@ class Puzzle:
 		for v in vertices:
 			if (v.decorator.rule == 'tetris'):
 				v.decorator.calculate_covering(self)
+		for decorator in decorators:
+			if (decorator.inner_decorator.rule == 'tetris'):
+				decorator.inner_decorator.calculate_covering(self)
 	
 func push_vertex_vec(puzzle, pos, hidden=false):
 	var result = len(puzzle.vertices)
@@ -147,15 +150,6 @@ func __check_decorator_consumed(raw_decorator, element_type):
 
 func __add_decorator(puzzle, raw_element, v):
 	var boxed_decorator = false
-	var point_decorator = __find_decorator(raw_element, "PointDecorator")
-	if (point_decorator):
-		puzzle.vertices[v].decorator = load('res://script/decorators/point_decorator.gd').new()
-		puzzle.vertices[v].decorator.color = color(point_decorator['Color'])
-	var self_intersection_decorator = __find_decorator(raw_element, "SelfIntersectionDecorator")
-	if (self_intersection_decorator):
-		puzzle.vertices[v].decorator = load('res://script/decorators/self_intersection_decorator.gd').new()
-		puzzle.vertices[v].decorator.color1 = color(self_intersection_decorator['Color1'])
-		puzzle.vertices[v].decorator.color2 = color(self_intersection_decorator['Color2'])
 	var end_decorator = __find_decorator(raw_element, "EndDecorator")
 	if (end_decorator):
 		var end_length = float(end_decorator['Length'])
@@ -166,6 +160,8 @@ func __add_decorator(puzzle, raw_element, v):
 		puzzle.vertices[v_end].is_attractor = true
 		puzzle.vertices[v].is_attractor = true
 		puzzle.vertices[v_end].is_puzzle_end = true
+	if (__find_decorator(raw_element, "BoxDecorator")):
+		boxed_decorator = true
 	var text_decorator = __find_decorator(raw_element, "TextDecorator")
 	if (text_decorator):
 		if (text_decorator['Text'] == 'Obs'):
@@ -238,7 +234,7 @@ func __add_decorator(puzzle, raw_element, v):
 		puzzle.vertices[v].is_puzzle_start = true
 	if (boxed_decorator):
 		var decorator = load('res://script/decorators/box_decorator.gd').new()
-		decorator.color = color(text_decorator['Color'])
+		decorator.color = Color.black
 		decorator.init_vertex = v
 		decorator.inner_decorator = puzzle.vertices[v].decorator
 		if (decorator.inner_decorator.rule == 'none'):
@@ -246,6 +242,17 @@ func __add_decorator(puzzle, raw_element, v):
 			decorator.inner_decorator.color = Color.pink
 		puzzle.decorators.append(decorator)
 		puzzle.vertices[v].decorator = load("res://script/decorators/no_decorator.gd").new()
+	var point_decorator = __find_decorator(raw_element, "PointDecorator")
+	if (point_decorator):
+		puzzle.vertices[v].decorator = load('res://script/decorators/point_decorator.gd').new()
+		puzzle.vertices[v].decorator.color = color(point_decorator['Color'])
+	var self_intersection_decorator = __find_decorator(raw_element, "SelfIntersectionDecorator")
+	if (self_intersection_decorator):
+		puzzle.vertices[v].decorator = load('res://script/decorators/self_intersection_decorator.gd').new()
+		puzzle.vertices[v].decorator.color1 = color(self_intersection_decorator['Color1'])
+		puzzle.vertices[v].decorator.color2 = color(self_intersection_decorator['Color2'])
+	
+
 func __load_tetris(raw_decorator, is_hollow):
 	var shapes = []
 	var min_x = INF

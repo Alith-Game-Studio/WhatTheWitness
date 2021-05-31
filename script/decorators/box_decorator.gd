@@ -38,10 +38,16 @@ func draw_above_solution(canvas, owner, owner_type, puzzle, solution):
 
 func init_property(puzzle, solution_state):
 	return init_vertex
+	
+func property_to_string(property):
+	return str(property)
+
+func string_to_property(string):
+	return int(string)
 
 func get_location(puzzle, solution, id):
 	var v
-	if (!solution.started or len(solution.state_stack[-1].event_properties) <= id):
+	if (solution == null or !solution.started or len(solution.state_stack[-1].event_properties) <= id):
 		v = init_vertex
 	else:
 		v = solution.state_stack[-1].event_properties[id] 

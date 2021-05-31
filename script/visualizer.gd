@@ -122,7 +122,7 @@ class PuzzleCanvas:
 	func draw_solution(target, solution, validator, time):
 		drawing_target = target
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
-		if (solution.started):
+		if (solution != null and solution.started):
 			var state = solution.state_stack[-1]
 			var main_way = Solution.MAIN_WAY
 			var vertices_main_way = state.vertices[main_way]

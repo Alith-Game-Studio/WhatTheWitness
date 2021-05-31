@@ -155,11 +155,25 @@ func judge_region_squares(validator: Validation.Validator, region: Validation.Re
 func judge_region_points(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('point')):
 		return true
-	if (require_errors):
-		for decorator_id in region.decorator_dict['point']:
-			var response = validator.decorator_responses[decorator_id]
-			response.state = Validation.DecoratorResponse.ERROR
-	return false
+	var all_ok = true
+	for decorator_id in region.decorator_dict['point']:
+		var ok = false
+		var response = validator.decorator_responses[decorator_id]
+		if (validator.has_boxes):
+			var v_id = response.vertex_index
+			for j in region.decorator_indices:
+				if (j == decorator_id):
+					continue
+				if (validator.decorator_responses[j].vertex_index == v_id):
+					ok = __match_color(validator.decorator_responses[j].color, response.color)
+					break
+		if (!ok):
+			if (require_errors):
+				response.state = Validation.DecoratorResponse.ERROR
+				all_ok = false
+			else:
+				return false
+	return all_ok
 	
 func judge_region_self_intersections(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('self-intersection')):

@@ -17,7 +17,7 @@ func load_puzzle():
 	Gameplay.puzzle = Graph.load_from_xml(Gameplay.get_absolute_puzzle_path())
 	Gameplay.puzzle.preprocess_tetris_covering()
 	if (Gameplay.puzzle_name in SaveData.saved_solutions):
-		Gameplay.solution = Solution.SolutionLine.load_from_string(SaveData.saved_solutions[Gameplay.puzzle_name])
+		Gameplay.solution = Solution.SolutionLine.load_from_string(SaveData.saved_solutions[Gameplay.puzzle_name], Gameplay.puzzle)
 		Gameplay.validator = Validation.Validator.new()
 		if (Gameplay.validator.validate(Gameplay.puzzle, Gameplay.solution)):
 			Gameplay.solution.validity = 1
@@ -66,7 +66,7 @@ func _input(event):
 					Gameplay.validator = Validation.Validator.new()
 					if (Gameplay.validator.validate(Gameplay.puzzle, Gameplay.solution)):
 						Gameplay.solution.validity = 1
-						SaveData.update(Gameplay.puzzle_name, Gameplay.solution.to_string())
+						SaveData.update(Gameplay.puzzle_name, Gameplay.solution.save_to_string(Gameplay.puzzle))
 						if (Gameplay.puzzle_name in MenuData.puzzle_preview_panels):
 							MenuData.puzzle_preview_panels[Gameplay.puzzle_name].update_puzzle()
 						level_map.update_counter()

@@ -327,7 +327,7 @@ class SolutionLine:
 			progress = projected_progress
 	
 	
-	func to_string():
+	func save_to_string(puzzle):
 		var state = state_stack[-1]
 		var line_result = []
 		for state_way in state.vertices:
@@ -337,12 +337,12 @@ class SolutionLine:
 			line_result.append( PoolStringArray(way_result).join(','))
 		var line_string = PoolStringArray(line_result).join('|')
 		var event_property_result = []
-		for event_property in state.event_properties:
-			event_property_result.append(str(event_property))
+		for i in range(len(puzzle.decorators)):
+			event_property_result.append(puzzle.decorators[i].property_to_string(state.event_properties[i]))
 		var event_string = PoolStringArray(event_property_result).join('|')
 		return PoolStringArray([line_string, event_string]).join('$')
 		
-	static func load_from_string(string):
+	static func load_from_string(string, puzzle):
 		var state = DiscreteSolutionState.new()
 		var line_string_event_string = string.split('$')
 		var line_string = line_string_event_string[0]
@@ -359,8 +359,8 @@ class SolutionLine:
 			state.vertices.append(way_vertices)
 		state.event_properties = []
 		var event_result = event_string.split('|')
-		for event_property_string in event_result:
-			state.event_properties.append(int(event_property_string))
+		for i in range(len(puzzle.decorators)):
+			state.event_properties.append(puzzle.decorators[i].string_to_property(event_result[i]))
 		var solution = SolutionLine.new()
 		solution.started = true
 		solution.validity = 1

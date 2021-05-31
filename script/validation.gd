@@ -43,6 +43,7 @@ class Validator:
 	var vertex_region: Array # -1: unknown; -2, -3, ...: covered by solution; 0, 1, ...: in regions
 	var puzzle: Graph.Puzzle
 	var solution: Solution.DiscreteSolutionState
+	var has_boxes: bool
 	
 	func alter_rule(decorator_index, region, new_rule):
 		var old_rule = decorator_responses[decorator_index].rule
@@ -89,6 +90,7 @@ class Validator:
 					var vertex = puzzle.vertices[v]
 					var response = add_decorator(puzzle.decorators[i].inner_decorator, vertex.pos, v)
 					decorator_responses_of_vertex[v].append(response)
+				has_boxes = true
 		vertex_region = []
 		for i in range(len(puzzle.vertices)):
 			vertex_region.push_back(-1)
