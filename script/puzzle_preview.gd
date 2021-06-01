@@ -4,6 +4,7 @@ var enabled = false
 onready var frame = $PuzzlePreview
 onready var visualizer = $PuzzlePreview/PuzzleVisualizer
 onready var parent = $".."
+onready var puzzle_credit_text = $"../../../SideMenu/PuzzleCredits"
 var puzzle_name
 var puzzle_unlocked
 		
@@ -44,14 +45,17 @@ func _on_Button_pressed():
 		$"/root/LevelMap/PuzzleUI".show()
 		$"/root/LevelMap/Menu".hide()
 		MenuData.can_drag_map = false
+		puzzle_credit_text.bbcode_text = ''
 	
 func _on_Button_mouse_entered():
 	if (puzzle_unlocked):
 		parent.move_child(self, parent.get_child_count() - 1)
 		frame.rect_scale = Vector2(1.2, 1.2)
 		MenuData.can_drag_map = false
+		puzzle_credit_text.bbcode_text = '[right] %s [/right]' % Credits.get_full_credit(puzzle_name)
 
 
 func _on_Button_mouse_exited():
 	frame.rect_scale = Vector2(1.0, 1.0)
 	MenuData.can_drag_map = true
+	puzzle_credit_text.bbcode_text = ''

@@ -144,14 +144,13 @@ func update_view():
 	view.scale = Vector2(view_scale, view_scale)
 
 func _input(event):
-	if (event is InputEventMouseButton):
+	if (event is InputEventMouseButton and MenuData.can_drag_map):
 		if (event.button_index == BUTTON_WHEEL_DOWN):
 			view_scale = max(view_scale * 0.8, 0.512)
 		elif (event.button_index == BUTTON_WHEEL_UP):
 			view_scale = min(view_scale * 1.25, 3.0)
 		elif (event.pressed):
-			if (MenuData.can_drag_map):
-				drag_start = event.position
+			drag_start = event.position
 		else:
 			drag_start = null
 			return

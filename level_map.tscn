@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://level_lines.tres" type="TileSet" id=1]
 [ext_resource path="res://script/level_map.gd" type="Script" id=2]
@@ -19,6 +19,9 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 4 )
 
 [node name="LevelMap" type="Node2D"]
@@ -155,7 +158,7 @@ margin_left = 192.0
 margin_top = 192.0
 margin_right = 288.0
 margin_bottom = 288.0
-text = "1-intro-1-a"
+text = "witness-intro-1-a"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -177,7 +180,7 @@ margin_left = 864.0
 margin_top = 1248.0
 margin_right = 960.0
 margin_bottom = 1344.0
-text = "1-ring-tutorial1-Alith"
+text = "Alith-ring-tutorial1"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -826,7 +829,7 @@ margin_left = 960.0
 margin_top = 1248.0
 margin_right = 1056.0
 margin_bottom = 1344.0
-text = "1-ring-tutorial2-Alith"
+text = "Alith-ring-tutorial2"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -837,7 +840,7 @@ margin_left = 1056.0
 margin_top = 1248.0
 margin_right = 1152.0
 margin_bottom = 1344.0
-text = "1-ring-tutorial3-Alith"
+text = "Alith-ring-tutorial3"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -859,7 +862,7 @@ margin_left = 1152.0
 margin_top = 1248.0
 margin_right = 1248.0
 margin_bottom = 1344.0
-text = "1-ring-tutorial4-Alith"
+text = "Alith-ring-tutorial4"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -870,7 +873,7 @@ margin_left = 1248.0
 margin_top = 1248.0
 margin_right = 1344.0
 margin_bottom = 1344.0
-text = "1-ring-tutorial5-Alith"
+text = "Alith-ring-tutorial5"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1080,7 +1083,7 @@ margin_top = 192.0
 margin_right = 672.0
 margin_bottom = 288.0
 rect_pivot_offset = Vector2( 64, 127 )
-text = "1-intro-1-b"
+text = "witness-intro-1-b"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1267,6 +1270,22 @@ bbcode_enabled = true
 bbcode_text = "[right] 0 / 0 [/right]
 "
 text = " 0 / 0 
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PuzzleCredits" type="RichTextLabel" parent="SideMenu"]
+margin_left = 262.0
+margin_top = 549.0
+margin_right = 1000.0
+margin_bottom = 578.0
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[right] Puzzle Credit [/right]
+"
+text = " Puzzle Credit 
 "
 scroll_active = false
 __meta__ = {
