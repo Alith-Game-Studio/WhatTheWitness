@@ -106,7 +106,7 @@ func update_light():
 					var new_pos2 = new_pos + Vector2(DIR_X[dir2], DIR_Y[dir2])
 					if (line_map.get_cellv(new_pos2) != -1 and !get_light_state(new_pos2)):
 						non_activated_neighbor += 1
-				print('non-activated_neighbor = ', non_activated_neighbor)
+				# print('non-activated_neighbor = ', non_activated_neighbor)
 				if (non_activated_neighbor == 1):
 					deltas.append(delta + get_gadget_direction(gadget_map, new_pos))
 		for delta in deltas:

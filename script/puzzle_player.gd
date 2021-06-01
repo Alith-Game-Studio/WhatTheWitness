@@ -105,6 +105,8 @@ func _input(event):
 						_on_right_arrow_button_pressed()
 
 func back_to_menu():
+	is_drawing_solution = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	loaded = false
 	level_map.update_light()
 	$"/root/LevelMap/Menu".show()

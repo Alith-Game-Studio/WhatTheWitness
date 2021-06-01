@@ -25,3 +25,7 @@ func _on_export_save_button_pressed():
 
 func _on_import_save_button_pressed():
 	get_tree().change_scene("res://import_save_scene.tscn")
+
+
+func _on_custom_level_button_pressed():
+	pass # Replace with function body.

@@ -391,7 +391,7 @@ func load_from_xml(file):
 	puzzle.n_ways = 1
 	var raw = better_xml.parse_xml_file(file)
 	var raw_meta = raw['MetaData']
-	print(raw_meta['LineColor'])
+	# print(raw_meta['LineColor'])
 	puzzle.solution_colors = [color(raw_meta['LineColor'])]
 	puzzle.line_color = color(raw_meta['ForegroundColor'])
 	puzzle.background_color = color(raw_meta['BackgroundColor'])
