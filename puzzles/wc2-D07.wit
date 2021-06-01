@@ -646,7 +646,7 @@
       <Decorator xsi:type="TetrisDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
+        <Angle>-15</Angle>
         <ExtraScale>1</ExtraScale>
         <Shapes>
           <ArrayOfNode>
@@ -748,7 +748,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Brown</Color>
+        <Color>White</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -821,7 +821,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Brown</Color>
+        <Color>White</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -848,7 +848,7 @@
       <Decorator xsi:type="TetrisDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
+        <Angle>-15</Angle>
         <ExtraScale>1</ExtraScale>
         <Shapes>
           <ArrayOfNode>
