@@ -57,6 +57,7 @@ func _ready():
 			placeholder.get_parent().remove_child(placeholder)
 	update_light()
 	update_counter()
+	MenuData.can_drag_map = true
 
 func get_light_state(pos):
 	if (light_map.get_cellv(pos) >= 0):
@@ -176,8 +177,6 @@ func _on_menu_bar_button_mouse_entered():
 
 func _on_menu_bar_button_mouse_exited():
 	menu_bar_button.modulate = Color(menu_bar_button.modulate.r, menu_bar_button.modulate.g, menu_bar_button.modulate.b, 1.0)
-
-
 
 func _on_menu_bar_button_pressed():
 	get_tree().change_scene("res://menu_main.tscn")
