@@ -5,7 +5,7 @@ var rule = 'filament-start'
 var nails: Array
 
 var filament_solution = null
-var circleRadius = 0.08
+var circle_radius = 0.08
 
 func draw_above_solution(canvas: Visualizer.PuzzleCanvas, owner, owner_type, puzzle, solution):
 	if (filament_solution != null):
@@ -18,17 +18,16 @@ func draw_above_solution(canvas: Visualizer.PuzzleCanvas, owner, owner_type, puz
 				puzzle.line_width / 4,
 				Color.white)
 			canvas.add_circle(end_pos, puzzle.line_width / 8, Color.white)
-		var circleRadius = 0.1 * (1 - puzzle.line_width)
-		canvas.add_circle(filament_solution.start_pos, circleRadius, Color.black)
+		canvas.add_circle(filament_solution.start_pos, circle_radius, Color.black)
 		
 func add_pillar(pos):
 	for i in range(8):
 		var angle = i * PI / 4
-		nails.append(pos + Vector2(cos(angle), sin(angle)) * circleRadius)
+		nails.append(pos + Vector2(cos(angle), sin(angle)) * circle_radius)
 
 func init_property(puzzle, solution_state, start_vertex):
 	filament_solution = Filament.FilamentSolution.new()
-	filament_solution.try_start_solution_at(start_vertex.pos)
+	filament_solution.try_start_solution_at(start_vertex.pos, circle_radius)
 	return filament_solution
 
 func vector_to_string(vec):

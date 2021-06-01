@@ -108,6 +108,7 @@ margin_right = 784.0
 margin_bottom = 441.0
 custom_fonts/font = SubResource( 3 )
 text = "Credits"
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ImportSaveButton" to="." method="_on_import_save_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ExportSaveButton" to="." method="_on_export_save_button_pressed"]

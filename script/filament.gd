@@ -8,8 +8,9 @@ class FilamentSolution:
 	var start_pos: Vector2
 	var end_pos: Vector2
 	var path_points: Array
+	var extra_nails: Array # around the start point
 	
-	func try_start_solution_at(pos):
+	func try_start_solution_at(pos, circle_radius):
 		if (started):
 			started = false
 			return false
@@ -17,6 +18,10 @@ class FilamentSolution:
 		start_pos = pos
 		end_pos = pos
 		path_points = [[pos, -1]]
+		extra_nails.clear()
+		for i in range(8):
+			var angle = i * PI / 4
+			extra_nails.append(pos + Vector2(cos(angle), sin(angle)) * circle_radius)
 		return true
 
 	func det(v1, v2):
@@ -26,10 +31,16 @@ class FilamentSolution:
 		return try_continue_single_step(nails, delta)
 		
 	
-	func try_continue_single_step(nails, delta):
+	func try_continue_single_step(fixed_nails, delta):
 		if (!started):
 			return 0.0
 		var original_step = delta.length()
+		
+		# add nails
+		var nails = []
+		nails += fixed_nails
+		if (len(path_points) >= 2):
+			nails += extra_nails
 		# print(original_step)
 		if (original_step < 1e-10):
 			return 1.0
