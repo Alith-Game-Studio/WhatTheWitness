@@ -180,4 +180,4 @@ func _on_menu_bar_button_mouse_exited():
 
 
 func _on_menu_bar_button_pressed():
-	extra_menu.visible = !extra_menu.visible
+	get_tree().change_scene("res://menu_main.tscn")

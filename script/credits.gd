@@ -3,12 +3,11 @@ extends Node
 
 const FULL_AUTHORS = {
 	'witness': 'from The Witness',
-	'wc1': 'from the 1st WitCup (by Gentova et al.)',
-	'wc2': 'from the 2nd WitCup (by Gentova et al.)',
+	'wc1': 'from the 1st WitCup (by Gentova)',
+	'wc2': 'from the 2nd WitCup (by Gentova and Zhvsjia)',
 	'wc3': 'from the 3rd WitCup (by Miaoji et al.)',
 	'wc4': 'from the 4th WitCup (by Artless)',
-	'wc5': 'from the 5th WitCup (by Alith & Artless)',
-	'wc6': 'from the 6th WitCup (by Qianxun et al.)',
+	'wc6': 'from the 6th WitCup (by Zhvsjia)',
 	'rpg': 'from the Witness RPG Mod (by Sigma144)',
 }
 

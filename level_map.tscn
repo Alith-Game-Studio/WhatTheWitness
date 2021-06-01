@@ -1283,9 +1283,9 @@ margin_right = 1000.0
 margin_bottom = 578.0
 custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
-bbcode_text = "[right] Puzzle Credit [/right]
+bbcode_text = "[right]  [/right]
 "
-text = " Puzzle Credit 
+text = "  
 "
 scroll_active = false
 __meta__ = {
@@ -1325,7 +1325,6 @@ text = "Export Save"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
 [connection signal="mouse_entered" from="SideMenu/MenuBarButton" to="." method="_on_menu_bar_button_mouse_entered"]
 [connection signal="mouse_exited" from="SideMenu/MenuBarButton" to="." method="_on_menu_bar_button_mouse_exited"]
 [connection signal="pressed" from="SideMenu/MenuBarButton" to="." method="_on_menu_bar_button_pressed"]

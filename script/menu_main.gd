@@ -17,3 +17,11 @@ func _on_reset_progress_button_pressed():
 
 func _ready():
 	CSPHelper.initialize()
+
+
+func _on_export_save_button_pressed():
+	get_tree().change_scene("res://export_save_scene.tscn")
+
+
+func _on_import_save_button_pressed():
+	get_tree().change_scene("res://import_save_scene.tscn")
