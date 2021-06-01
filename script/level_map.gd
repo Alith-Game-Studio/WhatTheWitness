@@ -72,7 +72,7 @@ func update_counter():
 		if(SaveData.puzzle_solved(puzzle_file)):
 			solved_count += 1
 		puzzle_count += 1
-	puzzle_counter_text.bbcode_text = '[right]%d / %d[/right]' % [solved_count, puzzle_count]
+	puzzle_counter_text.bbcode_text = '[right] %d / %d [/right]' % [solved_count, puzzle_count]
 
 func get_gadget_direction(tile_map: TileMap, pos: Vector2):
 	var x = int(round(pos.x))
