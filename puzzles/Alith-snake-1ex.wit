@@ -12,6 +12,11 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
+      <Decorator xsi:type="EndDecorator">
+        <Length>0.2</Length>
+        <Angle>180</Angle>
+        <Color>Transparent</Color>
+      </Decorator>
       <X>1</X>
       <Y>3</Y>
       <Hidden>false</Hidden>
@@ -55,6 +60,11 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
+      <Decorator xsi:type="EndDecorator">
+        <Length>0.2</Length>
+        <Angle>-90</Angle>
+        <Color>Transparent</Color>
+      </Decorator>
       <X>3</X>
       <Y>1</Y>
       <Hidden>false</Hidden>
@@ -129,6 +139,11 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
+      <Decorator xsi:type="EndDecorator">
+        <Length>0.2</Length>
+        <Angle>0</Angle>
+        <Color>Transparent</Color>
+      </Decorator>
       <X>5</X>
       <Y>3</Y>
       <Hidden>false</Hidden>
@@ -139,11 +154,6 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <Decorator xsi:type="EndDecorator">
-        <Length>0.2</Length>
-        <Angle>0</Angle>
-        <Color>Transparent</Color>
-      </Decorator>
       <X>5</X>
       <Y>5</Y>
       <Hidden>false</Hidden>
@@ -380,7 +390,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Lime</Color>
+        <Color>White</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -396,7 +406,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>White</Color>
+        <Color>Lime</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -428,7 +438,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>White</Color>
+        <Color>Lime</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -476,7 +486,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Lime</Color>
+        <Color>White</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -492,7 +502,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Lime</Color>
+        <Color>White</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -540,7 +550,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>White</Color>
+        <Color>Lime</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -588,7 +598,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Lime</Color>
+        <Color>White</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>

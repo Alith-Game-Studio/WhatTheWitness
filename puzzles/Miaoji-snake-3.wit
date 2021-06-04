@@ -22,7 +22,7 @@
           <DeltaY>0</DeltaY>
           <Angle>0</Angle>
           <ExtraScale>1</ExtraScale>
-          <Color>Black</Color>
+          <Color>Lime</Color>
         </Second>
       </Decorator>
       <X>1</X>
@@ -90,7 +90,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>2</ExtraScale>
-        <Color>Black</Color>
+        <Color>Lime</Color>
       </Decorator>
       <X>3</X>
       <Y>3</Y>
@@ -180,7 +180,7 @@
           <DeltaY>0</DeltaY>
           <Angle>0</Angle>
           <ExtraScale>1</ExtraScale>
-          <Color>Black</Color>
+          <Color>Lime</Color>
         </Second>
       </Decorator>
       <X>5</X>
@@ -403,7 +403,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Black</Color>
+        <Color>Lime</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -559,7 +559,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Black</Color>
+        <Color>Lime</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
