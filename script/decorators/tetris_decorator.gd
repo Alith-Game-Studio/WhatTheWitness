@@ -7,7 +7,7 @@ var is_hollow
 var margin_size
 var border_size
 var covering: Array
-const ROTATION_ANGLES = [0, PI / 3, 2 * PI / 3, PI / 2, PI, 3 * PI / 2]
+const ROTATION_ANGLES = [0, PI / 3, 2 * PI / 3, PI / 2, PI, 3 * PI / 2, 4 * PI / 3, 5 * PI / 3]
 
 func angle_equal_zero(angle, eps=1e-3):
 	var d = round(angle / (2 * PI))
@@ -61,7 +61,7 @@ func calculate_covering(puzzle):
 				if (!(alignment in covering_dict)):
 					covering_dict[alignment] = true
 					covering.append(alignment)
-	# print('Covering of %d:' % len(shapes), covering)
+	print('Covering of %d:' % len(shapes), covering)
 			
 func __shrink_corner(p0, p1, p2, depth):
 	var e1 = (p0 - p1).normalized()
