@@ -4,7 +4,7 @@
     <Node>
       <Decorator xsi:type="EndDecorator">
         <Length>0.2</Length>
-        <Angle>-135</Angle>
+        <Angle>-120</Angle>
         <Color>Transparent</Color>
       </Decorator>
       <X>-0.375</X>
@@ -280,7 +280,7 @@
     <Node>
       <Decorator xsi:type="EndDecorator">
         <Length>0.2</Length>
-        <Angle>45</Angle>
+        <Angle>60</Angle>
         <Color>Transparent</Color>
       </Decorator>
       <X>0.375</X>

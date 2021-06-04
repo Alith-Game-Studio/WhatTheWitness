@@ -9,18 +9,18 @@ const MAIN_WAY = 0
 class DiscreteSolutionState:
 	var vertices: Array
 	var event_properties: Array
-	var solution_stage: int
+	var solution_stage: Array
 	
 	func _init():
 		vertices = []
 		event_properties = []
-		solution_stage = SOLUTION_STAGE_EXTENSION
+		solution_stage = []
 		
 	func copy():
 		var result = DiscreteSolutionState.new()
 		result.vertices = vertices.duplicate(true)
 		result.event_properties = event_properties.duplicate(true)
-		result.solution_stage = solution_stage
+		result.solution_stage = solution_stage.duplicate(true)
 		return result
 		
 	func get_vertex_position(puzzle, way, id):
@@ -33,99 +33,112 @@ class DiscreteSolutionState:
 		return puzzle.vertices[vertices[way][-1]]
 		
 	func is_retraction(puzzle, main_way_vertex_id):
-		if (solution_stage == SOLUTION_STAGE_EXTENSION):
-			if (len(vertices[MAIN_WAY]) >= 2):
-				return main_way_vertex_id == vertices[MAIN_WAY][-2]
-			return false
-		assert(false)
+		if (len(vertices[MAIN_WAY]) >= 2):
+			return main_way_vertex_id == vertices[MAIN_WAY][-2]
+		return false
 		
 	func transist(puzzle, main_way_vertex_id):
 		var limit = 1.0 + 1e-6
 		var main_way_pos = puzzle.vertices[main_way_vertex_id].pos
 		var blocked_by_boxes = false
-		if (solution_stage == SOLUTION_STAGE_EXTENSION):
-			var new_state = copy()
-			var main_way_dir = (main_way_pos - puzzle.vertices[vertices[MAIN_WAY][-1]].pos).normalized()
-			for way in range(puzzle.n_ways):
-				var way_vertex_id
-				if (way == MAIN_WAY):
-					way_vertex_id = main_way_vertex_id
-				else:
-					var way_crossroad_vertex_id = vertices[way][-1]
-					var way_dir = get_symmetry_vector(puzzle, way, main_way_dir)
-					way_vertex_id = -1
-					for edge in puzzle.edges:
-						var new_vertex_id
-						var edge_dir
-						if (edge.start.index == way_crossroad_vertex_id):
-							new_vertex_id = edge.end.index
-							edge_dir = edge.end.pos - edge.start.pos
-						elif (edge.end.index == way_crossroad_vertex_id):
-							new_vertex_id = edge.start.index
-							edge_dir = edge.start.pos - edge.end.pos
-						else:
-							continue
-						edge_dir = edge_dir.normalized()
-						if ((edge_dir - way_dir).length() < 1e-6):
-							way_vertex_id = new_vertex_id
-							break
-				if (way_vertex_id == -1):
-					return [null, null]
-				new_state.vertices[way].push_back(way_vertex_id)
+		var new_state = copy()
+		var main_way_dir = (main_way_pos - puzzle.vertices[vertices[MAIN_WAY][-1]].pos).normalized()
+		var snake_points = []
+		var new_snake_points = []
+		for i in range(len(puzzle.decorators)):
+			if (puzzle.decorators[i].rule == 'snake-manager'):
+				snake_points = event_properties[i]
+				new_snake_points = new_state.event_properties[i]
+		for way in range(puzzle.n_ways):
+			var way_vertex_id
+			if (way == MAIN_WAY):
+				way_vertex_id = main_way_vertex_id
+			else:
+				var way_crossroad_vertex_id = vertices[way][-1]
+				var way_dir = get_symmetry_vector(puzzle, way, main_way_dir)
+				way_vertex_id = -1
+				for edge in puzzle.edges:
+					var new_vertex_id
+					var edge_dir
+					if (edge.start.index == way_crossroad_vertex_id):
+						new_vertex_id = edge.end.index
+						edge_dir = edge.end.pos - edge.start.pos
+					elif (edge.end.index == way_crossroad_vertex_id):
+						new_vertex_id = edge.start.index
+						edge_dir = edge.start.pos - edge.end.pos
+					else:
+						continue
+					edge_dir = edge_dir.normalized()
+					if ((edge_dir - way_dir).length() < 1e-6):
+						way_vertex_id = new_vertex_id
+						break
+			if (way_vertex_id == -1):
+				return [null, null]
+			new_state.vertices[way].push_back(way_vertex_id)
+			var line_stage = solution_stage[way]
+			if (line_stage == SOLUTION_STAGE_SNAKE):
+				new_state.vertices[way].pop_front()
+				var v = new_state.vertices[way][0]
+				if (v in new_snake_points):
+					line_stage = SOLUTION_STAGE_EXTENSION
+					new_snake_points.erase(v)
+			if (line_stage == SOLUTION_STAGE_EXTENSION):
+				if (vertices[way][-1] in new_snake_points):
+					line_stage = SOLUTION_STAGE_SNAKE
+			new_state.solution_stage[way] = line_stage
 
-			var main_edge_length = (puzzle.vertices[new_state.vertices[MAIN_WAY][-1]].pos - puzzle.vertices[new_state.vertices[MAIN_WAY][-2]].pos).length()
-			var occupied_vertices = {}
-			var endpoint_occupied = 0
-			for way in range(puzzle.n_ways):
-				var second_point = puzzle.vertices[new_state.vertices[way][-2]]
-				var end_point = puzzle.vertices[new_state.vertices[way][-1]]
-				var edge_length = (end_point.pos - second_point.pos).length()
-				if (abs(edge_length - main_edge_length) > 1e-3):
-					limit = min(limit, 1.0 - 1e-6)
-					if (edge_length < main_edge_length):
-						limit = min(limit, 1.0 * edge_length / main_edge_length)
-				for i in range(len(new_state.vertices[way])):
-					if (i == len(new_state.vertices[way]) - 1):
-						if (new_state.vertices[way][i] in occupied_vertices):
-							endpoint_occupied = max(endpoint_occupied, occupied_vertices[new_state.vertices[way][i]])
-					occupied_vertices[new_state.vertices[way][i]] = 2 if i == 0 else 1
-				if (second_point.decorator.rule == 'self-intersection' and endpoint_occupied != 0):
-					return [null, null]
-				if end_point.decorator.rule != 'self-intersection':
-					if (endpoint_occupied == 1): # colliding with other lines / self-colliding
-						limit = min(limit, 1.0 - puzzle.line_width / edge_length)
-					elif (endpoint_occupied == 2): # colliding with start points
-						limit = min(limit, 1.0 - (puzzle.start_size + puzzle.line_width / 2) / edge_length)
-			for i in range(len(puzzle.decorators)):
-				if (puzzle.decorators[i].rule == 'box'):
-					var box_v = new_state.event_properties[i]
-					if (!(box_v in occupied_vertices)):
-						occupied_vertices[box_v] = 3 # box - box collision
-			for i in range(len(puzzle.decorators)):
-				if (puzzle.decorators[i].rule == 'box'):
-					var box_v = new_state.event_properties[i]
-					if (box_v in occupied_vertices and occupied_vertices[box_v] <= 2):
-						var colliding_way = -1
-						for way in range(puzzle.n_ways):
-							var way_end_v = new_state.vertices[way][-1]
-							if (way_end_v == box_v):
-								if (colliding_way == -1):
-									colliding_way = way
-								else:
-									colliding_way = -2
-						if (colliding_way >= 0):
-							var way_end_v = new_state.vertices[colliding_way][-1]
-							var way_secondary_end_v = new_state.vertices[colliding_way][-2]
-							var old_box_position = puzzle.vertices[way_end_v].pos
-							var way_edge_dir = (old_box_position - puzzle.vertices[way_secondary_end_v].pos).normalized()
-							if (!self.__perform_push(puzzle, new_state, i, way_edge_dir, occupied_vertices)):
-								blocked_by_boxes = true
-						else:
+		var main_edge_length = (puzzle.vertices[new_state.vertices[MAIN_WAY][-1]].pos - puzzle.vertices[new_state.vertices[MAIN_WAY][-2]].pos).length()
+		var occupied_vertices = {}
+		var endpoint_occupied = 0
+		for way in range(puzzle.n_ways):
+			var second_point = puzzle.vertices[new_state.vertices[way][-2]]
+			var end_point = puzzle.vertices[new_state.vertices[way][-1]]
+			var edge_length = (end_point.pos - second_point.pos).length()
+			if (abs(edge_length - main_edge_length) > 1e-3):
+				limit = min(limit, 1.0 - 1e-6)
+				if (edge_length < main_edge_length):
+					limit = min(limit, 1.0 * edge_length / main_edge_length)
+			for i in range(len(new_state.vertices[way])):
+				if (i == len(new_state.vertices[way]) - 1):
+					if (new_state.vertices[way][i] in occupied_vertices):
+						endpoint_occupied = max(endpoint_occupied, occupied_vertices[new_state.vertices[way][i]])
+				occupied_vertices[new_state.vertices[way][i]] = 2 if i == 0 else 1
+			if (second_point.decorator.rule == 'self-intersection' and endpoint_occupied != 0):
+				return [null, null]
+			if end_point.decorator.rule != 'self-intersection':
+				if (endpoint_occupied == 1): # colliding with other lines / self-colliding
+					limit = min(limit, 1.0 - puzzle.line_width / edge_length)
+				elif (endpoint_occupied == 2): # colliding with start points
+					limit = min(limit, 1.0 - (puzzle.start_size + puzzle.line_width / 2) / edge_length)
+		for i in range(len(puzzle.decorators)):
+			if (puzzle.decorators[i].rule == 'box'):
+				var box_v = new_state.event_properties[i]
+				if (!(box_v in occupied_vertices)):
+					occupied_vertices[box_v] = 3 # box - box collision
+		for i in range(len(puzzle.decorators)):
+			if (puzzle.decorators[i].rule == 'box'):
+				var box_v = new_state.event_properties[i]
+				if (box_v in occupied_vertices and occupied_vertices[box_v] <= 2):
+					var colliding_way = -1
+					for way in range(puzzle.n_ways):
+						var way_end_v = new_state.vertices[way][-1]
+						if (way_end_v == box_v):
+							if (colliding_way == -1):
+								colliding_way = way
+							else:
+								colliding_way = -2
+					if (colliding_way >= 0):
+						var way_end_v = new_state.vertices[colliding_way][-1]
+						var way_secondary_end_v = new_state.vertices[colliding_way][-2]
+						var old_box_position = puzzle.vertices[way_end_v].pos
+						var way_edge_dir = (old_box_position - puzzle.vertices[way_secondary_end_v].pos).normalized()
+						if (!self.__perform_push(puzzle, new_state, i, way_edge_dir, occupied_vertices)):
 							blocked_by_boxes = true
-			if (blocked_by_boxes):
-				limit = min(limit, 0.22)
-			return [new_state, limit]
-		assert(false)
+					else:
+						blocked_by_boxes = true
+		if (blocked_by_boxes):
+			limit = min(limit, 0.22)
+		return [new_state, limit]
 	
 	func __perform_push(puzzle, state, box_id, dir, occupied_vertices):
 		var old_vertex_id = state.event_properties[box_id]
@@ -204,8 +217,8 @@ class DiscreteSolutionState:
 					ok = false
 					break
 				vertices.push_back([way_start_vertex.index])
+				solution_stage.push_back(SOLUTION_STAGE_EXTENSION)
 			if (ok):
-				solution_stage = SOLUTION_STAGE_EXTENSION
 				event_properties.clear()
 				for decorator in puzzle.decorators:
 					event_properties.append(decorator.init_property(puzzle, self, est_start_vertex))
@@ -241,7 +254,7 @@ class SolutionLine:
 		var crossroad_vertex = state_stack[-1].get_end_vertex(puzzle, MAIN_WAY)
 		if (crossroad_vertex == null):
 			return false
-		return crossroad_vertex.decorator != null and crossroad_vertex.is_puzzle_end
+		return crossroad_vertex.decorator != null and crossroad_vertex.is_puzzle_end and progress >= 1.0
 		
 	func get_total_length(puzzle):
 		if (!started):

@@ -51,8 +51,13 @@ func _ready():
 			target.set_position(placeholder.get_position())
 			var cell_pos = target.global_position / 96
 			cell_pos = Vector2(round(cell_pos.x), round(cell_pos.y))
+			if (puzzle_file in MenuData.puzzle_grid_pos):
+				print('[Warning] Duplicated puzzle %s on' % puzzle_file, cell_pos)
 			MenuData.puzzle_grid_pos[puzzle_file] = cell_pos
-			MenuData.grid_pos_puzzle[[int(cell_pos.x), int(cell_pos.y)]] = puzzle_file
+			var int_cell_pos = [int(cell_pos.x), int(cell_pos.y)]
+			if (int_cell_pos in MenuData.grid_pos_puzzle):
+				print('[Warning] Multiple puzzles (%s) on the same grid position (%d, %d)' % [puzzle_file, cell_pos.x, cell_pos.y])
+			MenuData.grid_pos_puzzle[int_cell_pos] = puzzle_file
 			target.show_puzzle(puzzle_file, get_light_state(cell_pos))
 			placeholder.get_parent().remove_child(placeholder)
 	update_light()
