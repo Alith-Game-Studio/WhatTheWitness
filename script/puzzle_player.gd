@@ -15,12 +15,12 @@ var loaded = false
 func _ready():
 	if (Gameplay.playing_custom_puzzle):
 		load_puzzle(Gameplay.puzzle_path)
-	else:
+	
+func load_puzzle(puzzle_path):
+	if (!Gameplay.playing_custom_puzzle):
 		level_map = $"/root/LevelMap"
 		menu_bar_button = $"/root/LevelMap/SideMenu/MenuBarButton"
 		puzzle_counter_text = $"/root/LevelMap/SideMenu/PuzzleCounter"
-
-func load_puzzle(puzzle_path):
 	Gameplay.background_texture = null
 	Gameplay.puzzle_path = puzzle_path
 	Gameplay.puzzle = Graph.load_from_xml(Gameplay.puzzle_path)
@@ -48,12 +48,11 @@ func load_puzzle(puzzle_path):
 	right_arrow_button.modulate = Color(front_color.r, front_color.g, front_color.b, right_arrow_button.modulate.a)
 	drawing_control.draw_background()
 	loaded = true
-	
+	back_button.modulate = front_color
 	if (Gameplay.playing_custom_puzzle):
 		hide_left_arrow_button()
 	else:
 		menu_bar_button.modulate = Color (front_color.r, front_color.g, front_color.b, menu_bar_button.modulate.a)
-		back_button.modulate = front_color
 		puzzle_counter_text.modulate = front_color
 		# test if there are previous puzzles
 		var puzzle_grid_pos = MenuData.puzzle_grid_pos[Gameplay.puzzle_name]
