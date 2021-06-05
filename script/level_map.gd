@@ -42,6 +42,8 @@ func _ready():
 	var files = list_files(puzzle_dir)
 	var viewports = []
 	var placeholders = puzzle_placeholders.get_children()
+	MenuData.puzzle_grid_pos.clear()
+	MenuData.grid_pos_puzzle.clear()
 	for placeholder in placeholders:
 		var puzzle_file = placeholder.text + '.wit'
 		if (puzzle_file in files):
