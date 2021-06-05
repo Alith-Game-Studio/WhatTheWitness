@@ -198,6 +198,16 @@ func __add_decorator(puzzle, raw_element, v):
 		elif (text_decorator['Text'].to_lower() == 'exit'):
 			# another way to add an end
 			puzzle.vertices[v].is_puzzle_end = true
+		elif (text_decorator['Text'].to_lower() == '\u00A4'):
+			var snake_manager = null
+			for global_decorator in puzzle.decorators:
+				if (global_decorator.rule == 'snake-manager'):
+					snake_manager = global_decorator
+					break
+			if (snake_manager == null):
+				snake_manager = load('res://script/decorators/snake_manager.gd').new()
+				puzzle.decorators.append(snake_manager)
+			snake_manager.init_snake_points.append(v)
 		else:
 			print('Unknown text decorator %s' % text_decorator['Text'])
 	var triangle_decorator = __find_decorator(raw_element, "TriangleDecorator")
@@ -260,7 +270,11 @@ func __add_decorator(puzzle, raw_element, v):
 		puzzle.vertices[v].decorator = load("res://script/decorators/no_decorator.gd").new()
 	var point_decorator = __find_decorator(raw_element, "PointDecorator")
 	if (point_decorator):
-		puzzle.vertices[v].decorator = load('res://script/decorators/point_decorator.gd').new()
+		var extra_scale = float(point_decorator['ExtraScale'])
+		if (extra_scale > 1.9):
+			puzzle.vertices[v].decorator = load('res://script/decorators/big_point_decorator.gd').new()
+		else:
+			puzzle.vertices[v].decorator = load('res://script/decorators/point_decorator.gd').new()
 		puzzle.vertices[v].decorator.color = color(point_decorator['Color'])
 	var self_intersection_decorator = __find_decorator(raw_element, "SelfIntersectionDecorator")
 	if (self_intersection_decorator):

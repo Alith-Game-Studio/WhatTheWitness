@@ -57,6 +57,7 @@ custom_fonts/font = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="mouse_entered" from="PuzzlePreview/Button" to="." method="_on_Button_mouse_entered"]
 [connection signal="mouse_exited" from="PuzzlePreview/Button" to="." method="_on_Button_mouse_exited"]
 [connection signal="pressed" from="PuzzlePreview/Button" to="." method="_on_Button_pressed"]

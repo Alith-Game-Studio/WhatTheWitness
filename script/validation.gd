@@ -95,6 +95,8 @@ class Validator:
 		for i in range(len(puzzle.vertices)):
 			vertex_region.push_back(-1)
 		for way in range(puzzle.n_ways):
+			if (way >= len(solution.vertices)):
+				continue
 			for v in solution.vertices[way]:
 				vertex_region[v] = -way - 2
 		var visit = []

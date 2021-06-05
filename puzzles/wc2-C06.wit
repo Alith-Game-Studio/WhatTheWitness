@@ -4,7 +4,7 @@
     <Node>
       <Decorator xsi:type="EndDecorator">
         <Length>0.2</Length>
-        <Angle>-135</Angle>
+        <Angle>-120</Angle>
         <Color>Transparent</Color>
       </Decorator>
       <X>-0.375</X>
@@ -280,7 +280,7 @@
     <Node>
       <Decorator xsi:type="EndDecorator">
         <Length>0.2</Length>
-        <Angle>45</Angle>
+        <Angle>60</Angle>
         <Color>Transparent</Color>
       </Decorator>
       <X>0.375</X>
@@ -781,13 +781,23 @@
         <int>32</int>
         <int>31</int>
       </Nodes>
-      <Decorator xsi:type="TriangleDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
-        <ExtraScale>1</ExtraScale>
-        <Count>4</Count>
-        <Color>Gold</Color>
+      <Decorator xsi:type="CombinedDecorator">
+        <First xsi:type="TriangleDecorator">
+          <DeltaX>0</DeltaX>
+          <DeltaY>0</DeltaY>
+          <Angle>0</Angle>
+          <ExtraScale>1</ExtraScale>
+          <Count>4</Count>
+          <Color>Gold</Color>
+        </First>
+        <Second xsi:type="SymmetryPuzzleDecorator">
+          <DeltaX>0</DeltaX>
+          <DeltaY>0</DeltaY>
+          <Angle>0</Angle>
+          <ExtraScale>1</ExtraScale>
+          <SecondLineColor>Aqua</SecondLineColor>
+          <IsRotational>true</IsRotational>
+        </Second>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>

@@ -12,6 +12,7 @@ const region_judgers = [
 	'judge_region_filament',
 	'judge_region_points',
 	'judge_region_self_intersections',
+	'judge_region_big_points',
 	'judge_region_squares',
 	'judge_region_stars',
 	'judge_region_triangles',
@@ -44,7 +45,7 @@ func judge_covered_points(validator: Validation.Validator, require_errors: bool)
 	var all_ok = true
 	for v in validator.decorator_responses_of_vertex:
 		for response in validator.decorator_responses_of_vertex[v]:
-			if (response.rule == 'point' or response.rule == 'self-intersection'):
+			if (response.rule == 'point' or response.rule == 'self-intersection' or response.rule == 'big-point'):
 				var ok = true
 				if (validator.vertex_region[v] < -1): # covered point
 					if (response.rule == 'self-intersection'):
@@ -61,11 +62,18 @@ func judge_covered_points(validator: Validation.Validator, require_errors: bool)
 								if (!__match_color(intersection_colors[1], response.decorator.color1) or
 									!__match_color(intersection_colors[0], response.decorator.color2)):
 									ok = false
-					else: # point
+					else: # point and big-points
+						if (ok and response.rule == 'big-point'):
+							ok = false
+							for way in range(validator.puzzle.n_ways):
+								var solution_vertex_id = validator.solution.vertices[way][0]
+								if (solution_vertex_id == v):
+									# big points only match starts
+									ok = true
+									break
 						var way_id = -validator.vertex_region[v] - 2
 						var color = response.color
 						if (!__match_color(validator.puzzle.solution_colors[way_id], color)): 
-							
 							ok = false
 				elif (validator.vertex_region[v] == -1): # points that do not belong to any region, neither covered
 					ok = false
@@ -81,6 +89,8 @@ func judge_rings(validator: Validation.Validator, require_errors: bool):
 	var clonable_decorators = []
 	var paste_positions = []
 	for region in validator.regions:
+		if (validator.puzzle.select_one_subpuzzle and !region.is_near_solution_line):
+			continue
 		if (region.has_any('ring')):
 			for decorator_id in region.decorator_indices:
 				if (!(validator.decorator_responses[decorator_id].rule in ['ring', 'circle', 'point', 'filament'])):
@@ -189,6 +199,15 @@ func judge_region_self_intersections(validator: Validation.Validator, region: Va
 		return true
 	if (require_errors):
 		for decorator_id in region.decorator_dict['self-intersection']:
+			var response = validator.decorator_responses[decorator_id]
+			response.state = Validation.DecoratorResponse.ERROR
+	return false
+	
+func judge_region_big_points(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	if (!region.has_any('big-point')):
+		return true
+	if (require_errors):
+		for decorator_id in region.decorator_dict['big-point']:
 			var response = validator.decorator_responses[decorator_id]
 			response.state = Validation.DecoratorResponse.ERROR
 	return false

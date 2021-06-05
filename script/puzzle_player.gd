@@ -62,7 +62,7 @@ func load_puzzle(puzzle_path):
 		else:
 			hide_left_arrow_button()
 	
-func _physics_process(delta):
+func _process(delta):
 	if (loaded):
 		if (Gameplay.validator != null):
 			Gameplay.validation_elasped_time += delta

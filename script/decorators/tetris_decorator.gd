@@ -7,7 +7,7 @@ var is_hollow
 var margin_size
 var border_size
 var covering: Array
-const ROTATION_ANGLES = [0, PI / 3, 2 * PI / 3, PI / 2, PI, 3 * PI / 2]
+const ROTATION_ANGLES = [0, PI / 3, 2 * PI / 3, PI / 2, PI, 3 * PI / 2, 4 * PI / 3, 5 * PI / 3]
 
 func angle_equal_zero(angle, eps=1e-3):
 	var d = round(angle / (2 * PI))

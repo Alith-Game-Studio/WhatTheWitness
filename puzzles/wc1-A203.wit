@@ -1672,8 +1672,8 @@
   </FacesID>
   <MetaData>
     <PuzzleTitle />
-    <BackgroundColor>Navy</BackgroundColor>
-    <ForegroundColor>MediumBlue</ForegroundColor>
+    <BackgroundColor>#000040</BackgroundColor>
+    <ForegroundColor>Navy</ForegroundColor>
     <EdgeWidth>0.2</EdgeWidth>
     <TetrisTemplate>
       <Shapes>
