@@ -20,20 +20,6 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <Decorator xsi:type="TextDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
-        <ExtraScale>1</ExtraScale>
-        <SerializableFont>
-          <FontFamily>宋体</FontFamily>
-          <GraphicsUnit>Point</GraphicsUnit>
-          <Size>30</Size>
-          <Style>Regular</Style>
-        </SerializableFont>
-        <Text></Text>
-        <Color>Black</Color>
-      </Decorator>
       <X>2</X>
       <Y>1</Y>
       <Hidden>false</Hidden>

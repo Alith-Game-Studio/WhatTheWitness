@@ -91,6 +91,9 @@ class DiscreteSolutionState:
 		var occupied_vertices = {}
 		var endpoint_occupied = 0
 		for way in range(puzzle.n_ways):
+			for i in range(len(new_state.vertices[way]) - 1):
+				occupied_vertices[new_state.vertices[way][i]] = 2 if i == 0 else 1
+		for way in range(puzzle.n_ways):
 			var second_point = puzzle.vertices[new_state.vertices[way][-2]]
 			var end_point = puzzle.vertices[new_state.vertices[way][-1]]
 			var edge_length = (end_point.pos - second_point.pos).length()
@@ -98,11 +101,9 @@ class DiscreteSolutionState:
 				limit = min(limit, 1.0 - 1e-6)
 				if (edge_length < main_edge_length):
 					limit = min(limit, 1.0 * edge_length / main_edge_length)
-			for i in range(len(new_state.vertices[way])):
-				if (i == len(new_state.vertices[way]) - 1):
-					if (new_state.vertices[way][i] in occupied_vertices):
-						endpoint_occupied = max(endpoint_occupied, occupied_vertices[new_state.vertices[way][i]])
-				occupied_vertices[new_state.vertices[way][i]] = 2 if i == 0 else 1
+			if (new_state.vertices[way][-1] in occupied_vertices):
+				endpoint_occupied = max(endpoint_occupied, occupied_vertices[new_state.vertices[way][-1]])
+			occupied_vertices[new_state.vertices[way][-1]] = 1 # end of solution also collides
 			if (second_point.decorator.rule == 'self-intersection' and endpoint_occupied != 0):
 				return [null, null]
 			if end_point.decorator.rule != 'self-intersection':
