@@ -1277,9 +1277,9 @@ __meta__ = {
 }
 
 [node name="TextEdit24" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1536.0
+margin_left = 1920.0
 margin_top = 864.0
-margin_right = 1632.0
+margin_right = 2016.0
 margin_bottom = 960.0
 text = "wc1-A301"
 wrap_enabled = true
@@ -1288,9 +1288,9 @@ __meta__ = {
 }
 
 [node name="TextEdit25" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1632.0
+margin_left = 1824.0
 margin_top = 864.0
-margin_right = 1728.0
+margin_right = 1920.0
 margin_bottom = 960.0
 text = "wc1-A302"
 wrap_enabled = true
@@ -1299,9 +1299,9 @@ __meta__ = {
 }
 
 [node name="TextEdit26" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1728.0
+margin_left = 2016.0
 margin_top = 864.0
-margin_right = 1824.0
+margin_right = 2112.0
 margin_bottom = 960.0
 text = "wc1-A303"
 wrap_enabled = true
@@ -1354,20 +1354,42 @@ __meta__ = {
 }
 
 [node name="TextEdit20" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 1536.0
+margin_top = 864.0
+margin_right = 1632.0
+margin_bottom = 960.0
+text = "wc1-A203-1"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit113" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 864.0
+margin_right = 1728.0
+margin_bottom = 960.0
+text = "wc1-A203-2"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit114" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 1728.0
-margin_top = 672.0
+margin_top = 864.0
 margin_right = 1824.0
-margin_bottom = 768.0
-text = "wc1-A203"
+margin_bottom = 960.0
+text = "wc1-A203-3"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextEdit21" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1824.0
+margin_left = 1728.0
 margin_top = 672.0
-margin_right = 1920.0
+margin_right = 1824.0
 margin_bottom = 768.0
 text = "wc1-A204"
 wrap_enabled = true
@@ -1376,9 +1398,9 @@ __meta__ = {
 }
 
 [node name="TextEdit22" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 1920.0
+margin_left = 1824.0
 margin_top = 672.0
-margin_right = 2016.0
+margin_right = 1920.0
 margin_bottom = 768.0
 text = "wc1-A205"
 wrap_enabled = true
@@ -1387,9 +1409,9 @@ __meta__ = {
 }
 
 [node name="TextEdit23" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
-margin_left = 2016.0
+margin_left = 1920.0
 margin_top = 672.0
-margin_right = 2112.0
+margin_right = 2016.0
 margin_bottom = 768.0
 text = "wc1-A206"
 wrap_enabled = true
