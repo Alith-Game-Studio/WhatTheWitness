@@ -50,4 +50,5 @@ text = "Back"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

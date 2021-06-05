@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://level_lines.tres" type="TileSet" id=1]
 [ext_resource path="res://script/level_map.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://img/hand_drawing/box.png" type="Texture" id=10]
 [ext_resource path="res://img/hand_drawing/filament.png" type="Texture" id=11]
 [ext_resource path="res://img/hand_drawing/arrow.png" type="Texture" id=12]
+[ext_resource path="res://img/hand_drawing/snake.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -115,6 +116,18 @@ margin_top = 3954.58
 margin_right = 806.227
 margin_bottom = 4050.58
 texture = ExtResource( 12 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect8" type="TextureRect" parent="Menu/View/Tags"]
+modulate = Color( 1, 1, 1, 0.254902 )
+margin_left = 711.922
+margin_top = 4527.41
+margin_right = 807.922
+margin_bottom = 4623.41
+texture = ExtResource( 13 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1091,7 +1104,7 @@ margin_top = 4608.0
 margin_right = 1056.0
 margin_bottom = 4704.0
 rect_pivot_offset = Vector2( 64, 127 )
-text = "Miaoji-snake-1"
+text = "Miaoji-snake-1rev"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false

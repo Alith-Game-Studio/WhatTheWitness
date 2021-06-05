@@ -25,14 +25,15 @@ func init_property(puzzle, solution_state, start_vertex):
 
 func property_to_string(snake_points):
 	var snake_result = []
-	for snake_v in snake_result:
+	for snake_v in snake_points:
 		snake_result.append(str(snake_v))
 	return PoolStringArray(snake_result).join(',')
 
 func string_to_property(string):
-	var snake_result = string.split(',')
-	var snake_points = []
-	if (len(snake_result) > 1):
+	if (string != ''):
+		var snake_result = string.split(',')
+		var snake_points = []
 		for snake_string in snake_result:
 			snake_points.append(int(snake_string))
-	return snake_points
+		return snake_points
+	return []

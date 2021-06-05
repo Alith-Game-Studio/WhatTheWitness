@@ -203,6 +203,14 @@
         <int>5</int>
         <int>2</int>
       </Nodes>
+      <Decorator xsi:type="TriangleDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Count>1</Count>
+        <Color>Yellow</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
