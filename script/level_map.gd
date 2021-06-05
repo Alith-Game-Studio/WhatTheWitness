@@ -58,7 +58,7 @@ func _ready():
 	update_light()
 	update_counter()
 	MenuData.can_drag_map = true
-
+	
 func get_light_state(pos):
 	if (light_map.get_cellv(pos) >= 0):
 		return true

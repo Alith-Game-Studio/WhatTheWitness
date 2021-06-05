@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://script/custom_level_scene.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 1 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="BackButton" type="Button" parent="."]
+margin_left = 871.156
+margin_top = 540.23
+margin_right = 992.156
+margin_bottom = 583.23
+custom_fonts/font = SubResource( 1 )
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 27.2202
+margin_top = 507.091
+margin_right = 764.22
+margin_bottom = 598.091
+custom_fonts/normal_font = SubResource( 2 )
+text = "To load a custom puzzle (*.wit) file, do one of the following:
+(1) Directly open *.wit file with the game's executable, or
+(2) Drag any *.wit file to the game window at any time."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="ColorRect" parent="."]
+margin_left = 112.0
+margin_top = 108.0
+margin_right = 918.0
+margin_bottom = 437.0
+color = Color( 1, 1, 1, 0.258824 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TextureRect"]
+margin_left = 42.0
+margin_top = 147.0
+margin_right = 770.0
+margin_bottom = 256.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[center]Drag *.wit files here![/center]"
+text = "Drag *.wit files here!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

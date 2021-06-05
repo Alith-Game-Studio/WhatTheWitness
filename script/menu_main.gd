@@ -17,15 +17,18 @@ func _on_reset_progress_button_pressed():
 
 func _ready():
 	CSPHelper.initialize()
+	get_tree().connect("files_dropped", Gameplay, "drag_custom_levels")
+	if (!Gameplay.loaded_from_command_line):
+		var args = OS.get_cmdline_args()
+		Gameplay.drag_custom_levels(args, null)
+		Gameplay.loaded_from_command_line = true
 
 
 func _on_export_save_button_pressed():
 	get_tree().change_scene("res://export_save_scene.tscn")
 
-
 func _on_import_save_button_pressed():
 	get_tree().change_scene("res://import_save_scene.tscn")
 
-
 func _on_custom_level_button_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene("res://custom_level_scene.tscn")

@@ -41,7 +41,8 @@ func _on_Button_pressed():
 	if (puzzle_unlocked):
 		_on_Button_mouse_exited()
 		Gameplay.puzzle_name = puzzle_name
-		$"/root/LevelMap/PuzzleUI".load_puzzle()
+		Gameplay.playing_custom_puzzle = false
+		$"/root/LevelMap/PuzzleUI".load_puzzle(Gameplay.PUZZLE_FOLDER + Gameplay.puzzle_name)
 		$"/root/LevelMap/PuzzleUI".show()
 		$"/root/LevelMap/Menu".hide()
 		MenuData.can_drag_map = false

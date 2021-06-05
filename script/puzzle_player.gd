@@ -3,20 +3,29 @@ extends Node2D
 var mouse_start_position = null
 var is_drawing_solution = false
 onready var drawing_target = $MarginContainer/PuzzleRegion/PuzzleForeground
-onready var viewport = $MarginContainer/PuzzleRegion/PuzzleForeground/Viewport
-onready var level_map = $"/root/LevelMap"
+var level_map = null
 onready var left_arrow_button = $LeftArrowButton
 onready var right_arrow_button = $RightArrowButton
-onready var menu_bar_button = $"/root/LevelMap/SideMenu/MenuBarButton"
-onready var puzzle_counter_text = $"/root/LevelMap/SideMenu/PuzzleCounter"
+var menu_bar_button = null
+var puzzle_counter_text = null
 onready var back_button = $BackButton
 onready var drawing_control = $MarginContainer/PuzzleRegion/PuzzleForeground/Viewport/Control
 var loaded = false
-func load_puzzle():
+
+func _ready():
+	if (Gameplay.playing_custom_puzzle):
+		load_puzzle(Gameplay.puzzle_path)
+	else:
+		level_map = $"/root/LevelMap"
+		menu_bar_button = $"/root/LevelMap/SideMenu/MenuBarButton"
+		puzzle_counter_text = $"/root/LevelMap/SideMenu/PuzzleCounter"
+
+func load_puzzle(puzzle_path):
 	Gameplay.background_texture = null
-	Gameplay.puzzle = Graph.load_from_xml(Gameplay.get_absolute_puzzle_path())
+	Gameplay.puzzle_path = puzzle_path
+	Gameplay.puzzle = Graph.load_from_xml(Gameplay.puzzle_path)
 	Gameplay.puzzle.preprocess_tetris_covering()
-	if (Gameplay.puzzle_name in SaveData.saved_solutions):
+	if (!Gameplay.playing_custom_puzzle and Gameplay.puzzle_name in SaveData.saved_solutions):
 		Gameplay.solution = Solution.SolutionLine.load_from_string(SaveData.saved_solutions[Gameplay.puzzle_name], Gameplay.puzzle)
 		Gameplay.validator = Validation.Validator.new()
 		if (Gameplay.validator.validate(Gameplay.puzzle, Gameplay.solution)):
@@ -37,18 +46,21 @@ func load_puzzle():
 	$ColorRect.color = back_color
 	left_arrow_button.modulate = Color(front_color.r, front_color.g, front_color.b, left_arrow_button.modulate.a)
 	right_arrow_button.modulate = Color(front_color.r, front_color.g, front_color.b, right_arrow_button.modulate.a)
-	menu_bar_button.modulate = Color (front_color.r, front_color.g, front_color.b, menu_bar_button.modulate.a)
-	back_button.modulate = front_color
-	puzzle_counter_text.modulate = front_color
 	drawing_control.draw_background()
 	loaded = true
 	
-	# test if there are previous puzzles
-	var puzzle_grid_pos = MenuData.puzzle_grid_pos[Gameplay.puzzle_name]
-	if (MenuData.get_puzzle_on_cell(puzzle_grid_pos - Vector2(1, 0)) != null):
-		left_arrow_button.show()
-	else:
+	if (Gameplay.playing_custom_puzzle):
 		hide_left_arrow_button()
+	else:
+		menu_bar_button.modulate = Color (front_color.r, front_color.g, front_color.b, menu_bar_button.modulate.a)
+		back_button.modulate = front_color
+		puzzle_counter_text.modulate = front_color
+		# test if there are previous puzzles
+		var puzzle_grid_pos = MenuData.puzzle_grid_pos[Gameplay.puzzle_name]
+		if (MenuData.get_puzzle_on_cell(puzzle_grid_pos - Vector2(1, 0)) != null):
+			left_arrow_button.show()
+		else:
+			hide_left_arrow_button()
 	
 func _physics_process(delta):
 	if (loaded):
@@ -66,10 +78,11 @@ func _input(event):
 					Gameplay.validator = Validation.Validator.new()
 					if (Gameplay.validator.validate(Gameplay.puzzle, Gameplay.solution)):
 						Gameplay.solution.validity = 1
-						SaveData.update(Gameplay.puzzle_name, Gameplay.solution.save_to_string(Gameplay.puzzle))
-						if (Gameplay.puzzle_name in MenuData.puzzle_preview_panels):
-							MenuData.puzzle_preview_panels[Gameplay.puzzle_name].update_puzzle()
-						level_map.update_counter()
+						if (!Gameplay.playing_custom_puzzle):
+							SaveData.update(Gameplay.puzzle_name, Gameplay.solution.save_to_string(Gameplay.puzzle))
+							if (Gameplay.puzzle_name in MenuData.puzzle_preview_panels):
+								MenuData.puzzle_preview_panels[Gameplay.puzzle_name].update_puzzle()
+							level_map.update_counter()
 						right_arrow_button.show()
 					else:
 						Gameplay.solution.validity = -1
@@ -105,29 +118,34 @@ func _input(event):
 						_on_right_arrow_button_pressed()
 
 func back_to_menu():
-	is_drawing_solution = false
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	loaded = false
-	level_map.update_light()
-	$"/root/LevelMap/Menu".show()
-	hide()
-	MenuData.can_drag_map = true
-	menu_bar_button.modulate = Color.white
-	puzzle_counter_text.modulate = Color.white
+	if (!Gameplay.playing_custom_puzzle):
+		is_drawing_solution = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		loaded = false
+		level_map.update_light()
+		$"/root/LevelMap/Menu".show()
+		hide()
+		MenuData.can_drag_map = true
+		menu_bar_button.modulate = Color.white
+		puzzle_counter_text.modulate = Color.white
+	else:
+		get_tree().change_scene("res://custom_level_scene.tscn")
 
 func switch_puzzle(delta_pos):
+	if (Gameplay.playing_custom_puzzle):
+		back_to_menu()
 	var puzzle_grid_pos = MenuData.puzzle_grid_pos[Gameplay.puzzle_name]
 	var new_puzzle_name = MenuData.get_puzzle_on_cell(puzzle_grid_pos + delta_pos)
 	if (new_puzzle_name != null):
 		is_drawing_solution = false
 		Gameplay.puzzle_name = new_puzzle_name
-		load_puzzle()
+		Gameplay.playing_custom_puzzle = false
+		load_puzzle(Gameplay.PUZZLE_FOLDER + Gameplay.puzzle_name)
 	else:
 		back_to_menu()
 
 func _on_back_button_pressed():
 	back_to_menu()
-
 
 func _on_right_arrow_button_mouse_entered():
 	right_arrow_button.modulate = Color(right_arrow_button.modulate.r, right_arrow_button.modulate.g, right_arrow_button.modulate.b, 0.5)
