@@ -61,7 +61,7 @@ func calculate_covering(puzzle):
 				if (!(alignment in covering_dict)):
 					covering_dict[alignment] = true
 					covering.append(alignment)
-	print('Covering of %d:' % len(shapes), covering)
+	# print('Covering of %d:' % len(shapes), covering)
 			
 func __shrink_corner(p0, p1, p2, depth):
 	var e1 = (p0 - p1).normalized()
