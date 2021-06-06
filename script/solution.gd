@@ -96,6 +96,8 @@ class DiscreteSolutionState:
 					line_stage = SOLUTION_STAGE_SNAKE
 			if (line_stage == SOLUTION_STAGE_GHOST):
 				if (puzzle.vertices[vertices[way][-1]].decorator.rule == 'ghost'):
+					if (ghost_manager.is_solution_point_ghosted(ghost_properties, way, len(vertices[way]) - 1)):
+						continue
 					var mark = len(vertices[way]) if puzzle.vertices[vertices[way][-1]].decorator.pattern == 0 else -len(vertices[way])
 					new_ghost_properties[way].append(mark)
 			new_state.solution_stage[way] = line_stage

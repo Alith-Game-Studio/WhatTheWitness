@@ -65,7 +65,10 @@ func draw_below_solution(canvas, owner, owner_type, puzzle, solution):
 							puzzle.line_width, [prev_point_color, prev_point_color, point_color, point_color])
 				last_pos = pos
 				last_point_ghosted = point_ghosted
-
+			if (layer == 2):
+				if (solution.validity == 0): # drawing
+					canvas.add_circle(last_pos, puzzle.line_width / 2.7, line_color)
+					canvas.add_circle(last_pos, puzzle.line_width / 3.1, color)
 func is_solution_point_ghosted(vertex_ghost_property, way, id):
 	if (len(vertex_ghost_property) <= way):
 		return false
@@ -77,7 +80,7 @@ func is_solution_point_ghosted(vertex_ghost_property, way, id):
 		if (id <= abs(next_pos) - 1):
 			if (prev_pos > 0): # pattern = 0, or equivalently cycle 100011
 				return (id - phase) % 6 in [1, 2, 3]
-			elif (prev_pos < 0): # pattern = 1, or equivalently cycle 000001
+			elif (prev_pos < 0): # pattern = 1, or equivalently cycle 000010
 				return (id - phase) % 6 != 5
 			else: # normal line, not ghosted
 				return false
