@@ -11,6 +11,7 @@ const region_judgers = [
 	'judge_region_eliminators',
 	'judge_region_filament',
 	'judge_region_points',
+	'judge_region_ghosts',
 	'judge_region_self_intersections',
 	'judge_region_big_points',
 	'judge_region_squares',
@@ -199,6 +200,15 @@ func judge_region_self_intersections(validator: Validation.Validator, region: Va
 		return true
 	if (require_errors):
 		for decorator_id in region.decorator_dict['self-intersection']:
+			var response = validator.decorator_responses[decorator_id]
+			response.state = Validation.DecoratorResponse.ERROR
+	return false
+	
+func judge_region_ghosts(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	if (!region.has_any('ghost')):
+		return true
+	if (require_errors):
+		for decorator_id in region.decorator_dict['ghost']:
 			var response = validator.decorator_responses[decorator_id]
 			response.state = Validation.DecoratorResponse.ERROR
 	return false

@@ -3,6 +3,7 @@ extends Node
 const SOLUTION_STAGE_EXTENSION = 0
 const SOLUTION_STAGE_SNAKE = 1
 const SOLUTION_STATE_LINE_TRANSLATION = 2
+const SOLUTION_STAGE_GHOST = 3
 
 const MAIN_WAY = 0
 
@@ -45,10 +46,18 @@ class DiscreteSolutionState:
 		var main_way_dir = (main_way_pos - puzzle.vertices[vertices[MAIN_WAY][-1]].pos).normalized()
 		var snake_points = []
 		var new_snake_points = []
+		var ghost_properties = null
+		var new_ghost_properties = null
+		var ghost_manager = null
 		for i in range(len(puzzle.decorators)):
 			if (puzzle.decorators[i].rule == 'snake-manager'):
 				snake_points = event_properties[i]
 				new_snake_points = new_state.event_properties[i]
+			elif (puzzle.decorators[i].rule == 'ghost-manager'):
+				ghost_manager = puzzle.decorators[i]
+				ghost_properties = event_properties[i]
+				new_ghost_properties = new_state.event_properties[i]
+				
 		for way in range(puzzle.n_ways):
 			var way_vertex_id
 			if (way == MAIN_WAY):
@@ -85,6 +94,10 @@ class DiscreteSolutionState:
 			if (line_stage == SOLUTION_STAGE_EXTENSION):
 				if (vertices[way][-1] in new_snake_points):
 					line_stage = SOLUTION_STAGE_SNAKE
+			if (line_stage == SOLUTION_STAGE_GHOST):
+				if (puzzle.vertices[vertices[way][-1]].decorator.rule == 'ghost'):
+					var mark = len(vertices[way]) if puzzle.vertices[vertices[way][-1]].decorator.pattern == 0 else -len(vertices[way])
+					new_ghost_properties[way].append(mark)
 			new_state.solution_stage[way] = line_stage
 
 		var main_edge_length = (puzzle.vertices[new_state.vertices[MAIN_WAY][-1]].pos - puzzle.vertices[new_state.vertices[MAIN_WAY][-2]].pos).length()
@@ -92,6 +105,8 @@ class DiscreteSolutionState:
 		var endpoint_occupied = 0
 		for way in range(puzzle.n_ways):
 			for i in range(len(new_state.vertices[way]) - 1):
+				if (ghost_manager != null and ghost_manager.is_solution_point_ghosted(new_ghost_properties, way, i)):
+					continue
 				occupied_vertices[new_state.vertices[way][i]] = 2 if i == 0 else 1
 		for way in range(puzzle.n_ways):
 			var second_point = puzzle.vertices[new_state.vertices[way][-2]]
@@ -102,6 +117,8 @@ class DiscreteSolutionState:
 				if (edge_length < main_edge_length):
 					limit = min(limit, 1.0 * edge_length / main_edge_length)
 			if (new_state.vertices[way][-1] in occupied_vertices):
+				if (ghost_manager != null and ghost_manager.is_solution_point_ghosted(new_ghost_properties, way, len(new_state.vertices[way]) - 1)):
+					continue
 				endpoint_occupied = max(endpoint_occupied, occupied_vertices[new_state.vertices[way][-1]])
 			occupied_vertices[new_state.vertices[way][-1]] = 1 # end of solution also collides
 			if (second_point.decorator.rule == 'self-intersection' and endpoint_occupied != 0):
@@ -383,6 +400,9 @@ class SolutionLine:
 		var event_result = event_string.split('|')
 		for i in range(len(puzzle.decorators)):
 			state.event_properties.append(puzzle.decorators[i].string_to_property(event_result[i]))
+		for i in range(len(puzzle.decorators)):
+			puzzle.decorators[i].post_load_state(puzzle, state)
+		
 		var solution = SolutionLine.new()
 		solution.started = true
 		solution.validity = 1

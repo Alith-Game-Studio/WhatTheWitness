@@ -14,3 +14,5 @@ func draw_below_solution(canvas, owner, owner_type, puzzle, solution):
 func draw_above_solution(canvas, owner, owner_type, puzzle, solution):
 	pass
 	
+func post_load_state(puzzle, solution_state):
+	pass

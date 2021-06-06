@@ -198,7 +198,7 @@ func __add_decorator(puzzle, raw_element, v):
 		elif (text_decorator['Text'].to_lower() == 'exit'):
 			# another way to add an end
 			puzzle.vertices[v].is_puzzle_end = true
-		elif (text_decorator['Text'].to_lower() == '\u00A4'):
+		elif (text_decorator['Text'].to_lower() == '\u00A4'): # snake
 			var snake_manager = null
 			for global_decorator in puzzle.decorators:
 				if (global_decorator.rule == 'snake-manager'):
@@ -208,6 +208,19 @@ func __add_decorator(puzzle, raw_element, v):
 				snake_manager = load('res://script/decorators/snake_manager.gd').new()
 				puzzle.decorators.append(snake_manager)
 			snake_manager.init_snake_points.append(v)
+		elif (text_decorator['Text'].to_lower() == '\u028A'): # ghost
+			var ghost_manager = null
+			for global_decorator in puzzle.decorators:
+				if (global_decorator.rule == 'ghost-manager'):
+					ghost_manager = global_decorator
+					break
+			if (ghost_manager == null):
+				ghost_manager = load('res://script/decorators/ghost_manager.gd').new()
+				puzzle.decorators.append(ghost_manager)
+			var decorator = load('res://script/decorators/ghost_decorator.gd').new()
+			decorator.color = color(text_decorator['Color'])
+			decorator.pattern = 0 if float(text_decorator['Angle']) == 0.0 else 1
+			puzzle.vertices[v].decorator = decorator
 		else:
 			print('Unknown text decorator %s' % text_decorator['Text'])
 	var triangle_decorator = __find_decorator(raw_element, "TriangleDecorator")

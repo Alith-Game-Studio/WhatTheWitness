@@ -91,13 +91,23 @@ class Validator:
 					var response = add_decorator(puzzle.decorators[i].inner_decorator, vertex.pos, v)
 					decorator_responses_of_vertex[v].append(response)
 				has_boxes = true
+		var ghost_properties = null
+		var ghost_manager = null
+		for i in range(len(puzzle.decorators)):
+			if (puzzle.decorators[i].rule == 'ghost-manager'):
+				ghost_manager = puzzle.decorators[i]
+				ghost_properties = solution.event_properties[i]
 		vertex_region = []
 		for i in range(len(puzzle.vertices)):
 			vertex_region.push_back(-1)
 		for way in range(puzzle.n_ways):
 			if (way >= len(solution.vertices)):
 				continue
-			for v in solution.vertices[way]:
+			var vertices_way = solution.vertices[way]
+			for i in range(len(vertices_way)):
+				var v = vertices_way[i]
+				if (ghost_manager != null and ghost_manager.is_solution_point_ghosted(ghost_properties, way, i)):
+					continue
 				vertex_region[v] = -way - 2
 		var visit = []
 		var stack = []

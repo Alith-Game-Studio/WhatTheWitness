@@ -1109,6 +1109,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextEdit116" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 384.0
+margin_right = 672.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "Erzahlung-3x3-6ad_SC"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TextEdit6" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 960.0
 margin_top = 4608.0

@@ -38,6 +38,14 @@ class PuzzleCanvas:
 		# drawing_target.draw_line(pos1 * view_scale, pos2 * view_scale, color if override_color == null else override_color, width * view_scale, true)
 		drawing_target.draw_line(pos1 * view_scale, pos2 * view_scale, color if override_color == null else override_color, width * view_scale)
 	
+	func add_gradient_lines(pos_list, width, colors):
+		var result_list = []
+		for pos in pos_list:
+			result_list.push_back(pos * view_scale)
+		drawing_target.draw_polyline_colors(result_list, 
+			colors if override_color == null else PoolColorArray([override_color]),
+			width * view_scale)
+	
 	func add_rect(pos1, pos2, width, color):
 		# drawing_target.draw_line(Vector2((pos1.x + pos2.x) / 2, pos1.y) * view_scale, Vector2((pos1.x + pos2.x) / 2, pos2.y) * view_scale, color if override_color == null else override_color, (pos2.x - pos1.x) * view_scale, true)
 		drawing_target.draw_line(Vector2((pos1.x + pos2.x) / 2, pos1.y) * view_scale, Vector2((pos1.x + pos2.x) / 2, pos2.y) * view_scale, color if override_color == null else override_color, (pos2.x - pos1.x) * view_scale)
@@ -132,6 +140,8 @@ class PuzzleCanvas:
 			var vertices_main_way = state.vertices[main_way]
 			for way in range(puzzle.n_ways):
 				if (way >= len(state.vertices)):
+					continue
+				if (len(state.solution_stage) > way and state.solution_stage[way] == Solution.SOLUTION_STAGE_GHOST):
 					continue
 				var vertices_way = state.vertices[way]
 				var color = puzzle.solution_colors[way]
