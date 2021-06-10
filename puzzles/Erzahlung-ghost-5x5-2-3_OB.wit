@@ -34,7 +34,7 @@
         <Second xsi:type="TextDecorator">
           <DeltaX>0</DeltaX>
           <DeltaY>0</DeltaY>
-          <Angle>0</Angle>
+          <Angle>180</Angle>
           <ExtraScale>1</ExtraScale>
           <SerializableFont>
             <FontFamily>幼圆</FontFamily>
