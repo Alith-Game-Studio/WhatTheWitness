@@ -14,7 +14,7 @@ def copy_editor():
         base, ext = os.path.splitext(file)
         if (ext.lower() in IGNORE_EXTENSIONS):
             os.unlink(os.path.join(BUILD_FOLDER, file))
-        if (file.lower() == 'templateGenerator.exe'):
+        if (file.lower() == 'templategenerator.exe'):
             os.unlink(os.path.join(BUILD_FOLDER, file))
 
 if __name__ == '__main__':
@@ -24,8 +24,8 @@ if __name__ == '__main__':
         pass
     copy_editor()
     shutil.copytree('../../puzzles', os.path.join(BUILD_FOLDER, 'puzzles'))
-    shutil.copyfile('Custom Witness Puzzles.exe', os.path.join(BUILD_FOLDER, 'Game.exe'))
-    shutil.copyfile('Custom Witness Puzzles.pck', os.path.join(BUILD_FOLDER, 'Game.pck'))
+    shutil.copyfile('Custom Witness Puzzles.exe', os.path.join(BUILD_FOLDER, 'Player.exe'))
+    shutil.copyfile('Custom Witness Puzzles.pck', os.path.join(BUILD_FOLDER, 'Player.pck'))
     try:
         os.unlink(BUILD_ZIP)
     except:
