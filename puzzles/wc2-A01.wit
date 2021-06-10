@@ -347,8 +347,8 @@
   </FacesID>
   <MetaData>
     <PuzzleTitle>Square/SquarePuzzle_3x3</PuzzleTitle>
-    <BackgroundColor>#404040</BackgroundColor>
-    <ForegroundColor>CadetBlue</ForegroundColor>
+    <BackgroundColor>#804000</BackgroundColor>
+    <ForegroundColor>#404040</ForegroundColor>
     <EdgeWidth>0.2</EdgeWidth>
     <TetrisTemplate>
       <Shapes>
@@ -1150,6 +1150,6 @@
     <FaceDecorationScale>1</FaceDecorationScale>
     <ExportWidth>768</ExportWidth>
     <ExportHeight>768</ExportHeight>
-    <LineColor>Yellow</LineColor>
+    <LineColor>Orange</LineColor>
   </MetaData>
 </SaveState>

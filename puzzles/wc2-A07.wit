@@ -17,71 +17,61 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>2</X>
-      <Y>1</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>2</X>
-      <Y>2</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>2</X>
-      <Y>3</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>3</X>
-      <Y>0.99999999999999978</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>3</X>
-      <Y>2</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>3</X>
-      <Y>3</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>0</X>
-      <Y>2</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>-2.2204460492503131E-16</X>
-      <Y>1</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>0</X>
-      <Y>3</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>2</X>
-      <Y>4</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
+      <Decorator xsi:type="StartDecorator">
+        <Color>Transparent</Color>
+      </Decorator>
       <X>1</X>
       <Y>4</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <Decorator xsi:type="StartDecorator">
-        <Color>Transparent</Color>
-      </Decorator>
-      <X>0</X>
+      <X>2</X>
+      <Y>1</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>2</X>
+      <Y>2</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>2</X>
+      <Y>3</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>2</X>
       <Y>4</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
       <X>3</X>
+      <Y>1</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>3</X>
+      <Y>2</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>3</X>
+      <Y>3</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>3</X>
       <Y>4</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>4</X>
+      <Y>1</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>4</X>
+      <Y>2</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
@@ -95,27 +85,56 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>4</X>
+      <Decorator xsi:type="PointDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Color>Black</Color>
+      </Decorator>
+      <X>5</X>
+      <Y>3</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>5</X>
+      <Y>4</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>5</X>
       <Y>1.9999999999999998</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>4</X>
-      <Y>0.99999999999999956</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>2.9999999999999996</X>
-      <Y>-2.2204460492503131E-16</Y>
+      <X>5</X>
+      <Y>0.99999999999999978</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
       <X>3.9999999999999996</X>
-      <Y>-6.6613381477509392E-16</Y>
+      <Y>0</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>1.9999999999999996</X>
+      <X>5</X>
+      <Y>-4.4408920985006262E-16</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>3</X>
+      <Y>0</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <Decorator xsi:type="PointDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Color>Black</Color>
+      </Decorator>
+      <X>1.9999999999999998</X>
       <Y>0</Y>
       <Hidden>false</Hidden>
     </Node>
@@ -125,43 +144,28 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>-4.4408920985006262E-16</X>
-      <Y>-2.2204460492503131E-16</Y>
+      <X>0.99999999999999956</X>
+      <Y>-1</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>5</X>
-      <Y>3</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>5</X>
-      <Y>4</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>5</X>
-      <Y>1.9999999999999996</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>5</X>
-      <Y>0.99999999999999933</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>5</X>
-      <Y>-1.3322676295501879E-15</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>2.9999999999999991</X>
+      <X>1.9999999999999998</X>
       <Y>-1.0000000000000002</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>3.9999999999999991</X>
-      <Y>-1.0000000000000009</Y>
+      <X>3</X>
+      <Y>-1.0000000000000004</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>3.9999999999999996</X>
+      <Y>-0.99999999999999978</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>4.9999999999999991</X>
+      <Y>-1.0000000000000011</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
@@ -170,40 +174,95 @@
         <Angle>-45</Angle>
         <Color>Transparent</Color>
       </Decorator>
-      <X>4.9999999999999991</X>
-      <Y>-1.000000000000002</Y>
+      <X>6</X>
+      <Y>-1.0000000000000022</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>1.9999999999999991</X>
-      <Y>-1</Y>
+      <X>6.0000000000000009</X>
+      <Y>-1.3322676295501881E-15</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>0.99999999999999956</X>
-      <Y>-0.99999999999999978</Y>
+      <X>6</X>
+      <Y>0.99999999999999978</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>-4.4408920985006262E-16</X>
-      <Y>-1.0000000000000004</Y>
+      <X>6</X>
+      <Y>1.9999999999999998</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>6</X>
+      <Y>3</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>6</X>
+      <Y>4</Y>
       <Hidden>false</Hidden>
     </Node>
   </Nodes>
   <EdgesID>
     <SaveEdge>
       <Start>0</Start>
-      <End>3</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>1</Start>
       <End>4</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>2</Start>
+      <Start>1</Start>
       <End>5</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>2</Start>
+      <End>6</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>3</Start>
+      <End>7</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>4</Start>
+      <End>8</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>5</Start>
+      <End>9</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>6</Start>
+      <End>10</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>7</Start>
+      <End>11</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>8</Start>
+      <End>12</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>9</Start>
+      <End>13</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>10</Start>
+      <End>14</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>11</Start>
+      <End>15</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -217,8 +276,8 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>3</Start>
-      <End>4</End>
+      <Start>2</Start>
+      <End>3</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -227,12 +286,7 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>7</Start>
-      <End>4</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>3</Start>
+      <Start>5</Start>
       <End>6</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
@@ -243,21 +297,6 @@
     </SaveEdge>
     <SaveEdge>
       <Start>8</Start>
-      <End>5</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>7</Start>
-      <End>8</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>10</Start>
-      <End>0</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>1</Start>
       <End>9</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
@@ -267,23 +306,8 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>2</Start>
+      <Start>10</Start>
       <End>11</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>11</Start>
-      <End>9</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>13</Start>
-      <End>2</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>5</Start>
-      <End>12</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -292,23 +316,13 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>14</Start>
-      <End>11</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
       <Start>13</Start>
       <End>14</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>8</Start>
+      <Start>14</Start>
       <End>15</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>15</Start>
-      <End>12</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -317,7 +331,7 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>8</Start>
+      <Start>14</Start>
       <End>16</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
@@ -327,7 +341,7 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>7</Start>
+      <Start>13</Start>
       <End>18</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
@@ -337,7 +351,7 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>6</Start>
+      <Start>12</Start>
       <End>19</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
@@ -352,7 +366,7 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>6</Start>
+      <Start>12</Start>
       <End>20</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
@@ -362,9 +376,8 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>3</Start>
+      <Start>8</Start>
       <End>22</End>
-      <Decorator xsi:type="BrokenDecorator" />
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -373,7 +386,7 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>0</Start>
+      <Start>4</Start>
       <End>23</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
@@ -383,7 +396,7 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>10</Start>
+      <Start>0</Start>
       <End>24</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
@@ -394,11 +407,11 @@
     </SaveEdge>
     <SaveEdge>
       <Start>26</Start>
-      <End>17</End>
+      <End>23</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>16</Start>
+      <Start>24</Start>
       <End>25</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
@@ -408,33 +421,33 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>18</Start>
-      <End>27</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
       <Start>27</Start>
-      <End>25</End>
+      <End>22</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>19</Start>
-      <End>28</End>
+      <Start>26</Start>
+      <End>27</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
       <Start>28</Start>
-      <End>27</End>
+      <End>20</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>21</Start>
-      <End>29</End>
+      <Start>27</Start>
+      <End>28</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
       <Start>29</Start>
-      <End>28</End>
+      <End>21</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>28</Start>
+      <End>29</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -443,7 +456,7 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>20</Start>
+      <Start>29</Start>
       <End>30</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
@@ -454,7 +467,7 @@
     </SaveEdge>
     <SaveEdge>
       <Start>32</Start>
-      <End>29</End>
+      <End>19</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -463,33 +476,33 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>22</Start>
-      <End>33</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
       <Start>33</Start>
-      <End>30</End>
+      <End>18</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>23</Start>
-      <End>34</End>
+      <Start>32</Start>
+      <End>33</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
       <Start>34</Start>
-      <End>33</End>
+      <End>16</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>24</Start>
-      <End>35</End>
+      <Start>33</Start>
+      <End>34</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
       <Start>35</Start>
-      <End>34</End>
+      <End>17</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>34</Start>
+      <End>35</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
   </EdgesID>
@@ -497,125 +510,132 @@
     <SaveFace>
       <Nodes>
         <int>0</int>
-        <int>3</int>
         <int>4</int>
+        <int>5</int>
         <int>1</int>
       </Nodes>
+      <Decorator xsi:type="StarDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Color>Aqua</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
         <int>1</int>
-        <int>4</int>
         <int>5</int>
+        <int>6</int>
         <int>2</int>
       </Nodes>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>4</int>
-        <int>3</int>
+        <int>2</int>
         <int>6</int>
         <int>7</int>
+        <int>3</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>4</int>
+        <int>8</int>
+        <int>9</int>
+        <int>5</int>
       </Nodes>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
         <int>5</int>
-        <int>4</int>
-        <int>7</int>
-        <int>8</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>0</int>
-        <int>1</int>
         <int>9</int>
         <int>10</int>
+        <int>6</int>
       </Nodes>
-      <Decorator xsi:type="SquareDecorator">
+      <Decorator xsi:type="StarDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>White</Color>
+        <Color>Aqua</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>1</int>
-        <int>2</int>
+        <int>6</int>
+        <int>10</int>
         <int>11</int>
+        <int>7</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>8</int>
+        <int>12</int>
+        <int>13</int>
         <int>9</int>
       </Nodes>
-      <Decorator xsi:type="SquareDecorator">
+      <Decorator xsi:type="EliminatorDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Lime</Color>
+        <Color>Aqua</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>2</int>
-        <int>5</int>
-        <int>12</int>
-        <int>13</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>11</int>
-        <int>2</int>
+        <int>9</int>
         <int>13</int>
         <int>14</int>
+        <int>10</int>
       </Nodes>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>5</int>
-        <int>8</int>
+        <int>10</int>
+        <int>14</int>
         <int>15</int>
-        <int>12</int>
+        <int>11</int>
       </Nodes>
-      <Decorator xsi:type="SquareDecorator">
+      <Decorator xsi:type="StarDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>White</Color>
+        <Color>Aqua</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
         <int>15</int>
-        <int>8</int>
+        <int>14</int>
         <int>16</int>
         <int>17</int>
       </Nodes>
-      <Decorator xsi:type="SquareDecorator">
+      <Decorator xsi:type="StarDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Fuchsia</Color>
+        <Color>Blue</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>8</int>
-        <int>7</int>
+        <int>14</int>
+        <int>13</int>
         <int>18</int>
         <int>16</int>
       </Nodes>
@@ -623,8 +643,8 @@
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>7</int>
-        <int>6</int>
+        <int>13</int>
+        <int>12</int>
         <int>19</int>
         <int>18</int>
       </Nodes>
@@ -633,32 +653,32 @@
     <SaveFace>
       <Nodes>
         <int>19</int>
-        <int>6</int>
+        <int>12</int>
         <int>20</int>
         <int>21</int>
       </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>6</int>
-        <int>3</int>
-        <int>22</int>
-        <int>20</int>
-      </Nodes>
-      <Decorator xsi:type="SquareDecorator">
+      <Decorator xsi:type="StarDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Fuchsia</Color>
+        <Color>Aqua</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>3</int>
-        <int>0</int>
+        <int>12</int>
+        <int>8</int>
+        <int>22</int>
+        <int>20</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>8</int>
+        <int>4</int>
         <int>23</int>
         <int>22</int>
       </Nodes>
@@ -666,81 +686,74 @@
     </SaveFace>
     <SaveFace>
       <Nodes>
+        <int>4</int>
         <int>0</int>
-        <int>10</int>
         <int>24</int>
         <int>23</int>
       </Nodes>
-      <Decorator xsi:type="SquareDecorator">
+      <Decorator xsi:type="StarDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Fuchsia</Color>
+        <Color>Blue</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>17</int>
-        <int>16</int>
+        <int>23</int>
+        <int>24</int>
         <int>25</int>
         <int>26</int>
       </Nodes>
-      <Decorator xsi:type="SquareDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
-        <ExtraScale>1</ExtraScale>
-        <Color>Lime</Color>
-      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>16</int>
-        <int>18</int>
-        <int>27</int>
-        <int>25</int>
-      </Nodes>
-      <Decorator xsi:type="SquareDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
-        <ExtraScale>1</ExtraScale>
-        <Color>Fuchsia</Color>
-      </Decorator>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>18</int>
-        <int>19</int>
-        <int>28</int>
+        <int>22</int>
+        <int>23</int>
+        <int>26</int>
         <int>27</int>
       </Nodes>
-      <Decorator xsi:type="SquareDecorator">
+      <Decorator xsi:type="StarDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>White</Color>
+        <Color>Blue</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>19</int>
-        <int>21</int>
-        <int>29</int>
+        <int>20</int>
+        <int>22</int>
+        <int>27</int>
         <int>28</int>
       </Nodes>
+      <Decorator xsi:type="StarDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Color>Aqua</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
         <int>21</int>
         <int>20</int>
+        <int>28</int>
+        <int>29</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>21</int>
+        <int>29</int>
         <int>30</int>
         <int>31</int>
       </Nodes>
@@ -748,7 +761,7 @@
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>29</int>
+        <int>19</int>
         <int>21</int>
         <int>31</int>
         <int>32</int>
@@ -757,43 +770,50 @@
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>20</int>
-        <int>22</int>
-        <int>33</int>
-        <int>30</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>22</int>
-        <int>23</int>
-        <int>34</int>
+        <int>18</int>
+        <int>19</int>
+        <int>32</int>
         <int>33</int>
       </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>23</int>
-        <int>24</int>
-        <int>35</int>
-        <int>34</int>
-      </Nodes>
-      <Decorator xsi:type="SquareDecorator">
+      <Decorator xsi:type="StarDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>White</Color>
+        <Color>Aqua</Color>
       </Decorator>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>16</int>
+        <int>18</int>
+        <int>33</int>
+        <int>34</int>
+      </Nodes>
+      <Decorator xsi:type="StarDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Color>Blue</Color>
+      </Decorator>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>17</int>
+        <int>16</int>
+        <int>34</int>
+        <int>35</int>
+      </Nodes>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
   </FacesID>
   <MetaData>
-    <PuzzleTitle>Square/SquarePuzzle_1x2</PuzzleTitle>
-    <BackgroundColor>#000040</BackgroundColor>
-    <ForegroundColor>MediumBlue</ForegroundColor>
+    <PuzzleTitle>Square/SquarePuzzle_3x3</PuzzleTitle>
+    <BackgroundColor>#404040</BackgroundColor>
+    <ForegroundColor>CadetBlue</ForegroundColor>
     <EdgeWidth>0.2</EdgeWidth>
     <TetrisTemplate>
       <Shapes>
@@ -1595,6 +1615,6 @@
     <FaceDecorationScale>1</FaceDecorationScale>
     <ExportWidth>768</ExportWidth>
     <ExportHeight>768</ExportHeight>
-    <LineColor>#699BFF</LineColor>
+    <LineColor>Cyan</LineColor>
   </MetaData>
 </SaveState>
