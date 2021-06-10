@@ -2,28 +2,8 @@
 <SaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Nodes>
     <Node>
-      <Decorator xsi:type="PointDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
-        <ExtraScale>1</ExtraScale>
-        <Color>Black</Color>
-      </Decorator>
       <X>1</X>
       <Y>1</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>1</X>
-      <Y>2</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <Decorator xsi:type="StartDecorator">
-        <Color>Transparent</Color>
-      </Decorator>
-      <X>1</X>
-      <Y>3</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
@@ -41,6 +21,19 @@
         <Text>ʊ</Text>
         <Color>Black</Color>
       </Decorator>
+      <X>1</X>
+      <Y>2</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <Decorator xsi:type="StartDecorator">
+        <Color>Transparent</Color>
+      </Decorator>
+      <X>1</X>
+      <Y>3</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
       <X>2</X>
       <Y>1</Y>
       <Hidden>false</Hidden>
@@ -51,6 +44,11 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
+      <Decorator xsi:type="EndDecorator">
+        <Length>0.2</Length>
+        <Angle>0</Angle>
+        <Color>Transparent</Color>
+      </Decorator>
       <X>2</X>
       <Y>3</Y>
       <Hidden>false</Hidden>
@@ -61,13 +59,25 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <Decorator xsi:type="EndDecorator">
-        <Length>0.2</Length>
-        <Angle>0</Angle>
-        <Color>Transparent</Color>
-      </Decorator>
       <X>2</X>
       <Y>-2.2204460492503131E-16</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>0.99999999999999933</X>
+      <Y>-1.0000000000000002</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <Decorator xsi:type="PointDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Color>Black</Color>
+      </Decorator>
+      <X>1.9999999999999998</X>
+      <Y>-1.0000000000000007</Y>
       <Hidden>false</Hidden>
     </Node>
   </Nodes>
@@ -122,6 +132,21 @@
       <End>7</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
+    <SaveEdge>
+      <Start>9</Start>
+      <End>7</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>6</Start>
+      <End>8</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>8</Start>
+      <End>9</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
   </EdgesID>
   <FacesID>
     <SaveFace>
@@ -148,6 +173,15 @@
         <int>0</int>
         <int>6</int>
         <int>7</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>7</int>
+        <int>6</int>
+        <int>8</int>
+        <int>9</int>
       </Nodes>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>

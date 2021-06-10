@@ -31,7 +31,6 @@ func draw_below_solution(canvas, owner, owner_type, puzzle, solution):
 		var percentage
 		for i in range(1, len(vertices_way)):
 			var segment = [puzzle.vertices[vertices_way[i - 1]].pos, puzzle.vertices[vertices_way[i]].pos]
-
 			if (i + 1 == len(vertices_way)):
 				var segment_main = [puzzle.vertices[vertices_main_way[-2]].pos, puzzle.vertices[vertices_main_way[-1]].pos]
 				var main_line_length = (segment_main[1] - segment_main[0]).length()
@@ -64,9 +63,9 @@ func draw_below_solution(canvas, owner, owner_type, puzzle, solution):
 			canvas.add_circle(last_pos, puzzle.line_width / 2.7, line_color)
 			canvas.add_circle(last_pos, puzzle.line_width / 3.1, color)
 			if (len(vertices_way) >= 3):
-				var last_v_pos = puzzle.vertices[vertices_main_way[-1]].pos
-				var second_last_v_pos = puzzle.vertices[vertices_main_way[-2]].pos
-				var third_last_v_pos = puzzle.vertices[vertices_main_way[-3]].pos
+				var last_v_pos = puzzle.vertices[vertices_way[-1]].pos
+				var second_last_v_pos = puzzle.vertices[vertices_way[-2]].pos
+				var third_last_v_pos = puzzle.vertices[vertices_way[-3]].pos
 				var last_distance = last_v_pos.distance_to(second_last_v_pos) * percentage
 				var second_last_distance = second_last_v_pos.distance_to(third_last_v_pos)
 				var follow_distance = 0.5 # the distance that the second indicator from the first indicator
@@ -75,6 +74,7 @@ func draw_below_solution(canvas, owner, owner_type, puzzle, solution):
 				var second_indicator_pos = second_percentage * second_last_v_pos + (1 - second_percentage) * third_last_v_pos
 				canvas.add_circle(second_indicator_pos, puzzle.line_width / 3.4, line_color)
 				canvas.add_circle(second_indicator_pos, puzzle.line_width / 3.8, color)
+
 				
 func is_solution_point_ghosted(vertex_ghost_property, way, id):
 	if (len(vertex_ghost_property) <= way):
@@ -108,10 +108,10 @@ func property_to_string(vertex_ghost_property):
 		for v in way_property:
 			way_result.append(str(v))
 		ghost_result.append(PoolStringArray(way_result).join(','))
-	return PoolStringArray(ghost_result).join('|')
+	return PoolStringArray(ghost_result).join('/')
 
 func string_to_property(string):
-	var ghost_result = string.split('|')
+	var ghost_result = string.split('/')
 	var vertex_ghost_property = []
 	for way_result in ghost_result:
 		var way_property = []

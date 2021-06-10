@@ -36,6 +36,7 @@ func list_files(path):
 		files[file] = true
 	
 func _ready():
+	drag_start = null
 	# puzzle_placeholders.hide()
 	SaveData.load_all()
 	var puzzle_files = list_files(puzzle_dir)
@@ -163,6 +164,8 @@ func _input(event):
 			drag_start = null
 			return
 	elif (event is InputEventMouseMotion):
+		if (!MenuData.can_drag_map):
+			drag_start = null
 		if (drag_start != null):
 			view_origin += (event.position - drag_start) / view_scale
 			drag_start = event.position
