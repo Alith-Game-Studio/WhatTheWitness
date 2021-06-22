@@ -1305,9 +1305,9 @@ __meta__ = {
 
 [node name="TextEdit146" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 2496.0
-margin_top = 5376.0
+margin_top = 5568.0
 margin_right = 2592.0
-margin_bottom = 5472.0
+margin_bottom = 5664.0
 rect_pivot_offset = Vector2( 64, 127 )
 text = "Erzahlung-ghost-5x5-2-3_OB"
 wrap_enabled = true
