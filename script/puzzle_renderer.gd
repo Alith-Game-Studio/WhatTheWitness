@@ -4,7 +4,7 @@ func _draw():
 	var canvas = Visualizer.PuzzleCanvas.new()
 	var puzzle_name = name.replace('|', '.')
 	var puzzle_path = 'res://puzzles/%s' % puzzle_name
-	var puzzle = Graph.load_from_xml(puzzle_path)
+	var puzzle = Graph.load_from_xml(puzzle_path, true)
 	canvas.puzzle = puzzle
 	canvas.normalize_view(self.get_rect().size)
 	canvas.draw_puzzle(self)

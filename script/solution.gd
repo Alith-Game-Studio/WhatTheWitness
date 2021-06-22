@@ -338,7 +338,7 @@ class SolutionLine:
 			
 			# calculate new progress
 			var projected_length = edge_vec.normalized().dot(delta) / edge_length
-			var projected_det = abs(det(edge_vec.normalized(), delta)) / edge_length
+			var projected_det = det(edge_vec.normalized(), delta) / edge_length
 			var projected_progress = progress + projected_length
 			var encourage_extension = false
 			if (v1.is_attractor):
@@ -347,9 +347,15 @@ class SolutionLine:
 				else:
 					encourage_extension = true
 			if (encourage_extension):
-				projected_progress += projected_det * 0.5 # encourage
-			else:
-				projected_progress -= projected_det * 0.5 # discorage
+				if ([v2, v1] in puzzle.edge_turning_angles):
+					var angle = puzzle.edge_turning_angles[[v2, v1]][1 if projected_det < 0 else 0]
+					# print('encourage ', angle, ' to add ', projected_det / tan(angle / 2))
+					projected_progress -= projected_det / tan(angle / 2) * 0.5
+			else: # discourage extension
+				if ([v1, v2] in puzzle.edge_turning_angles):
+					var angle = puzzle.edge_turning_angles[[v1, v2]][1 if projected_det > 0 else 0]
+					# print('discourage ', angle, ' to minus ', projected_det / tan(angle / 2))
+					projected_progress -= projected_det / tan(angle / 2) * 0.5
 			if (projected_progress <= 0.0):
 				state_stack.pop_back()
 				limit = 1.0 + 1e-6

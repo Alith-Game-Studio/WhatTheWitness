@@ -1123,6 +1123,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextEdit156" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 384.0
+margin_right = 672.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "test-flower"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TextEdit116" type="TextEdit" parent="Menu/View/PuzzlePlaceHolders"]
 margin_left = 1152.0
 margin_top = 5568.0

@@ -24,7 +24,6 @@ func load_puzzle(puzzle_path):
 	Gameplay.background_texture = null
 	Gameplay.puzzle_path = puzzle_path
 	Gameplay.puzzle = Graph.load_from_xml(Gameplay.puzzle_path)
-	Gameplay.puzzle.preprocess_tetris_covering()
 	if (!Gameplay.playing_custom_puzzle and Gameplay.puzzle_name in SaveData.saved_solutions):
 		Gameplay.solution = Solution.SolutionLine.load_from_string(SaveData.saved_solutions[Gameplay.puzzle_name], Gameplay.puzzle)
 		Gameplay.validator = Validation.Validator.new()

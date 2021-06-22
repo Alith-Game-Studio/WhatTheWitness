@@ -75,6 +75,7 @@ class Puzzle:
 	var decorators : Array
 	var edge_detector_node = {}
 	var edge_shared_facets = {}
+	var edge_turning_angles = {}
 	
 	func get_vertex_at(position, eps=1e-3):
 		for vertex in vertices:
@@ -91,6 +92,36 @@ class Puzzle:
 				if (decorator.inner_decorator.rule == 'tetris'):
 					decorator.inner_decorator.calculate_covering(self)
 		
+	func preprocess_edge_angles():
+		for e in edges:
+			var start_turning_angles = [-PI, PI]
+			var end_turning_angles = [-PI, PI]
+			for e2 in edges:
+				if (e == e2):
+					continue
+				if (e2.start.index == e.start.index or e2.end.index == e.start.index):
+					var d1 = e.end.pos - e.start.pos
+					var d2 = e2.end.pos - e2.start.pos
+					if (e2.end.index == e.start.index):
+						d2 = -d2
+					var angle = d1.angle_to(d2)
+					if (angle > 0):
+						start_turning_angles[1] = min(start_turning_angles[1], angle)
+					else:
+						start_turning_angles[0] = max(start_turning_angles[0], angle)
+				elif (e2.end.index == e.end.index or e2.start.index == e.end.index):
+					var d1 = e.start.pos - e.end.pos
+					var d2 = e2.start.pos - e2.end.pos
+					if (e2.start.index == e.end.index):
+						d2 = -d2
+					var angle = d1.angle_to(d2)
+					if (angle > 0):
+						end_turning_angles[1] = min(end_turning_angles[1], angle)
+					else:
+						end_turning_angles[0] = max(end_turning_angles[0], angle)
+			edge_turning_angles[[e.start, e.end]] = end_turning_angles
+			edge_turning_angles[[e.end, e.start]] = start_turning_angles
+			
 func push_vertex_vec(puzzle, pos, hidden=false):
 	var result = len(puzzle.vertices)
 	var vertex = Vertex.new(pos.x, pos.y)
@@ -413,7 +444,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		var raw_decorator = raw_element['Decorator']
 		__check_decorator_consumed(raw_decorator, element_type)
 	
-func load_from_xml(file):
+func load_from_xml(file, preview_only=false):
 	var puzzle = Puzzle.new()
 	puzzle.n_ways = 1
 	var raw = better_xml.parse_xml_file(file)
@@ -437,5 +468,8 @@ func load_from_xml(file):
 		add_element(puzzle, raw_edge, EDGE_ELEMENT)
 	for raw_face in raw['FacesID']['_arr']:
 		add_element(puzzle, raw_face, FACET_ELEMENT)
+	if (not preview_only):
+		puzzle.preprocess_tetris_covering()
+		puzzle.preprocess_edge_angles()
 	return puzzle
 	
