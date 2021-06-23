@@ -162,6 +162,8 @@ class PuzzleCanvas:
 						last_pos = last_pos * (1 - solution.progress) + puzzle.vertices[vertices_way[1]].pos * solution.progress
 				add_circle(last_pos, puzzle.start_size, color)
 				for i in range(1, len(vertices_way)):
+					if(vertices_way[i - 1] >= len(puzzle.vertices) or vertices_way[i] >= len(puzzle.vertices)):
+						continue
 					var segment = [puzzle.vertices[vertices_way[i - 1]].pos, puzzle.vertices[vertices_way[i]].pos]
 					var percentage
 					if (i + 1 == len(vertices_way)):

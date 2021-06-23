@@ -44,6 +44,7 @@ class Validator:
 	var puzzle: Graph.Puzzle
 	var solution: Solution.DiscreteSolutionState
 	var has_boxes: bool
+	var has_lasers: bool
 	
 	func alter_rule(decorator_index, region, new_rule):
 		var old_rule = decorator_responses[decorator_index].rule
@@ -91,6 +92,8 @@ class Validator:
 					var response = add_decorator(puzzle.decorators[i].inner_decorator, vertex.pos, v)
 					decorator_responses_of_vertex[v].append(response)
 				has_boxes = true
+			elif (decorator.rule == 'laser-manager'):
+				has_lasers = true
 		var ghost_properties = null
 		var ghost_manager = null
 		for i in range(len(puzzle.decorators)):
@@ -107,6 +110,8 @@ class Validator:
 			for i in range(len(vertices_way)):
 				var v = vertices_way[i]
 				if (ghost_manager != null and ghost_manager.is_solution_point_ghosted(ghost_properties, way, i)):
+					continue
+				if (v >= len(puzzle.vertices)):
 					continue
 				vertex_region[v] = -way - 2
 		var visit = []

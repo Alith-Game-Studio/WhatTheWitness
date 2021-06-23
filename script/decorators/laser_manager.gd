@@ -19,7 +19,7 @@ func draw_below_solution(canvas: Visualizer.PuzzleCanvas, owner, owner_type, puz
 		lasers = init_lasers
 	else:
 		lasers = solution.state_stack[-1].event_properties[id] 
-	for k in range(n_laser):
+	for k in range(len(lasers)):
 		var color = laser_colors[k]
 		var transparent_color = Color(color.r, color.g, color.b, 0.5)
 		var laser = lasers[k]

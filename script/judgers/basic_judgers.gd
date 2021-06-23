@@ -187,6 +187,9 @@ func judge_region_points(validator: Validation.Validator, region: Validation.Reg
 				if (validator.decorator_responses[j].vertex_index == v_id):
 					ok = __match_color(validator.decorator_responses[j].color, response.color)
 					break
+		if (validator.has_lasers):
+			if (LaserJudger.laser_pass_point(validator, response.pos, response.color)):
+				ok = true
 		if (!ok):
 			if (require_errors):
 				response.state = Validation.DecoratorResponse.ERROR
