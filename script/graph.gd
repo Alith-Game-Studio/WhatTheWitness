@@ -252,6 +252,11 @@ func __add_decorator(puzzle, raw_element, v):
 			decorator.color = color(text_decorator['Color'])
 			decorator.pattern = 0 if float(text_decorator['Angle']) == 0.0 else 1
 			puzzle.vertices[v].decorator = decorator
+		elif (text_decorator['Text'].to_lower() == '\u263F\uFE0F'): # emitter
+			var decorator = load('res://script/decorators/emitter_decorator.gd').new()
+			decorator.color = color(text_decorator['Color'])
+			puzzle.vertices[v].decorator = decorator
+			decorator.angle = deg2rad(float(text_decorator['Angle']))
 		else:
 			print('Unknown text decorator %s' % text_decorator['Text'])
 	var triangle_decorator = __find_decorator(raw_element, "TriangleDecorator")
