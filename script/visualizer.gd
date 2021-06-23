@@ -128,6 +128,13 @@ class PuzzleCanvas:
 				decorator_response.decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)
 				
 		override_color = null
+		
+	func draw_additive_layer(target, solution, validator, time):
+		drawing_target = target
+		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
+		for i in range(len(puzzle.decorators)):
+			puzzle.decorators[i].draw_additive_layer(self, i, -1, puzzle, solution)
+
 	func draw_solution(target, solution, validator, time):
 		drawing_target = target
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))

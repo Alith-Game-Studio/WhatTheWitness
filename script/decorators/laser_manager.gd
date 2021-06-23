@@ -12,7 +12,7 @@ const LASER_EMITTER_OBS_RADIUS = 0.05
 const LASER_EMITTER_RADIUS = 0.1
 const CORNER_SIZE = 0.02
 
-func draw_below_solution(canvas: Visualizer.PuzzleCanvas, owner, owner_type, puzzle, solution):
+func draw_additive_layer(canvas: Visualizer.PuzzleCanvas, owner, owner_type, puzzle, solution):
 	var id = owner
 	var lasers
 	if (solution == null or !solution.started or len(solution.state_stack[-1].event_properties) <= id):
@@ -20,6 +20,8 @@ func draw_below_solution(canvas: Visualizer.PuzzleCanvas, owner, owner_type, puz
 	else:
 		lasers = solution.state_stack[-1].event_properties[id] 
 	for k in range(len(lasers)):
+		if (k >= n_laser):
+			continue
 		var color = laser_colors[k]
 		var transparent_color = Color(color.r, color.g, color.b, 0.5)
 		var laser = lasers[k]
@@ -94,7 +96,7 @@ func update_lasers(lasers, puzzle, solution_state):
 			lasers[i].append(pos)
 		while(laser_reflection(lasers[i], puzzle, solution_state)):
 			pass
-	print(lasers)
+	# print(lasers)
 
 func add_laser_emitter(pos, color, angle):
 	var id = n_laser

@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://script/puzzle_player.gd" type="Script" id=1]
+[ext_resource path="res://puzzle_additive_layer_renderer.gd" type="Script" id=2]
 [ext_resource path="res://img/right_arrow.png" type="Texture" id=4]
 [ext_resource path="res://img/left_arrow.png" type="Texture" id=5]
 [ext_resource path="res://img/cross.png" type="Texture" id=6]
@@ -10,6 +11,9 @@
 [sub_resource type="ViewportTexture" id=1]
 flags = 4
 viewport_path = NodePath("MarginContainer/PuzzleRegion/PuzzleForeground/Viewport")
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
 
 [node name="PuzzleUI" type="Node2D"]
 script = ExtResource( 1 )
@@ -65,6 +69,13 @@ margin_right = 1440.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 1440, 1200 )
 script = ExtResource( 8 )
+
+[node name="Control2" type="Control" parent="MarginContainer/PuzzleRegion/PuzzleForeground/Viewport"]
+material = SubResource( 2 )
+margin_right = 1440.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 1440, 1200 )
+script = ExtResource( 2 )
 
 [node name="RightArrowButton" type="TextureButton" parent="."]
 margin_left = 919.464

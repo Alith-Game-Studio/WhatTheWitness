@@ -9,7 +9,7 @@ onready var right_arrow_button = $RightArrowButton
 var menu_bar_button = null
 var puzzle_counter_text = null
 onready var back_button = $BackButton
-onready var drawing_control = $MarginContainer/PuzzleRegion/PuzzleForeground/Viewport/Control
+onready var viewport = $MarginContainer/PuzzleRegion/PuzzleForeground/Viewport
 var loaded = false
 
 func _ready():
@@ -39,13 +39,13 @@ func load_puzzle(puzzle_path):
 		hide_right_arrow_button()
 	Gameplay.canvas = Visualizer.PuzzleCanvas.new()
 	Gameplay.canvas.puzzle = Gameplay.puzzle
-	Gameplay.canvas.normalize_view(drawing_control.get_rect().size, 0.95, 0.8)	
+	Gameplay.canvas.normalize_view(viewport.size, 0.95, 0.8)	
 	var back_color = Gameplay.puzzle.background_color
 	var front_color = Gameplay.puzzle.line_color
 	$ColorRect.color = back_color
 	left_arrow_button.modulate = Color(front_color.r, front_color.g, front_color.b, left_arrow_button.modulate.a)
 	right_arrow_button.modulate = Color(front_color.r, front_color.g, front_color.b, right_arrow_button.modulate.a)
-	drawing_control.draw_background()
+	viewport.draw_background()
 	loaded = true
 	back_button.modulate = front_color
 	if (Gameplay.playing_custom_puzzle):
@@ -64,7 +64,7 @@ func _process(delta):
 	if (loaded):
 		if (Gameplay.validator != null):
 			Gameplay.validation_elasped_time += delta
-		drawing_control.update()
+		viewport.update_all()
 
 func resizable_wrap_mouse_position(pos):
 	var current_window_size = OS.window_size

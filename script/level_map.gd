@@ -19,6 +19,8 @@ var window_size = Vector2(1024, 600)
 var view_origin = -window_size / 2
 var view_scale = 1.0
 
+const UNLOCK_ALL_PUZZLES = true
+
 const DIR_X = [-1, 0, 1, 0]
 const DIR_Y = [0, -1, 0, 1]
 
@@ -129,7 +131,7 @@ func update_light():
 				stack.append(new_pos)
 	for puzzle_file in MenuData.puzzle_grid_pos:
 		var pos = MenuData.puzzle_grid_pos[puzzle_file]
-		if(get_light_state(pos) and !MenuData.puzzle_preview_panels[puzzle_file].puzzle_unlocked):
+		if((UNLOCK_ALL_PUZZLES or get_light_state(pos)) and !MenuData.puzzle_preview_panels[puzzle_file].puzzle_unlocked):
 			MenuData.puzzle_preview_panels[puzzle_file].update_puzzle(true)
 
 func update_view():
