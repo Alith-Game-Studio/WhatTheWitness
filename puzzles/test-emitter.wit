@@ -254,6 +254,20 @@
     <SaveEdge>
       <Start>3</Start>
       <End>4</End>
+      <Decorator xsi:type="TextDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>-135</Angle>
+        <ExtraScale>3</ExtraScale>
+        <SerializableFont>
+          <FontFamily>Segoe UI Emoji</FontFamily>
+          <GraphicsUnit>Point</GraphicsUnit>
+          <Size>9</Size>
+          <Style>Regular</Style>
+        </SerializableFont>
+        <Text>☿️</Text>
+        <Color>Lime</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -279,20 +293,6 @@
     <SaveEdge>
       <Start>10</Start>
       <End>11</End>
-      <Decorator xsi:type="TextDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>45</Angle>
-        <ExtraScale>3</ExtraScale>
-        <SerializableFont>
-          <FontFamily>Segoe UI Emoji</FontFamily>
-          <GraphicsUnit>Point</GraphicsUnit>
-          <Size>9</Size>
-          <Style>Regular</Style>
-        </SerializableFont>
-        <Text>☿️</Text>
-        <Color>Red</Color>
-      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -348,7 +348,7 @@
         <DeltaY>0</DeltaY>
         <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Color>Red</Color>
+        <Color>Lime</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
@@ -506,8 +506,8 @@
   </FacesID>
   <MetaData>
     <PuzzleTitle>Square/SquarePuzzle_4x4</PuzzleTitle>
-    <BackgroundColor>LightGray</BackgroundColor>
-    <ForegroundColor>DarkGray</ForegroundColor>
+    <BackgroundColor>DimGray</BackgroundColor>
+    <ForegroundColor>Gray</ForegroundColor>
     <EdgeWidth>0.2</EdgeWidth>
     <TetrisTemplate>
       <Shapes>
@@ -1309,6 +1309,6 @@
     <FaceDecorationScale>1</FaceDecorationScale>
     <ExportWidth>768</ExportWidth>
     <ExportHeight>768</ExportHeight>
-    <LineColor>Yellow</LineColor>
+    <LineColor>Silver</LineColor>
   </MetaData>
 </SaveState>

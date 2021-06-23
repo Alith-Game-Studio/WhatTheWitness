@@ -57,7 +57,8 @@ class DiscreteSolutionState:
 				ghost_manager = puzzle.decorators[i]
 				ghost_properties = event_properties[i]
 				new_ghost_properties = new_state.event_properties[i]
-				
+			elif (puzzle.decorators[i].rule == 'laser-manager'):
+				puzzle.decorators[i].update_lasers(new_state.event_properties[i], puzzle, self)
 		for way in range(puzzle.n_ways):
 			var way_vertex_id
 			if (way == MAIN_WAY):
