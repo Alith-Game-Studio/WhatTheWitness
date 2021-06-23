@@ -1945,15 +1945,13 @@ visible = false
 
 [node name="PuzzleCounter" type="RichTextLabel" parent="SideMenu"]
 margin_left = 713.0
-margin_top = 26.0
+margin_top = 25.37
 margin_right = 1004.0
-margin_bottom = 72.0
+margin_bottom = 71.37
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[right] 0 / 0 [/right]
-"
-text = " 0 / 0 
-"
+bbcode_text = "[right]0 / 0[/right] "
+text = "0 / 0 "
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
