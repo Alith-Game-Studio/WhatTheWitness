@@ -2,6 +2,10 @@ extends Node
 
 const UPSAMPLING_FACTOR = 2
 
+onready var initial_viewport_size = get_viewport().size
+onready var initial_window_size = OS.window_size
+
+
 class PuzzleCanvas:
 	
 	var drawing_target

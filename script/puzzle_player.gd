@@ -66,6 +66,14 @@ func _process(delta):
 			Gameplay.validation_elasped_time += delta
 		drawing_control.update()
 
+func resizable_wrap_mouse_position(pos):
+	var current_window_size = OS.window_size
+	var additional_scale = current_window_size / Visualizer.initial_viewport_size
+	additional_scale = min(additional_scale.x, additional_scale.y)
+	var margin = (current_window_size - Visualizer.initial_viewport_size * additional_scale) / 2
+	print(margin)
+	Input.warp_mouse_position(pos * additional_scale + margin)
+
 func _input(event):
 	if (loaded):
 		if (event is InputEventMouseButton and event.is_pressed()):
@@ -88,7 +96,7 @@ func _input(event):
 				is_drawing_solution = false
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 				if (mouse_start_position != null):
-					Input.warp_mouse_position(mouse_start_position + panel_start_pos)
+					resizable_wrap_mouse_position(mouse_start_position + panel_start_pos)
 					mouse_start_position = null
 				if (len(Gameplay.solution.state_stack) == 1):
 					Gameplay.solution.started = false
