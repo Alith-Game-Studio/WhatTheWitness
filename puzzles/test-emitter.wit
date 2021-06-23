@@ -115,6 +115,20 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
+      <Decorator xsi:type="TextDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>63.43494882292201</Angle>
+        <ExtraScale>3</ExtraScale>
+        <SerializableFont>
+          <FontFamily>Segoe UI Emoji</FontFamily>
+          <GraphicsUnit>Point</GraphicsUnit>
+          <Size>9</Size>
+          <Style>Regular</Style>
+        </SerializableFont>
+        <Text>☿️</Text>
+        <Color>Red</Color>
+      </Decorator>
       <X>5</X>
       <Y>2</Y>
       <Hidden>false</Hidden>
@@ -254,20 +268,6 @@
     <SaveEdge>
       <Start>3</Start>
       <End>4</End>
-      <Decorator xsi:type="TextDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>-135</Angle>
-        <ExtraScale>3</ExtraScale>
-        <SerializableFont>
-          <FontFamily>Segoe UI Emoji</FontFamily>
-          <GraphicsUnit>Point</GraphicsUnit>
-          <Size>9</Size>
-          <Style>Regular</Style>
-        </SerializableFont>
-        <Text>☿️</Text>
-        <Color>Lime</Color>
-      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>

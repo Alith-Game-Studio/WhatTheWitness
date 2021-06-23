@@ -49,6 +49,8 @@ class DiscreteSolutionState:
 		var ghost_properties = null
 		var new_ghost_properties = null
 		var ghost_manager = null
+		
+		# preprocess
 		for i in range(len(puzzle.decorators)):
 			if (puzzle.decorators[i].rule == 'snake-manager'):
 				snake_points = event_properties[i]
@@ -57,8 +59,8 @@ class DiscreteSolutionState:
 				ghost_manager = puzzle.decorators[i]
 				ghost_properties = event_properties[i]
 				new_ghost_properties = new_state.event_properties[i]
-			elif (puzzle.decorators[i].rule == 'laser-manager'):
-				puzzle.decorators[i].update_lasers(new_state.event_properties[i], puzzle, self)
+		
+		# introduce new vertices
 		for way in range(puzzle.n_ways):
 			var way_vertex_id
 			if (way == MAIN_WAY):
@@ -102,7 +104,8 @@ class DiscreteSolutionState:
 					var mark = len(vertices[way]) if puzzle.vertices[vertices[way][-1]].decorator.pattern == 0 else -len(vertices[way])
 					new_ghost_properties[way].append(mark)
 			new_state.solution_stage[way] = line_stage
-
+		
+		# limit calculation
 		var main_edge_length = (puzzle.vertices[new_state.vertices[MAIN_WAY][-1]].pos - puzzle.vertices[new_state.vertices[MAIN_WAY][-2]].pos).length()
 		var occupied_vertices = {}
 		var endpoint_occupied = 0
@@ -159,6 +162,12 @@ class DiscreteSolutionState:
 						blocked_by_boxes = true
 		if (blocked_by_boxes):
 			limit = min(limit, 0.22)
+		
+		# postprocess
+		for i in range(len(puzzle.decorators)):
+			if (puzzle.decorators[i].rule == 'laser-manager'):
+				puzzle.decorators[i].update_lasers(new_state.event_properties[i], puzzle, new_state)
+				
 		return [new_state, limit]
 	
 	func __perform_push(puzzle, state, box_id, dir, occupied_vertices):
