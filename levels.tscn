@@ -281,3 +281,15 @@ wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextEdit21" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2592.0
+margin_top = 480.0
+margin_right = 2688.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "wc7-D19"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
