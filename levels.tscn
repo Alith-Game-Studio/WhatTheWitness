@@ -20,7 +20,7 @@ tile_set = ExtResource( 10 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 65539, 196614, 2, 65538, 262150, 2, 65538, 262160, 2, 65542, 262161, 2, 8, 262162, 2, 8, 262163, 2, 8, 262164, 2, 8, 262165, 2, 8, 262166, 2, 65539, 327686, 2, 131083, 327687, 2, 8, 327688, 2, 8, 327689, 2, 8, 327690, 2, 8, 327691, 2, 8, 327692, 2, 8, 327693, 2, 8, 327694, 2, 8, 327695, 2, 8, 327696, 2, 65541, 327702, 2, 65544, 327703, 2, 8, 327704, 2, 8, 327705, 2, 2, 393222, 2, 65538, 393232, 2, 6, 393233, 2, 8, 393234, 2, 8, 393235, 2, 8, 393236, 2, 8, 393237, 2, 8, 393238, 2, 3, 458758, 2, 65538, 524294, 2, 65538, 589830, 2, 65538, 655366, 2, 1 )
+tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 65539, 196614, 2, 65538, 262150, 2, 65538, 262160, 2, 65542, 262161, 2, 8, 262162, 2, 8, 262163, 2, 8, 262164, 2, 131074, 262166, 2, 131082, 262167, 2, 8, 262168, 2, 8, 262169, 2, 8, 262170, 2, 65539, 327686, 2, 131083, 327687, 2, 8, 327688, 2, 8, 327689, 2, 8, 327690, 2, 8, 327691, 2, 8, 327692, 2, 8, 327693, 2, 8, 327694, 2, 8, 327695, 2, 8, 327696, 2, 65541, 327700, 2, 65543, 327701, 2, 8, 327702, 2, 65541, 327706, 2, 65543, 327707, 2, 8, 327708, 2, 2, 393222, 2, 65538, 393232, 2, 7, 393233, 2, 8, 393234, 2, 8, 393235, 2, 8, 393236, 2, 4, 393238, 2, 6, 393239, 2, 8, 393240, 2, 8, 393241, 2, 8, 393242, 2, 4, 458758, 2, 65538, 524294, 2, 65538, 589830, 2, 65538, 655366, 2, 1 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -39,6 +39,7 @@ tile_set = ExtResource( 10 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
+tile_data = PoolIntArray( 327700, 4, 0 )
 
 [node name="PuzzlePlaceHolders" type="Node2D" parent="."]
 
@@ -204,6 +205,78 @@ margin_right = 1920.0
 margin_bottom = 672.0
 rect_pivot_offset = Vector2( 64, 127 )
 text = "wc7-D12"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit15" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 384.0
+margin_right = 2304.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "wc7-D13"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit16" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2304.0
+margin_top = 384.0
+margin_right = 2400.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "wc7-D14"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit17" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2400.0
+margin_top = 384.0
+margin_right = 2496.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "wc7-D15"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit18" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 576.0
+margin_right = 2304.0
+margin_bottom = 672.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "wc7-D16"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit19" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2304.0
+margin_top = 576.0
+margin_right = 2400.0
+margin_bottom = 672.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "wc7-D17"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit20" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2400.0
+margin_top = 576.0
+margin_right = 2496.0
+margin_bottom = 672.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "wc7-D18"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
