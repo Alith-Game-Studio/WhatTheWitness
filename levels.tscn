@@ -149,6 +149,78 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextEdit29" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 960.0
+margin_right = 1536.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-A06"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit30" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1536.0
+margin_top = 960.0
+margin_right = 1632.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-A07"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit31" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 960.0
+margin_right = 1728.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-A08"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit32" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1728.0
+margin_top = 960.0
+margin_right = 1824.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-A09"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit33" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 960.0
+margin_right = 1920.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-A10"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit34" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1920.0
+margin_top = 960.0
+margin_right = 2016.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-A11"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TextEdit4" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 960.0
 margin_top = 480.0
