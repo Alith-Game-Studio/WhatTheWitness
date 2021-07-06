@@ -17,6 +17,7 @@ const region_judgers = [
 	'judge_region_squares',
 	'judge_region_stars',
 	'judge_region_triangles',
+	'judge_region_circle_arrows',
 	'judge_region_arrows',
 	'judge_region_tetris',
 ]
@@ -273,6 +274,51 @@ func judge_region_triangles(validator: Validation.Validator, region: Validation.
 			else:
 				return false
 	return all_ok
+
+func judge_region_circle_arrows(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	if (!region.has_any('circle-arrow')):
+		return true
+	var all_ok = true
+	for decorator_id in region.decorator_dict['circle-arrow']:
+		var ok = true
+		var response = validator.decorator_responses[decorator_id]
+		var is_clockwise = response.decorator.is_clockwise
+		var passed_edge_detector_nodes = []
+		var facet = validator.puzzle.vertices[response.vertex_index].linked_facet
+		if (facet == null): # the triangle is not placed on facets
+			ok = false
+		var center = validator.puzzle.vertices[response.vertex_index].pos
+		for edge_tuple in facet.edge_tuples:
+			var v = validator.puzzle.edge_detector_node[edge_tuple]
+			if (validator.vertex_region[v] < -1): # covered by any line
+				passed_edge_detector_nodes.append(v)
+		if (len(passed_edge_detector_nodes) == 0):
+			ok = false
+		else:
+			for way_vertices in validator.solution.vertices:
+				if (len(way_vertices) <= 1): # no direction
+					continue
+				for i in range(len(way_vertices)):
+					var v = way_vertices[i]
+					if (v in passed_edge_detector_nodes):
+						var v1 = way_vertices[i - 1] if i != 0 else v
+						var v2 = way_vertices[i + 1] if i == 0 else v
+						if (v1 >= len(validator.puzzle.vertices) or v2 >= len(validator.puzzle.vertices)):
+							continue
+						var cross = TetrisJudger.det(
+							validator.puzzle.vertices[v2].pos - center, 
+							validator.puzzle.vertices[v1].pos - center)
+						if ((cross > 0 and is_clockwise) or (cross < 0 and !is_clockwise)):
+							ok = false
+							break
+		if (!ok):
+			if (require_errors):
+				response.state = Validation.DecoratorResponse.ERROR
+				all_ok = false
+			else:
+				return false
+	return all_ok
+	
 	
 func judge_region_arrows(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('arrow')):

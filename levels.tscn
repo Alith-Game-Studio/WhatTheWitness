@@ -20,7 +20,7 @@ tile_set = ExtResource( 10 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 65539, 196614, 2, 65538, 262150, 2, 65538, 262160, 2, 65542, 262161, 2, 8, 262162, 2, 8, 262163, 2, 8, 262164, 2, 131074, 262166, 2, 131082, 262167, 2, 8, 262168, 2, 8, 262169, 2, 8, 262170, 2, 8, 262171, 2, 131074, 327686, 2, 131083, 327687, 2, 8, 327688, 2, 8, 327689, 2, 8, 327690, 2, 8, 327691, 2, 8, 327692, 2, 8, 327693, 2, 8, 327694, 2, 8, 327695, 2, 8, 327696, 2, 65541, 327700, 2, 65543, 327701, 2, 8, 327702, 2, 65541, 327707, 2, 65543, 327708, 2, 8, 327709, 2, 8, 327710, 2, 2, 393222, 2, 65538, 393232, 2, 7, 393233, 2, 8, 393234, 2, 8, 393235, 2, 8, 393236, 2, 4, 393238, 2, 6, 393239, 2, 8, 393240, 2, 8, 393241, 2, 8, 393242, 2, 8, 393243, 2, 3, 458758, 2, 65538, 524294, 2, 65538, 589830, 2, 65538, 655366, 2, 1 )
+tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 65539, 196614, 2, 65538, 262150, 2, 65538, 262160, 2, 65542, 262161, 2, 8, 262162, 2, 8, 262163, 2, 8, 262164, 2, 131074, 262166, 2, 131082, 262167, 2, 8, 262168, 2, 8, 262169, 2, 8, 262170, 2, 8, 262171, 2, 131074, 327686, 2, 131083, 327687, 2, 8, 327688, 2, 8, 327689, 2, 8, 327690, 2, 8, 327691, 2, 8, 327692, 2, 8, 327693, 2, 8, 327694, 2, 8, 327695, 2, 8, 327696, 2, 65541, 327700, 2, 65543, 327701, 2, 8, 327702, 2, 65541, 327707, 2, 65543, 327708, 2, 8, 327709, 2, 8, 327710, 2, 2, 393222, 2, 65538, 393232, 2, 7, 393233, 2, 8, 393234, 2, 8, 393235, 2, 8, 393236, 2, 4, 393238, 2, 6, 393239, 2, 8, 393240, 2, 8, 393241, 2, 8, 393242, 2, 8, 393243, 2, 3, 458758, 2, 65538, 524294, 2, 65538, 589830, 2, 65538, 655366, 2, 6, 655367, 2, 8, 655368, 2, 8, 655369, 2, 8, 655370, 2, 8, 655371, 2, 8, 655372, 2, 8, 655373, 2, 8, 655374, 2, 8, 655375, 2, 8, 655376, 2, 8, 655377, 2, 8, 655378, 2, 8, 655379, 2, 8, 655380, 2, 8, 655381, 2, 8, 655382, 2, 8, 655383, 2, 8, 655384, 2, 8, 655385, 2, 8, 655386, 2, 8, 655387, 2, 8, 655388, 2, 8, 655389, 2, 2 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -82,8 +82,68 @@ margin_left = 864.0
 margin_top = 480.0
 margin_right = 960.0
 margin_bottom = 576.0
-rect_pivot_offset = Vector2( 64, 127 )
+rect_pivot_offset = Vector2( 48, 96 )
 text = "wc7-D01"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit24" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 960.0
+margin_right = 960.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-A01"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit25" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 960.0
+margin_right = 1056.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-A02"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit26" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 960.0
+margin_right = 1152.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-A03"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit27" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 960.0
+margin_right = 1248.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-A04"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit28" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 960.0
+margin_right = 1344.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-A05"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false

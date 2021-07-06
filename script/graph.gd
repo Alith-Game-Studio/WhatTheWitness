@@ -239,6 +239,17 @@ func __add_decorator(puzzle, raw_element, v):
 				snake_manager = load('res://script/decorators/snake_manager.gd').new()
 				puzzle.decorators.append(snake_manager)
 			snake_manager.init_snake_points.append(v)
+		elif (text_decorator['Text'].to_lower() == '\u2B6E'): # clockwise arrow
+			var decorator = load('res://script/decorators/circle_arrow_decorator.gd').new()
+			decorator.color = color(text_decorator['Color'])
+			decorator.is_clockwise = true
+			puzzle.vertices[v].decorator = decorator
+		elif (text_decorator['Text'].to_lower() == '\u2B6F'): # counterclockwise arrow
+			var decorator = load('res://script/decorators/circle_arrow_decorator.gd').new()
+			decorator.color = color(text_decorator['Color'])
+			decorator.is_clockwise = false
+			puzzle.vertices[v].decorator = decorator
+		
 		elif (text_decorator['Text'].to_lower() == '\u028A'): # ghost
 			var ghost_manager = null
 			for global_decorator in puzzle.decorators:
