@@ -258,12 +258,24 @@ __meta__ = {
 }
 
 [node name="TextEdit22" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 2496.0
-margin_top = 384.0
-margin_right = 2592.0
-margin_bottom = 480.0
+margin_left = 2784.0
+margin_top = 480.0
+margin_right = 2880.0
+margin_bottom = 576.0
 rect_pivot_offset = Vector2( 64, 127 )
 text = "wc7-D20"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit23" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2880.0
+margin_top = 480.0
+margin_right = 2976.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "wc7-D21"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false

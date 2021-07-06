@@ -46,33 +46,34 @@ func laser_reflection(laser, puzzle, solution_state):
 	var nearest_collision_dist = INF
 	var nearest_collision_normal = null
 	var collision_is_reflection = true
-	var last_cut_pos = null
-	for way_vertices in solution_state.vertices:
-		for i in range(len(way_vertices) - 1):
-			var pos1 = puzzle.vertices[way_vertices[i]].pos
-			var pos2 = puzzle.vertices[way_vertices[i + 1]].pos
-			var edge_dir = (pos2 - pos1).normalized()
-			# cut corners
-			pos1 += edge_dir * CORNER_SIZE 
-			pos2 -= edge_dir * CORNER_SIZE
-			if (i + 2 < len(way_vertices)): # line collision
-				var intersect = Geometry.segment_intersects_segment_2d(pos1, pos2, laser_pos, laser[-1]) 
-				if (intersect != null):
-					var collision_dist = intersect.distance_to(laser_pos)
-					if (collision_dist >= 0 and collision_dist < nearest_collision_dist):
-						nearest_collision_dist = collision_dist
-						nearest_collision_pos = intersect
-						nearest_collision_normal = edge_dir
-			if (last_cut_pos != null): # corners collision
-				var corner_intersect = Geometry.segment_intersects_segment_2d(pos1, last_cut_pos, laser_pos, laser[-1]) 
-				if (corner_intersect != null):
-					var collision_dist = corner_intersect.distance_to(laser_pos)
-					if (collision_dist >= 0 and collision_dist < nearest_collision_dist):
-						nearest_collision_dist = collision_dist
-						nearest_collision_normal = (pos1 - last_cut_pos).normalized()
-						var actual_corner = puzzle.vertices[way_vertices[i]].pos
-						nearest_collision_pos = actual_corner + (corner_intersect - actual_corner).reflect(Vector2(-nearest_collision_normal.y, nearest_collision_normal.x))
-			last_cut_pos = pos2
+	if (solution_state != null):
+		for way_vertices in solution_state.vertices:
+			var last_cut_pos = null
+			for i in range(len(way_vertices) - 1):
+				var pos1 = puzzle.vertices[way_vertices[i]].pos
+				var pos2 = puzzle.vertices[way_vertices[i + 1]].pos
+				var edge_dir = (pos2 - pos1).normalized()
+				# cut corners
+				pos1 += edge_dir * CORNER_SIZE 
+				pos2 -= edge_dir * CORNER_SIZE
+				if (i + 2 < len(way_vertices)): # line collision
+					var intersect = Geometry.segment_intersects_segment_2d(pos1, pos2, laser_pos, laser[-1]) 
+					if (intersect != null):
+						var collision_dist = intersect.distance_to(laser_pos)
+						if (collision_dist >= 0 and collision_dist < nearest_collision_dist):
+							nearest_collision_dist = collision_dist
+							nearest_collision_pos = intersect
+							nearest_collision_normal = edge_dir
+				if (last_cut_pos != null): # corners collision
+					var corner_intersect = Geometry.segment_intersects_segment_2d(pos1, last_cut_pos, laser_pos, laser[-1]) 
+					if (corner_intersect != null):
+						var collision_dist = corner_intersect.distance_to(laser_pos)
+						if (collision_dist >= 0 and collision_dist < nearest_collision_dist):
+							nearest_collision_dist = collision_dist
+							nearest_collision_normal = (pos1 - last_cut_pos).normalized()
+							var actual_corner = puzzle.vertices[way_vertices[i]].pos
+							nearest_collision_pos = actual_corner + (corner_intersect - actual_corner).reflect(Vector2(-nearest_collision_normal.y, nearest_collision_normal.x))
+				last_cut_pos = pos2
 	for obs_pos in obstacle_positions:
 		var dist = Geometry.segment_intersects_circle(laser_pos, laser[-1], obs_pos, LASER_EMITTER_OBS_RADIUS) * INF_FAR
 		if (dist > 0 and dist < nearest_collision_dist + 1e-2):
@@ -109,6 +110,10 @@ func add_laser_emitter(pos, color, angle):
 	obstacle_positions.append(pos)
 
 func init_property(puzzle, solution_state, start_vertex):
+	# inital reflection / blocking
+	for i in range(len(init_lasers)):
+		while(laser_reflection(init_lasers[i], puzzle, null)):
+			pass
 	return init_lasers
 
 func vector_to_string(vec):

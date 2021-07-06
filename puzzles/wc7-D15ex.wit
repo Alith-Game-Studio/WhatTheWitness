@@ -331,6 +331,13 @@
     <SaveEdge>
       <Start>16</Start>
       <End>17</End>
+      <Decorator xsi:type="PointDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Color>Lime</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
