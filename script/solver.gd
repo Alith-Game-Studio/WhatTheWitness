@@ -1,3 +1,4 @@
+extends Node
 
 class Solver:
 	var state_stack: Array
