@@ -436,7 +436,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		
 		if (__find_decorator(raw_element, "BrokenDecorator")):
 			puzzle.vertices[v_mid].decorator = load('res://script/decorators/broken_decorator.gd').new()
-			puzzle.vertices[v_mid].decorator.direction = (p2 - p1) * 0.15
+			puzzle.vertices[v_mid].decorator.direction = (p2 - p1) * (0.25 - puzzle.line_width / (2 * p2.distance_to(p1)))
 		puzzle.edge_detector_node[[v1, v2]] = v_mid
 		puzzle.edge_detector_node[[v2, v1]] = v_mid
 		puzzle.edge_shared_facets[[v1, v2]] = []
