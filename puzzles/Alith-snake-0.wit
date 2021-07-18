@@ -98,11 +98,6 @@
     <SaveEdge>
       <Start>2</Start>
       <End>3</End>
-      <Decorator xsi:type="EndDecorator">
-        <Length>0.2</Length>
-        <Angle>-90</Angle>
-        <Color>Transparent</Color>
-      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
