@@ -18,6 +18,7 @@ const region_judgers = [
 	'judge_region_stars',
 	'judge_region_triangles',
 	'judge_region_circle_arrows',
+	'judge_region_graph_counter',
 	'judge_region_arrows',
 	'judge_region_tetris',
 ]
@@ -352,7 +353,7 @@ func judge_region_tetris(validator: Validation.Validator, region: Validation.Reg
 		return true
 	return TetrisJudger.judge_region_tetris_implementation(validator, region, require_errors)
 	
-func judge_region_rings(validator: Validation.Validator, region: Validation.Region, require_errors: bool):  # only for uneliminated eliminators
+func judge_region_rings(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('ring') and !region.has_any('circle')):
 		return true
 	if (require_errors):
@@ -366,7 +367,8 @@ func judge_region_rings(validator: Validation.Validator, region: Validation.Regi
 				response.state = Validation.DecoratorResponse.ERROR
 	return false
 	
-func judge_region_eliminators(validator: Validation.Validator, region: Validation.Region, require_errors: bool):  # only for uneliminated eliminators
+func judge_region_eliminators(validator: Validation.Validator, region: Validation.Region, require_errors: bool): 
+	# only for uneliminated eliminators
 	if (!region.has_any('eliminator')):
 		return true
 	if (require_errors):
@@ -375,7 +377,7 @@ func judge_region_eliminators(validator: Validation.Validator, region: Validatio
 			response.state = Validation.DecoratorResponse.ERROR
 	return false
 
-func judge_region_filament(validator: Validation.Validator, region: Validation.Region, require_errors: bool):  # only for uneliminated eliminators
+func judge_region_filament(validator: Validation.Validator, region: Validation.Region, require_errors: bool): 
 	if (!region.has_any('filament-pillar')):
 		return true
 	var all_ok = true
@@ -387,6 +389,67 @@ func judge_region_filament(validator: Validation.Validator, region: Validation.R
 				all_ok = false
 			else:
 				return false
+	return all_ok
+
+func judge_region_graph_counter(validator: Validation.Validator, region: Validation.Region, require_errors: bool): 
+	if (!region.has_any('graph-counter')):
+		return true
+	var graph_counter
+	var all_ok = true
+	var vertex_shapes = {}
+	var shape_counter = {}
+	for decorator_id in region.decorator_dict['graph-counter']:
+		var response = validator.decorator_responses[decorator_id]
+		graph_counter = response.decorator
+		for line in graph_counter.matrix:
+			for original_symbol in line:
+				var symbol = graph_counter.get_rotational_symbol(original_symbol) if graph_counter.rotational else original_symbol
+				if (symbol > 0):
+					if not (symbol in shape_counter):
+						shape_counter[symbol] = 1
+					else:
+						shape_counter[symbol] += 1
+	for v in region.vertice_indices:
+		vertex_shapes[v] = 0
+	for edge in validator.puzzle.edges:
+		var edge_direction = (edge.end.pos - edge.start.pos).normalized()
+		var dir_forward = -1
+		var dir_backward = -1
+		for dir in range(4):
+			if (edge_direction.distance_to(Vector2(graph_counter.DIR_X[dir], graph_counter.DIR_Y[dir])) < 1e-3):
+				dir_forward = dir
+				dir_backward = (dir + 2) % 4
+		if (dir_backward >= 0 and edge.end.index in vertex_shapes):
+			vertex_shapes[edge.end.index] |= 1 << dir_backward
+			if (edge.end.decorator.rule == 'broken'):
+				vertex_shapes[edge.end.index] |= 1 << graph_counter.MASK_BROKEN
+		if (dir_forward >= 0 and edge.start.index in vertex_shapes):
+			vertex_shapes[edge.start.index] |= 1 << dir_forward
+			if (edge.start.decorator.rule == 'broken'):
+				vertex_shapes[edge.start.index] |= 1 << graph_counter.MASK_BROKEN
+	print('Old:', shape_counter)
+	for v in region.vertice_indices:
+		var original_symbol = vertex_shapes[v]
+		var rotational_symbol = graph_counter.get_rotational_symbol(original_symbol)
+		for symbol in [original_symbol, rotational_symbol]:
+			if not (symbol in shape_counter):
+				shape_counter[symbol] = -1
+			else:
+				shape_counter[symbol] -= 1
+	print('New:', shape_counter)
+	for decorator_id in region.decorator_dict['graph-counter']:
+		var response = validator.decorator_responses[decorator_id]
+		var decorator = response.decorator
+		for line in decorator.matrix:
+			for original_symbol in line:
+				var symbol = graph_counter.get_rotational_symbol(original_symbol) if graph_counter.rotational else original_symbol
+				if (symbol > 0):
+					if (shape_counter[symbol] != 0):
+						if (require_errors):
+							response.state = Validation.DecoratorResponse.ERROR
+							all_ok = false
+						else:
+							return false
 	return all_ok
 
 func __judge_region_elimination_case(validator: Validation.Validator, region: Validation.Region, require_errors: bool, \

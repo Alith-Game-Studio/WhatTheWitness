@@ -281,10 +281,27 @@ func __add_decorator(puzzle, raw_element, v):
 			puzzle.vertices[v].decorator = decorator
 			decorator.angle = deg2rad(float(text_decorator['Angle']))
 			laser_manager.add_laser_emitter(puzzle.vertices[v].pos, decorator.color, decorator.angle)
-		elif (text_decorator['Text'].to_lower() in GRAPH_COUNTER_TEXTS):
+		elif (text_decorator['Text'][0] in GRAPH_COUNTER_TEXTS):
 			var decorator = load('res://script/decorators/graph_counter_decorator.gd').new()
+			var text_matrix = text_decorator['Text'].replace('\r', '').split('\n')
+			var n_rows = len(text_matrix)
+			var n_cols = 0
+			for line in text_matrix:
+				n_cols = max(n_cols, len(line))
+				var symbols = []
+				for chr in line:
+					if (chr == ' '):
+						symbols.append(0)
+					else:
+						symbols.append(GRAPH_COUNTER_TEXTS[chr])
+				decorator.matrix.append(symbols)
+			decorator.step_x = (1.0 - puzzle.line_width) / n_cols
+			decorator.step_y = (1.0 - puzzle.line_width) / n_rows
+			var font_size = float(text_decorator['SerializableFont']['Size'])
+			decorator.size = 1.0 if font_size >= 5.5 else 0.5 if font_size >= 3.5 else 0.34
 			decorator.color = color(text_decorator['Color'])
-			decorator.type = GRAPH_COUNTER_TEXTS[text_decorator['Text'].to_lower()]
+			decorator.angle = deg2rad(float(text_decorator['Angle']))
+			decorator.rotational = abs(decorator.angle) > 1e-3
 			puzzle.vertices[v].decorator = decorator
 			
 		else:
