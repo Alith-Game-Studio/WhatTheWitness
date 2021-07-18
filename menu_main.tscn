@@ -56,9 +56,9 @@ size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[right]A Fan Game of The Witness[/right]
-[right]Beta v1.2[/right]"
+[right]Beta v1.3[/right]"
 text = "A Fan Game of The Witness
-Beta v1.2"
+Beta v1.3"
 
 [node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer"]
 margin_top = 172.0
