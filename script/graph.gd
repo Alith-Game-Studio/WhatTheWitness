@@ -298,7 +298,7 @@ func __add_decorator(puzzle, raw_element, v):
 			decorator.step_x = (1.0 - puzzle.line_width) / n_cols
 			decorator.step_y = (1.0 - puzzle.line_width) / n_rows
 			var font_size = float(text_decorator['SerializableFont']['Size'])
-			decorator.size = 1.0 if font_size >= 5.5 else 0.5 if font_size >= 3.5 else 0.34
+			decorator.size = 1.0 if font_size >= 4.5 else 0.5 if font_size >= 3.5 else 0.34
 			decorator.color = color(text_decorator['Color'])
 			decorator.angle = deg2rad(float(text_decorator['Angle']))
 			decorator.rotational = abs(decorator.angle) > 1e-3
