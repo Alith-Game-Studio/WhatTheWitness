@@ -393,22 +393,15 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		var p1 = puzzle.vertices[v1].pos
 		var p2 = puzzle.vertices[v2].pos
 		var v_mid
+		v_mid = push_vertex_vec(puzzle, p1 * 0.5 + p2 * 0.5)
+		puzzle.vertices[v_mid].linked_edge_tuple = [v1, v2]
+		var e1 = push_edge_idx(puzzle, v1, v_mid)
+		var e2 = push_edge_idx(puzzle, v2, v_mid)
+		__add_decorator(puzzle, raw_element, v_mid)
+		
 		if (__find_decorator(raw_element, "BrokenDecorator")):
-			var p3 = p1 * 0.75 + p2 * 0.25
-			var p4 = p1 * 0.25 + p2 * 0.75
-			v_mid = push_vertex_vec(puzzle, p3)
-			var v4 = push_vertex_vec(puzzle, p4)
 			puzzle.vertices[v_mid].decorator = load('res://script/decorators/broken_decorator.gd').new()
-			puzzle.vertices[v_mid].decorator.direction = (p2 - p1).normalized()
-			puzzle.vertices[v4].decorator = puzzle.vertices[v_mid].decorator
-			push_edge_idx(puzzle, v1, v_mid)
-			push_edge_idx(puzzle, v2, v4)
-		else:
-			v_mid = push_vertex_vec(puzzle, p1 * 0.5 + p2 * 0.5)
-			puzzle.vertices[v_mid].linked_edge_tuple = [v1, v2]
-			var e1 = push_edge_idx(puzzle, v1, v_mid)
-			var e2 = push_edge_idx(puzzle, v2, v_mid)
-			__add_decorator(puzzle, raw_element, v_mid)
+			puzzle.vertices[v_mid].decorator.direction = (p2 - p1) * 0.15
 		puzzle.edge_detector_node[[v1, v2]] = v_mid
 		puzzle.edge_detector_node[[v2, v1]] = v_mid
 		puzzle.edge_shared_facets[[v1, v2]] = []
