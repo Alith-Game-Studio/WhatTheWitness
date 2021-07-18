@@ -34,6 +34,7 @@ SaveData="*res://script/save_data.gd"
 Filament="*res://script/filament.gd"
 Credits="*res://script/credits.gd"
 LaserJudger="*res://script/judgers/laser_judger.gd"
+Solver="*res://script/solver.gd"
 
 [debug]
 

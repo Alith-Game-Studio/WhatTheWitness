@@ -121,6 +121,12 @@ func _input(event):
 				elif (event.scancode == KEY_RIGHT):
 					if (right_arrow_button.visible):
 						_on_right_arrow_button_pressed()
+				elif (event.scancode == KEY_A):
+					var solver = load("res://script/solver.gd").Solver.new()
+					if (solver.solve(Gameplay.puzzle)):
+						Gameplay.solution = solver.to_solution_line()
+					else:
+						print('no solution!')
 
 func back_to_menu():
 	if (!Gameplay.playing_custom_puzzle):

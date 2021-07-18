@@ -134,6 +134,8 @@ class DiscreteSolutionState:
 					limit = min(limit, 1.0 - puzzle.line_width / edge_length)
 				elif (endpoint_occupied == 2): # colliding with start points
 					limit = min(limit, 1.0 - (puzzle.start_size + puzzle.line_width / 2) / edge_length)
+			if (end_point.decorator.rule == 'broken'): # broken
+				limit = min(limit, 0.5)
 		for i in range(len(puzzle.decorators)):
 			if (puzzle.decorators[i].rule == 'box'):
 				var box_v = new_state.event_properties[i]
