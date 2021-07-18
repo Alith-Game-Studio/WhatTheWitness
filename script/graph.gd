@@ -179,6 +179,10 @@ func __check_decorator_consumed(raw_decorator, element_type):
 		print('Unsupported decorator: %s on %s' % [raw_decorator['xsi:type'], ['node', 'edge', 'facet'][element_type]])
 
 		
+const GRAPH_COUNTER_TEXTS = {'\u250F': 12, '\u2533': 13,  '\u2513': 9,
+	'\u2523': 14, '\u254B': 15, '\u252B': 11, 
+	'\u2517': 6, '\u253B': 7, '\u251B': 3,
+	'\u2503': 10, '\u2501': 5, '\u254F': 26, '\u254D': 21 }
 
 func __add_decorator(puzzle, raw_element, v):
 	var boxed_decorator = false
@@ -277,6 +281,12 @@ func __add_decorator(puzzle, raw_element, v):
 			puzzle.vertices[v].decorator = decorator
 			decorator.angle = deg2rad(float(text_decorator['Angle']))
 			laser_manager.add_laser_emitter(puzzle.vertices[v].pos, decorator.color, decorator.angle)
+		elif (text_decorator['Text'].to_lower() in GRAPH_COUNTER_TEXTS):
+			var decorator = load('res://script/decorators/graph_counter_decorator.gd').new()
+			decorator.color = color(text_decorator['Color'])
+			decorator.type = GRAPH_COUNTER_TEXTS[text_decorator['Text'].to_lower()]
+			puzzle.vertices[v].decorator = decorator
+			
 		else:
 			print('Unknown text decorator %s' % text_decorator['Text'])
 	var triangle_decorator = __find_decorator(raw_element, "TriangleDecorator")

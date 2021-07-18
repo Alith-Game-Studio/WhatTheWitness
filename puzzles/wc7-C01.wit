@@ -357,7 +357,7 @@
           <Style>Regular</Style>
         </SerializableFont>
         <Text>┏</Text>
-        <Color>Black</Color>
+        <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -380,7 +380,7 @@
           <Style>Regular</Style>
         </SerializableFont>
         <Text>┣</Text>
-        <Color>Black</Color>
+        <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -403,7 +403,7 @@
           <Style>Regular</Style>
         </SerializableFont>
         <Text>┗</Text>
-        <Color>Black</Color>
+        <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -435,7 +435,7 @@
           <Style>Regular</Style>
         </SerializableFont>
         <Text>┳</Text>
-        <Color>Black</Color>
+        <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -458,7 +458,7 @@
           <Style>Regular</Style>
         </SerializableFont>
         <Text>╋</Text>
-        <Color>Black</Color>
+        <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -481,7 +481,7 @@
           <Style>Regular</Style>
         </SerializableFont>
         <Text>┻</Text>
-        <Color>Black</Color>
+        <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -504,7 +504,7 @@
           <Style>Regular</Style>
         </SerializableFont>
         <Text>╏</Text>
-        <Color>Black</Color>
+        <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -527,7 +527,7 @@
           <Style>Regular</Style>
         </SerializableFont>
         <Text>┓</Text>
-        <Color>Black</Color>
+        <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -550,7 +550,7 @@
           <Style>Regular</Style>
         </SerializableFont>
         <Text>┫</Text>
-        <Color>Black</Color>
+        <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -573,7 +573,7 @@
           <Style>Regular</Style>
         </SerializableFont>
         <Text>┛</Text>
-        <Color>Black</Color>
+        <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -596,7 +596,7 @@
           <Style>Regular</Style>
         </SerializableFont>
         <Text>╍</Text>
-        <Color>Black</Color>
+        <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
@@ -616,6 +616,20 @@
         <int>22</int>
         <int>17</int>
       </Nodes>
+      <Decorator xsi:type="TextDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <SerializableFont>
+          <FontFamily>Segoe UI Emoji</FontFamily>
+          <GraphicsUnit>Point</GraphicsUnit>
+          <Size>9</Size>
+          <Style>Regular</Style>
+        </SerializableFont>
+        <Text>┃</Text>
+        <Color>Silver</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
@@ -625,6 +639,20 @@
         <int>23</int>
         <int>18</int>
       </Nodes>
+      <Decorator xsi:type="TextDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <SerializableFont>
+          <FontFamily>Segoe UI Emoji</FontFamily>
+          <GraphicsUnit>Point</GraphicsUnit>
+          <Size>9</Size>
+          <Style>Regular</Style>
+        </SerializableFont>
+        <Text>━</Text>
+        <Color>Silver</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
