@@ -8,3 +8,10 @@ export_presets.cfg
 .mono/
 data_*/
 /export
+/MathHelper.dll
+/PuzzleGraph.dll
+/Icons
+/Templates
+/Toolkit
+/zh-CN
+/Editor.exe

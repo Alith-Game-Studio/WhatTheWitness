@@ -281,6 +281,25 @@ func __add_decorator(puzzle, raw_element, v):
 			puzzle.vertices[v].decorator = decorator
 			decorator.angle = deg2rad(float(text_decorator['Angle']))
 			laser_manager.add_laser_emitter(puzzle.vertices[v].pos, decorator.color, decorator.angle)
+		elif (text_decorator['Text'].to_lower() in ['\uC6C3', '\u337F']): # cosmic express
+			var cosmic_manager = null
+			for global_decorator in puzzle.decorators:
+				if (global_decorator.rule == 'cosmic-manager'):
+					cosmic_manager = global_decorator
+					break
+			if (cosmic_manager == null):
+				cosmic_manager = load('res://script/decorators/cosmic_manager.gd').new()
+				puzzle.decorators.append(cosmic_manager)
+			if (text_decorator['Text'].to_lower() == '\uC6C3'):
+				var decorator = load('res://script/decorators/cosmic_alien_decorator.gd').new()
+				decorator.color = color(text_decorator['Color'])
+				puzzle.vertices[v].decorator = decorator
+				cosmic_manager.add_alien(v)
+			else:
+				var decorator = load('res://script/decorators/cosmic_house_decorator.gd').new()
+				decorator.color = color(text_decorator['Color'])
+				puzzle.vertices[v].decorator = decorator
+				cosmic_manager.add_house(v)
 		elif (text_decorator['Text'][0] in GRAPH_COUNTER_TEXTS):
 			var decorator = load('res://script/decorators/graph_counter_decorator.gd').new()
 			var text_matrix = text_decorator['Text'].replace('\r', '').split('\n')

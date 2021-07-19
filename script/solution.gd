@@ -59,6 +59,8 @@ class DiscreteSolutionState:
 				ghost_manager = puzzle.decorators[i]
 				ghost_properties = event_properties[i]
 				new_ghost_properties = new_state.event_properties[i]
+			elif (puzzle.decorators[i].rule == 'cosmic-manager'):
+				new_state.event_properties[i] = puzzle.decorators[i].transist(puzzle, vertices, event_properties[i])
 		
 		# introduce new vertices
 		for way in range(puzzle.n_ways):
@@ -300,6 +302,18 @@ class SolutionLine:
 			else:
 				result += (pos1 - pos2).length() 
 		return result
+		
+	func get_current_way_position(puzzle, way):
+		if (!started):
+			return null
+		var way_vertices = state_stack[-1].vertices[way]
+		if (len(way_vertices) == 1):
+			return puzzle.vertices[way_vertices[0]].pos
+		var p1 = puzzle.vertices[way_vertices[-1]].pos
+		var p2 = puzzle.vertices[way_vertices[-2]].pos
+		return p1 * progress + p2 * (1 - progress)
+		
+		
 	
 	func try_continue_solution(puzzle, delta):
 		if (!started):

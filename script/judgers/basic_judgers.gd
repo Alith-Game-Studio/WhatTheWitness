@@ -10,6 +10,7 @@ const region_judgers = [
 	'judge_region_rings',
 	'judge_region_eliminators',
 	'judge_region_filament',
+	'judge_region_cosmic_aliens',
 	'judge_region_points',
 	'judge_region_ghosts',
 	'judge_region_self_intersections',
@@ -391,6 +392,19 @@ func judge_region_filament(validator: Validation.Validator, region: Validation.R
 				return false
 	return all_ok
 
+func judge_region_cosmic_aliens(validator: Validation.Validator, region: Validation.Region, require_errors: bool): 
+	if (!region.has_any('cosmic-alien')):
+		return true
+	var all_ok = true
+	for decorator_id in region.decorator_dict['cosmic-alien']:
+		var response = validator.decorator_responses[decorator_id]
+		if (require_errors):
+			response.state = Validation.DecoratorResponse.ERROR
+			all_ok = false
+		else:
+			return false
+	return all_ok
+	
 func judge_region_graph_counter(validator: Validation.Validator, region: Validation.Region, require_errors: bool): 
 	if (!region.has_any('graph-counter')):
 		return true
