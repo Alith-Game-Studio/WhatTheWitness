@@ -2,6 +2,7 @@ extends Node
 
 const global_judgers = [
 	'judge_covered_points',
+	'judge_covered_cosmic_aliens',
 	'preprocess_filament',
 	'judge_rings',
 ]
@@ -89,6 +90,18 @@ func judge_covered_points(validator: Validation.Validator, require_errors: bool)
 						return false
 	return all_ok
 
+func judge_covered_cosmic_aliens(validator: Validation.Validator, require_errors: bool):
+	var all_ok = true
+	for v in validator.decorator_responses_of_vertex:
+		for response in validator.decorator_responses_of_vertex[v]:
+			if (response.rule == 'cosmic-alien'):
+				if (require_errors):
+					response.state = Validation.DecoratorResponse.ERROR
+					all_ok = false
+				else:
+					return false
+	return all_ok
+	
 func judge_rings(validator: Validation.Validator, require_errors: bool):
 	var clonable_decorators = []
 	var paste_positions = []

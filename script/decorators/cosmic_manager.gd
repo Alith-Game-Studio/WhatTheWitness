@@ -47,6 +47,38 @@ func draw_above_solution(canvas, owner, owner_type, puzzle, solution):
 				alien_color
 			)
 	
+func prepare_validation(validator, states):
+	var puzzle = validator.puzzle
+	for alien_v in alien_vertices:
+		if not (alien_v in states):
+			continue
+		if (states[alien_v] == -1):
+			var vertex = puzzle.vertices[alien_v]
+			var response = validator.add_decorator(vertex.decorator, vertex.pos, alien_v)
+			validator.push_vertex_decorator_response(alien_v, response)
+	
+	for house_v in house_vertices:
+		if not (house_v in states):
+			continue
+		var vertex = puzzle.vertices[house_v]
+		var response = validator.add_decorator(vertex.decorator, vertex.pos, house_v)
+		if (states[house_v] != -1):
+			var alien_v = states[house_v]
+			var alien_color = puzzle.vertices[alien_v].decorator.color
+			response.color = alien_color
+		validator.push_vertex_decorator_response(house_v, response)
+	
+	for way in range(puzzle.n_ways):
+		if not (-way - 1 in states):
+			continue
+		var way_state = states[-way - 1]
+		if (way_state != -1):
+			var way_end_v = validator.solution.vertices[way][-1]
+			var alien_v = way_state
+			var alien_color = puzzle.vertices[alien_v].decorator.color
+			var response = validator.add_decorator(puzzle.vertices[alien_v].decorator, puzzle.vertices[way_end_v].pos, way_end_v)
+			validator.push_vertex_decorator_response(way_end_v, response)
+
 func init_property(puzzle, solution_state, start_vertex):
 	var states = {}
 	for alien_v in alien_vertices:
@@ -81,10 +113,13 @@ func transist(puzzle: Graph.Puzzle, vertices, old_state):
 					continue
 				if (passing_vertex_id in vertex_detectors[house_v]):
 					var alien_v = way_state
-					new_state[alien_v] = house_v
-					new_state[house_v] = alien_v
-					way_state = -1
-					break
+					var house_color = puzzle.vertices[house_v].decorator.color
+					var alien_color = puzzle.vertices[alien_v].decorator.color
+					if (house_color == Color.black or house_color == alien_color):
+						new_state[alien_v] = house_v
+						new_state[house_v] = alien_v
+						way_state = -1
+						break
 		if (way_state == -1): # not occupied
 			var aliens_on_board = []
 			for alien_v in alien_vertices:
@@ -98,11 +133,20 @@ func transist(puzzle: Graph.Puzzle, vertices, old_state):
 		new_state[-way - 1] = way_state
 	return new_state
 
-func vector_to_string(vec):
-	return ''
+func property_to_string(states):
+	var result = []
+	for v in states:
+		result.append('%d:%d' % [v, states[v]])
+	return PoolStringArray(result).join(',')
 
-func property_to_string(lasers):
-	return ''
-			
 func string_to_property(string):
+	if (string != ''):
+		var result = string.split(',')
+		var states = {}
+		for state_string in result:
+			var key_value = state_string.split(':')
+			if (len(key_value) == 2):
+				states[int(key_value[0])] = int(key_value[1])
+		return states
 	return {}
+

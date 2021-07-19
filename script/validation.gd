@@ -69,6 +69,12 @@ class Validator:
 		response.index = len(decorator_responses)
 		decorator_responses.append(response)
 		return response
+		
+	func push_vertex_decorator_response(v, response):
+		if not (v in decorator_responses_of_vertex):
+			decorator_responses_of_vertex[v] = [response]
+		else:
+			decorator_responses_of_vertex[v].append(response)
 	
 	func validate(input_puzzle: Graph.Puzzle, input_solution, require_errors=true):
 		puzzle = input_puzzle
@@ -78,28 +84,27 @@ class Validator:
 		elimination_happended = false
 		for i in range(len(puzzle.vertices)):
 			var vertex = puzzle.vertices[i]
-			if (vertex.decorator.rule != 'none'):
+			if not (vertex.decorator.rule in ['none', 'cosmic-alien', 'cosmic-house']):
 				var response = add_decorator(vertex.decorator, vertex.pos, i)
-				decorator_responses_of_vertex[i] = [response]
+				push_vertex_decorator_response(i, response)
+		var ghost_properties = null
+		var ghost_manager = null
 		for i in range(len(puzzle.decorators)):
 			var decorator = puzzle.decorators[i]
 			if (decorator.rule == 'box'):
 				if (len(solution.event_properties) > i):
 					var v = solution.event_properties[i]
-					if (!(v in decorator_responses_of_vertex)):
-						decorator_responses_of_vertex[v] = []
 					var vertex = puzzle.vertices[v]
 					var response = add_decorator(puzzle.decorators[i].inner_decorator, vertex.pos, v)
-					decorator_responses_of_vertex[v].append(response)
+					push_vertex_decorator_response(v, response)
 				has_boxes = true
 			elif (decorator.rule == 'laser-manager'):
 				has_lasers = true
-		var ghost_properties = null
-		var ghost_manager = null
-		for i in range(len(puzzle.decorators)):
-			if (puzzle.decorators[i].rule == 'ghost-manager'):
+			elif (puzzle.decorators[i].rule == 'ghost-manager'):
 				ghost_manager = puzzle.decorators[i]
 				ghost_properties = solution.event_properties[i]
+			elif (puzzle.decorators[i].rule == 'cosmic-manager'):
+				puzzle.decorators[i].prepare_validation(self, solution.event_properties[i])
 		vertex_region = []
 		for i in range(len(puzzle.vertices)):
 			vertex_region.push_back(-1)
