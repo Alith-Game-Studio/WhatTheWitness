@@ -33,7 +33,7 @@ class Solver:
 	var solution_state: Solution.DiscreteSolutionState
 	var color_mapping: Dictionary
 	var is_decorator: Array
-	
+	var is_tetris_covered: Array
 	func add_to_color_mapping(color):
 		if !(color in color_mapping):
 			color_mapping[color] = len(color_mapping)
@@ -76,6 +76,7 @@ class Solver:
 		ensure_segment()
 		ensure_points()
 		ensure_squares()
+		ensure_tetris()
 		solutions = s.solve(max_solution_count)
 		return len(solutions) != 0
 		
@@ -116,6 +117,7 @@ class Solver:
 		is_solution = s.new_int_array(n_vertices, -1, puzzle.n_ways - 1, true)
 		is_decorator = s.new_int_array(n_vertices, -1, len(rule_ids) - 1)
 		is_region = s.new_int_array(n_vertices, -1, n_max_regions - 1)
+		is_tetris_covered = s.new_bool_array(n_vertices)
 		for v in range(n_vertices):
 			if (!puzzle.vertices[v].is_puzzle_start):
 				s.ensure(s.eq(is_start[v], -1))
@@ -123,7 +125,7 @@ class Solver:
 				s.ensure(s.eq(is_end[v], -1))
 			if (puzzle.vertices[v].decorator.rule == 'broken'):
 				s.ensure(s.eq(is_solution[v], -1))
-			if !(puzzle.vertices[v].decorator.rule in ['point', 'square']):
+			if !(puzzle.vertices[v].decorator.rule in ['point', 'square', 'tetris']):
 				s.ensure(s.eq(is_decorator[v], -1))
 			s.ensure(s.xor(s.eq(is_solution[v], -1), s.eq(is_region[v], -1)))
 		for way in range(puzzle.n_ways):
@@ -158,7 +160,9 @@ class Solver:
 			s.ensure(s.graph_vertex_connected(s.eq(is_solution, way), edge_list))
 		for v_pair in region_edge_list:
 			s.ensure(s.or_(s.or_(s.eq(is_region[v_pair[0]], -1), s.eq(is_region[v_pair[1]], -1)),
-				s.eq(is_region[v_pair[0]], is_region[v_pair[1]])))
+				s.and_(s.eq(is_region[v_pair[0]], is_region[v_pair[1]]),
+				s.iff(is_tetris_covered[v_pair[0]], is_tetris_covered[v_pair[1]]))
+			))
 		for region_id in range(n_max_regions):
 			s.ensure(s.graph_vertex_connected(s.eq(is_region, region_id), region_edge_list))
 	
@@ -189,3 +193,24 @@ class Solver:
 									s.neq(is_region[v], is_region[v2]))
 							)
 	
+	func ensure_tetris():
+		var coverings_facets = []
+		for f in range(len(puzzle.facets)):
+			coverings_facets.append([])
+		for v in range(n_vertices):
+			if (puzzle.vertices[v].decorator.rule == 'tetris'):
+				s.ensure(s.eq(is_decorator[v], rule_ids['tetris']))
+				var coverings_shape = []
+				for covering in puzzle.vertices[v].decorator.covering:
+					var b = s.new_bool()
+					coverings_shape.append(b)
+					for f in covering:
+						var vf = puzzle.facets[f].center_vertex_index
+						var region_cond = s.eq(is_region[v], is_region[vf])
+						s.ensure(s.imp(b, region_cond))
+						coverings_facets[f].append(b)
+				s.ensure(s.eq(s.count_true(coverings_shape), 1))
+		for f in range(len(puzzle.facets)):
+			var v = puzzle.facets[f].center_vertex_index
+			s.ensure(s.eq(s.count_true(coverings_facets[f]), s.if_(is_tetris_covered[v], 1, 0)))
+		
