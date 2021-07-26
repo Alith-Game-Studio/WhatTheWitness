@@ -19,6 +19,7 @@ class Solver:
 	var n_vertices: int
 	var n_edges: int
 	var n_max_regions: int
+	var n_colors: int
 	var vertice_neighbors: Array
 	var vertices_region_neighbors: Array
 	var edge_list: Array
@@ -71,9 +72,10 @@ class Solver:
 				add_to_color_mapping(puzzle.vertices[v].decorator.color)
 		for way in range(puzzle.n_ways):
 			add_to_color_mapping(puzzle.solution_colors[way])
-		print(color_mapping)
+		n_colors = len(color_mapping)
 		ensure_segment()
 		ensure_points()
+		ensure_squares()
 		solutions = s.solve(max_solution_count)
 		return len(solutions) != 0
 		
@@ -121,7 +123,7 @@ class Solver:
 				s.ensure(s.eq(is_end[v], -1))
 			if (puzzle.vertices[v].decorator.rule == 'broken'):
 				s.ensure(s.eq(is_solution[v], -1))
-			if !(puzzle.vertices[v].decorator.rule in ['point']):
+			if !(puzzle.vertices[v].decorator.rule in ['point', 'square']):
 				s.ensure(s.eq(is_decorator[v], -1))
 			s.ensure(s.xor(s.eq(is_solution[v], -1), s.eq(is_region[v], -1)))
 		for way in range(puzzle.n_ways):
@@ -172,3 +174,18 @@ class Solver:
 				s.ensure(s.imp(s.eq(is_decorator[v], rule_ids['point']),
 					s.fold_or(satisfy_conditions)))
 			
+	func ensure_squares():
+		for v in range(n_vertices):
+			if (puzzle.vertices[v].decorator.rule == 'square'):
+				var color = puzzle.vertices[v].decorator.color
+				s.ensure(s.eq(is_decorator[v], rule_ids['square']))
+				for v2 in range(n_vertices):
+					if (puzzle.vertices[v2].decorator.rule == 'square'):
+						var color2 = puzzle.vertices[v2].decorator.color
+						if (color != color2):
+							s.ensure(
+								s.imp(s.and_(s.eq(is_decorator[v], rule_ids['square']),
+									s.eq(is_decorator[v2], rule_ids['square'])),
+									s.neq(is_region[v], is_region[v2]))
+							)
+	
