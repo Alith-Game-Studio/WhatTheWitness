@@ -33,6 +33,7 @@ MenuData="*res://script/menu_data.gd"
 SaveData="*res://script/save_data.gd"
 Filament="*res://script/filament.gd"
 Credits="*res://script/credits.gd"
+Solver="*res://script/solver.gd"
 
 [debug]
 
