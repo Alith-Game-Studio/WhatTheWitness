@@ -1,76 +1,80 @@
 extends Node
 
 class Solver:
-	var state_stack: Array
 	var puzzle: Graph.Puzzle
-	var validation_counter = 0
-	var max_validation_counter = 500
-	
-	func __is_completed():
-		var crossroad_vertex = state_stack[-1].get_end_vertex(puzzle, Solution.MAIN_WAY)
-		if (crossroad_vertex == null):
-			return false
-		return crossroad_vertex.decorator != null and crossroad_vertex.is_puzzle_end
-		
-	func __search():
-		if (validation_counter >= max_validation_counter):
-			return false
-		var crossroad_vertex = state_stack[-1].get_end_vertex(puzzle, Solution.MAIN_WAY)
-		var possible_transitions = []
-		if (__is_completed()):
-			if (validation_counter % 1000 == 0):
-				print('Validating %d...' % validation_counter)
-			validation_counter += 1
-			var validator = Validation.Validator.new()
-			return validator.validate(puzzle, self, false)
+	var s = preload("res://script/judgers/sugar.gd").new()
+	var n_vertices: int
+	var n_edges: int
+	var vertice_neighbors: Array
+	var edge_list: Array
+	var solutions: Array
+	var current_solution_id: int
+	var passed: Array
+	var is_start: Array
+	var is_end: Array
+	func solve(input_puzzle, max_solution_count):
+		puzzle = input_puzzle
+		n_vertices = len(puzzle.vertices)
+		n_edges = len(puzzle.edges)
+		print(puzzle)
+		vertice_neighbors = []
+		for v in range(n_vertices):
+			vertice_neighbors.append([])
 		for edge in puzzle.edges:
-			var target_vertex
-			var edge_dir
-			if (edge.start == crossroad_vertex):
-				target_vertex = edge.end
-				possible_transitions.append(target_vertex.index)
-			elif (edge.end == crossroad_vertex):
-				target_vertex = edge.start
-				possible_transitions.append(target_vertex.index)
-			else:
-				continue
-		for vertex_id in possible_transitions:
-			if (state_stack[-1].is_retraction(puzzle, vertex_id)):
-				continue
-			else:
-				var new_state_with_limit = state_stack[-1].transist(puzzle, vertex_id)
-				var new_state = new_state_with_limit[0]
-				var new_limit = new_state_with_limit[1]
-				if (new_state != null and new_limit >= 1.0):
-					state_stack.push_back(new_state)
-					if (__search()):
-						return true
-					else:
-						state_stack.pop_back()
-				else:
-					continue
-		return false
+			vertice_neighbors[edge.start.index].append(edge.end.index)
+			vertice_neighbors[edge.end.index].append(edge.start.index)
+			edge_list.append([edge.start.index, edge.end.index])
+		ensure_segment()
+		solutions = s.solve(max_solution_count)
+		return len(solutions) != 0
 		
-	func solve(init_puzzle):
-		validation_counter = 0
-		puzzle = init_puzzle
-		for vertex in puzzle.vertices:
-			if (vertex.is_puzzle_start):
-				var solution_state = Solution.DiscreteSolutionState.new()
-				var ok = solution_state.initialize(puzzle, vertex.pos)
-				if (ok):
-					state_stack.clear()
-					state_stack.push_back(solution_state)
-					if(__search()):
-						return true
-		return false
-	
+	func get_solution_count():
+		return len(solutions)
+		
 	func to_solution_line():
-		print('total validations: %d' % validation_counter)
+		var sugar_solution = solutions[current_solution_id]
 		var solution_line = Solution.SolutionLine.new()
-		solution_line.state_stack = state_stack
-		solution_line.progress = 1.0
+		var solution_state = Solution.DiscreteSolutionState.new()
+		var visited_vertices = {}
+		for v in range(n_vertices):
+			if (sugar_solution[is_start[v]]):
+				visited_vertices[v] = true
+				var vertices = [v]
+				var ok = true
+				while(ok):
+					ok = false
+					for v2 in vertice_neighbors[v]:
+						if (sugar_solution[passed[v2]]):
+							if !(v2 in visited_vertices):
+								visited_vertices[v2] = true
+								vertices.append(v2)
+								v = v2
+								ok = true
+								break
+				solution_state.vertices.append(vertices)
+		solution_line.state_stack.append(solution_state)
 		solution_line.started = true
+		solution_line.progress = 1.0
 		return solution_line
 				
-		
+	func ensure_segment():
+		is_start = s.new_bool_array(n_vertices, true)
+		is_end = s.new_bool_array(n_vertices)
+		passed = s.new_bool_array(n_vertices, true)
+		var is_start_or_end = s.or_(is_start, is_end)
+		s.ensure(s.imp(is_start, passed))
+		s.ensure(s.imp(is_end, passed))
+		for v in range(n_vertices):
+			if (!puzzle.vertices[v].is_puzzle_start):
+				s.ensure(s.iff(is_start[v], s.FALSE))
+			if (!puzzle.vertices[v].is_puzzle_end):
+				s.ensure(s.iff(is_end[v], s.FALSE))
+			var connectivity_conditions = []
+			for v2 in vertice_neighbors[v]:
+				connectivity_conditions.append(passed[v2])
+			var degree = s.count_true(connectivity_conditions)
+			s.ensure(s.imp(s.and_(passed[v], s.not_(is_start_or_end[v])), s.eq(degree, '2')))
+			s.ensure(s.imp(is_start_or_end[v], s.eq(degree, '1')))
+		s.ensure(s.eq(s.count_true(is_start), '1'))
+		s.ensure(s.eq(s.count_true(is_end), '1'))
+		s.ensure(s.graph_vertex_connected(passed, edge_list))

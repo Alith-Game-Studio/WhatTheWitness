@@ -11,7 +11,7 @@ var puzzle_counter_text = null
 onready var back_button = $BackButton
 onready var drawing_control = $MarginContainer/PuzzleRegion/PuzzleForeground/Viewport/Control
 var loaded = false
-
+var solver = null
 func _ready():
 	if (Gameplay.playing_custom_puzzle):
 		load_puzzle(Gameplay.puzzle_path)
@@ -122,6 +122,31 @@ func _input(event):
 				elif (event.scancode == KEY_RIGHT):
 					if (right_arrow_button.visible):
 						_on_right_arrow_button_pressed()
+				elif (event.scancode == KEY_A):
+					solver = load("res://script/solver.gd").Solver.new()
+					solver.solve(Gameplay.puzzle, 100)
+					if (solver.get_solution_count() != 0):
+						Gameplay.solution = solver.to_solution_line()
+						puzzle_counter_text.text = '[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()]
+					else:
+						puzzle_counter_text.text = '[0 / 0]'
+				elif (event.scancode == KEY_X):
+					if (solver != null and solver.get_solution_count() != 0):
+						solver.current_solution_id += 1
+						if (solver.current_solution_id >= solver.get_solution_count()):
+							solver.current_solution_id = 0
+						Gameplay.solution = solver.to_solution_line()
+						puzzle_counter_text.text = '[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()]
+				elif (event.scancode == KEY_Z):
+					if (solver != null and solver.get_solution_count() != 0):
+						solver.current_solution_id -= 1
+						if (solver.current_solution_id < 0):
+							solver.current_solution_id = solver.get_solution_count() - 1
+						Gameplay.solution = solver.to_solution_line()
+						puzzle_counter_text.text = '[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()]
+				
+							
+						
 
 func back_to_menu():
 	if (!Gameplay.playing_custom_puzzle):
