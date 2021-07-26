@@ -22,8 +22,8 @@ func new_int(low, high, is_key=false):
 	var result = "i" + str(n_ints)
 	if (is_key):
 		keys.append(result)
-		int_lows.append(low)
-		int_highs.append(high)
+	int_lows.append(low)
+	int_highs.append(high)
 	n_ints += 1
 	return result
 
@@ -45,6 +45,16 @@ func binary_operator(op, lhs, rhs):
 		var result = []
 		for i in range(len(lhs)):
 			result.append(binary_operator(op, lhs[i], rhs[i]))
+		return result
+	elif (lhs is Array):
+		var result = []
+		for i in range(len(lhs)):
+			result.append(binary_operator(op, lhs[i], rhs))
+		return result
+	elif (rhs is Array):
+		var result = []
+		for i in range(len(rhs)):
+			result.append(binary_operator(op, lhs, rhs[i]))
 		return result
 	else:
 		return '(%s %s %s)' % [op, lhs, rhs]
