@@ -9,8 +9,10 @@ const rule_ids = {
 	'!eliminated_star': 5,
 	'tetris': 6,
 	'!eliminated_tetris': 7,
-	'eliminator': 8,
-	'!eliminated_eliminator': 9,
+	'triangle': 8,
+	'!eliminated_triangle': 9,
+	'eliminator': 10,
+	'!eliminated_eliminator': 11,
 }
 
 class Solver:
@@ -50,6 +52,8 @@ class Solver:
 		for v in range(n_vertices):
 			vertice_neighbors.append([])
 			vertices_region_neighbors.append([])
+			if (puzzle.vertices[v].is_puzzle_end):
+				n_max_regions += 1 # isolated ends
 		for edge in puzzle.edges:
 			vertice_neighbors[edge.start.index].append(edge.end.index)
 			vertice_neighbors[edge.end.index].append(edge.start.index)
@@ -77,6 +81,8 @@ class Solver:
 		ensure_points()
 		ensure_squares()
 		ensure_tetris()
+		ensure_triangles()
+		ensure_stars()
 		solutions = s.solve(max_solution_count)
 		return len(solutions) != 0
 		
@@ -125,7 +131,7 @@ class Solver:
 				s.ensure(s.eq(is_end[v], -1))
 			if (puzzle.vertices[v].decorator.rule == 'broken'):
 				s.ensure(s.eq(is_solution[v], -1))
-			if !(puzzle.vertices[v].decorator.rule in ['point', 'square', 'tetris']):
+			if !(puzzle.vertices[v].decorator.rule in ['point', 'square', 'tetris', 'triangle', 'star']):
 				s.ensure(s.eq(is_decorator[v], -1))
 			s.ensure(s.xor(s.eq(is_solution[v], -1), s.eq(is_region[v], -1)))
 		for way in range(puzzle.n_ways):
@@ -194,9 +200,11 @@ class Solver:
 							)
 	
 	func ensure_tetris():
-		var coverings_facets = []
+		var coverings_facets_pos = []
+		var coverings_facets_neg = []
 		for f in range(len(puzzle.facets)):
-			coverings_facets.append([])
+			coverings_facets_pos.append([])
+			coverings_facets_neg.append([])
 		for v in range(n_vertices):
 			if (puzzle.vertices[v].decorator.rule == 'tetris'):
 				s.ensure(s.eq(is_decorator[v], rule_ids['tetris']))
@@ -208,9 +216,42 @@ class Solver:
 						var vf = puzzle.facets[f].center_vertex_index
 						var region_cond = s.eq(is_region[v], is_region[vf])
 						s.ensure(s.imp(b, region_cond))
-						coverings_facets[f].append(b)
+						if (puzzle.vertices[v].decorator.is_hollow):
+							coverings_facets_neg[f].append(b)
+						else:
+							coverings_facets_pos[f].append(b)
 				s.ensure(s.eq(s.count_true(coverings_shape), 1))
 		for f in range(len(puzzle.facets)):
 			var v = puzzle.facets[f].center_vertex_index
-			s.ensure(s.eq(s.count_true(coverings_facets[f]), s.if_(is_tetris_covered[v], 1, 0)))
+			s.ensure(s.eq(s.sub(s.count_true(coverings_facets_pos[f]),
+				s.count_true(coverings_facets_neg[f])), s.if_(is_tetris_covered[v], 1, 0)))
+		
+	func ensure_triangles():
+		for v in range(n_vertices):
+			if (puzzle.vertices[v].decorator.rule == 'triangle'):
+				s.ensure(s.eq(is_decorator[v], rule_ids['triangle']))
+				var facet = puzzle.vertices[v].linked_facet
+				if (facet == null): # the triangle is not placed on facets
+					s.ensure(s.FALSE)
+				else:
+					var count = []
+					for edge_tuple in facet.edge_tuples:
+						var v2 = puzzle.edge_detector_node[edge_tuple]
+						count.append(s.neq(is_solution[v2], -1))
+					# print(s.eq(s.count_true(count), puzzle.vertices[v].decorator.count))
+					s.ensure(s.eq(s.count_true(count), puzzle.vertices[v].decorator.count))
+	
+	func ensure_stars():
+		for v in range(n_vertices):
+			if (puzzle.vertices[v].decorator.rule == 'star'):
+				s.ensure(s.eq(is_decorator[v], rule_ids['star']))
+				var color = puzzle.vertices[v].decorator.color
+				var choices = []
+				for v2 in range(n_vertices):
+					if (v2 == v):
+						continue
+					if (puzzle.vertices[v2].decorator.color == color):
+						choices.append(s.eq(is_region[v], is_region[v2]))
+				s.ensure(s.eq(s.count_true(choices), 1))
+						
 		

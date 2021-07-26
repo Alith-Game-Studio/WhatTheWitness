@@ -122,17 +122,9 @@ func _input(event):
 				elif (event.scancode == KEY_RIGHT):
 					if (right_arrow_button.visible):
 						_on_right_arrow_button_pressed()
-				elif (event.scancode == KEY_A):
+				elif (event.scancode in [KEY_A, KEY_S, KEY_D]):
 					solver = load("res://script/solver.gd").Solver.new()
-					solver.solve(Gameplay.puzzle, 100)
-					if (solver.get_solution_count() != 0):
-						Gameplay.solution = solver.to_solution_line()
-						puzzle_counter_text.text = '[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()]
-					else:
-						puzzle_counter_text.text = '[0 / 0]'
-				elif (event.scancode == KEY_S):
-					solver = load("res://script/solver.gd").Solver.new()
-					solver.solve(Gameplay.puzzle, 5)
+					solver.solve(Gameplay.puzzle, {KEY_A: 100, KEY_S: 10, KEY_D: 1}[event.scancode])
 					if (solver.get_solution_count() != 0):
 						Gameplay.solution = solver.to_solution_line()
 						puzzle_counter_text.text = '[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()]
