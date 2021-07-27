@@ -213,19 +213,28 @@ class Solver:
 					var b = s.new_bool()
 					coverings_shape.append(b)
 					for f in covering:
-						var vf = puzzle.facets[f].center_vertex_index
-						var region_cond = s.eq(is_region[v], is_region[vf])
-						s.ensure(s.imp(b, region_cond))
+						# var vf = puzzle.facets[f].center_vertex_index
+						# var region_cond = s.eq(is_region[v], is_region[vf])
+						# s.ensure(s.imp(b, region_cond))
 						if (puzzle.vertices[v].decorator.is_hollow):
-							coverings_facets_neg[f].append(b)
+							coverings_facets_neg[f].append([b, v])
 						else:
-							coverings_facets_pos[f].append(b)
+							coverings_facets_pos[f].append([b, v])
 				s.ensure(s.eq(s.count_true(coverings_shape), 1))
-		for f in range(len(puzzle.facets)):
-			var v = puzzle.facets[f].center_vertex_index
-			s.ensure(s.eq(s.sub(s.count_true(coverings_facets_pos[f]),
-				s.count_true(coverings_facets_neg[f])), s.if_(is_tetris_covered[v], 1, 0)))
-		
+		# todo: fix hollow
+		for ref_v in range(n_vertices):
+			if (puzzle.vertices[ref_v].decorator.rule == 'tetris'):
+				for f in range(len(puzzle.facets)):
+					var center_v = puzzle.facets[f].center_vertex_index
+					var pos_cond = []
+					var neg_cond = []
+					for b_v_pair in coverings_facets_pos[f]:
+						pos_cond.append(s.and_(b_v_pair[0], s.eq(is_region[ref_v], is_region[b_v_pair[1]])))
+					for b_v_pair in coverings_facets_neg[f]:
+						neg_cond.append(s.and_(b_v_pair[0], s.eq(is_region[ref_v], is_region[b_v_pair[1]])))
+					s.ensure(s.eq(s.sub(s.count_true(pos_cond),
+						s.count_true(neg_cond)), s.if_(s.and_(s.eq(is_region[center_v], is_region[ref_v]), is_tetris_covered[center_v]), 1, 0)))
+				
 	func ensure_triangles():
 		for v in range(n_vertices):
 			if (puzzle.vertices[v].decorator.rule == 'triangle'):
