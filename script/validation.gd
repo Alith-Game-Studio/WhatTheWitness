@@ -76,7 +76,7 @@ class Validator:
 		else:
 			decorator_responses_of_vertex[v].append(response)
 	
-	func validate(input_puzzle: Graph.Puzzle, input_solution, require_errors=true):
+	func validate(input_puzzle: Graph.Puzzle, input_solution: Solution.SolutionLine):
 		puzzle = input_puzzle
 		solution = input_solution.state_stack[-1]
 		decorator_responses = []
@@ -164,4 +164,4 @@ class Validator:
 						regions[vertex_region[i]].decorator_dict[rule].append(response.index)
 				regions[vertex_region[i]].vertice_indices.append(i)
 		
-		return BasicJudgers.judge_all(self, require_errors)
+		return BasicJudgers.judge_all(self, true)

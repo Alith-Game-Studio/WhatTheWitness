@@ -31,8 +31,14 @@ if __name__ == '__main__':
         pass
     copy_editor()
     shutil.copytree('../../puzzles', os.path.join(BUILD_FOLDER, 'puzzles'))
+    shutil.copyfile('../../Credits.txt', os.path.join(BUILD_FOLDER, 'Credits.txt'))
     shutil.copyfile('Custom Witness Puzzles.exe', os.path.join(BUILD_FOLDER, 'Player.exe'))
     shutil.copyfile('Custom Witness Puzzles.pck', os.path.join(BUILD_FOLDER, 'Player.pck'))
+    try:
+        os.unlink(build_zip)
+        os.unlink(os.path.join(BUILD_FOLDER, 'Toolkit', 'current.toolkit'))
+    except:
+        pass
     try:
         os.unlink(build_zip)
     except:
