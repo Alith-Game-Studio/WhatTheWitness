@@ -36,6 +36,7 @@ class Solver:
 	var color_mapping: Dictionary
 	var is_decorator: Array
 	var is_tetris_covered: Array
+	var rules: Dictionary
 	func add_to_color_mapping(color):
 		if !(color in color_mapping):
 			color_mapping[color] = len(color_mapping)
@@ -49,11 +50,16 @@ class Solver:
 		print(puzzle)
 		vertice_neighbors = []
 		vertices_region_neighbors = []
+		rules = {}
 		for v in range(n_vertices):
 			vertice_neighbors.append([])
 			vertices_region_neighbors.append([])
 			if (puzzle.vertices[v].is_puzzle_end):
 				n_max_regions += 1 # isolated ends
+			var rule = puzzle.vertices[v].decorator.rule
+			if !(rule in rules):
+				rules[rule] = []
+			rules[rule].append(v)
 		for edge in puzzle.edges:
 			vertice_neighbors[edge.start.index].append(edge.end.index)
 			vertice_neighbors[edge.end.index].append(edge.start.index)
@@ -78,11 +84,16 @@ class Solver:
 			add_to_color_mapping(puzzle.solution_colors[way])
 		n_colors = len(color_mapping)
 		ensure_segment()
-		ensure_points()
-		ensure_squares()
-		ensure_tetris()
-		ensure_triangles()
-		ensure_stars()
+		if ('point' in rules):
+			ensure_points()
+		if ('square' in rules):
+			ensure_squares()
+		if ('tetris' in rules):
+			ensure_tetris()
+		if ('triangle' in rules):
+			ensure_triangles()
+		if ('star' in rules):
+			ensure_stars()
 		solutions = s.solve(max_solution_count)
 		return len(solutions) != 0
 		
