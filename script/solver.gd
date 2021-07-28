@@ -13,6 +13,7 @@ const rule_ids = {
 	'!eliminated_triangle': 9,
 	'eliminator': 10,
 	'!eliminated_eliminator': 11,
+	'circle-arrow': 12,
 }
 
 class Solver:
@@ -36,6 +37,7 @@ class Solver:
 	var color_mapping: Dictionary
 	var is_decorator: Array
 	var is_tetris_covered: Array
+	var is_direction: Array
 	var rules: Dictionary
 	func add_to_color_mapping(color):
 		if !(color in color_mapping):
@@ -94,6 +96,7 @@ class Solver:
 			ensure_triangles()
 		if ('star' in rules):
 			ensure_stars()
+		ensure_circle_arrow()
 		solutions = s.solve(max_solution_count)
 		return len(solutions) != 0
 		
@@ -142,7 +145,7 @@ class Solver:
 				s.ensure(s.eq(is_end[v], -1))
 			if (puzzle.vertices[v].decorator.rule == 'broken'):
 				s.ensure(s.eq(is_solution[v], -1))
-			if !(puzzle.vertices[v].decorator.rule in ['point', 'square', 'tetris', 'triangle', 'star']):
+			if !(puzzle.vertices[v].decorator.rule in ['point', 'square', 'tetris', 'triangle', 'star', 'circle-arrow']):
 				s.ensure(s.eq(is_decorator[v], -1))
 			s.ensure(s.xor(s.eq(is_solution[v], -1), s.eq(is_region[v], -1)))
 		for way in range(puzzle.n_ways):
@@ -274,4 +277,40 @@ class Solver:
 						choices.append(s.eq(is_region[v], is_region[v2]))
 				s.ensure(s.eq(s.count_true(choices), 1))
 						
+	func ensure_circle_arrow():
+		var edges_direction = {}
+		for v in range(n_vertices):
+			var dir_conditions = []
+			for v2 in vertice_neighbors[v]:
+				var b = s.new_bool()
+				dir_conditions.append(s.and_(s.eq(is_solution[v2], is_solution[v]), b))
+				edges_direction[[v, v2]] = b
+			s.ensure(s.imp(s.neq(is_solution[v], -1),
+				s.eq(s.count_true(dir_conditions), s.if_(s.eq(is_start[v], -1), 1, 0))))
+		for v_pair in edges_direction:
+			if (v_pair[0] < v_pair[1]):
+				s.ensure(s.imp(s.eq(is_solution[v_pair[0]], is_solution[v_pair[1]]), s.xor(edges_direction[v_pair], edges_direction[[v_pair[1], v_pair[0]]])))
 		
+		for v in range(n_vertices):
+			if (puzzle.vertices[v].decorator.rule == 'circle-arrow'):
+				var center = puzzle.vertices[v].pos
+				var is_clockwise = puzzle.vertices[v].decorator.is_clockwise
+				s.ensure(s.eq(is_decorator[v], rule_ids['circle-arrow']))
+				var facet = puzzle.vertices[v].linked_facet
+				if (facet == null):
+					s.ensure(s.FALSE)
+				else:
+					var count = []
+					for edge_tuple in facet.edge_tuples:
+						var v1 = puzzle.edge_detector_node[edge_tuple]
+						count.append(s.neq(is_solution[v1], -1))
+						
+						for v2 in vertice_neighbors[v1]:
+							var cross = TetrisJudger.det(
+								puzzle.vertices[v2].pos - center, 
+								puzzle.vertices[v1].pos - center)
+							if ((cross > 0 and is_clockwise) or (cross < 0 and !is_clockwise)):
+								s.ensure(s.or_(s.eq(is_solution[v1], -1), edges_direction[[v1, v2]]))
+					s.ensure(s.fold_or(count))
+					
+	
