@@ -27,6 +27,36 @@ const region_judgers = [
 ]
 
 func judge_all(validator: Validation.Validator, require_errors: bool):
+	for way_vertices in validator.solution.vertices:
+		var v = way_vertices[0]
+		if (v < len(validator.puzzle.vertices) and validator.puzzle.vertices[v].decorator.rule == 'all-error'):
+			# require all errors
+			for global_judger in global_judgers:
+				var judger_ok = call(global_judger, validator, true)
+			var ok = true
+			var collected_responses = []
+			var all_error_responses = []
+			for response in validator.decorator_responses:
+				if (response.rule == 'all-error'):
+					collected_responses.append(response)
+					all_error_responses.append(response)
+				else:
+					if (response.rule in ['broken', 'laser-emitter']):
+						continue
+					collected_responses.append(response)
+					if (response.state != Validation.DecoratorResponse.ERROR):
+						ok = false
+			if (require_errors):
+				if (ok):
+					for response in collected_responses:
+						response.state_before_elimination = response.state
+						response.state = Validation.DecoratorResponse.ELIMINATED
+					validator.elimination_happended = true
+				else:
+					for response in all_error_responses:
+						response.state = Validation.DecoratorResponse.ERROR
+			return ok
+	
 	var ok = true
 	for global_judger in global_judgers:
 		var judger_ok = call(global_judger, validator, require_errors)
@@ -185,9 +215,28 @@ func judge_region_squares(validator: Validation.Validator, region: Validation.Re
 				ok = false
 				break
 	if (require_errors and !ok):
+		var color_counts = {}
+		var max_color_count = 0
+		var max_color_type = null
+		var all_errors = false
 		for decorator_id in region.decorator_dict['square']:
 			var response = validator.decorator_responses[decorator_id]
-			response.state = Validation.DecoratorResponse.ERROR
+			if !(response.color in color_counts):
+				color_counts[response.color] = 1
+			else:
+				color_counts[response.color] += 1
+		for c in color_counts:
+			max_color_count = max(color_counts[c], max_color_count)
+		for c in color_counts:
+			if (color_counts[c] == max_color_count):
+				if (max_color_type == null):
+					max_color_type = c
+				else:
+					all_errors = true
+		for decorator_id in region.decorator_dict['square']:
+			var response = validator.decorator_responses[decorator_id]
+			if (all_errors or response.color != max_color_type):
+				response.state = Validation.DecoratorResponse.ERROR
 	return ok
 
 func judge_region_points(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
