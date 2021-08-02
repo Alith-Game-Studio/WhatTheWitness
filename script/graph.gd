@@ -209,7 +209,7 @@ func __add_decorator(puzzle, raw_element, v):
 		elif (text_decorator['Text'] == '[ ]'):
 			boxed_decorator = true
 		elif (text_decorator['Text'] == 'X'):
-			var decorator = load('res://script/decorators/wall_decorator.gd').new()
+			var decorator = load('res://script/decorators/all_error_decorator.gd').new()
 			decorator.color = color(text_decorator['Color'])
 			puzzle.vertices[v].decorator = decorator
 		elif (text_decorator['Text'] == 'F'):
@@ -323,6 +323,11 @@ func __add_decorator(puzzle, raw_element, v):
 			decorator.rotational = abs(decorator.angle) > 1e-3
 			puzzle.vertices[v].decorator = decorator
 			
+		elif (text_decorator['Text'].to_lower() in '01234567'):
+			var decorator = load('res://script/decorators/minesweeper_decorator.gd').new()
+			decorator.color = color(text_decorator['Color'])
+			decorator.count = '01234567'.find(text_decorator['Text'].to_lower())
+			puzzle.vertices[v].decorator = decorator
 		else:
 			print('Unknown text decorator %s' % text_decorator['Text'])
 	var triangle_decorator = __find_decorator(raw_element, "TriangleDecorator")

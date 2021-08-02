@@ -19,6 +19,7 @@ const region_judgers = [
 	'judge_region_squares',
 	'judge_region_stars',
 	'judge_region_triangles',
+	'judge_region_minesweeper',
 	'judge_region_circle_arrows',
 	'judge_region_graph_counter',
 	'judge_region_arrows',
@@ -38,6 +39,7 @@ func __match_color(solution_color, point_color):
 	if (point_color == Color.black): # black point matches every color
 		return true
 	return point_color == solution_color 
+
 
 func preprocess_filament(validator: Validation.Validator, require_errors: bool):
 	for v in validator.decorator_responses_of_vertex:
@@ -279,6 +281,42 @@ func judge_region_triangles(validator: Validation.Validator, region: Validation.
 			for edge_tuple in facet.edge_tuples:
 				var v = validator.puzzle.edge_detector_node[edge_tuple]
 				if (validator.vertex_region[v] < -1): # covered by any line
+					count += 1
+			if (count != response.decorator.count):
+				ok = false
+		if (!ok):
+			if (require_errors):
+				response.state = Validation.DecoratorResponse.ERROR
+				all_ok = false
+			else:
+				return false
+	return all_ok
+	
+func judge_region_minesweeper(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	if (!region.has_any('minesweeper')):
+		return true
+	var all_ok = true
+	var vertex_shared_facets = {}
+	for facet in validator.puzzle.facets:
+		for vertex in facet.vertices:
+			if !(vertex.index in vertex_shared_facets):
+				vertex_shared_facets[vertex.index] = [facet.center_vertex_index]
+			else:
+				vertex_shared_facets[vertex.index].append(facet.center_vertex_index)
+	for decorator_id in region.decorator_dict['minesweeper']:
+		var ok = true
+		var response = validator.decorator_responses[decorator_id]
+		var facet = validator.puzzle.vertices[response.vertex_index].linked_facet
+		if (facet == null): # not placed on facets
+			ok = false
+		else:
+			var count = 0
+			var neighbor_facet_vertex_ids = {}
+			for vertex in facet.vertices:
+				for facet_center_vertex_id in vertex_shared_facets[vertex.index]:
+					neighbor_facet_vertex_ids[facet_center_vertex_id] = true
+			for v in neighbor_facet_vertex_ids:
+				if (validator.vertex_region[v] != validator.vertex_region[facet.center_vertex_index]): # different region
 					count += 1
 			if (count != response.decorator.count):
 				ok = false

@@ -54,11 +54,11 @@ class PuzzleCanvas:
 		# drawing_target.draw_line(Vector2((pos1.x + pos2.x) / 2, pos1.y) * view_scale, Vector2((pos1.x + pos2.x) / 2, pos2.y) * view_scale, color if override_color == null else override_color, (pos2.x - pos1.x) * view_scale, true)
 		drawing_target.draw_line(Vector2((pos1.x + pos2.x) / 2, pos1.y) * view_scale, Vector2((pos1.x + pos2.x) / 2, pos2.y) * view_scale, color if override_color == null else override_color, (pos2.x - pos1.x) * view_scale)
 		
-	func add_texture(center, size, texture):
+	func add_texture(center, size, texture, color):
 		var origin = center * view_scale
 		var screen_size = size * view_scale
 		var rect = Rect2(origin - screen_size / 2, screen_size)
-		drawing_target.draw_texture_rect(texture, rect, false)
+		drawing_target.draw_texture_rect(texture, rect, false, color if override_color == null else override_color)
 		
 	func add_polygon(pos_list, color):
 		var result_list = []
