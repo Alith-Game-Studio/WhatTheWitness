@@ -558,7 +558,7 @@ func judge_region_graph_counter(validator: Validation.Validator, region: Validat
 			for original_symbol in line:
 				var symbol = graph_counter.get_rotational_symbol(original_symbol) if graph_counter.rotational else original_symbol
 				if (symbol > 0):
-					if (shape_counter[symbol] != 0):
+					if (!(symbol in shape_counter) or shape_counter[symbol] != 0):
 						if (require_errors):
 							response.state = Validation.DecoratorResponse.ERROR
 							all_ok = false
