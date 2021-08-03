@@ -234,6 +234,42 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextEdit90" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2016.0
+margin_top = 2976.0
+margin_right = 2112.0
+margin_bottom = 3072.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-F15"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit91" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2112.0
+margin_top = 2976.0
+margin_right = 2208.0
+margin_bottom = 3072.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-F16"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit92" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 2976.0
+margin_right = 2304.0
+margin_bottom = 3072.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-F17"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TextEdit89" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1728.0
 margin_top = 2880.0
@@ -247,9 +283,9 @@ __meta__ = {
 }
 
 [node name="TextEdit83" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 1536.0
+margin_left = 1440.0
 margin_top = 3072.0
-margin_right = 1632.0
+margin_right = 1536.0
 margin_bottom = 3168.0
 rect_pivot_offset = Vector2( 48, 96 )
 text = "wc7-F08"
@@ -283,9 +319,9 @@ __meta__ = {
 }
 
 [node name="TextEdit85" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 1440.0
+margin_left = 1536.0
 margin_top = 3072.0
-margin_right = 1536.0
+margin_right = 1632.0
 margin_bottom = 3168.0
 rect_pivot_offset = Vector2( 48, 96 )
 text = "wc7-F10"
