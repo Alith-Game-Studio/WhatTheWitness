@@ -511,9 +511,9 @@ __meta__ = {
 }
 
 [node name="TextEdit61" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 1536.0
+margin_left = 1920.0
 margin_top = 1920.0
-margin_right = 1632.0
+margin_right = 2016.0
 margin_bottom = 2016.0
 rect_pivot_offset = Vector2( 48, 96 )
 text = "wc7-B07"
@@ -523,9 +523,9 @@ __meta__ = {
 }
 
 [node name="TextEdit62" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 1632.0
+margin_left = 1536.0
 margin_top = 1920.0
-margin_right = 1728.0
+margin_right = 1632.0
 margin_bottom = 2016.0
 rect_pivot_offset = Vector2( 48, 96 )
 text = "wc7-B08"
@@ -535,9 +535,9 @@ __meta__ = {
 }
 
 [node name="TextEdit63" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 1728.0
+margin_left = 1632.0
 margin_top = 1920.0
-margin_right = 1824.0
+margin_right = 1728.0
 margin_bottom = 2016.0
 rect_pivot_offset = Vector2( 48, 96 )
 text = "wc7-B09"
@@ -553,6 +553,18 @@ margin_right = 1920.0
 margin_bottom = 2016.0
 rect_pivot_offset = Vector2( 48, 96 )
 text = "wc7-B10"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit93" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1728.0
+margin_top = 1920.0
+margin_right = 1824.0
+margin_bottom = 2016.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc7-B11"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false

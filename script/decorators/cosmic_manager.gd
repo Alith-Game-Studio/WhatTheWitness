@@ -4,9 +4,11 @@ var rule = 'cosmic-manager'
 
 var alien_vertices = []
 var house_vertices = []
+var is_angry = {}
 var vertex_detectors = {}
 func add_alien(v):
 	alien_vertices.append(v)
+	is_angry[v] = false
 	
 func add_house(v):
 	house_vertices.append(v)
@@ -24,7 +26,8 @@ func draw_above_solution(canvas, owner, owner_type, puzzle, solution):
 			var background_color = puzzle.background_color
 			puzzle.vertices[alien_v].decorator.draw_alien(canvas, puzzle, puzzle.vertices[alien_v].pos,
 				Color(background_color.r, background_color.g, background_color.b, 0.7))
-	
+		if (is_angry[alien_v]):
+			puzzle.vertices[alien_v].decorator.draw_anger(canvas, puzzle, puzzle.vertices[alien_v].pos, Color.black)
 	for house_v in house_vertices:
 		if not (house_v in states):
 			continue
@@ -56,7 +59,6 @@ func prepare_validation(validator, states):
 			var vertex = puzzle.vertices[alien_v]
 			var response = validator.add_decorator(vertex.decorator, vertex.pos, alien_v)
 			validator.push_vertex_decorator_response(alien_v, response)
-	
 	for house_v in house_vertices:
 		if not (house_v in states):
 			continue
@@ -88,6 +90,7 @@ func init_property(puzzle, solution_state, start_vertex):
 		if (facet != null):
 			for edge_tuple in facet.edge_tuples:
 				vertex_detectors[alien_v].append(puzzle.edge_detector_node[edge_tuple])
+		is_angry[alien_v] = false
 	for house_v in house_vertices:
 		states[house_v] = -1
 		vertex_detectors[house_v] = []
@@ -128,8 +131,12 @@ func transist(puzzle: Graph.Puzzle, vertices, old_state):
 				if (passing_vertex_id in vertex_detectors[alien_v]):
 					aliens_on_board.append(alien_v)
 			if (len(aliens_on_board) == 1):
+				is_angry[aliens_on_board[0]] = false
 				way_state = aliens_on_board[0]
 				new_state[aliens_on_board[0]] = -2 - way
+			else:
+				for alien_v in aliens_on_board:
+					is_angry[alien_v] = true
 		new_state[-way - 1] = way_state
 	return new_state
 
