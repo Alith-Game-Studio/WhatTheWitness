@@ -92,7 +92,7 @@ class PuzzleCanvas:
 		for decorator in puzzle.decorators:
 			decorator.draw_foreground(self, null, -1, puzzle)
 	
-	func draw_validation(target, puzzle, validator, time, show_errors_only):
+	func draw_validation(target, puzzle, validator, time):
 		if (validator == null): # unknown
 			return
 		var error_transparency = (sin(time * 6 + PI / 4) + 1) / 2
@@ -111,32 +111,32 @@ class PuzzleCanvas:
 			else:
 				draw_error = decorator_response.state == Validation.DecoratorResponse.ERROR
 				draw_eliminated = decorator_response.state == Validation.DecoratorResponse.ELIMINATED
-			if (!show_errors_only and draw_cloned):
+			if (draw_cloned):
 				override_color = Color(puzzle.background_color.r, puzzle.background_color.g, puzzle.background_color.b, clone_fading * 0.8)
 				drawing_target.draw_set_transform(view_origin + decorator_response.pos * view_scale, decorator_response.decorator.angle, Vector2(1.0, 1.0))
 				decorator_response.clone_source_decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)
 				override_color = Color(decorator_response.color.r, decorator_response.color.g, decorator_response.color.b, clone_fading)
 				drawing_target.draw_set_transform(view_origin + decorator_response.pos * view_scale, decorator_response.decorator.angle, Vector2(1.0, 1.0))
 				decorator_response.decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)
-			if (show_errors_only and draw_error and (!draw_cloned or time > 0.5)):
-				override_color = Color(1.0, 0.0, 0.0, 1.0)
+			if (draw_error and (!draw_cloned or time > 0.5)):
+				override_color = Color(error_transparency + (1 - error_transparency) * decorator_response.color.r, 
+								(1 - error_transparency) * decorator_response.color.g, 
+								(1 - error_transparency) * decorator_response.color.b, 1.0)
 				drawing_target.draw_set_transform(view_origin + decorator_response.pos * view_scale, decorator_response.decorator.angle, Vector2(1.0, 1.0))
 				decorator_response.decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)
-			elif (!show_errors_only and draw_eliminated):
+			elif (draw_eliminated):
 				override_color = Color(puzzle.background_color.r, puzzle.background_color.g, puzzle.background_color.b, eliminator_fading)
 				drawing_target.draw_set_transform(view_origin + decorator_response.pos * view_scale, decorator_response.decorator.angle, Vector2(1.0, 1.0))
 				decorator_response.decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)
 				
 		override_color = null
-		return error_transparency
 		
 	func draw_additive_layer(target, solution, validator, time):
 		drawing_target = target
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		for i in range(len(puzzle.decorators)):
 			puzzle.decorators[i].draw_additive_layer(self, i, -1, puzzle, solution)
-	
-	
+
 	func draw_solution(target, solution, validator, time):
 		drawing_target = target
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))

@@ -179,10 +179,10 @@ func __check_decorator_consumed(raw_decorator, element_type):
 		print('Unsupported decorator: %s on %s' % [raw_decorator['xsi:type'], ['node', 'edge', 'facet'][element_type]])
 
 		
-const GRAPH_COUNTER_TEXTS = {'\u250F': 12, '\u2533': 13,  '\u2513': 9,
-	'\u2523': 14, '\u254B': 15, '\u252B': 11, 
-	'\u2517': 6, '\u253B': 7, '\u251B': 3,
-	'\u2503': 10, '\u2501': 5, '\u254F': 26, '\u254D': 21 }
+const GRAPH_COUNTER_TEXTS = {'\u250F': 576, '\u2533': 577,  '\u2513': 513,
+	'\u2523': 584, '\u254B': 585, '\u252B': 521, 
+	'\u2517': 72, '\u253B': 73, '\u251B': 9,
+	'\u2503': 520, '\u2501': 65, '\u254F': 4616, '\u254D': 4161 }
 
 func __add_decorator(puzzle, raw_element, v):
 	var boxed_decorator = false

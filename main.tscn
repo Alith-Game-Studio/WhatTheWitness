@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://script/puzzle_player.gd" type="Script" id=1]
 [ext_resource path="res://script/puzzle_additive_layer_renderer.gd" type="Script" id=2]
-[ext_resource path="res://script/puzzle_error_layer_renderer.gd" type="Script" id=3]
 [ext_resource path="res://img/right_arrow.png" type="Texture" id=4]
 [ext_resource path="res://img/left_arrow.png" type="Texture" id=5]
 [ext_resource path="res://img/cross.png" type="Texture" id=6]
@@ -79,12 +78,6 @@ margin_right = 1440.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 1440, 1200 )
 script = ExtResource( 2 )
-
-[node name="ErrorLayer" type="Control" parent="MarginContainer/PuzzleRegion/PuzzleForeground/Viewport"]
-margin_right = 1440.0
-margin_bottom = 1200.0
-rect_min_size = Vector2( 1440, 1200 )
-script = ExtResource( 3 )
 
 [node name="RightArrowButton" type="TextureButton" parent="."]
 margin_left = 919.464

@@ -13,16 +13,17 @@ const MASK_LEFT = 0
 const MASK_UP = 3
 const MASK_RIGHT = 6
 const MASK_DOWN = 9
-const MASK_BROKEN = 10
-const MASK_ROTATIONAL = 11
+const MASK_BROKEN = 12
+const MASK_ROTATIONAL = 13
 var rotational: bool
 
 func get_rotational_symbol(old_symbol: int):
 	if (old_symbol == 0):
 		return old_symbol
 	var min_symbol = old_symbol
+	var mask = (1 << N_DIRS) - 1
 	for i in range(N_DIRS):
-		min_symbol = min(min_symbol, (((old_symbol & 0xfff) << i) % 0xfff) | old_symbol & ~0xf)
+		min_symbol = min(min_symbol, (((old_symbol & mask) << i) % mask) | old_symbol & ~mask)
 	return min_symbol | 1 << MASK_ROTATIONAL
 
 func draw_symbol(canvas: Visualizer.PuzzleCanvas, puzzle: Graph.Puzzle, pos: Vector2, symbol: int):
@@ -36,24 +37,10 @@ func draw_symbol(canvas: Visualizer.PuzzleCanvas, puzzle: Graph.Puzzle, pos: Vec
 			if (symbol & (1 << dir)):
 				canvas.add_line(line_length * Vector2(DIR_X[dir], DIR_Y[dir]) * 0.3 + pos, line_length * Vector2(DIR_X[dir], DIR_Y[dir]) + pos, width, color)
 	else:
-		var points = []
 		for dir in range(N_DIRS):
-			var prev_dir = N_DIRS - 1 if dir == 0 else dir - 1
-			var vec = Vector2(DIR_X[dir], DIR_Y[dir])
-			var prev_vec = Vector2(DIR_X[prev_dir], DIR_Y[prev_dir])
 			if (symbol & (1 << dir)):
-				points.append(line_length * vec + width / 2 * prev_vec + pos)
-				points.append(line_length * vec - width / 2 * prev_vec + pos)
-				points.append(width / 2 * (vec - prev_vec) + pos)
-			else:
-				if (not (symbol & (1 << prev_dir))):
-					for i in range(nb_points):
-						var angle = (i + 1) * PI / (nb_points * 2) + (dir + 1) * PI / 2
-						points.append(Vector2(cos(angle), sin(angle)) * width / 2 + pos)
-				else:
-					points.append(width / 2 * vec + pos)
-		canvas.add_polygon(points, color)
-	
+				canvas.add_line(pos, line_length * Vector2(DIR_X[dir], DIR_Y[dir]) + pos, width, color)
+		canvas.add_circle(pos, width / 2, color)
 func draw_foreground(canvas: Visualizer.PuzzleCanvas, owner, owner_type: int, puzzle: Graph.Puzzle):
 	for i in range(len(matrix)):
 		var pos_y = (i - (len(matrix) - 1) / 2.0) * step_y
