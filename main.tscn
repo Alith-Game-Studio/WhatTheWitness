@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://script/puzzle_player.gd" type="Script" id=1]
-[ext_resource path="res://puzzle_additive_layer_renderer.gd" type="Script" id=2]
+[ext_resource path="res://script/puzzle_additive_layer_renderer.gd" type="Script" id=2]
+[ext_resource path="res://script/puzzle_error_layer_renderer.gd" type="Script" id=3]
 [ext_resource path="res://img/right_arrow.png" type="Texture" id=4]
 [ext_resource path="res://img/left_arrow.png" type="Texture" id=5]
 [ext_resource path="res://img/cross.png" type="Texture" id=6]
@@ -27,8 +28,10 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 1025.0
-margin_bottom = 602.0
+margin_left = -2.24487
+margin_top = 2.24493
+margin_right = 1022.76
+margin_bottom = 604.245
 custom_constants/margin_right = 150
 custom_constants/margin_top = 0
 custom_constants/margin_left = 150
@@ -64,18 +67,24 @@ render_target_v_flip = true
 render_target_update_mode = 3
 script = ExtResource( 7 )
 
-[node name="Control" type="Control" parent="MarginContainer/PuzzleRegion/PuzzleForeground/Viewport"]
+[node name="MixLayer" type="Control" parent="MarginContainer/PuzzleRegion/PuzzleForeground/Viewport"]
 margin_right = 1440.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 1440, 1200 )
 script = ExtResource( 8 )
 
-[node name="Control2" type="Control" parent="MarginContainer/PuzzleRegion/PuzzleForeground/Viewport"]
+[node name="AddLayer" type="Control" parent="MarginContainer/PuzzleRegion/PuzzleForeground/Viewport"]
 material = SubResource( 2 )
 margin_right = 1440.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 1440, 1200 )
 script = ExtResource( 2 )
+
+[node name="ErrorLayer" type="Control" parent="MarginContainer/PuzzleRegion/PuzzleForeground/Viewport"]
+margin_right = 1440.0
+margin_bottom = 1200.0
+rect_min_size = Vector2( 1440, 1200 )
+script = ExtResource( 3 )
 
 [node name="RightArrowButton" type="TextureButton" parent="."]
 margin_left = 919.464

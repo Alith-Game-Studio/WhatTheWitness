@@ -6,22 +6,23 @@ var matrix: Array
 var step_x: float
 var step_y: float
 var size: float
-const DIR_X = [-1, 0, 1, 0]
-const DIR_Y = [0, -1, 0, 1]
+const N_DIRS = 12
+const DIR_X = [-1, -sqrt(0.75), -0.5, 0, 0.5, sqrt(0.75), 1, sqrt(0.75), 0.5, 0, -0.5, -sqrt(0.75)]
+const DIR_Y = [0, -0.5, -sqrt(0.75), -1, -sqrt(0.75), -0.5, 0, 0.5, sqrt(0.75), 1, sqrt(0.75), 0.5]
 const MASK_LEFT = 0
-const MASK_UP = 1
-const MASK_RIGHT = 2
-const MASK_DOWN = 3
-const MASK_BROKEN = 4
-const MASK_ROTATIONAL = 5
+const MASK_UP = 3
+const MASK_RIGHT = 6
+const MASK_DOWN = 9
+const MASK_BROKEN = 10
+const MASK_ROTATIONAL = 11
 var rotational: bool
 
 func get_rotational_symbol(old_symbol: int):
 	if (old_symbol == 0):
 		return old_symbol
 	var min_symbol = old_symbol
-	for i in range(4):
-		min_symbol = min(min_symbol, (((old_symbol & 0xf) << i) % 0xf) | old_symbol & ~0xf)
+	for i in range(N_DIRS):
+		min_symbol = min(min_symbol, (((old_symbol & 0xfff) << i) % 0xfff) | old_symbol & ~0xf)
 	return min_symbol | 1 << MASK_ROTATIONAL
 
 func draw_symbol(canvas: Visualizer.PuzzleCanvas, puzzle: Graph.Puzzle, pos: Vector2, symbol: int):
@@ -31,13 +32,13 @@ func draw_symbol(canvas: Visualizer.PuzzleCanvas, puzzle: Graph.Puzzle, pos: Vec
 	var width = puzzle.line_width * 0.6 * size
 	var nb_points = 8
 	if (symbol & (1 << MASK_BROKEN)):
-		for dir in range(4):
+		for dir in range(N_DIRS):
 			if (symbol & (1 << dir)):
 				canvas.add_line(line_length * Vector2(DIR_X[dir], DIR_Y[dir]) * 0.3 + pos, line_length * Vector2(DIR_X[dir], DIR_Y[dir]) + pos, width, color)
 	else:
 		var points = []
-		for dir in range(4):
-			var prev_dir = 3 if dir == 0 else dir - 1
+		for dir in range(N_DIRS):
+			var prev_dir = N_DIRS - 1 if dir == 0 else dir - 1
 			var vec = Vector2(DIR_X[dir], DIR_Y[dir])
 			var prev_vec = Vector2(DIR_X[prev_dir], DIR_Y[prev_dir])
 			if (symbol & (1 << dir)):

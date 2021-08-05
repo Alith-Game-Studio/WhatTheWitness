@@ -529,10 +529,10 @@ func judge_region_graph_counter(validator: Validation.Validator, region: Validat
 		var edge_direction = (edge.end.pos - edge.start.pos).normalized()
 		var dir_forward = -1
 		var dir_backward = -1
-		for dir in range(4):
+		for dir in range(graph_counter.N_DIRS):
 			if (edge_direction.distance_to(Vector2(graph_counter.DIR_X[dir], graph_counter.DIR_Y[dir])) < 1e-3):
 				dir_forward = dir
-				dir_backward = (dir + 2) % 4
+				dir_backward = (dir + graph_counter.N_DIRS / 2) % graph_counter.N_DIRS
 		if (dir_backward >= 0 and edge.end.index in vertex_shapes):
 			vertex_shapes[edge.end.index] |= 1 << dir_backward
 			if (edge.end.decorator.rule == 'broken'):
