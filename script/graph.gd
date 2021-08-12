@@ -72,6 +72,7 @@ class Puzzle:
 	var symmetry_type: int
 	var symmetry_center: Vector2
 	var symmetry_normal: Vector2
+	var symmetry_parallel_points: Array
 	var decorators : Array
 	var edge_detector_node = {}
 	var edge_shared_facets = {}
@@ -198,6 +199,8 @@ func __add_decorator(puzzle, raw_element, v):
 		puzzle.vertices[v_end].is_puzzle_end = true
 	if (__find_decorator(raw_element, "BoxDecorator")):
 		boxed_decorator = true
+	if (__find_decorator(raw_element, "StartDecorator")):
+		puzzle.vertices[v].is_puzzle_start = true
 	var text_decorator = __find_decorator(raw_element, "TextDecorator")
 	if (text_decorator):
 		if (text_decorator['Text'] == 'Obs'):
@@ -230,6 +233,18 @@ func __add_decorator(puzzle, raw_element, v):
 		elif (text_decorator['Text'].to_lower() == 'select 1'):
 			puzzle.vertices[v].hidden = true
 			puzzle.select_one_subpuzzle = true
+		elif (text_decorator['Text'].to_lower() == 'parallel'):
+			var p = puzzle.vertices[v].pos
+			if (puzzle.symmetry_type != SYMMETRY_PARALLEL):
+				puzzle.symmetry_type = SYMMETRY_PARALLEL
+				puzzle.n_ways = 1
+				puzzle.solution_colors[0] = color(text_decorator['Color'])
+				puzzle.symmetry_parallel_points = [p]
+			else:
+				puzzle.n_ways += 1
+				puzzle.symmetry_parallel_points.append(p)
+				puzzle.solution_colors.append(color(text_decorator['Color']))
+			
 		elif (text_decorator['Text'].to_lower() == 'exit'):
 			# another way to add an end
 			puzzle.vertices[v].is_puzzle_end = true
@@ -267,7 +282,7 @@ func __add_decorator(puzzle, raw_element, v):
 			decorator.color = color(text_decorator['Color'])
 			decorator.pattern = 0 if float(text_decorator['Angle']) == 0.0 else 1
 			puzzle.vertices[v].decorator = decorator
-		elif (text_decorator['Text'].to_lower() == '\u263F\uFE0F'): # laser emitter
+		elif (text_decorator['Text'].to_lower() in ['laser_region_min', 'laser_region_max', '\u263F\uFE0F']): # laser
 			var laser_manager = null
 			for global_decorator in puzzle.decorators:
 				if (global_decorator.rule == 'laser-manager'):
@@ -276,11 +291,18 @@ func __add_decorator(puzzle, raw_element, v):
 			if (laser_manager == null):
 				laser_manager = load('res://script/decorators/laser_manager.gd').new()
 				puzzle.decorators.append(laser_manager)
-			var decorator = load('res://script/decorators/laser_emitter_decorator.gd').new()
-			decorator.color = color(text_decorator['Color'])
-			puzzle.vertices[v].decorator = decorator
-			decorator.angle = deg2rad(float(text_decorator['Angle']))
-			laser_manager.add_laser_emitter(puzzle.vertices[v].pos, decorator.color, decorator.angle)
+			if (text_decorator['Text'].to_lower() == 'laser_region_min'):
+				laser_manager.min_x = puzzle.vertices[v].pos.x
+				laser_manager.min_y = puzzle.vertices[v].pos.y
+			elif (text_decorator['Text'].to_lower() == 'laser_region_max'):
+				laser_manager.max_x = puzzle.vertices[v].pos.x
+				laser_manager.max_y = puzzle.vertices[v].pos.y
+			else:
+				var decorator = load('res://script/decorators/laser_emitter_decorator.gd').new()
+				decorator.color = color(text_decorator['Color'])
+				puzzle.vertices[v].decorator = decorator
+				decorator.angle = deg2rad(float(text_decorator['Angle']))
+				laser_manager.add_laser_emitter(puzzle.vertices[v].pos, decorator.color, decorator.angle)
 		elif (text_decorator['Text'].to_lower() in ['\uC6C3', '\u337F']): # cosmic express
 			var cosmic_manager = null
 			for global_decorator in puzzle.decorators:
@@ -365,9 +387,14 @@ func __add_decorator(puzzle, raw_element, v):
 		puzzle.vertices[v].decorator = decorator
 	var eliminator_decorator = __find_decorator(raw_element, "EliminatorDecorator")
 	if (eliminator_decorator):
-		var decorator = load('res://script/decorators/eliminator_decorator.gd').new()
-		decorator.color = color(eliminator_decorator['Color'])
-		puzzle.vertices[v].decorator = decorator
+		if (puzzle.vertices[v].is_puzzle_start):
+			var decorator = load('res://script/decorators/all_error_decorator.gd').new()
+			decorator.color = color(text_decorator['Color'])
+			puzzle.vertices[v].decorator = decorator
+		else:
+			var decorator = load('res://script/decorators/eliminator_decorator.gd').new()
+			decorator.color = color(eliminator_decorator['Color'])
+			puzzle.vertices[v].decorator = decorator
 	var tetris_decorator = __find_decorator(raw_element, "TetrisDecorator")
 	if (tetris_decorator):
 		var decorator = __load_tetris(tetris_decorator, false)
@@ -376,8 +403,6 @@ func __add_decorator(puzzle, raw_element, v):
 	if (hollow_tetris_decorator):
 		var decorator = __load_tetris(hollow_tetris_decorator, true)
 		puzzle.vertices[v].decorator = decorator
-	if (__find_decorator(raw_element, "StartDecorator")):
-		puzzle.vertices[v].is_puzzle_start = true
 	if (boxed_decorator):
 		var decorator = load('res://script/decorators/box_decorator.gd').new()
 		decorator.color = Color.black
@@ -457,9 +482,10 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 	if (symmetry_decorator):
 		puzzle.n_ways = 2
 		puzzle.symmetry_type = SYMMETRY_PARALLEL
-		puzzle.symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
-		puzzle.symmetry_center += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
-		puzzle.symmetry_normal = Vector2(float(symmetry_decorator['TranslationX']), float(symmetry_decorator['TranslationY']))
+		var p1 = __get_raw_element_center(puzzle, raw_element, element_type, id)
+		p1 += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
+		var p2 = p1 + Vector2(float(symmetry_decorator['TranslationX']), float(symmetry_decorator['TranslationY']))
+		puzzle.symmetry_parallel_points = [p1, p2]
 		puzzle.solution_colors.push_back(color(symmetry_decorator['SecondLineColor']))
 	if (element_type == EDGE_ELEMENT):
 		var v1 = int(raw_element['Start'])

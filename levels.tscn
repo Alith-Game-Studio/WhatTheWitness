@@ -66,6 +66,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextEdit94" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 480.0
+margin_right = 672.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "wc7-H01"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit95" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 576.0
+margin_right = 672.0
+margin_bottom = 672.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "wc7-H02"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TextEdit3" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 864.0
 margin_top = 480.0

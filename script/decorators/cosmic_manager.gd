@@ -45,6 +45,8 @@ func draw_above_solution(canvas, owner, owner_type, puzzle, solution):
 			var way_vertices = solution.state_stack[-1].vertices[way]
 			var alien_v = way_state
 			var alien_color = puzzle.vertices[alien_v].decorator.color
+			if (alien_color == null):
+				continue
 			canvas.add_circle(solution.get_current_way_position(puzzle, way),
 				puzzle.line_width * 0.3,
 				alien_color

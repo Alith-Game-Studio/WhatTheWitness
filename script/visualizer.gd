@@ -118,7 +118,7 @@ class PuzzleCanvas:
 				override_color = Color(decorator_response.color.r, decorator_response.color.g, decorator_response.color.b, clone_fading)
 				drawing_target.draw_set_transform(view_origin + decorator_response.pos * view_scale, decorator_response.decorator.angle, Vector2(1.0, 1.0))
 				decorator_response.decorator.draw_foreground(self, puzzle.vertices[decorator_response.vertex_index], 0, puzzle)
-			if (draw_error and (!draw_cloned or time > 0.5)):
+			if (draw_error and (!draw_cloned or time > 0.5) and decorator_response.color != null):
 				override_color = Color(error_transparency + (1 - error_transparency) * decorator_response.color.r, 
 								(1 - error_transparency) * decorator_response.color.g, 
 								(1 - error_transparency) * decorator_response.color.b, 1.0)

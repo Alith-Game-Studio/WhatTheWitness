@@ -34,6 +34,7 @@ func judge_all(validator: Validation.Validator, require_errors: bool):
 			for global_judger in global_judgers:
 				var judger_ok = call(global_judger, validator, true)
 			var ok = true
+			var any_error = false
 			var collected_responses = []
 			var all_error_responses = []
 			for response in validator.decorator_responses:
@@ -41,21 +42,28 @@ func judge_all(validator: Validation.Validator, require_errors: bool):
 					collected_responses.append(response)
 					all_error_responses.append(response)
 				else:
-					if (response.rule in ['broken', 'laser-emitter']):
+					if (response.rule in ['broken', 'laser-emitter', 'cosmic-house']):
 						continue
-					collected_responses.append(response)
 					if (response.state != Validation.DecoratorResponse.ERROR):
 						ok = false
+					else:
+						any_error = true
+					collected_responses.append(response)
 			if (require_errors):
-				if (ok):
-					for response in collected_responses:
-						response.state_before_elimination = response.state
-						response.state = Validation.DecoratorResponse.ELIMINATED
-					validator.elimination_happended = true
-				else:
+				if (!any_error):
 					for response in all_error_responses:
 						response.state = Validation.DecoratorResponse.ERROR
-			return ok
+				else:
+					for response in collected_responses:
+						response.state_before_elimination = response.state
+						if (response.state == Validation.DecoratorResponse.ERROR):
+							response.state = Validation.DecoratorResponse.ELIMINATED
+						else:
+							response.state = Validation.DecoratorResponse.ERROR
+					for response in all_error_responses:
+						response.state = Validation.DecoratorResponse.ELIMINATED
+					validator.elimination_happended = true
+			return any_error and ok
 	
 	var ok = true
 	for global_judger in global_judgers:

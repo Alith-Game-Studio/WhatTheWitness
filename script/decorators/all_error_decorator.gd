@@ -20,5 +20,6 @@ func draw_foreground(canvas: Visualizer.PuzzleCanvas, owner, owner_type: int, pu
 	canvas.add_polygon(curve_points_template, color)
 
 func draw_above_solution(canvas, owner, owner_type, puzzle, solution):
-	canvas.add_polygon(curve_points_template, color)
+	if (solution == null or solution.validity == 0):
+		canvas.add_polygon(curve_points_template, color)
  

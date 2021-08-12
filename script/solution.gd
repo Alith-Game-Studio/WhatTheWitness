@@ -203,7 +203,7 @@ class DiscreteSolutionState:
 		elif (puzzle.symmetry_type == Graph.SYMMETRY_REFLECTIVE):
 			return (pos - puzzle.symmetry_center).reflect(puzzle.symmetry_normal) + puzzle.symmetry_center
 		elif (puzzle.symmetry_type == Graph.SYMMETRY_PARALLEL):
-			return pos + puzzle.symmetry_normal
+			return pos + puzzle.symmetry_parallel_points[way] - puzzle.symmetry_parallel_points[MAIN_WAY]
 		assert(false)
 		
 	func get_symmetry_vector(puzzle, way, vec):
@@ -235,9 +235,12 @@ class DiscreteSolutionState:
 		return result
 		
 	func initialize(puzzle, pos):
-		var possible_start_pos = [pos]
+		var possible_start_pos = []
 		if (puzzle.symmetry_type == Graph.SYMMETRY_PARALLEL):
-			possible_start_pos.append(pos - puzzle.symmetry_normal)
+			for i in range(puzzle.n_ways):
+				possible_start_pos.append(pos - puzzle.symmetry_parallel_points[i] + puzzle.symmetry_parallel_points[MAIN_WAY])
+		else:
+			possible_start_pos = [pos]
 		for pos in possible_start_pos:
 			vertices.clear()
 			var est_start_vertex = get_nearest_start(puzzle, pos)
