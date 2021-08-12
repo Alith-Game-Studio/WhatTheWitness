@@ -1240,8 +1240,8 @@
         <Text>laser_region_min</Text>
         <Color>White</Color>
       </Decorator>
-      <X>6.5</X>
-      <Y>0.5</Y>
+      <X>6.6</X>
+      <Y>0.6</Y>
       <Hidden>true</Hidden>
     </Node>
     <Node>
@@ -1259,8 +1259,8 @@
         <Text>laser_region_max</Text>
         <Color>White</Color>
       </Decorator>
-      <X>12.5</X>
-      <Y>6.5</Y>
+      <X>12.4</X>
+      <Y>6.4</Y>
       <Hidden>true</Hidden>
     </Node>
   </Nodes>
