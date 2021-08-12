@@ -5,8 +5,10 @@ onready var frame = $PuzzlePreview
 onready var visualizer = $PuzzlePreview/PuzzleVisualizer
 onready var parent = $".."
 onready var puzzle_credit_text = $"../../../SideMenu/PuzzleCredits"
+onready var points_label = $PuzzlePreview/PointsLabel
 var puzzle_name
 var puzzle_unlocked
+var points = 0
 		
 func show_puzzle(load_puzzle_name, unlocked=true):
 	puzzle_name = load_puzzle_name
@@ -33,6 +35,9 @@ func show_puzzle(load_puzzle_name, unlocked=true):
 	var image_texture = ImageTexture.new()
 	image_texture.create_from_image(vport_img)
 	visualizer.texture = image_texture
+	points_label.bbcode_text = '[center]%s[/center]' % (
+		'' if points == 0 else '1 pt' if points == 1 else '%d pts' % points
+	)
 	
 func update_puzzle(unlocked=true):
 	show_puzzle(puzzle_name, unlocked)

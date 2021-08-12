@@ -354,22 +354,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit87" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 1632.0
-margin_top = 2880.0
-margin_right = 1728.0
-margin_bottom = 2976.0
-rect_pivot_offset = Vector2( 48, 96 )
-text = "wc7-F12"
-wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="TextEdit88" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 1824.0
+margin_left = 1728.0
 margin_top = 2880.0
-margin_right = 1920.0
+margin_right = 1824.0
 margin_bottom = 2976.0
 rect_pivot_offset = Vector2( 48, 96 )
 text = "wc7-F13"
@@ -415,9 +403,9 @@ __meta__ = {
 }
 
 [node name="TextEdit89" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 1728.0
+margin_left = 1632.0
 margin_top = 2880.0
-margin_right = 1824.0
+margin_right = 1728.0
 margin_bottom = 2976.0
 rect_pivot_offset = Vector2( 48, 96 )
 text = "wc7-F14"
@@ -1406,6 +1394,1249 @@ margin_bottom = 672.0
 rect_pivot_offset = Vector2( 64, 127 )
 text = "wc7-D18"
 wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 576.0
+margin_right = 912.0
+margin_bottom = 624.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel113" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 288.0
+margin_right = 624.0
+margin_bottom = 336.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel114" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 192.0
+margin_top = 288.0
+margin_right = 240.0
+margin_bottom = 336.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel20" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 1056.0
+margin_right = 912.0
+margin_bottom = 1104.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel31" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 3360.0
+margin_top = 1440.0
+margin_right = 3408.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel32" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 3456.0
+margin_top = 1440.0
+margin_right = 3504.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel33" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 3648.0
+margin_top = 1440.0
+margin_right = 3696.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel35" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 3744.0
+margin_top = 1440.0
+margin_right = 3792.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel36" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 3840.0
+margin_top = 1440.0
+margin_right = 3888.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel34" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 3552.0
+margin_top = 1440.0
+margin_right = 3600.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel37" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 3360.0
+margin_top = 1632.0
+margin_right = 3408.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel38" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 3456.0
+margin_top = 1632.0
+margin_right = 3504.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel39" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 3648.0
+margin_top = 1632.0
+margin_right = 3696.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel40" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 3744.0
+margin_top = 1632.0
+margin_right = 3792.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel41" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 3840.0
+margin_top = 1632.0
+margin_right = 3888.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel42" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 3552.0
+margin_top = 1632.0
+margin_right = 3600.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel21" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 1056.0
+margin_right = 1104.0
+margin_bottom = 1104.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel22" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 1056.0
+margin_right = 1008.0
+margin_bottom = 1104.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel23" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 1056.0
+margin_right = 1200.0
+margin_bottom = 1104.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel24" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 1056.0
+margin_right = 1296.0
+margin_bottom = 1104.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel43" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 1440.0
+margin_right = 912.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel44" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 1440.0
+margin_right = 1104.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel45" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 1440.0
+margin_right = 1008.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel46" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 1440.0
+margin_right = 1200.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel47" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 1440.0
+margin_right = 1296.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel48" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 1632.0
+margin_right = 912.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel49" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 1632.0
+margin_right = 1104.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel50" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 1632.0
+margin_right = 1008.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel51" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 1632.0
+margin_right = 1200.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel52" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 1632.0
+margin_right = 1296.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel53" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 2016.0
+margin_right = 912.0
+margin_bottom = 2064.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel54" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 2016.0
+margin_right = 1104.0
+margin_bottom = 2064.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel55" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 2016.0
+margin_right = 1008.0
+margin_bottom = 2064.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel56" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 2016.0
+margin_right = 1200.0
+margin_bottom = 2064.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel57" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 2016.0
+margin_right = 1296.0
+margin_bottom = 2064.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel58" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 2592.0
+margin_right = 912.0
+margin_bottom = 2640.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel59" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 2592.0
+margin_right = 1104.0
+margin_bottom = 2640.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel60" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 2592.0
+margin_right = 1008.0
+margin_bottom = 2640.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel61" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 2592.0
+margin_right = 1200.0
+margin_bottom = 2640.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel62" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 2592.0
+margin_right = 1296.0
+margin_bottom = 2640.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel63" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 3072.0
+margin_right = 912.0
+margin_bottom = 3120.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel64" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 3072.0
+margin_right = 1104.0
+margin_bottom = 3120.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel65" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 3072.0
+margin_right = 1008.0
+margin_bottom = 3120.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel66" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 3072.0
+margin_right = 1200.0
+margin_bottom = 3120.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel67" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 3072.0
+margin_right = 1296.0
+margin_bottom = 3120.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel25" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 1056.0
+margin_right = 1488.0
+margin_bottom = 1104.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel26" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1536.0
+margin_top = 1056.0
+margin_right = 1584.0
+margin_bottom = 1104.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel27" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 1056.0
+margin_right = 1680.0
+margin_bottom = 1104.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel28" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1728.0
+margin_top = 1056.0
+margin_right = 1776.0
+margin_bottom = 1104.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel68" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 1440.0
+margin_right = 1488.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel69" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1536.0
+margin_top = 1440.0
+margin_right = 1584.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel70" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 1440.0
+margin_right = 1680.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel71" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1728.0
+margin_top = 1440.0
+margin_right = 1776.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel72" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 1440.0
+margin_right = 1872.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel73" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 1632.0
+margin_right = 1488.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel74" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1536.0
+margin_top = 1632.0
+margin_right = 1584.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel89" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 2016.0
+margin_right = 1488.0
+margin_bottom = 2064.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel90" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1536.0
+margin_top = 2016.0
+margin_right = 1584.0
+margin_bottom = 2064.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel75" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 1632.0
+margin_right = 1680.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel76" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1728.0
+margin_top = 1632.0
+margin_right = 1776.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel77" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 1632.0
+margin_right = 1872.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel95" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 2592.0
+margin_right = 1488.0
+margin_bottom = 2640.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel96" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1536.0
+margin_top = 2592.0
+margin_right = 1584.0
+margin_bottom = 2640.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel97" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 2592.0
+margin_right = 1680.0
+margin_bottom = 2640.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel98" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1728.0
+margin_top = 2592.0
+margin_right = 1776.0
+margin_bottom = 2640.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel99" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 2592.0
+margin_right = 1872.0
+margin_bottom = 2640.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel101" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 2976.0
+margin_right = 1488.0
+margin_bottom = 3024.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel102" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1536.0
+margin_top = 2976.0
+margin_right = 1584.0
+margin_bottom = 3024.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel103" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 2976.0
+margin_right = 1680.0
+margin_bottom = 3024.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel104" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1728.0
+margin_top = 2976.0
+margin_right = 1776.0
+margin_bottom = 3024.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel106" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 3168.0
+margin_right = 1488.0
+margin_bottom = 3216.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel107" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1536.0
+margin_top = 3168.0
+margin_right = 1584.0
+margin_bottom = 3216.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel108" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 3168.0
+margin_right = 1680.0
+margin_bottom = 3216.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel109" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1728.0
+margin_top = 3168.0
+margin_right = 1776.0
+margin_bottom = 3216.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel100" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1920.0
+margin_top = 2592.0
+margin_right = 1968.0
+margin_bottom = 2640.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel29" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 1056.0
+margin_right = 1872.0
+margin_bottom = 1104.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel30" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1920.0
+margin_top = 1056.0
+margin_right = 1968.0
+margin_bottom = 1104.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 576.0
+margin_right = 1008.0
+margin_bottom = 624.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 576.0
+margin_right = 1104.0
+margin_bottom = 624.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 576.0
+margin_right = 1200.0
+margin_bottom = 624.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 576.0
+margin_right = 1296.0
+margin_bottom = 624.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1344.0
+margin_top = 576.0
+margin_right = 1392.0
+margin_bottom = 624.0
+rect_scale = Vector2( 2, 2 )
+text = "$1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 480.0
+margin_right = 1680.0
+margin_bottom = 528.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1728.0
+margin_top = 480.0
+margin_right = 1776.0
+margin_bottom = 528.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel9" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 480.0
+margin_right = 1872.0
+margin_bottom = 528.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel10" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 672.0
+margin_right = 1680.0
+margin_bottom = 720.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel11" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1728.0
+margin_top = 672.0
+margin_right = 1776.0
+margin_bottom = 720.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel12" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 672.0
+margin_right = 1872.0
+margin_bottom = 720.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel78" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2016.0
+margin_top = 1632.0
+margin_right = 2064.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel79" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2112.0
+margin_top = 1632.0
+margin_right = 2160.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel80" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 1632.0
+margin_right = 2256.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel81" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2304.0
+margin_top = 1632.0
+margin_right = 2352.0
+margin_bottom = 1680.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel13" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 480.0
+margin_right = 2256.0
+margin_bottom = 528.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel14" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2304.0
+margin_top = 480.0
+margin_right = 2352.0
+margin_bottom = 528.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel15" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2400.0
+margin_top = 480.0
+margin_right = 2448.0
+margin_bottom = 528.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel82" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2016.0
+margin_top = 1440.0
+margin_right = 2064.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel83" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2112.0
+margin_top = 1440.0
+margin_right = 2160.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel84" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 1440.0
+margin_right = 2256.0
+margin_bottom = 1488.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel110" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2016.0
+margin_top = 3072.0
+margin_right = 2064.0
+margin_bottom = 3120.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel111" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2112.0
+margin_top = 3072.0
+margin_right = 2160.0
+margin_bottom = 3120.0
+rect_scale = Vector2( 2, 2 )
+text = "$4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel112" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 3072.0
+margin_right = 2256.0
+margin_bottom = 3120.0
+rect_scale = Vector2( 2, 2 )
+text = "$4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel91" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 2016.0
+margin_right = 1680.0
+margin_bottom = 2064.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel92" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1728.0
+margin_top = 2016.0
+margin_right = 1776.0
+margin_bottom = 2064.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel93" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 2016.0
+margin_right = 1872.0
+margin_bottom = 2064.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel85" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2496.0
+margin_top = 1536.0
+margin_right = 2544.0
+margin_bottom = 1584.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel86" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2592.0
+margin_top = 1536.0
+margin_right = 2640.0
+margin_bottom = 1584.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel87" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2688.0
+margin_top = 1536.0
+margin_right = 2736.0
+margin_bottom = 1584.0
+rect_scale = Vector2( 2, 2 )
+text = "$3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel16" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 672.0
+margin_right = 2256.0
+margin_bottom = 720.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel17" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2304.0
+margin_top = 672.0
+margin_right = 2352.0
+margin_bottom = 720.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel18" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2400.0
+margin_top = 672.0
+margin_right = 2448.0
+margin_bottom = 720.0
+rect_scale = Vector2( 2, 2 )
+text = "$2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel19" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2592.0
+margin_top = 576.0
+margin_right = 2640.0
+margin_bottom = 624.0
+rect_scale = Vector2( 2, 2 )
+text = "$4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel88" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 2784.0
+margin_top = 1536.0
+margin_right = 2832.0
+margin_bottom = 1584.0
+rect_scale = Vector2( 2, 2 )
+text = "$4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel94" type="RichTextLabel" parent="PuzzlePlaceHolders"]
+margin_left = 1920.0
+margin_top = 2016.0
+margin_right = 1968.0
+margin_bottom = 2064.0
+rect_scale = Vector2( 2, 2 )
+text = "$4"
 __meta__ = {
 "_edit_use_anchors_": false
 }

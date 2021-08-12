@@ -26,10 +26,10 @@ visible = false
 [node name="SideMenu" type="Node2D" parent="."]
 
 [node name="PuzzleCounter" type="RichTextLabel" parent="SideMenu"]
-margin_left = 713.0
-margin_top = 25.37
+margin_left = 426.0
+margin_top = 25.0
 margin_right = 1004.0
-margin_bottom = 71.37
+margin_bottom = 71.0
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[right]0 / 0[/right] "

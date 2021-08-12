@@ -7,6 +7,7 @@ var can_drag_map = true
 
 var puzzle_grid_pos = {}
 var grid_pos_puzzle = {}
+var puzzle_points = {}
 
 func get_puzzle_on_cell(pos):
 	var int_pos = [int(round(pos.x)), int(round(pos.y))]

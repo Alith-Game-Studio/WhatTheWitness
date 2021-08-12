@@ -47,9 +47,16 @@ func _ready():
 	var placeholders = puzzle_placeholders.get_children()
 	MenuData.puzzle_grid_pos.clear()
 	MenuData.grid_pos_puzzle.clear()
+	var pos_points = {}
+	for placeholder in placeholders:
+		if (placeholder.text.begins_with('$')):
+			var cell_pos = placeholder.get_position() / 96
+			var int_cell_pos = [int(round(cell_pos.x)), int(round(cell_pos.y)) - 1]
+			pos_points[int_cell_pos] = int(placeholder.text.substr(1))
+			placeholder.get_parent().remove_child(placeholder)
 	for placeholder in placeholders:
 		var puzzle_file = placeholder.text + '.wit'
-		if (puzzle_file in files):
+		if (!placeholder.text.begins_with('$') and puzzle_file in files):
 			var target = MenuData.puzzle_preview_prefab.instance()
 			MenuData.puzzle_preview_panels[puzzle_file] = target
 			view.add_child(target)
@@ -63,6 +70,10 @@ func _ready():
 			if (int_cell_pos in MenuData.grid_pos_puzzle):
 				print('[Warning] Multiple puzzles (%s) on the same grid position (%d, %d)' % [puzzle_file, cell_pos.x, cell_pos.y])
 			MenuData.grid_pos_puzzle[int_cell_pos] = puzzle_file
+			MenuData.puzzle_points[puzzle_file] = 0
+			if (int_cell_pos in pos_points):
+				MenuData.puzzle_points[puzzle_file] = pos_points[int_cell_pos]
+			target.points = MenuData.puzzle_points[puzzle_file]
 			target.show_puzzle(puzzle_file, get_light_state(cell_pos))
 			placeholder.get_parent().remove_child(placeholder)
 	update_light()
@@ -78,13 +89,19 @@ func get_light_state(pos):
 func update_counter():
 	var puzzle_count = 0
 	var solved_count = 0
+	var score = 0
+	var total_score = 0
 	for puzzle_file in MenuData.puzzle_grid_pos:
 		var pos = MenuData.puzzle_grid_pos[puzzle_file]
 		if(SaveData.puzzle_solved(puzzle_file)):
 			solved_count += 1
+			score += MenuData.puzzle_points[puzzle_file]
 		puzzle_count += 1
-	puzzle_counter_text.bbcode_text = '[right]%d / %d[/right] ' % [solved_count, puzzle_count]
-
+		total_score += MenuData.puzzle_points[puzzle_file]
+	if (total_score > 0):
+		puzzle_counter_text.bbcode_text = '[right]%d / %d pts (%d / %d)[/right] ' % [score, total_score, solved_count, puzzle_count]
+	else:
+		puzzle_counter_text.bbcode_text = '[right]%d / %d[/right] ' % [solved_count, puzzle_count]
 func get_gadget_direction(tile_map: TileMap, pos: Vector2):
 	var x = int(round(pos.x))
 	var y = int(round(pos.y))
