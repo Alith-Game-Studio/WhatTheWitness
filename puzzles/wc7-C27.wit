@@ -2,6 +2,11 @@
 <SaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Nodes>
     <Node>
+      <Decorator xsi:type="EndDecorator">
+        <Length>0.2</Length>
+        <Angle>180</Angle>
+        <Color>Transparent</Color>
+      </Decorator>
       <X>1</X>
       <Y>2</Y>
       <Hidden>false</Hidden>
@@ -65,6 +70,11 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
+      <Decorator xsi:type="EndDecorator">
+        <Length>0.2</Length>
+        <Angle>0</Angle>
+        <Color>Transparent</Color>
+      </Decorator>
       <X>4</X>
       <Y>2</Y>
       <Hidden>false</Hidden>
@@ -220,20 +230,6 @@
         <int>5</int>
         <int>1</int>
       </Nodes>
-      <Decorator xsi:type="TextDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
-        <ExtraScale>1</ExtraScale>
-        <SerializableFont>
-          <FontFamily>Segoe UI Emoji</FontFamily>
-          <GraphicsUnit>Point</GraphicsUnit>
-          <Size>9</Size>
-          <Style>Regular</Style>
-        </SerializableFont>
-        <Text>╋</Text>
-        <Color>Silver</Color>
-      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
@@ -270,6 +266,20 @@
         <int>10</int>
         <int>6</int>
       </Nodes>
+      <Decorator xsi:type="TextDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <SerializableFont>
+          <FontFamily>Segoe UI Emoji</FontFamily>
+          <GraphicsUnit>Point</GraphicsUnit>
+          <Size>9</Size>
+          <Style>Regular</Style>
+        </SerializableFont>
+        <Text>s:1</Text>
+        <Color>Silver</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
@@ -306,20 +316,6 @@
         <int>15</int>
         <int>11</int>
       </Nodes>
-      <Decorator xsi:type="TextDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
-        <ExtraScale>1</ExtraScale>
-        <SerializableFont>
-          <FontFamily>Segoe UI Emoji</FontFamily>
-          <GraphicsUnit>Point</GraphicsUnit>
-          <Size>9</Size>
-          <Style>Regular</Style>
-        </SerializableFont>
-        <Text>╋</Text>
-        <Color>Silver</Color>
-      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
   </FacesID>

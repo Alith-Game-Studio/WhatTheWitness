@@ -65,6 +65,11 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
+      <Decorator xsi:type="EndDecorator">
+        <Length>0.2</Length>
+        <Angle>0</Angle>
+        <Color>Transparent</Color>
+      </Decorator>
       <X>4</X>
       <Y>2</Y>
       <Hidden>false</Hidden>
@@ -80,11 +85,6 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <Decorator xsi:type="EndDecorator">
-        <Length>0.2</Length>
-        <Angle>0</Angle>
-        <Color>Transparent</Color>
-      </Decorator>
       <X>4</X>
       <Y>5</Y>
       <Hidden>false</Hidden>
@@ -231,7 +231,7 @@
           <Size>9</Size>
           <Style>Regular</Style>
         </SerializableFont>
-        <Text>╋</Text>
+        <Text>┻</Text>
         <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
@@ -317,7 +317,7 @@
           <Size>9</Size>
           <Style>Regular</Style>
         </SerializableFont>
-        <Text>╋</Text>
+        <Text>┳</Text>
         <Color>Silver</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>

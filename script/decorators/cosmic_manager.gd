@@ -70,6 +70,7 @@ func prepare_validation(validator, states):
 			var alien_v = states[house_v]
 			var alien_color = puzzle.vertices[alien_v].decorator.color
 			response.color = alien_color
+		response.decorator.satisfied = (states[house_v] != -1)
 		validator.push_vertex_decorator_response(house_v, response)
 	
 	for way in range(puzzle.n_ways):

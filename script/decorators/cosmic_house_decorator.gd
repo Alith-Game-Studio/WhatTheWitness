@@ -1,6 +1,7 @@
 extends "../decorator.gd"
 
 var rule = 'cosmic-house'
+var satisfied = false
 const HOUSE_POINTS = [
 	Vector2(0, -1),
 	Vector2(1, 0),

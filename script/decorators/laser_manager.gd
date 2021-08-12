@@ -119,7 +119,7 @@ func update_lasers(lasers, puzzle, solution_state):
 		while(laser_reflection(lasers[i], puzzle, solution_state)):
 			pass
 	# print(lasers)
-func add_laser_emitter(pos, color, angle):
+func add_laser_emitter(puzzle, pos, color, angle):
 	var id = n_laser
 	n_laser += 1
 	laser_colors.append(color)
@@ -128,12 +128,12 @@ func add_laser_emitter(pos, color, angle):
 		pos + Vector2(-sin(angle), cos(angle)) * INF_FAR
 	])
 	obstacle_positions.append(pos)
-
-func init_property(puzzle, solution_state, start_vertex):
 	# inital reflection / blocking
 	for i in range(len(init_lasers)):
 		while(laser_reflection(init_lasers[i], puzzle, null)):
 			pass
+
+func init_property(puzzle, solution_state, start_vertex):
 	return init_lasers
 
 func vector_to_string(vec):

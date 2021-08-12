@@ -77,6 +77,7 @@ class Puzzle:
 	var edge_detector_node = {}
 	var edge_shared_facets = {}
 	var edge_turning_angles = {}
+	var vertice_region_neighbors = null
 	
 	func get_vertex_at(position, eps=1e-3):
 		for vertex in vertices:
@@ -122,7 +123,23 @@ class Puzzle:
 						end_turning_angles[0] = max(end_turning_angles[0], angle)
 			edge_turning_angles[[e.start, e.end]] = end_turning_angles
 			edge_turning_angles[[e.end, e.start]] = start_turning_angles
+	
+	func build_neighbor_graph():
+		vertice_region_neighbors = []
+		for v in range(len(vertices)):
+			vertice_region_neighbors.append([])
+		for edge in edges:
+			vertice_region_neighbors[edge.start.index].append(edge.end.index)
+			vertice_region_neighbors[edge.end.index].append(edge.start.index)
+		for v_pair in edge_shared_facets:
+			if (v_pair[0] < v_pair[1]):
+				var v_det = edge_detector_node[v_pair]
+				for f in edge_shared_facets[v_pair]:
+					var v_facet = facets[f].center_vertex_index
+					vertice_region_neighbors[v_facet].append(v_det)
+					vertice_region_neighbors[v_det].append(v_facet)
 			
+		
 func push_vertex_vec(puzzle, pos, hidden=false):
 	var result = len(puzzle.vertices)
 	var vertex = Vertex.new(pos.x, pos.y)
@@ -180,10 +197,10 @@ func __check_decorator_consumed(raw_decorator, element_type):
 		print('Unsupported decorator: %s on %s' % [raw_decorator['xsi:type'], ['node', 'edge', 'facet'][element_type]])
 
 		
-const GRAPH_COUNTER_TEXTS = {'\u250F': 576, '\u2533': 577,  '\u2513': 513,
-	'\u2523': 584, '\u254B': 585, '\u252B': 521, 
-	'\u2517': 72, '\u253B': 73, '\u251B': 9,
-	'\u2503': 520, '\u2501': 65, '\u254F': 4616, '\u254D': 4161 }
+const GRAPH_COUNTER_TEXTS = {'\u250F': 266240, '\u2533': 266241,  '\u2513': 262145,
+	'\u2523': 266304, '\u254B': 266305, '\u252B': 262209, 
+	'\u2517': 4160, '\u253B': 4161, '\u251B': 65,
+	'\u2503': 262208, '\u2501': 4097, '\u254F': 17039424, '\u254D': 16781313 }
 
 func __add_decorator(puzzle, raw_element, v):
 	var boxed_decorator = false
@@ -302,7 +319,7 @@ func __add_decorator(puzzle, raw_element, v):
 				decorator.color = color(text_decorator['Color'])
 				puzzle.vertices[v].decorator = decorator
 				decorator.angle = deg2rad(float(text_decorator['Angle']))
-				laser_manager.add_laser_emitter(puzzle.vertices[v].pos, decorator.color, decorator.angle)
+				laser_manager.add_laser_emitter(puzzle, puzzle.vertices[v].pos, decorator.color, decorator.angle)
 		elif (text_decorator['Text'].to_lower() in ['\uC6C3', '\u337F']): # cosmic express
 			var cosmic_manager = null
 			for global_decorator in puzzle.decorators:
@@ -322,6 +339,17 @@ func __add_decorator(puzzle, raw_element, v):
 				decorator.color = color(text_decorator['Color'])
 				puzzle.vertices[v].decorator = decorator
 				cosmic_manager.add_house(v)
+		elif (text_decorator['Text'].to_lower().begins_with('s:')):
+			var decorator = load('res://script/decorators/graph_counter_decorator.gd').new()
+			decorator.step_x = 1.0 - puzzle.line_width
+			decorator.step_y = 1.0 - puzzle.line_width
+			decorator.size = 1.0
+			decorator.color = color(text_decorator['Color'])
+			decorator.angle = deg2rad(float(text_decorator['Angle']))
+			decorator.rotational = abs(decorator.angle) > 1e-3
+			decorator.matrix = [[int(text_decorator['Text'].substr(2))]]
+			puzzle.vertices[v].decorator = decorator
+			
 		elif (text_decorator['Text'][0] in GRAPH_COUNTER_TEXTS):
 			var decorator = load('res://script/decorators/graph_counter_decorator.gd').new()
 			var text_matrix = text_decorator['Text'].replace('\r', '').split('\n')
@@ -566,5 +594,7 @@ func load_from_xml(file, preview_only=false):
 	if (not preview_only):
 		puzzle.preprocess_tetris_covering()
 		puzzle.preprocess_edge_angles()
+		puzzle.build_neighbor_graph()
 	return puzzle
+	
 	

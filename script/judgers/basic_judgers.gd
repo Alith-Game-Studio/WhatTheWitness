@@ -42,7 +42,7 @@ func judge_all(validator: Validation.Validator, require_errors: bool):
 					collected_responses.append(response)
 					all_error_responses.append(response)
 				else:
-					if (response.rule in ['broken', 'laser-emitter', 'cosmic-house']):
+					if (response.rule in ['broken', 'laser-emitter']):
 						continue
 					if (response.state != Validation.DecoratorResponse.ERROR):
 						ok = false
@@ -501,16 +501,24 @@ func judge_region_filament(validator: Validation.Validator, region: Validation.R
 	return all_ok
 
 func judge_region_cosmic_aliens(validator: Validation.Validator, region: Validation.Region, require_errors: bool): 
-	if (!region.has_any('cosmic-alien')):
-		return true
 	var all_ok = true
-	for decorator_id in region.decorator_dict['cosmic-alien']:
-		var response = validator.decorator_responses[decorator_id]
-		if (require_errors):
-			response.state = Validation.DecoratorResponse.ERROR
-			all_ok = false
-		else:
-			return false
+	if (region.has_any('cosmic-alien')):
+		for decorator_id in region.decorator_dict['cosmic-alien']:
+			var response = validator.decorator_responses[decorator_id]
+			if (require_errors):
+				response.state = Validation.DecoratorResponse.ERROR
+				all_ok = false
+			else:
+				return false
+	if (region.has_any('cosmic-house')):
+		for decorator_id in region.decorator_dict['cosmic-house']:
+			var response = validator.decorator_responses[decorator_id]
+			if (!response.decorator.satisfied):
+				if (require_errors):
+					response.state = Validation.DecoratorResponse.ERROR
+					all_ok = false
+				else:
+					return false
 	return all_ok
 	
 func judge_region_graph_counter(validator: Validation.Validator, region: Validation.Region, require_errors: bool): 
@@ -538,7 +546,7 @@ func judge_region_graph_counter(validator: Validation.Validator, region: Validat
 		var dir_forward = -1
 		var dir_backward = -1
 		for dir in range(graph_counter.N_DIRS):
-			if (edge_direction.distance_to(Vector2(graph_counter.DIR_X[dir], graph_counter.DIR_Y[dir])) < 1e-3):
+			if (edge_direction.distance_to(graph_counter.dir_to_vec(dir)) < 1e-3):
 				dir_forward = dir
 				dir_backward = (dir + graph_counter.N_DIRS / 2) % graph_counter.N_DIRS
 		if (dir_backward >= 0 and edge.end.index in vertex_shapes):

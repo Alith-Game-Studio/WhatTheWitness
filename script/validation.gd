@@ -119,40 +119,30 @@ class Validator:
 				if (v >= len(puzzle.vertices)):
 					continue
 				vertex_region[v] = -way - 2
-		var visit = []
 		var stack = []
 		regions = []
 		for i in range(len(puzzle.facets)):
-			visit.append(false)
 			region_of_facet.append(-1)
-		for i in range(len(puzzle.facets)):
-			var facet = puzzle.facets[i]
-			if (!visit[i]):
-				stack.push_back(i)
-				visit[i] = true
-				var single_region = Region.new()
+		for v1 in range(len(puzzle.vertices)):
+			if (vertex_region[v1] == -1):
+				stack.push_back(v1)
+				var new_region = Region.new()
+				new_region.index = len(regions)
+				regions.append(new_region)
+				vertex_region[v1] = new_region.index
 				while (!stack.empty()):
-					var fid = stack.pop_back()
-					single_region.facet_indices.push_back(fid)
-					for edge_tuple in puzzle.facets[fid].edge_tuples:
-						var mid_v = puzzle.edge_detector_node[edge_tuple]
-						if (vertex_region[mid_v] == -1):
-							for j in puzzle.edge_shared_facets[edge_tuple]:
-								if (!visit[j]):
-									stack.push_back(j)
-									visit[j] = true
-						elif (vertex_region[mid_v] < -1):
-							single_region.is_near_solution_line = true
-				single_region.index = len(regions)
-				for f in single_region.facet_indices:
-					region_of_facet[f] = single_region
-					vertex_region[puzzle.facets[f].center_vertex_index] = single_region.index
-					for edge_tuple in puzzle.facets[f].edge_tuples:
-						var mid_v = puzzle.edge_detector_node[edge_tuple]
-						for v_id in [edge_tuple[0], edge_tuple[1], mid_v]:
-							if (vertex_region[v_id] == -1):
-								vertex_region[v_id] = single_region.index
-				regions.append(single_region)
+					var v2 = stack.pop_back()
+					for v3 in puzzle.vertice_region_neighbors[v2]:
+						if (vertex_region[v3] == -1):
+							vertex_region[v3] = new_region.index
+							stack.push_back(v3)
+						elif (vertex_region[v3] < -1):
+							new_region.is_near_solution_line = true
+					var facet = puzzle.vertices[v2].linked_facet
+					if (facet != null):
+						region_of_facet[facet.index] = new_region
+						new_region.facet_indices.append(facet.index)
+
 		for i in range(len(puzzle.vertices)):
 			if (vertex_region[i] >= 0):
 				if (i in decorator_responses_of_vertex):
@@ -165,3 +155,5 @@ class Validator:
 				regions[vertex_region[i]].vertice_indices.append(i)
 		
 		return BasicJudgers.judge_all(self, true)
+	
+	
