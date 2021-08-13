@@ -6,6 +6,7 @@ onready var visualizer = $PuzzlePreview/PuzzleVisualizer
 onready var parent = $".."
 onready var puzzle_credit_text = $"../../../SideMenu/PuzzleCredits"
 onready var points_label = $PuzzlePreview/PointsLabel
+onready var delete_bar = $PuzzlePreview/PointsLabel/ColorRect
 var puzzle_name
 var puzzle_unlocked
 var points = 0
@@ -38,7 +39,12 @@ func show_puzzle(load_puzzle_name, unlocked=true):
 	points_label.bbcode_text = '[center]%s[/center]' % (
 		'' if points == 0 else '1 pt' if points == 1 else '%d pts' % points
 	)
-	
+	if (SaveData.puzzle_solved(puzzle_name)):
+		points_label.modulate = Color(1.0, 1.0, 1.0, 0.5)
+		delete_bar.visible = true
+	else:
+		points_label.modulate = Color.white
+		delete_bar.visible = false
 func update_puzzle(unlocked=true):
 	show_puzzle(puzzle_name, unlocked)
 

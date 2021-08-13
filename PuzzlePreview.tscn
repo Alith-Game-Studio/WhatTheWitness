@@ -64,9 +64,9 @@ __meta__ = {
 }
 
 [node name="PointsLabel" type="RichTextLabel" parent="PuzzlePreview"]
-margin_top = 256.0
+margin_top = 255.75
 margin_right = 256.0
-margin_bottom = 363.0
+margin_bottom = 362.75
 custom_fonts/normal_font = SubResource( 6 )
 bbcode_enabled = true
 bbcode_text = "[center] [/center]"
@@ -74,6 +74,13 @@ text = " "
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ColorRect" type="ColorRect" parent="PuzzlePreview/PointsLabel"]
+visible = false
+margin_left = 54.0
+margin_top = 43.3333
+margin_right = 196.0
+margin_bottom = 47.3333
 
 [connection signal="mouse_entered" from="PuzzlePreview/Button" to="." method="_on_Button_mouse_entered"]
 [connection signal="mouse_exited" from="PuzzlePreview/Button" to="." method="_on_Button_mouse_exited"]
