@@ -14,6 +14,7 @@ const rule_ids = {
 	'eliminator': 10,
 	'!eliminated_eliminator': 11,
 	'circle-arrow': 12,
+	'minesweeper': 13, 
 }
 
 class Solver:
@@ -96,7 +97,10 @@ class Solver:
 			ensure_triangles()
 		if ('star' in rules):
 			ensure_stars()
-		ensure_circle_arrow()
+		if ('minesweeper' in rules):
+			ensure_minesweeper()
+		if ('circle-arrow' in rules):
+			ensure_circle_arrow()
 		solutions = s.solve(max_solution_count)
 		return len(solutions) != 0
 		
@@ -145,7 +149,7 @@ class Solver:
 				s.ensure(s.eq(is_end[v], -1))
 			if (puzzle.vertices[v].decorator.rule == 'broken'):
 				s.ensure(s.eq(is_solution[v], -1))
-			if !(puzzle.vertices[v].decorator.rule in ['point', 'square', 'tetris', 'triangle', 'star', 'circle-arrow']):
+			if !(puzzle.vertices[v].decorator.rule in ['point', 'square', 'tetris', 'triangle', 'star', 'circle-arrow', 'minesweeper']):
 				s.ensure(s.eq(is_decorator[v], -1))
 			s.ensure(s.xor(s.eq(is_solution[v], -1), s.eq(is_region[v], -1)))
 		for way in range(puzzle.n_ways):
@@ -261,6 +265,31 @@ class Solver:
 					for edge_tuple in facet.edge_tuples:
 						var v2 = puzzle.edge_detector_node[edge_tuple]
 						count.append(s.neq(is_solution[v2], -1))
+					# print(s.eq(s.count_true(count), puzzle.vertices[v].decorator.count))
+					s.ensure(s.eq(s.count_true(count), puzzle.vertices[v].decorator.count))
+	
+	func ensure_minesweeper():
+		var vertex_shared_facets = {}
+		for facet in puzzle.facets:
+			for vertex in facet.vertices:
+				if !(vertex.index in vertex_shared_facets):
+					vertex_shared_facets[vertex.index] = [facet.center_vertex_index]
+				else:
+					vertex_shared_facets[vertex.index].append(facet.center_vertex_index)
+		for v in range(n_vertices):
+			if (puzzle.vertices[v].decorator.rule == 'minesweeper'):
+				s.ensure(s.eq(is_decorator[v], rule_ids['minesweeper']))
+				var facet = puzzle.vertices[v].linked_facet
+				if (facet == null): # the triangle is not placed on facets
+					s.ensure(s.FALSE)
+				else:
+					var count = []
+					var neighbor_facet_vertex_ids = {}
+					for vertex in facet.vertices:
+						for facet_center_vertex_id in vertex_shared_facets[vertex.index]:
+							neighbor_facet_vertex_ids[facet_center_vertex_id] = true
+					for v2 in neighbor_facet_vertex_ids:
+						count.append(s.neq(is_region[v], is_region[v2]))
 					# print(s.eq(s.count_true(count), puzzle.vertices[v].decorator.count))
 					s.ensure(s.eq(s.count_true(count), puzzle.vertices[v].decorator.count))
 	

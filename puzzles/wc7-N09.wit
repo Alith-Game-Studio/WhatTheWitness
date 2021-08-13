@@ -2,228 +2,139 @@
 <SaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Nodes>
     <Node>
-      <X>1</X>
-      <Y>1</Y>
+      <X>9.9193114659612544E-17</X>
+      <Y>0.53999999999999992</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>1</X>
-      <Y>2</Y>
+      <X>-9.9193114659612544E-17</X>
+      <Y>-0.53999999999999992</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>1</X>
-      <Y>3</Y>
+      <X>0.93530743608719358</X>
+      <Y>-1.08</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>0.935307436087194</X>
+      <Y>2.1599999999999997</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>0.9353074360871938</X>
+      <Y>1.0799999999999996</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>1.8706148721743874</X>
+      <Y>0.53999999999999959</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>1.8706148721743874</X>
+      <Y>-0.54000000000000026</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>2.8059223082615814</X>
+      <Y>-1.0800000000000003</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>1.870614872174388</X>
+      <Y>3.78</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>1.8706148721743878</X>
+      <Y>2.6999999999999997</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>2.8059223082615814</X>
+      <Y>2.1599999999999993</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>2.8059223082615814</X>
+      <Y>1.0799999999999994</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>3.7412297443487748</X>
+      <Y>0.53999999999999926</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>3.7412297443487748</X>
+      <Y>-0.54000000000000059</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>4.6765371804359672</X>
+      <Y>-1.0800000000000007</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
       <Decorator xsi:type="StartDecorator">
         <Color>Transparent</Color>
       </Decorator>
-      <X>1</X>
-      <Y>4</Y>
+      <X>2.8059223082615818</X>
+      <Y>4.3199999999999985</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>2</X>
-      <Y>1</Y>
+      <X>3.7412297443487752</X>
+      <Y>3.7799999999999994</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>2</X>
-      <Y>2</Y>
+      <X>3.7412297443487752</X>
+      <Y>2.6999999999999993</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>2</X>
-      <Y>3</Y>
+      <X>4.6765371804359672</X>
+      <Y>2.1599999999999988</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>2</X>
-      <Y>4</Y>
+      <X>4.6765371804359672</X>
+      <Y>1.079999999999999</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>3</X>
-      <Y>1</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>3</X>
-      <Y>2</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>3</X>
-      <Y>3</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>3</X>
-      <Y>4</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>4</X>
-      <Y>1</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>4</X>
-      <Y>2</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>4</X>
-      <Y>3</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>4</X>
-      <Y>4</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>0.99999999999999978</X>
-      <Y>0</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>2</X>
-      <Y>-2.2204460492503131E-16</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>3</X>
-      <Y>-2.2204460492503131E-16</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>4</X>
-      <Y>-2.2204460492503131E-16</Y>
+      <X>5.6118446165231628</X>
+      <Y>0.53999999999999893</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
       <Decorator xsi:type="EndDecorator">
         <Length>0.2</Length>
-        <Angle>0</Angle>
+        <Angle>-30</Angle>
         <Color>Transparent</Color>
       </Decorator>
-      <X>5</X>
-      <Y>-4.4408920985006262E-16</Y>
+      <X>5.6118446165231628</X>
+      <Y>-0.54000000000000092</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>5</X>
-      <Y>1</Y>
+      <X>2.8059223082615818</X>
+      <Y>3.2399999999999989</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>5</X>
-      <Y>2</Y>
+      <X>3.7412297443487748</X>
+      <Y>1.6199999999999988</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>5</X>
-      <Y>3</Y>
+      <X>1.8706148721743878</X>
+      <Y>1.62</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
-      <X>5</X>
-      <Y>4</Y>
-      <Hidden>false</Hidden>
-    </Node>
-  </Nodes>
-  <EdgesID>
-    <SaveEdge>
-      <Start>0</Start>
-      <End>4</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>1</Start>
-      <End>5</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>2</Start>
-      <End>6</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>3</Start>
-      <End>7</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>4</Start>
-      <End>8</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>5</Start>
-      <End>9</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>6</Start>
-      <End>10</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>7</Start>
-      <End>11</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>8</Start>
-      <End>12</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>9</Start>
-      <End>13</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>10</Start>
-      <End>14</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>11</Start>
-      <End>15</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>0</Start>
-      <End>1</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>1</Start>
-      <End>2</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>2</Start>
-      <End>3</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>4</Start>
-      <End>5</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>5</Start>
-      <End>6</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>6</Start>
-      <End>7</End>
       <Decorator xsi:type="PointDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
@@ -231,16 +142,40 @@
         <ExtraScale>1</ExtraScale>
         <Color>Black</Color>
       </Decorator>
+      <X>2.805922308261581</X>
+      <Y>-8.3516677414640745E-16</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>0.935307436087194</X>
+      <Y>1.4793671674059084E-16</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <X>4.6765371804359672</X>
+      <Y>-6.99165456211248E-16</Y>
+      <Hidden>false</Hidden>
+    </Node>
+  </Nodes>
+  <EdgesID>
+    <SaveEdge>
+      <Start>0</Start>
+      <End>1</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>3</Start>
+      <End>4</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>5</Start>
+      <End>6</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
       <Start>8</Start>
       <End>9</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>9</Start>
-      <End>10</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -254,33 +189,98 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>13</Start>
-      <End>14</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>14</Start>
-      <End>15</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>17</Start>
-      <End>4</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>0</Start>
-      <End>16</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
       <Start>16</Start>
       <End>17</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
       <Start>18</Start>
-      <End>8</End>
+      <End>19</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>20</Start>
+      <End>21</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>0</Start>
+      <End>4</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>2</Start>
+      <End>6</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>3</Start>
+      <End>9</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>5</Start>
+      <End>11</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>7</Start>
+      <End>13</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>8</Start>
+      <End>15</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>10</Start>
+      <End>17</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>12</Start>
+      <End>19</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>14</Start>
+      <End>21</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>1</Start>
+      <End>2</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>4</Start>
+      <End>5</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>6</Start>
+      <End>7</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>9</Start>
+      <End>10</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>11</Start>
+      <End>12</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>13</Start>
+      <End>14</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>15</Start>
+      <End>16</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -290,363 +290,165 @@
     </SaveEdge>
     <SaveEdge>
       <Start>19</Start>
-      <End>12</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>18</Start>
-      <End>19</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>21</Start>
-      <End>12</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>19</Start>
       <End>20</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>20</Start>
-      <End>21</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>22</Start>
-      <End>13</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>21</Start>
+      <Start>17</Start>
       <End>22</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
       <Start>23</Start>
-      <End>14</End>
+      <End>17</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>22</Start>
+      <Start>11</Start>
+      <End>24</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>25</Start>
+      <End>11</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>6</Start>
+      <End>26</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>13</Start>
+      <End>25</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>19</Start>
       <End>23</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>24</Start>
-      <End>15</End>
+      <Start>27</Start>
+      <End>19</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>15</Start>
+      <End>22</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>22</Start>
+      <End>9</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>9</Start>
+      <End>24</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>4</Start>
+      <End>24</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>4</Start>
+      <End>26</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>1</Start>
+      <End>26</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>25</Start>
+      <End>6</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>13</Start>
+      <End>27</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>21</Start>
+      <End>27</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
       <Start>23</Start>
-      <End>24</End>
+      <End>11</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
   </EdgesID>
   <FacesID>
     <SaveFace>
       <Nodes>
-        <int>0</int>
-        <int>4</int>
-        <int>5</int>
-        <int>1</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>1</int>
-        <int>5</int>
-        <int>6</int>
-        <int>2</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>2</int>
-        <int>6</int>
-        <int>7</int>
-        <int>3</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>4</int>
-        <int>8</int>
-        <int>9</int>
-        <int>5</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>5</int>
-        <int>9</int>
-        <int>10</int>
-        <int>6</int>
-      </Nodes>
-      <Decorator xsi:type="TetrisDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>-15</Angle>
-        <ExtraScale>1</ExtraScale>
-        <Shapes>
-          <ArrayOfNode>
-            <Node>
-              <X>1</X>
-              <Y>1</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>2</X>
-              <Y>1</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>2</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>1</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-          </ArrayOfNode>
-          <ArrayOfNode>
-            <Node>
-              <X>2</X>
-              <Y>1</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>3</X>
-              <Y>1</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>3</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>2</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-          </ArrayOfNode>
-          <ArrayOfNode>
-            <Node>
-              <X>3</X>
-              <Y>1</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>4</X>
-              <Y>1</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>4</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>3</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-          </ArrayOfNode>
-        </Shapes>
-        <Indexes>
-          <int>0</int>
-          <int>6</int>
-          <int>12</int>
-        </Indexes>
-        <Color>Yellow</Color>
-        <MarginSize>0.14</MarginSize>
-      </Decorator>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>6</int>
-        <int>10</int>
-        <int>11</int>
-        <int>7</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>8</int>
-        <int>12</int>
-        <int>13</int>
-        <int>9</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>9</int>
-        <int>13</int>
-        <int>14</int>
-        <int>10</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>10</int>
-        <int>14</int>
-        <int>15</int>
-        <int>11</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>4</int>
-        <int>0</int>
+        <int>17</int>
         <int>16</int>
+        <int>15</int>
+        <int>22</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>22</int>
+        <int>9</int>
+        <int>10</int>
         <int>17</int>
       </Nodes>
-      <Decorator xsi:type="TetrisDecorator">
+      <Decorator xsi:type="StarDecorator">
         <DeltaX>0</DeltaX>
         <DeltaY>0</DeltaY>
-        <Angle>-15</Angle>
+        <Angle>0</Angle>
         <ExtraScale>1</ExtraScale>
-        <Shapes>
-          <ArrayOfNode>
-            <Node>
-              <X>1</X>
-              <Y>1</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>2</X>
-              <Y>1</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>2</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>1</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-          </ArrayOfNode>
-          <ArrayOfNode>
-            <Node>
-              <X>2</X>
-              <Y>1</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>3</X>
-              <Y>1</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>3</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>2</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-          </ArrayOfNode>
-          <ArrayOfNode>
-            <Node>
-              <X>3</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>4</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>4</X>
-              <Y>3</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>3</X>
-              <Y>3</Y>
-              <Hidden>false</Hidden>
-            </Node>
-          </ArrayOfNode>
-        </Shapes>
-        <Indexes>
-          <int>0</int>
-          <int>6</int>
-          <int>13</int>
-        </Indexes>
         <Color>Yellow</Color>
-        <MarginSize>0.14</MarginSize>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
-        <int>8</int>
-        <int>4</int>
-        <int>17</int>
-        <int>18</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>12</int>
-        <int>8</int>
-        <int>18</int>
-        <int>19</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>12</int>
-        <int>19</int>
-        <int>20</int>
-        <int>21</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>13</int>
-        <int>12</int>
-        <int>21</int>
         <int>22</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>14</int>
-        <int>13</int>
-        <int>22</int>
-        <int>23</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
         <int>15</int>
-        <int>14</int>
-        <int>23</int>
+        <int>8</int>
+        <int>9</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>9</int>
+        <int>24</int>
+        <int>11</int>
+        <int>10</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>9</int>
+        <int>3</int>
+        <int>4</int>
+        <int>24</int>
+      </Nodes>
+      <Decorator xsi:type="SquareDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Color>Yellow</Color>
+      </Decorator>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>4</int>
+        <int>5</int>
+        <int>11</int>
         <int>24</int>
       </Nodes>
       <Decorator xsi:type="TetrisDecorator">
@@ -657,84 +459,308 @@
         <Shapes>
           <ArrayOfNode>
             <Node>
-              <X>1</X>
-              <Y>2</Y>
+              <X>0.77942286340599443</X>
+              <Y>-1.7999999999999998</Y>
               <Hidden>false</Hidden>
             </Node>
             <Node>
-              <X>2</X>
-              <Y>2</Y>
+              <X>1.5588457268119891</X>
+              <Y>-1.3500000000000005</Y>
               <Hidden>false</Hidden>
             </Node>
             <Node>
-              <X>2</X>
-              <Y>3</Y>
+              <X>1.5588457268119895</X>
+              <Y>-0.45000000000000023</Y>
               <Hidden>false</Hidden>
             </Node>
             <Node>
-              <X>1</X>
-              <Y>3</Y>
-              <Hidden>false</Hidden>
-            </Node>
-          </ArrayOfNode>
-          <ArrayOfNode>
-            <Node>
-              <X>2</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>3</X>
-              <Y>2</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>3</X>
-              <Y>3</Y>
-              <Hidden>false</Hidden>
-            </Node>
-            <Node>
-              <X>2</X>
-              <Y>3</Y>
+              <X>0.77942286340599465</X>
+              <Y>-0.9</Y>
               <Hidden>false</Hidden>
             </Node>
           </ArrayOfNode>
           <ArrayOfNode>
             <Node>
-              <X>3</X>
-              <Y>1</Y>
+              <X>1.5588457268119891</X>
+              <Y>-2.25</Y>
               <Hidden>false</Hidden>
             </Node>
             <Node>
-              <X>4</X>
-              <Y>1</Y>
+              <X>2.3382685902179845</X>
+              <Y>-1.8000000000000003</Y>
               <Hidden>false</Hidden>
             </Node>
             <Node>
-              <X>4</X>
-              <Y>2</Y>
+              <X>1.5588457268119891</X>
+              <Y>-1.3500000000000005</Y>
               <Hidden>false</Hidden>
             </Node>
             <Node>
-              <X>3</X>
-              <Y>2</Y>
+              <X>0.77942286340599443</X>
+              <Y>-1.7999999999999998</Y>
+              <Hidden>false</Hidden>
+            </Node>
+          </ArrayOfNode>
+          <ArrayOfNode>
+            <Node>
+              <X>2.3382685902179845</X>
+              <Y>-1.8000000000000003</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>2.3382685902179845</X>
+              <Y>-0.90000000000000036</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>1.5588457268119895</X>
+              <Y>-0.45000000000000023</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>1.5588457268119891</X>
+              <Y>-1.3500000000000005</Y>
               <Hidden>false</Hidden>
             </Node>
           </ArrayOfNode>
         </Shapes>
         <Indexes>
-          <int>1</int>
-          <int>7</int>
+          <int>9</int>
+          <int>10</int>
           <int>12</int>
         </Indexes>
         <Color>Yellow</Color>
-        <MarginSize>0.14</MarginSize>
+        <MarginSize>0.08</MarginSize>
+      </Decorator>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>26</int>
+        <int>6</int>
+        <int>5</int>
+        <int>4</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>1</int>
+        <int>26</int>
+        <int>4</int>
+        <int>0</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>2</int>
+        <int>6</int>
+        <int>26</int>
+        <int>1</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>7</int>
+        <int>13</int>
+        <int>25</int>
+        <int>6</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>25</int>
+        <int>11</int>
+        <int>5</int>
+        <int>6</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>13</int>
+        <int>12</int>
+        <int>11</int>
+        <int>25</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>13</int>
+        <int>27</int>
+        <int>19</int>
+        <int>12</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>14</int>
+        <int>21</int>
+        <int>27</int>
+        <int>13</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>21</int>
+        <int>20</int>
+        <int>19</int>
+        <int>27</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>12</int>
+        <int>19</int>
+        <int>23</int>
+        <int>11</int>
+      </Nodes>
+      <Decorator xsi:type="TetrisDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>-15</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Shapes>
+          <ArrayOfNode>
+            <Node>
+              <X>0.77942286340599443</X>
+              <Y>-1.7999999999999998</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>1.5588457268119891</X>
+              <Y>-1.3500000000000005</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>1.5588457268119895</X>
+              <Y>-0.45000000000000023</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>0.77942286340599465</X>
+              <Y>-0.9</Y>
+              <Hidden>false</Hidden>
+            </Node>
+          </ArrayOfNode>
+          <ArrayOfNode>
+            <Node>
+              <X>1.5588457268119891</X>
+              <Y>-2.25</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>2.3382685902179845</X>
+              <Y>-1.8000000000000003</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>1.5588457268119891</X>
+              <Y>-1.3500000000000005</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>0.77942286340599443</X>
+              <Y>-1.7999999999999998</Y>
+              <Hidden>false</Hidden>
+            </Node>
+          </ArrayOfNode>
+          <ArrayOfNode>
+            <Node>
+              <X>2.3382685902179845</X>
+              <Y>-1.8000000000000003</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>2.3382685902179845</X>
+              <Y>-0.90000000000000036</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>1.5588457268119895</X>
+              <Y>-0.45000000000000023</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>1.5588457268119891</X>
+              <Y>-1.3500000000000005</Y>
+              <Hidden>false</Hidden>
+            </Node>
+          </ArrayOfNode>
+        </Shapes>
+        <Indexes>
+          <int>9</int>
+          <int>10</int>
+          <int>12</int>
+        </Indexes>
+        <Color>Yellow</Color>
+        <MarginSize>0.08</MarginSize>
+      </Decorator>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>23</int>
+        <int>17</int>
+        <int>10</int>
+        <int>11</int>
+      </Nodes>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>23</int>
+        <int>19</int>
+        <int>18</int>
+        <int>17</int>
+      </Nodes>
+      <Decorator xsi:type="TetrisDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>-15</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Shapes>
+          <ArrayOfNode>
+            <Node>
+              <X>2.3382685902179845</X>
+              <Y>-0.90000000000000036</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>3.117691453623979</X>
+              <Y>-0.45000000000000051</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>2.3382685902179841</X>
+              <Y>-6.959723117886729E-16</Y>
+              <Hidden>false</Hidden>
+            </Node>
+            <Node>
+              <X>1.5588457268119895</X>
+              <Y>-0.45000000000000023</Y>
+              <Hidden>false</Hidden>
+            </Node>
+          </ArrayOfNode>
+        </Shapes>
+        <Indexes>
+          <int>18</int>
+        </Indexes>
+        <Color>Yellow</Color>
+        <MarginSize>0.08</MarginSize>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
   </FacesID>
   <MetaData>
-    <PuzzleTitle>Square/SquarePuzzle_3x3</PuzzleTitle>
+    <PuzzleTitle>Hex/HexPuzzle_3x3</PuzzleTitle>
     <BackgroundColor>SaddleBrown</BackgroundColor>
     <ForegroundColor>BurlyWood</ForegroundColor>
     <EdgeWidth>0.2</EdgeWidth>
@@ -742,793 +768,595 @@
       <Shapes>
         <ArrayOfNode>
           <Node>
-            <X>1</X>
-            <Y>1</Y>
+            <X>3.7412297443487752</X>
+            <Y>2.6999999999999993</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>2</X>
-            <Y>1</Y>
+            <X>3.7412297443487752</X>
+            <Y>3.7799999999999994</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>2</X>
-            <Y>2</Y>
+            <X>2.8059223082615818</X>
+            <Y>4.3199999999999985</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>1</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>1</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>3</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>1</X>
-            <Y>3</Y>
+            <X>2.8059223082615818</X>
+            <Y>3.2399999999999989</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>1</X>
-            <Y>3</Y>
+            <X>2.8059223082615818</X>
+            <Y>3.2399999999999989</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>2</X>
-            <Y>3</Y>
+            <X>1.8706148721743878</X>
+            <Y>2.6999999999999997</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>2</X>
-            <Y>4</Y>
+            <X>2.8059223082615814</X>
+            <Y>2.1599999999999993</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>1</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>1</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>5</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>1</X>
-            <Y>5</Y>
+            <X>3.7412297443487752</X>
+            <Y>2.6999999999999993</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>1</X>
-            <Y>5</Y>
+            <X>2.8059223082615818</X>
+            <Y>3.2399999999999989</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>2</X>
-            <Y>5</Y>
+            <X>2.8059223082615818</X>
+            <Y>4.3199999999999985</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>2</X>
-            <Y>6</Y>
+            <X>1.870614872174388</X>
+            <Y>3.78</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>1</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>1</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>7</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>1</X>
-            <Y>7</Y>
+            <X>1.8706148721743878</X>
+            <Y>2.6999999999999997</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>2</X>
-            <Y>1</Y>
+            <X>1.8706148721743878</X>
+            <Y>2.6999999999999997</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>3</X>
-            <Y>1</Y>
+            <X>1.8706148721743878</X>
+            <Y>1.62</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>3</X>
-            <Y>2</Y>
+            <X>2.8059223082615814</X>
+            <Y>1.0799999999999994</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>2</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>2</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>3</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>3</X>
-            <Y>3</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>3</Y>
+            <X>2.8059223082615814</X>
+            <Y>2.1599999999999993</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>2</X>
-            <Y>3</Y>
+            <X>1.8706148721743878</X>
+            <Y>2.6999999999999997</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>3</X>
-            <Y>3</Y>
+            <X>0.935307436087194</X>
+            <Y>2.1599999999999997</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>3</X>
-            <Y>4</Y>
+            <X>0.9353074360871938</X>
+            <Y>1.0799999999999996</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>2</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>2</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>3</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>3</X>
-            <Y>5</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>5</Y>
+            <X>1.8706148721743878</X>
+            <Y>1.62</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>2</X>
-            <Y>5</Y>
+            <X>0.9353074360871938</X>
+            <Y>1.0799999999999996</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>3</X>
-            <Y>5</Y>
+            <X>1.8706148721743874</X>
+            <Y>0.53999999999999959</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>3</X>
-            <Y>6</Y>
+            <X>2.8059223082615814</X>
+            <Y>1.0799999999999994</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>2</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>2</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>3</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>3</X>
-            <Y>7</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>2</X>
-            <Y>7</Y>
+            <X>1.8706148721743878</X>
+            <Y>1.62</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>3</X>
-            <Y>1</Y>
+            <X>0.935307436087194</X>
+            <Y>1.4793671674059084E-16</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>4</X>
-            <Y>1</Y>
+            <X>1.8706148721743874</X>
+            <Y>-0.54000000000000026</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>4</X>
-            <Y>2</Y>
+            <X>1.8706148721743874</X>
+            <Y>0.53999999999999959</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>3</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>3</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>4</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>4</X>
-            <Y>3</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>3</X>
-            <Y>3</Y>
+            <X>0.9353074360871938</X>
+            <Y>1.0799999999999996</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>3</X>
-            <Y>3</Y>
+            <X>-9.9193114659612544E-17</X>
+            <Y>-0.53999999999999992</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>4</X>
-            <Y>3</Y>
+            <X>0.935307436087194</X>
+            <Y>1.4793671674059084E-16</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>4</X>
-            <Y>4</Y>
+            <X>0.9353074360871938</X>
+            <Y>1.0799999999999996</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>3</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>3</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>4</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>4</X>
-            <Y>5</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>3</X>
-            <Y>5</Y>
+            <X>9.9193114659612544E-17</X>
+            <Y>0.53999999999999992</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>3</X>
-            <Y>5</Y>
+            <X>0.93530743608719358</X>
+            <Y>-1.08</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>4</X>
-            <Y>5</Y>
+            <X>1.8706148721743874</X>
+            <Y>-0.54000000000000026</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>4</X>
-            <Y>6</Y>
+            <X>0.935307436087194</X>
+            <Y>1.4793671674059084E-16</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>3</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>3</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>4</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>4</X>
-            <Y>7</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>3</X>
-            <Y>7</Y>
+            <X>-9.9193114659612544E-17</X>
+            <Y>-0.53999999999999992</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>4</X>
-            <Y>1</Y>
+            <X>0.93530743608719324</X>
+            <Y>-2.1599999999999997</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>5</X>
-            <Y>1</Y>
+            <X>1.8706148721743867</X>
+            <Y>-1.6200000000000006</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>5</X>
-            <Y>2</Y>
+            <X>1.8706148721743874</X>
+            <Y>-0.54000000000000026</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>4</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>4</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>5</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>5</X>
-            <Y>3</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>4</X>
-            <Y>3</Y>
+            <X>0.93530743608719358</X>
+            <Y>-1.08</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>4</X>
-            <Y>3</Y>
+            <X>1.8706148721743867</X>
+            <Y>-2.6999999999999997</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>5</X>
-            <Y>3</Y>
+            <X>2.8059223082615814</X>
+            <Y>-2.16</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>5</X>
-            <Y>4</Y>
+            <X>1.8706148721743867</X>
+            <Y>-1.6200000000000006</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>4</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>4</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>5</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>5</X>
-            <Y>5</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>4</X>
-            <Y>5</Y>
+            <X>0.93530743608719324</X>
+            <Y>-2.1599999999999997</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>4</X>
-            <Y>5</Y>
+            <X>1.8706148721743865</X>
+            <Y>-3.78</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>5</X>
-            <Y>5</Y>
+            <X>2.80592230826158</X>
+            <Y>-3.24</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>5</X>
-            <Y>6</Y>
+            <X>2.8059223082615814</X>
+            <Y>-2.16</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>4</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>4</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>5</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>5</X>
-            <Y>7</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>4</X>
-            <Y>7</Y>
+            <X>1.8706148721743867</X>
+            <Y>-2.6999999999999997</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>5</X>
-            <Y>1</Y>
+            <X>2.8059223082615814</X>
+            <Y>-2.16</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>6</X>
-            <Y>1</Y>
+            <X>2.8059223082615814</X>
+            <Y>-1.0800000000000003</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>6</X>
-            <Y>2</Y>
+            <X>1.8706148721743874</X>
+            <Y>-0.54000000000000026</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>5</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>5</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>6</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>6</X>
-            <Y>3</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>5</X>
-            <Y>3</Y>
+            <X>1.8706148721743867</X>
+            <Y>-1.6200000000000006</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>5</X>
-            <Y>3</Y>
+            <X>2.805922308261581</X>
+            <Y>-4.32</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>6</X>
-            <Y>3</Y>
+            <X>3.7412297443487743</X>
+            <Y>-3.7800000000000002</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>6</X>
-            <Y>4</Y>
+            <X>2.80592230826158</X>
+            <Y>-3.24</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>5</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>5</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>6</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>6</X>
-            <Y>5</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>5</X>
-            <Y>5</Y>
+            <X>1.8706148721743865</X>
+            <Y>-3.78</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>5</X>
-            <Y>5</Y>
+            <X>3.7412297443487743</X>
+            <Y>-3.7800000000000002</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>6</X>
-            <Y>5</Y>
+            <X>3.7412297443487743</X>
+            <Y>-2.7000000000000006</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>6</X>
-            <Y>6</Y>
+            <X>2.8059223082615814</X>
+            <Y>-2.16</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>5</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>5</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>6</X>
-            <Y>6</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>6</X>
-            <Y>7</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>5</X>
-            <Y>7</Y>
+            <X>2.80592230826158</X>
+            <Y>-3.24</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>6</X>
-            <Y>1</Y>
+            <X>2.8059223082615814</X>
+            <Y>-2.16</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>7</X>
-            <Y>1</Y>
+            <X>3.7412297443487748</X>
+            <Y>-1.6200000000000012</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>7</X>
-            <Y>2</Y>
+            <X>3.7412297443487748</X>
+            <Y>-0.54000000000000059</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>6</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>6</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>7</X>
-            <Y>2</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>7</X>
-            <Y>3</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>6</X>
-            <Y>3</Y>
+            <X>2.8059223082615814</X>
+            <Y>-1.0800000000000003</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>6</X>
-            <Y>3</Y>
+            <X>3.7412297443487743</X>
+            <Y>-2.7000000000000006</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>7</X>
-            <Y>3</Y>
+            <X>4.6765371804359672</X>
+            <Y>-2.1600000000000006</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>7</X>
-            <Y>4</Y>
+            <X>3.7412297443487748</X>
+            <Y>-1.6200000000000012</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>6</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-        </ArrayOfNode>
-        <ArrayOfNode>
-          <Node>
-            <X>6</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>7</X>
-            <Y>4</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>7</X>
-            <Y>5</Y>
-            <Hidden>false</Hidden>
-          </Node>
-          <Node>
-            <X>6</X>
-            <Y>5</Y>
+            <X>2.8059223082615814</X>
+            <Y>-2.16</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>6</X>
-            <Y>5</Y>
+            <X>4.6765371804359672</X>
+            <Y>-2.1600000000000006</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>7</X>
-            <Y>5</Y>
+            <X>4.6765371804359672</X>
+            <Y>-1.0800000000000007</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>7</X>
-            <Y>6</Y>
+            <X>3.7412297443487748</X>
+            <Y>-0.54000000000000059</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>6</X>
-            <Y>6</Y>
+            <X>3.7412297443487748</X>
+            <Y>-1.6200000000000012</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>
         <ArrayOfNode>
           <Node>
-            <X>6</X>
-            <Y>6</Y>
+            <X>2.8059223082615814</X>
+            <Y>-1.0800000000000003</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>7</X>
-            <Y>6</Y>
+            <X>3.7412297443487748</X>
+            <Y>-0.54000000000000059</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>7</X>
-            <Y>7</Y>
+            <X>2.805922308261581</X>
+            <Y>-8.3516677414640745E-16</Y>
             <Hidden>false</Hidden>
           </Node>
           <Node>
-            <X>6</X>
-            <Y>7</Y>
+            <X>1.8706148721743874</X>
+            <Y>-0.54000000000000026</Y>
+            <Hidden>false</Hidden>
+          </Node>
+        </ArrayOfNode>
+        <ArrayOfNode>
+          <Node>
+            <X>2.805922308261581</X>
+            <Y>-8.3516677414640745E-16</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>2.8059223082615814</X>
+            <Y>1.0799999999999994</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>1.8706148721743874</X>
+            <Y>0.53999999999999959</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>1.8706148721743874</X>
+            <Y>-0.54000000000000026</Y>
+            <Hidden>false</Hidden>
+          </Node>
+        </ArrayOfNode>
+        <ArrayOfNode>
+          <Node>
+            <X>3.7412297443487748</X>
+            <Y>-0.54000000000000059</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>3.7412297443487748</X>
+            <Y>0.53999999999999926</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>2.8059223082615814</X>
+            <Y>1.0799999999999994</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>2.805922308261581</X>
+            <Y>-8.3516677414640745E-16</Y>
+            <Hidden>false</Hidden>
+          </Node>
+        </ArrayOfNode>
+        <ArrayOfNode>
+          <Node>
+            <X>3.7412297443487748</X>
+            <Y>-0.54000000000000059</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>4.6765371804359672</X>
+            <Y>-6.99165456211248E-16</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>4.6765371804359672</X>
+            <Y>1.079999999999999</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>3.7412297443487748</X>
+            <Y>0.53999999999999926</Y>
+            <Hidden>false</Hidden>
+          </Node>
+        </ArrayOfNode>
+        <ArrayOfNode>
+          <Node>
+            <X>4.6765371804359672</X>
+            <Y>-1.0800000000000007</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>5.6118446165231628</X>
+            <Y>-0.54000000000000092</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>4.6765371804359672</X>
+            <Y>-6.99165456211248E-16</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>3.7412297443487748</X>
+            <Y>-0.54000000000000059</Y>
+            <Hidden>false</Hidden>
+          </Node>
+        </ArrayOfNode>
+        <ArrayOfNode>
+          <Node>
+            <X>5.6118446165231628</X>
+            <Y>-0.54000000000000092</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>5.6118446165231628</X>
+            <Y>0.53999999999999893</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>4.6765371804359672</X>
+            <Y>1.079999999999999</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>4.6765371804359672</X>
+            <Y>-6.99165456211248E-16</Y>
+            <Hidden>false</Hidden>
+          </Node>
+        </ArrayOfNode>
+        <ArrayOfNode>
+          <Node>
+            <X>3.7412297443487748</X>
+            <Y>0.53999999999999926</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>4.6765371804359672</X>
+            <Y>1.079999999999999</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>3.7412297443487748</X>
+            <Y>1.6199999999999988</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>2.8059223082615814</X>
+            <Y>1.0799999999999994</Y>
+            <Hidden>false</Hidden>
+          </Node>
+        </ArrayOfNode>
+        <ArrayOfNode>
+          <Node>
+            <X>3.7412297443487748</X>
+            <Y>1.6199999999999988</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>3.7412297443487752</X>
+            <Y>2.6999999999999993</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>2.8059223082615814</X>
+            <Y>2.1599999999999993</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>2.8059223082615814</X>
+            <Y>1.0799999999999994</Y>
+            <Hidden>false</Hidden>
+          </Node>
+        </ArrayOfNode>
+        <ArrayOfNode>
+          <Node>
+            <X>3.7412297443487748</X>
+            <Y>1.6199999999999988</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>4.6765371804359672</X>
+            <Y>1.079999999999999</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>4.6765371804359672</X>
+            <Y>2.1599999999999988</Y>
+            <Hidden>false</Hidden>
+          </Node>
+          <Node>
+            <X>3.7412297443487752</X>
+            <Y>2.6999999999999993</Y>
             <Hidden>false</Hidden>
           </Node>
         </ArrayOfNode>

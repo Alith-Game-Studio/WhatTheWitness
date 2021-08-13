@@ -83,7 +83,7 @@ class DiscreteSolutionState:
 					else:
 						continue
 					edge_dir = edge_dir.normalized()
-					if ((edge_dir - way_dir).length() < 1e-6):
+					if ((edge_dir - way_dir).length() < 1e-4):
 						way_vertex_id = new_vertex_id
 						break
 			if (way_vertex_id == -1):

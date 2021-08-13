@@ -68,7 +68,7 @@ func __shrink_corner(p0, p1, p2, depth):
 	var e2 = (p2 - p1).normalized()
 	var cross = abs(e1.x * e2.y - e2.x * e1.y)
 	if (cross < 1e-6):
-		return p1 + Vector2(e2.y, -e2.x) * depth
+		return p1 + Vector2(-e2.y, e2.x) * depth
 	else:
 		return p1 + (e1 + e2) * depth / cross
 
