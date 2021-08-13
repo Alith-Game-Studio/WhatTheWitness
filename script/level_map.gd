@@ -99,7 +99,7 @@ func update_counter():
 		puzzle_count += 1
 		total_score += MenuData.puzzle_points[puzzle_file]
 	if (total_score > 0):
-		puzzle_counter_text.bbcode_text = '[right]%d / %d pts (%d / %d)[/right] ' % [score, total_score, solved_count, puzzle_count]
+		puzzle_counter_text.bbcode_text = '[right]%d / %d (%d / %d pts)[/right] ' % [solved_count, puzzle_count, score, total_score]
 	else:
 		puzzle_counter_text.bbcode_text = '[right]%d / %d[/right] ' % [solved_count, puzzle_count]
 func get_gadget_direction(tile_map: TileMap, pos: Vector2):

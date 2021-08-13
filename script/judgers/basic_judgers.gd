@@ -557,7 +557,7 @@ func judge_region_graph_counter(validator: Validation.Validator, region: Validat
 			vertex_shapes[edge.start.index] |= 1 << dir_forward
 			if (edge.start.decorator.rule == 'broken'):
 				vertex_shapes[edge.start.index] |= 1 << graph_counter.MASK_BROKEN
-	print('Old:', shape_counter)
+	# print('Old:', shape_counter)
 	for v in region.vertice_indices:
 		var original_symbol = vertex_shapes[v]
 		var rotational_symbol = graph_counter.get_rotational_symbol(original_symbol)
@@ -566,7 +566,7 @@ func judge_region_graph_counter(validator: Validation.Validator, region: Validat
 				shape_counter[symbol] = -1
 			else:
 				shape_counter[symbol] -= 1
-	print('New:', shape_counter)
+	# print('New:', shape_counter)
 	for decorator_id in region.decorator_dict['graph-counter']:
 		var response = validator.decorator_responses[decorator_id]
 		var decorator = response.decorator

@@ -2,6 +2,7 @@ extends Node
 
 const PUZZLE_FOLDER = 'res://puzzles/'
 var puzzle_name = ""
+const ALLOW_CUSTOM_LEVELS = false
 
 var playing_custom_puzzle: bool
 var puzzle_path: String
@@ -18,9 +19,10 @@ func get_absolute_puzzle_path():
 
 
 func load_custom_level(level_path):
-	get_tree().change_scene("res://main.tscn")
-	puzzle_path = level_path
-	playing_custom_puzzle = true
+	if (ALLOW_CUSTOM_LEVELS):
+		get_tree().change_scene("res://main.tscn")
+		puzzle_path = level_path
+		playing_custom_puzzle = true
 		
 
 func drag_custom_levels(files, screen):

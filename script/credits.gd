@@ -7,7 +7,9 @@ const FULL_AUTHORS = {
 	'wc2': 'from the 2nd WitCup (by Gentova and Zhvsjia)',
 	'wc3': 'from the 3rd WitCup (by Miaoji et al.)',
 	'wc4': 'from the 4th WitCup (by Artless)',
+	'wc5': 'from the 5th WitCup (by Alith)',
 	'wc6': 'from the 6th WitCup (by Zhvsjia)',
+	'wc7': 'from the 7th WitCup (by Alith)',
 	'rpg': 'from the Witness RPG Mod (by Sigma144)',
 }
 
