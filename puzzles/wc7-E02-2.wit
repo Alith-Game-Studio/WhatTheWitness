@@ -114,7 +114,6 @@
     <SaveEdge>
       <Start>0</Start>
       <End>1</End>
-      <Decorator xsi:type="BrokenDecorator" />
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -165,7 +164,6 @@
     <SaveEdge>
       <Start>10</Start>
       <End>8</End>
-      <Decorator xsi:type="BrokenDecorator" />
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -249,6 +247,20 @@
         <int>8</int>
         <int>9</int>
       </Nodes>
+      <Decorator xsi:type="TextDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <SerializableFont>
+          <FontFamily>Microsoft YaHei UI</FontFamily>
+          <GraphicsUnit>Point</GraphicsUnit>
+          <Size>9</Size>
+          <Style>Regular</Style>
+        </SerializableFont>
+        <Text>3</Text>
+        <Color>#DC0000</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
@@ -276,20 +288,6 @@
         <int>12</int>
         <int>13</int>
       </Nodes>
-      <Decorator xsi:type="TextDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
-        <ExtraScale>1</ExtraScale>
-        <SerializableFont>
-          <FontFamily>Microsoft YaHei UI</FontFamily>
-          <GraphicsUnit>Point</GraphicsUnit>
-          <Size>9</Size>
-          <Style>Regular</Style>
-        </SerializableFont>
-        <Text>3</Text>
-        <Color>#DC0000</Color>
-      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>

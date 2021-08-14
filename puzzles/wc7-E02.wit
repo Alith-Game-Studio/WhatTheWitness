@@ -119,7 +119,6 @@
     <SaveEdge>
       <Start>1</Start>
       <End>2</End>
-      <Decorator xsi:type="BrokenDecorator" />
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -160,7 +159,6 @@
     <SaveEdge>
       <Start>5</Start>
       <End>10</End>
-      <Decorator xsi:type="BrokenDecorator" />
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
