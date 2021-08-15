@@ -80,6 +80,7 @@ func _input(event):
 			var position = event.position - panel_start_pos
 			if (is_drawing_solution):
 				if (Gameplay.solution.is_completed(Gameplay.puzzle)):
+					Gameplay.solution.progress = 1.0
 					Gameplay.validator = Validation.Validator.new()
 					if (Gameplay.validator.validate(Gameplay.puzzle, Gameplay.solution)):
 						Gameplay.solution.validity = 1

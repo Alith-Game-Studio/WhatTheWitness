@@ -50,7 +50,6 @@ class Solver:
 		n_vertices = len(puzzle.vertices)
 		n_edges = len(puzzle.edges)
 		n_max_regions = len(puzzle.facets)
-		print(puzzle)
 		vertice_neighbors = []
 		vertices_region_neighbors = []
 		rules = {}

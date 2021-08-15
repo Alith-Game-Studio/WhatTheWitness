@@ -291,7 +291,7 @@ class SolutionLine:
 		var crossroad_vertex = state_stack[-1].get_end_vertex(puzzle, MAIN_WAY)
 		if (crossroad_vertex == null):
 			return false
-		return crossroad_vertex.decorator != null and crossroad_vertex.is_puzzle_end and progress >= 1.0
+		return crossroad_vertex.decorator != null and crossroad_vertex.is_puzzle_end and progress >= 0.8 # allow small gap
 		
 	func get_total_length(puzzle):
 		if (!started):
