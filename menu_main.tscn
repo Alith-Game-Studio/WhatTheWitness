@@ -45,8 +45,8 @@ margin_bottom = 65.0
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[center]What The Witness?[/center]"
-text = "What The Witness?"
+bbcode_text = "[center]What The Witness? - 7th WitCup[/center]"
+text = "What The Witness? - 7th WitCup"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 margin_top = 86.0
@@ -56,9 +56,9 @@ size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[right]A Fan Game of The Witness[/right]
-[right]Beta v1.3[/right]"
+[right]Beta v1.31[/right]"
 text = "A Fan Game of The Witness
-Beta v1.3"
+Beta v1.31"
 
 [node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer"]
 margin_top = 172.0

@@ -122,7 +122,7 @@ func _input(event):
 				elif (event.scancode == KEY_RIGHT):
 					if (right_arrow_button.visible):
 						_on_right_arrow_button_pressed()
-				elif (event.scancode in [KEY_A, KEY_S, KEY_D]):
+				"""elif (event.scancode in [KEY_A, KEY_S, KEY_D]):
 					solver = load("res://script/solver.gd").Solver.new()
 					solver.solve(Gameplay.puzzle, {KEY_A: 100, KEY_S: 10, KEY_D: 1}[event.scancode])
 					if (solver.get_solution_count() != 0):
@@ -143,7 +143,7 @@ func _input(event):
 						if (solver.current_solution_id < 0):
 							solver.current_solution_id = solver.get_solution_count() - 1
 						Gameplay.solution = solver.to_solution_line()
-						puzzle_counter_text.text = '[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()]
+						puzzle_counter_text.text = '[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()]"""
 				
 							
 						
