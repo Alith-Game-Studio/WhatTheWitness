@@ -19,6 +19,3 @@ https://alith.itch.io/what-the-witness
 # Build Environment
 
 Godot 3.3.2 (https://godotengine.org/)
-
-
-See in-game credits for details.

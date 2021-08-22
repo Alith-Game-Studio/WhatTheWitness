@@ -1,3 +1,0 @@
-Credits to external resources:
-1. Lock icon: ``Simpleicon Interface'' by SimpleIcon, used under  Creative Commons License. Source: https://commons.wikimedia.org/wiki/File:Simpleicons_Interface_lock-padlock-symbol-for-protect.svg
-2. Game font: ``Libre Baskerville'' by Impallari Type, used under Open Font License. Source: https://fonts.google.com/specimen/Libre+Baskerville#license
