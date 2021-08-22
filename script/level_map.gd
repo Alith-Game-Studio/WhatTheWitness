@@ -15,11 +15,13 @@ onready var and_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('and_gate
 onready var or_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('or_gate')
 onready var puzzle_counter_text = $SideMenu/PuzzleCounter
 onready var menu_bar_button = $SideMenu/MenuBarButton
+onready var loading_cover = $LoadingCover
 var window_size = Vector2(1024, 600)
 var view_origin = -window_size / 2
 var view_scale = 1.0
 
 const UNLOCK_ALL_PUZZLES = true
+const LOADING_BATCH_SIZE = 5
 
 const DIR_X = [-1, 0, 1, 0]
 const DIR_Y = [0, -1, 0, 1]
@@ -38,6 +40,7 @@ func list_files(path):
 		files[file] = true
 	
 func _ready():
+	loading_cover.visible = true
 	drag_start = null
 	# puzzle_placeholders.hide()
 	SaveData.load_all()
@@ -54,6 +57,12 @@ func _ready():
 			var int_cell_pos = [int(round(cell_pos.x)), int(round(cell_pos.y)) - 1]
 			pos_points[int_cell_pos] = int(placeholder.text.substr(1))
 			placeholder.get_parent().remove_child(placeholder)
+	var processed_placeholder_count = 0
+	var total_placeholder_count = 0
+	for placeholder in placeholders:
+		var puzzle_file = placeholder.text + '.wit'
+		if (!placeholder.text.begins_with('$') and puzzle_file in files):
+			total_placeholder_count += 1
 	for placeholder in placeholders:
 		var puzzle_file = placeholder.text + '.wit'
 		if (!placeholder.text.begins_with('$') and puzzle_file in files):
@@ -76,9 +85,11 @@ func _ready():
 			target.points = MenuData.puzzle_points[puzzle_file]
 			target.show_puzzle(puzzle_file, get_light_state(cell_pos))
 			placeholder.get_parent().remove_child(placeholder)
-	update_light()
-	update_counter()
-	MenuData.can_drag_map = true
+			if (processed_placeholder_count % LOADING_BATCH_SIZE == 0):
+				puzzle_counter_text.bbcode_text = '[right]loading puzzle: %d / %d[/right] ' % [processed_placeholder_count, total_placeholder_count]
+				yield(VisualServer, "frame_post_draw")
+			processed_placeholder_count += 1
+	update_light(true)
 	
 func get_light_state(pos):
 	if (light_map.get_cellv(pos) >= 0):
@@ -110,7 +121,7 @@ func get_gadget_direction(tile_map: TileMap, pos: Vector2):
 	else:
 		return Vector2(-1, 0) if tile_map.is_cell_x_flipped(x, y) else Vector2(1, 0)
 
-func update_light():
+func update_light(first_time=false):
 	var stack = []
 	for puzzle_file in MenuData.puzzle_grid_pos:
 		var pos = MenuData.puzzle_grid_pos[puzzle_file]
@@ -146,11 +157,22 @@ func update_light():
 			if (gadget_map.get_cellv(new_pos) == -1 and
 				MenuData.get_puzzle_on_cell(new_pos) == null):
 				stack.append(new_pos)
+	var puzzles_to_unlock = []
 	for puzzle_file in MenuData.puzzle_grid_pos:
 		var pos = MenuData.puzzle_grid_pos[puzzle_file]
 		if((UNLOCK_ALL_PUZZLES or get_light_state(pos)) and !MenuData.puzzle_preview_panels[puzzle_file].puzzle_unlocked):
-			MenuData.puzzle_preview_panels[puzzle_file].update_puzzle(true)
-
+			puzzles_to_unlock.append(puzzle_file)
+	var processed_rendering_count = 0
+	for puzzle_file in puzzles_to_unlock:
+		MenuData.puzzle_preview_panels[puzzle_file].update_puzzle(true)
+		if (first_time and processed_rendering_count % LOADING_BATCH_SIZE == 0):
+			puzzle_counter_text.bbcode_text = '[right]rendering puzzle: %d / %d[/right] ' % [processed_rendering_count, len(puzzles_to_unlock)]
+			yield(VisualServer, "frame_post_draw")
+		processed_rendering_count += 1
+	if (first_time):
+		loading_cover.visible = false
+		MenuData.can_drag_map = true
+		update_counter()
 func update_view():
 	view.position = window_size / 2 + (view_origin) * view_scale
 	view.scale = Vector2(view_scale, view_scale)

@@ -23,6 +23,14 @@ script = ExtResource( 2 )
 [node name="PuzzleUI" parent="." instance=ExtResource( 3 )]
 visible = false
 
+[node name="LoadingCover" type="ColorRect" parent="."]
+margin_right = 1031.0
+margin_bottom = 617.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SideMenu" type="Node2D" parent="."]
 
 [node name="PuzzleCounter" type="RichTextLabel" parent="SideMenu"]
