@@ -21,4 +21,3 @@ func get_unlocked_puzzle_on_cell(pos):
 		if (puzzle_preview_panels[grid_pos_puzzle[int_pos]].puzzle_unlocked):
 			return grid_pos_puzzle[int_pos]
 	return null
-	

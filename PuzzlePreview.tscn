@@ -77,10 +77,13 @@ __meta__ = {
 
 [node name="ColorRect" type="ColorRect" parent="PuzzlePreview/PointsLabel"]
 visible = false
-margin_left = 54.0
-margin_top = 43.3333
-margin_right = 196.0
-margin_bottom = 47.3333
+margin_left = 42.0
+margin_top = 43.0
+margin_right = 214.0
+margin_bottom = 47.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="mouse_entered" from="PuzzlePreview/Button" to="." method="_on_Button_mouse_entered"]
 [connection signal="mouse_exited" from="PuzzlePreview/Button" to="." method="_on_Button_mouse_exited"]

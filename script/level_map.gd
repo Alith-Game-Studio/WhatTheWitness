@@ -196,7 +196,7 @@ func update_view():
 func _input(event):
 	if (event is InputEventMouseButton and MenuData.can_drag_map):
 		if (event.button_index == BUTTON_WHEEL_DOWN):
-			view_scale = max(view_scale * 0.8, 0.512)
+			view_scale = max(view_scale * 0.8, 0.2097152)
 		elif (event.button_index == BUTTON_WHEEL_UP):
 			view_scale = min(view_scale * 1.25, 3.0)
 		elif (event.pressed):
