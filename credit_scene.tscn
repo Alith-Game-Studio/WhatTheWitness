@@ -1,0 +1,164 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://script/credit_scene.gd" type="Script" id=2]
+[ext_resource path="res://font/LibreBaskerville-Italic.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://font/LibreBaskerville-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://font/wqy-MicroHei.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 1 )
+fallback/0 = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+font_data = ExtResource( 1 )
+
+[node name="Credit" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1026.41
+margin_bottom = 601.0
+custom_constants/margin_right = 60
+custom_constants/margin_top = 30
+custom_constants/margin_left = 60
+custom_constants/margin_bottom = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 60.0
+margin_top = 30.0
+margin_right = 966.0
+margin_bottom = 571.0
+custom_constants/separation = 21
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+margin_right = 906.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]What The Witness?[/center]"
+text = "What The Witness?"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+margin_top = 71.0
+margin_right = 906.0
+margin_bottom = 483.0
+size_flags_vertical = 3
+custom_fonts/italics_font = SubResource( 4 )
+custom_fonts/bold_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[i]What The Witness?[/i] is a fan game of The Witness (2016) that features custom puzzle mechanics. Most mechanics/puzzle sets are created and shared by game fans, many of which are created during the [i]WitCup[/i] contest, a fan-organized competition on solving new The Witness puzzles under limited time. This project is also used as the 7th WitCup event's client. 
+
+[center][b]Game Credits[/b][/center]
+[i]The Witness[/i]: Originally designed by Jonathan Blow et al. from Thekla
+[i]What The Witness?[/i]: Programmed by Alith Game Studio
+
+[center][b]Level Collection Credits[/b][/center]
+(see in-game credits for full detail)
+wc1: from the 1st WitCup (by Gentova)
+wc2: from the 2nd WitCup (by Gentova and Zhvsjia)
+wc3: from the 3rd WitCup (by Miaoji et al.)
+wc4: from the 4th WitCup (by Artless), see also [url=https://artless.itch.io/meant-to-be-a-witness-clone]this link[/url]
+wc5: from the 5th WitCup (by Artless and Alith), see also [url=https://artless.itch.io/meant-to-be-a-witness-clone-2-not-witness]this link[/url]
+wc6: from the 6th WitCup (by Zhvsjia)
+wc7: from the 7th WitCup (by Alith)
+rpg: from the Witness RPG Mod (by Sigma144), see also [url=https://github.com/sigma144/witness-randomizer]this link[/url]
+
+[center][b]The 7th WitCup[/b][/center]
+The 7th WitCup took place in Aug 2021 using [i]What The Witness?[/i] as the game client. The 2.5-hour-long contest contains a total of 306 points (134 problems). We received 35 submissions. The top players are:
+
+[center]1. Jack Lance	301 pts (133 solved)
+2. 落葉子 (Leaving Leaves)	296 pts (133 solved)
+3. phenomist	278 pts (129 solved)
+4. ItzShaun	270 pts (127 solved)
+5. Zachary Barbanell	269 pts (125 solved)
+6. Zimodo	263 pts (123 solved)
+7. sevenkplus	261 pts (123 solved)
+8. zhvsjia	246 pts (122 solved)
+9. 草稿 (Anslote)	235 pts (116 solved)
+10. sky	215 pts (111 solved)
+10. ubuntor	215 pts (113 solved)[/center]
+
+Thanks to all participants: 草稿 (Anslote), 落葉子 (Leaving Leaves), 清和文, 一只特特呦, 长江一号, agoo, Akuta Zehy, anonymous, baguabagua, DaffaFM2002, Fivero, hum, icetoaurn, ItzShaun, Jack Lance, jxck_wwap, kirb, maou, nerdnim, Patrick, PC, phenomist, Pichusuperlover, prod, Raz, rtliu, sevenkplus, shiyu, sky, Spynder, ubuntor, Yuexiang, Zachary Barbanell, zhvsjia, Zimodo.
+
+Special thanks to Artless for organizing the event.
+
+[center][b]Credits To External Resources[/b][/center]
+1. Lock icon: ``Simpleicon Interface'' by SimpleIcon, used under  Creative Commons License. Source: [url]https://commons.wikimedia.org/wiki/File:Simpleicons_Interface_lock-padlock-symbol-for-protect.svg[/url]
+2. Game font: ``Libre Baskerville'' by Impallari Type, used under Open Font License. Source: [url]https://fonts.google.com/specimen/Libre+Baskerville#license[/url]
+3. Credit font: 文泉驿微米黑 by FangQ et al., used under Apache 2.0 License. Source: [url]http://wenq.org/wqy2[/url]
+4. CSugar by semiexp: [url]https://github.com/semiexp/csugar/tree/master/src[/url]
+"
+text = "What The Witness? is a fan game of The Witness (2016) that features custom puzzle mechanics. Most mechanics/puzzle sets are created and shared by game fans, many of which are created during the WitCup contest, a fan-organized competition on solving new The Witness puzzles under limited time. This project is also used as the 7th WitCup event's client. 
+
+Game Credits
+The Witness: Originally designed by Jonathan Blow et al. from Thekla
+What The Witness?: Programmed by Alith Game Studio
+
+Level Collection Credits
+(see in-game credits for full detail)
+wc1: from the 1st WitCup (by Gentova)
+wc2: from the 2nd WitCup (by Gentova and Zhvsjia)
+wc3: from the 3rd WitCup (by Miaoji et al.)
+wc4: from the 4th WitCup (by Artless), see also this link
+wc5: from the 5th WitCup (by Artless and Alith), see also this link
+wc6: from the 6th WitCup (by Zhvsjia)
+wc7: from the 7th WitCup (by Alith)
+rpg: from the Witness RPG Mod (by Sigma144), see also this link
+
+The 7th WitCup
+The 7th WitCup took place in Aug 2021 using What The Witness? as the game client. The 2.5-hour-long contest contains a total of 306 points (134 problems). We received 35 submissions. The top players are:
+
+1. Jack Lance	301 pts (133 solved)
+2. 落葉子 (Leaving Leaves)	296 pts (133 solved)
+3. phenomist	278 pts (129 solved)
+4. ItzShaun	270 pts (127 solved)
+5. Zachary Barbanell	269 pts (125 solved)
+6. Zimodo	263 pts (123 solved)
+7. sevenkplus	261 pts (123 solved)
+8. zhvsjia	246 pts (122 solved)
+9. 草稿 (Anslote)	235 pts (116 solved)
+10. sky	215 pts (111 solved)
+10. ubuntor	215 pts (113 solved)
+
+Thanks to all participants: 草稿 (Anslote), 落葉子 (Leaving Leaves), 清和文, 一只特特呦, 长江一号, agoo, Akuta Zehy, anonymous, baguabagua, DaffaFM2002, Fivero, hum, icetoaurn, ItzShaun, Jack Lance, jxck_wwap, kirb, maou, nerdnim, Patrick, PC, phenomist, Pichusuperlover, prod, Raz, rtliu, sevenkplus, shiyu, sky, Spynder, ubuntor, Yuexiang, Zachary Barbanell, zhvsjia, Zimodo.
+
+Special thanks to Artless for organizing the event.
+
+Credits To External Resources
+1. Lock icon: ``Simpleicon Interface'' by SimpleIcon, used under  Creative Commons License. Source: https://commons.wikimedia.org/wiki/File:Simpleicons_Interface_lock-padlock-symbol-for-protect.svg
+2. Game font: ``Libre Baskerville'' by Impallari Type, used under Open Font License. Source: https://fonts.google.com/specimen/Libre+Baskerville#license
+3. Credit font: 文泉驿微米黑 by FangQ et al., used under Apache 2.0 License. Source: http://wenq.org/wqy2
+4. CSugar by semiexp: https://github.com/semiexp/csugar/tree/master/src
+"
+
+[node name="CreditsButton" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 504.0
+margin_right = 906.0
+margin_bottom = 541.0
+custom_fonts/font = SubResource( 3 )
+text = "Back"
+
+[connection signal="meta_clicked" from="MarginContainer/VBoxContainer/RichTextLabel2" to="." method="_on_RichTextLabel2_meta_clicked"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]

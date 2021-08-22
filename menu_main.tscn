@@ -15,7 +15,7 @@ font_data = ExtResource( 1 )
 size = 24
 font_data = ExtResource( 1 )
 
-[node name="MenuMain" type="Node2D"]
+[node name="MenuMain2" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -114,3 +114,4 @@ text = "Credits"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ExportSaveButton" to="." method="_on_export_save_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ClearProgressButton" to="." method="_on_reset_progress_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CustomLevelButton" to="." method="_on_custom_level_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
