@@ -20,7 +20,7 @@ var window_size = Vector2(1024, 600)
 var view_origin = -window_size / 2
 var view_scale = 1.0
 
-const UNLOCK_ALL_PUZZLES = true
+const UNLOCK_ALL_PUZZLES = false
 const LOADING_BATCH_SIZE = 5
 
 const DIR_X = [-1, 0, 1, 0]

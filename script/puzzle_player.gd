@@ -32,10 +32,12 @@ func load_puzzle(puzzle_path):
 			Gameplay.validation_elasped_time = 10.0 # skip animations
 		else:
 			Gameplay.solution.validity = -1 # maybe the problem is changed
+		left_arrow_button.show()
 		right_arrow_button.show()
 	else:
 		Gameplay.validator = null
 		Gameplay.solution = Solution.SolutionLine.new()
+		hide_left_arrow_button()
 		hide_right_arrow_button()
 	Gameplay.canvas = Visualizer.PuzzleCanvas.new()
 	Gameplay.canvas.puzzle = Gameplay.puzzle
@@ -50,15 +52,16 @@ func load_puzzle(puzzle_path):
 	back_button.modulate = front_color
 	if (Gameplay.playing_custom_puzzle):
 		hide_left_arrow_button()
+		hide_right_arrow_button()
 	else:
 		menu_bar_button.modulate = Color (front_color.r, front_color.g, front_color.b, menu_bar_button.modulate.a)
 		puzzle_counter_text.modulate = front_color
 		# test if there are previous puzzles
 		var puzzle_grid_pos = MenuData.puzzle_grid_pos[Gameplay.puzzle_name]
-		if (MenuData.get_puzzle_on_cell(puzzle_grid_pos - Vector2(1, 0)) != null):
+		if (MenuData.get_unlocked_puzzle_on_cell(puzzle_grid_pos - Vector2(1, 0)) != null):
 			left_arrow_button.show()
-		else:
-			hide_left_arrow_button()
+		if (MenuData.get_unlocked_puzzle_on_cell(puzzle_grid_pos + Vector2(1, 0)) != null):
+			right_arrow_button.show()
 	
 func _process(delta):
 	if (loaded):
@@ -90,6 +93,7 @@ func _input(event):
 								MenuData.puzzle_preview_panels[Gameplay.puzzle_name].update_puzzle()
 							level_map.update_counter()
 						right_arrow_button.show()
+						left_arrow_button.show()
 					else:
 						Gameplay.solution.validity = -1
 					Gameplay.validation_elasped_time = 0.0

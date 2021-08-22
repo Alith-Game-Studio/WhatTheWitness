@@ -39,7 +39,7 @@ func show_puzzle(load_puzzle_name, unlocked=true):
 	points_label.bbcode_text = '[center]%s[/center]' % (
 		'' if points == 0 else '1 pt' if points == 1 else '%d pts' % points
 	)
-	if (SaveData.puzzle_solved(puzzle_name)):
+	if (SaveData.puzzle_solved(puzzle_name) and points != 0):
 		points_label.modulate = Color(1.0, 1.0, 1.0, 0.5)
 		delete_bar.visible = true
 	else:
