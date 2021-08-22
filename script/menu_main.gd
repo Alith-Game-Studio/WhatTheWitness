@@ -38,3 +38,7 @@ func _on_import_save_button_pressed():
 
 func _on_custom_level_button_pressed():
 	get_tree().change_scene("res://custom_level_scene.tscn")
+
+
+func _on_CreditsButton_pressed():
+	get_tree().change_scene("res://credit_scene.tscn")
