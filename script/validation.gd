@@ -132,6 +132,11 @@ class Validator:
 				vertex_region[v1] = new_region.index
 				while (!stack.empty()):
 					var v2 = stack.pop_back()
+					if (ghost_manager != null):
+						# ghost lines have different region cutting method
+						if (puzzle.vertices[v2].linked_edge_tuple == null and 
+							puzzle.vertices[v2].linked_facet == null):
+							continue
 					for v3 in puzzle.vertice_region_neighbors[v2]:
 						if (vertex_region[v3] == -1):
 							vertex_region[v3] = new_region.index
@@ -153,7 +158,7 @@ class Validator:
 							regions[vertex_region[i]].decorator_dict[rule] = []
 						regions[vertex_region[i]].decorator_dict[rule].append(response.index)
 				regions[vertex_region[i]].vertice_indices.append(i)
-		
+		# print(regions)
 		return BasicJudgers.judge_all(self, true)
 	
 	
