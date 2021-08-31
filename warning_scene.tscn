@@ -72,16 +72,16 @@ custom_fonts/italics_font = SubResource( 2 )
 custom_fonts/bold_font = SubResource( 3 )
 custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
-bbcode_text = "[i]What The Witness?[/i] is a fan game of [url=https://store.steampowered.com/app/210970/The_Witness/]The Witness (2016)[/url]. Do not continue if you have not yet played the original game.
+bbcode_text = "[i]What The Witness?[/i] is a fan game of [url=http://the-witness.net/]The Witness (2016)[/url]. Do not continue if you have not yet played the original game.
 
 [i]What The Witness?[/i] assumes that you have played the original game and understand well how original game mechanics work. You are not required to 100% complete the original game. It would be enough if you know how all the symbols work in the original game.
 
-Link to the original game: [url]https://store.steampowered.com/app/210970/The_Witness/[/url]"
+Link to the original game: [url]http://the-witness.net/[/url]"
 text = "What The Witness? is a fan game of The Witness (2016). Do not continue if you have not yet played the original game.
 
 What The Witness? assumes that you have played the original game and understand well how original game mechanics work. You are not required to 100% complete the original game. It would be enough if you know how all the symbols work in the original game.
 
-Link to the original game: https://store.steampowered.com/app/210970/The_Witness/"
+Link to the original game: http://the-witness.net/"
 
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
 margin_top = 394.0
