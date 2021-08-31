@@ -323,6 +323,7 @@ class SolutionLine:
 			return
 		if (delta.length() < 1e-6):
 			return
+		delta = delta * Gameplay.mouse_speed
 		var crossroad_vertex = state_stack[-1].get_end_vertex(puzzle, MAIN_WAY)
 		if (len(state_stack) == 1 or progress >= 1.0):
 			var chosen_edge = null

@@ -10,20 +10,20 @@
 size = 32
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 20
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=3]
 size = 20
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
 size = 20
 font_data = ExtResource( 1 )
 fallback/0 = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=5]
 size = 24
 font_data = ExtResource( 1 )
 
@@ -64,9 +64,9 @@ margin_top = 71.0
 margin_right = 906.0
 margin_bottom = 483.0
 size_flags_vertical = 3
-custom_fonts/italics_font = SubResource( 4 )
-custom_fonts/bold_font = SubResource( 5 )
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/italics_font = SubResource( 2 )
+custom_fonts/bold_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[i]What The Witness?[/i] is a fan game of The Witness (2016) that features custom puzzle mechanics. Most mechanics/puzzle sets are created and shared by game fans, many of which are created during the [i]WitCup[/i] contest, a fan-organized competition on solving new The Witness puzzles under limited time. This project is also used as the 7th WitCup event's client. 
 
@@ -157,7 +157,7 @@ Credits To External Resources
 margin_top = 504.0
 margin_right = 906.0
 margin_bottom = 541.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 text = "Back"
 
 [connection signal="meta_clicked" from="MarginContainer/VBoxContainer/RichTextLabel2" to="." method="_on_RichTextLabel2_meta_clicked"]

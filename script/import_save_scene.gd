@@ -6,7 +6,7 @@ func _ready():
 
 
 func _on_back_button_pressed():
-	get_tree().change_scene("res://menu_main.tscn")
+	get_tree().change_scene("res://setting_scene.tscn")
 
 
 func _on_import_button_pressed():

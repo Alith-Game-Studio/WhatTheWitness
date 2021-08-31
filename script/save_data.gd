@@ -20,14 +20,15 @@ func save_all():
 	if ('&checksum' in saved_solutions):
 		saved_solutions.erase('&checksum')
 	var line = to_json(saved_solutions)
-	var checksum = (line + 'ArZgL!.zVx-.').md5_text()
-	line = ('{"&checksum":"%s",' % checksum) + line.substr(1)
+	# var checksum = (line + 'ArZgL!.zVx-.').md5_text()
+	# line = ('{"&checksum":"%s",' % checksum) + line.substr(1)
 	save_game.store_line(line)
 	save_game.close()
 	
 func load_all():
 	var save_game = File.new()
 	if not save_game.file_exists(SAVE_PATH):
+		saved_solutions = {}
 		return 
 	save_game.open(SAVE_PATH, File.READ)
 	var line = save_game.get_line()
@@ -41,3 +42,14 @@ func clear():
 		var dir = Directory.new()
 		dir.remove(SAVE_PATH)
 	saved_solutions = {}
+
+func get_setting():
+	load_all()
+	var setting = {}
+	if ('&setting' in saved_solutions):
+		setting = saved_solutions['&setting']
+	return setting
+	
+func save_setting(setting):
+	saved_solutions['&setting'] = setting
+	save_all()

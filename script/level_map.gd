@@ -90,6 +90,7 @@ func _ready():
 				yield(VisualServer, "frame_post_draw")
 			processed_placeholder_count += 1
 	update_light(true)
+	Gameplay.update_mouse_speed()
 	
 func get_light_state(pos):
 	if (light_map.get_cellv(pos) >= 0):

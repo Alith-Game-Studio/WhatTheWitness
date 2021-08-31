@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://script/warning_scene.gd" type="Script" id=2]
+[ext_resource path="res://font/LibreBaskerville-Italic.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://font/LibreBaskerville-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://font/wqy-MicroHei.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 1 )
+fallback/0 = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 18
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 24
+font_data = ExtResource( 1 )
+
+[node name="SpoilerWarning" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1026.41
+margin_bottom = 601.0
+custom_constants/margin_right = 60
+custom_constants/margin_top = 30
+custom_constants/margin_left = 60
+custom_constants/margin_bottom = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 60.0
+margin_top = 30.0
+margin_right = 966.0
+margin_bottom = 571.0
+custom_constants/separation = 21
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+margin_right = 906.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Spoiler Warning[/center]"
+text = "Spoiler Warning"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+margin_top = 71.0
+margin_right = 906.0
+margin_bottom = 373.0
+size_flags_vertical = 3
+custom_fonts/italics_font = SubResource( 2 )
+custom_fonts/bold_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[i]What The Witness?[/i] is a fan game of [url=https://store.steampowered.com/app/210970/The_Witness/]The Witness (2016)[/url]. Do not continue if you have not yet played the original game.
+
+[i]What The Witness?[/i] assumes that you have played the original game and understand well how original game mechanics work. You are not required to 100% complete the original game. It would be enough if you know how all the symbols work in the original game.
+
+Link to the original game: [url]https://store.steampowered.com/app/210970/The_Witness/[/url]"
+text = "What The Witness? is a fan game of The Witness (2016). Do not continue if you have not yet played the original game.
+
+What The Witness? assumes that you have played the original game and understand well how original game mechanics work. You are not required to 100% complete the original game. It would be enough if you know how all the symbols work in the original game.
+
+Link to the original game: https://store.steampowered.com/app/210970/The_Witness/"
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+margin_top = 394.0
+margin_right = 906.0
+margin_bottom = 425.0
+custom_fonts/font = SubResource( 6 )
+text = "Do not show this again in the future"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueButton" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 446.0
+margin_right = 906.0
+margin_bottom = 483.0
+custom_fonts/font = SubResource( 5 )
+text = "Continue"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 504.0
+margin_right = 906.0
+margin_bottom = 541.0
+custom_fonts/font = SubResource( 5 )
+text = "Exit"
+
+[connection signal="meta_clicked" from="MarginContainer/VBoxContainer/RichTextLabel2" to="." method="_on_RichTextLabel2_meta_clicked"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]

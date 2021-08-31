@@ -1,22 +1,10 @@
 extends Node2D
 
-onready var clear_save_button = $MarginContainer/VBoxContainer/ClearProgressButton
 onready var custom_level_button = $MarginContainer/VBoxContainer/CustomLevelButton
 
 func _on_start_button_pressed():
-	get_tree().change_scene("res://level_map.tscn")
+	get_tree().change_scene("res://warning_scene.tscn")
 
-
-func _on_reset_progress_button_pressed():
-	if (clear_save_button.text == 'Are you sure?'):
-		SaveData.clear()
-		clear_save_button.text = 'Save cleared.'
-		if (MenuData.puzzle_preview_panels != null):
-			for puzzle_name in MenuData.puzzle_preview_panels:
-				if (MenuData.puzzle_preview_panels[puzzle_name] != null):
-					MenuData.puzzle_preview_panels[puzzle_name].update_puzzle(false)
-	else:
-		clear_save_button.text = 'Are you sure?'
 
 func _ready():
 	CSPHelper.initialize()
@@ -30,15 +18,13 @@ func _ready():
 		get_tree().connect("files_dropped", Gameplay, "drag_custom_levels")
 
 
-func _on_export_save_button_pressed():
-	get_tree().change_scene("res://export_save_scene.tscn")
-
-func _on_import_save_button_pressed():
-	get_tree().change_scene("res://import_save_scene.tscn")
-
 func _on_custom_level_button_pressed():
 	get_tree().change_scene("res://custom_level_scene.tscn")
 
 
 func _on_CreditsButton_pressed():
 	get_tree().change_scene("res://credit_scene.tscn")
+
+
+func _on_SettingButton_pressed():
+	get_tree().change_scene("res://setting_scene.tscn")
