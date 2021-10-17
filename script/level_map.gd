@@ -128,6 +128,8 @@ func update_light(first_time=false):
 		var pos = MenuData.puzzle_grid_pos[puzzle_file]
 		if(SaveData.puzzle_solved(puzzle_file)):
 			stack.append(pos)
+			light_map.set_cellv(pos, light_tile_id)
+			light_map.update_bitmask_area(pos)
 	while (!stack.empty()):
 		var pos = stack.pop_back()
 		# print('Visiting ', pos)
@@ -146,7 +148,6 @@ func update_light(first_time=false):
 					var new_pos2 = new_pos + Vector2(DIR_X[dir2], DIR_Y[dir2])
 					if (line_map.get_cellv(new_pos2) != -1 and !get_light_state(new_pos2)):
 						non_activated_neighbor += 1
-				# print('non-activated_neighbor = ', non_activated_neighbor)
 				if (non_activated_neighbor == 1):
 					deltas.append(delta + get_gadget_direction(gadget_map, new_pos))
 		for delta in deltas:
