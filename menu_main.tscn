@@ -45,8 +45,8 @@ margin_bottom = 94.0
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[center]What The Witness?[/center]"
-text = "What The Witness?"
+bbcode_text = "[center]The 10th WitCup[/center]"
+text = "The 10th WitCup"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 margin_top = 115.0
@@ -55,10 +55,10 @@ margin_bottom = 209.0
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
-bbcode_text = "[right]A Fan Game of The Witness by Alith[/right]
-[right]v1.02[/right]"
-text = "A Fan Game of The Witness by Alith
-v1.02"
+bbcode_text = "[right]Is it real life or just fanta sea?[/right]
+[right]v1.03[/right]"
+text = "Is it real life or just fanta sea?
+v1.03"
 
 [node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer"]
 margin_top = 230.0
