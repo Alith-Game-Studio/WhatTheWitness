@@ -7,6 +7,7 @@ var is_hollow
 var margin_size
 var border_size
 var covering: Array
+var is_multi
 const ROTATION_ANGLES = [0, PI / 3, 2 * PI / 3, PI / 2, PI, 3 * PI / 2, 4 * PI / 3, 5 * PI / 3]
 
 func angle_equal_zero(angle, eps=1e-3):
@@ -96,4 +97,16 @@ func draw_foreground(canvas: Visualizer.PuzzleCanvas, owner, owner_type: int, pu
 	else:
 		for shape in shapes:
 			canvas.add_polygon(__shrink_shape(shape, margin_size, scale), color)
+	if (is_multi):
+		var plus_size = 0.08 * (1 - puzzle.line_width)
+		var plus_position = 0.35 * (1 - puzzle.line_width)
+		canvas.add_line(
+			Vector2(-plus_size + plus_position, -plus_position).rotated(-angle), 
+			Vector2(plus_size + plus_position, -plus_position).rotated(-angle), 
+			plus_size * 0.65, color)
+		canvas.add_line(
+			Vector2(plus_position, -plus_size - plus_position).rotated(-angle), 
+			Vector2(plus_position, plus_size - plus_position).rotated(-angle), 
+			plus_size * 0.65, color)
+		
 	
