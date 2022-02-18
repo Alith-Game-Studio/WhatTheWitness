@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-class CSPHelper {
+class CSPHelper : Node {
 
     public const int BINOMIAL_LIMIT = 100000000;
     const int MAX_SIZE = 1000;
@@ -30,7 +30,7 @@ class CSPHelper {
         return BINOMIAL_LIMIT + i;
     }
 }
-public class CSPClause {
+class CSPClause : Node {
     public int sum;
     public Dictionary<int, int> variables = new Dictionary<int, int>();
     public int positiveCount;
@@ -75,7 +75,7 @@ public class CSPClause {
         assignedVariables.Remove(x);
     }
 }
-public class CSPVariable {
+class CSPVariable : Node {
     public List<int> clauses = new List<int>();
     public int value;
 }

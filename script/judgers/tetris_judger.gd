@@ -76,8 +76,7 @@ func judge_csp(validator, region: Validation.Region, fill: bool):
 			for f_id in covering:
 				clauses[f_id][0][n_id] = -1 if is_hollow else 1
 			n_id += 1
-		if (response.decorator.is_multi): # count >= 1, no additional shape clause
-			for i in range(n_id): # fill negative variables
+			if (response.decorator.is_multi):  # fill negative variables for optional duplication
 				shape_clause[0][n_id] = -1
 				n_id += 1
 		clauses.append(shape_clause)
