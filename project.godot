@@ -14,7 +14,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Custom Witness Puzzles"
+config/name="WitCup10"
 run/main_scene="res://menu_main.tscn"
 config/icon="res://icon.png"
 
