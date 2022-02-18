@@ -169,6 +169,7 @@ func back_to_menu():
 func switch_puzzle(delta_pos):
 	if (Gameplay.playing_custom_puzzle):
 		back_to_menu()
+		return
 	var puzzle_grid_pos = MenuData.puzzle_grid_pos[Gameplay.puzzle_name]
 	var new_puzzle_name = MenuData.get_puzzle_on_cell(puzzle_grid_pos + delta_pos)
 	if (new_puzzle_name != null):
