@@ -1,6 +1,7 @@
 extends "../decorator.gd"
 
 var rule = 'collapse'
+var passed = false
 
 func draw_foreground(canvas: Visualizer.PuzzleCanvas, owner, owner_type: int, puzzle: Graph.Puzzle):
 	var lineWidth = 0.05 * (1 - puzzle.line_width)

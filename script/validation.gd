@@ -121,8 +121,16 @@ class Validator:
 				vertex_region[v] = -way - 2
 		var stack = []
 		regions = []
-		for i in range(len(puzzle.facets)):
+		for f in range(len(puzzle.facets)):
 			region_of_facet.append(-1)
+			var center_vertex_id = puzzle.facets[f].center_vertex_index
+			if (puzzle.vertices[center_vertex_id].decorator.rule == 'collapse'):
+				puzzle.vertices[center_vertex_id].decorator.passed = false
+				for edge_tuple in puzzle.facets[f].edge_tuples:
+					var v = puzzle.edge_detector_node[edge_tuple]
+					if (vertex_region[v] < -1):
+						vertex_region[v] = -1
+						puzzle.vertices[center_vertex_id].decorator.passed = true
 		for v1 in range(len(puzzle.vertices)):
 			if (vertex_region[v1] == -1):
 				stack.push_back(v1)
