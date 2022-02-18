@@ -354,13 +354,6 @@ func judge_region_water(validator: Validation.Validator, region: Validation.Regi
 	if (!region.has_any('water')):
 		return true
 	var all_ok = true
-	var vertex_shared_facets = {}
-	for facet in validator.puzzle.facets:
-		for vertex in facet.vertices:
-			if !(vertex.index in vertex_shared_facets):
-				vertex_shared_facets[vertex.index] = [facet.center_vertex_index]
-			else:
-				vertex_shared_facets[vertex.index].append(facet.center_vertex_index)
 	for decorator_id in region.decorator_dict['water']:
 		var ok = true
 		var response = validator.decorator_responses[decorator_id]
@@ -370,18 +363,13 @@ func judge_region_water(validator: Validation.Validator, region: Validation.Regi
 		else:
 			var count = 0
 			var neighbor_facet_vertex_ids = {}
-			for vertex in facet.vertices:
-				for facet_center_vertex_id in vertex_shared_facets[vertex.index]:
-					if !(facet_center_vertex_id in neighbor_facet_vertex_ids):
-						neighbor_facet_vertex_ids[facet_center_vertex_id] = 1
-					else:
-						neighbor_facet_vertex_ids[facet_center_vertex_id] += 1
-			for v in neighbor_facet_vertex_ids:
-				if (neighbor_facet_vertex_ids[v] >= 2):
-					if (validator.vertex_region[v] == validator.vertex_region[facet.center_vertex_index]): # same region
-						if (validator.puzzle.vertices[v].decorator.rule == 'water'): # water facet
+			for edge_tuple in facet.edge_tuples:
+				for f in validator.puzzle.edge_shared_facets[edge_tuple]:
+					var v = validator.puzzle.facets[f].center_vertex_index
+					if (validator.vertex_region[v] == validator.vertex_region[facet.center_vertex_index]):
+						if (v != facet.center_vertex_index and validator.puzzle.vertices[v].decorator.rule == 'water'):
 							count += 1
-			if (count >= 3):
+			if (count >= 2):
 				ok = false
 		if (!ok):
 			if (require_errors):
