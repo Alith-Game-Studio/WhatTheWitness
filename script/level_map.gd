@@ -20,7 +20,7 @@ var window_size = Vector2(1024, 600)
 var view_origin = -window_size / 2
 var view_scale = 1.0
 
-const UNLOCK_ALL_PUZZLES = false
+const UNLOCK_ALL_PUZZLES = true
 const LOADING_BATCH_SIZE = 5
 
 const DIR_X = [-1, 0, 1, 0]
@@ -61,6 +61,12 @@ func _ready():
 	var total_placeholder_count = 0
 	for placeholder in placeholders:
 		var puzzle_file = placeholder.text + '.wit'
+		for file in files:
+			if (file.begins_with('wc10-') and len(file) >= 8):
+				if (placeholder.text == 'wc10-X' + file[6] + file[7]):
+					placeholder.text = file.substr(0, len(file) - 4)
+					puzzle_file = placeholder.text + '.wit'
+					break
 		if (!placeholder.text.begins_with('$') and puzzle_file in files):
 			total_placeholder_count += 1
 	for placeholder in placeholders:
