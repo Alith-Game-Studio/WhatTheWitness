@@ -327,22 +327,22 @@ func judge_region_stars(validator: Validation.Validator, region: Validation.Regi
 func judge_region_artless_numbers(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('artless-number')):
 		return true
-	var all_count = 0
 	var edge_dict = {}
+	var ok = true
 	for facet_id in region.facet_indices:
 		for edge_tuple in validator.puzzle.facets[facet_id].edge_tuples:
 			var v = validator.puzzle.edge_detector_node[edge_tuple]
 			if (validator.vertex_region[v] < -1): # covered by any line
 				edge_dict[v] = true
 	for decorator_id in region.decorator_dict['artless-number']:
-		all_count += validator.decorator_responses[decorator_id].decorator.count
-	if (all_count == len(edge_dict)):
-		return true
-	else:
-		if (require_errors):
-			for decorator_id in region.decorator_dict['artless-number']:
-				validator.decorator_responses[decorator_id].state = Validation.DecoratorResponse.ERROR
-		return false
+		var response = validator.decorator_responses[decorator_id]
+		if (response.decorator.count != len(edge_dict)):
+			if (require_errors):
+				response.state = Validation.DecoratorResponse.ERROR
+				ok = false
+			else:
+				return false
+	return ok
 	
 func judge_region_triangles(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('triangle')):

@@ -47,4 +47,4 @@ if __name__ == '__main__':
     except:
         pass
     shutil.make_archive(os.path.splitext(build_zip)[0], 'zip', BUILD_FOLDER)
-    shutil.rmtree(BUILD_FOLDER)
+    # shutil.rmtree(BUILD_FOLDER)
