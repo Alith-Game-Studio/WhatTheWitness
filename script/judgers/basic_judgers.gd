@@ -22,6 +22,7 @@ const region_judgers = [
 	'judge_region_minesweeper',
 	'judge_region_circle_arrows',
 	'judge_region_graph_counter',
+	'judge_region_artless_numbers',
 	'judge_region_arrows',
 	'judge_region_tetris',
 ]
@@ -322,6 +323,26 @@ func judge_region_stars(validator: Validation.Validator, region: Validation.Regi
 			else:
 				return false
 	return ok
+	
+func judge_region_artless_numbers(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	if (!region.has_any('artless-number')):
+		return true
+	var all_count = 0
+	var edge_dict = {}
+	for facet_id in region.facet_indices:
+		for edge_tuple in validator.puzzle.facets[facet_id].edge_tuples:
+			var v = validator.puzzle.edge_detector_node[edge_tuple]
+			if (validator.vertex_region[v] < -1): # covered by any line
+				edge_dict[v] = true
+	for decorator_id in region.decorator_dict['artless-number']:
+		all_count += validator.decorator_responses[decorator_id].decorator.count
+	if (all_count == len(edge_dict)):
+		return true
+	else:
+		if (require_errors):
+			for decorator_id in region.decorator_dict['artless-number']:
+				validator.decorator_responses[decorator_id].state = Validation.DecoratorResponse.ERROR
+		return false
 	
 func judge_region_triangles(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('triangle')):
