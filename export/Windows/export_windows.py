@@ -30,6 +30,10 @@ if __name__ == '__main__':
     except:
         pass
     copy_editor()
+    dir = os.getcwd()
+    os.chdir('../..')
+    os.system('Godot_v3.4.2-stable_mono_win64.exe --export "Windows Desktop"')
+    os.chdir(dir)
     shutil.copytree('../../puzzles', os.path.join(BUILD_FOLDER, 'puzzles'))
     shutil.copyfile('Custom Witness Puzzles.exe', os.path.join(BUILD_FOLDER, 'Player.exe'))
     shutil.copyfile('Custom Witness Puzzles.pck', os.path.join(BUILD_FOLDER, 'Player.pck'))
