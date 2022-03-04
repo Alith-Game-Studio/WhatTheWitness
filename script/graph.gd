@@ -8,10 +8,6 @@ const EDGE_ELEMENT = 1
 const FACET_ELEMENT = 2
 const GLOBAL_ELEMENT = 3
 
-const SYMMETRY_ROTATIONAL = 0
-const SYMMETRY_REFLECTIVE = 1
-const SYMMETRY_PARALLEL = 2
-
 func color(name):
 	if (name.begins_with('#')):
 		return Color(name)
@@ -69,10 +65,7 @@ class Puzzle:
 	var start_size: float
 	var n_ways: int
 	var select_one_subpuzzle = false # multi-panels
-	var symmetry_type: int
-	var symmetry_center: Vector2
-	var symmetry_normal: Vector2
-	var symmetry_parallel_points: Array
+	var symmetry_transforms: Array
 	var decorators : Array
 	var edge_detector_node = {}
 	var edge_shared_facets = {}
@@ -250,16 +243,19 @@ func __add_decorator(puzzle, raw_element, v):
 		elif (text_decorator['Text'].to_lower() == 'select 1'):
 			puzzle.vertices[v].hidden = true
 			puzzle.select_one_subpuzzle = true
-		elif (text_decorator['Text'].to_lower() == 'parallel'):
-			var p = puzzle.vertices[v].pos
-			if (puzzle.symmetry_type != SYMMETRY_PARALLEL):
-				puzzle.symmetry_type = SYMMETRY_PARALLEL
-				puzzle.n_ways = 1
+		elif (text_decorator['Text'].to_lower() in ['parallel', 'p', 'd', 'b', 'q']):
+			var chr = text_decorator['Text'][0].to_lower()
+			var symmetry_center = puzzle.vertices[v].pos
+			symmetry_center += Vector2(float(text_decorator['DeltaX']), float(text_decorator['DeltaY']))
+			var flip_x = chr in ['b', 'q']
+			var symmetry_angle = deg2rad(float(text_decorator['Angle'])) + (PI if chr in ['b', 'd'] else 0)
+			var transform = Transform2D(0, symmetry_center) * Transform2D(symmetry_angle, Vector2.ZERO) * (Transform2D.FLIP_X if flip_x else Transform2D.IDENTITY)
+			if (puzzle.n_ways == 1 and len(puzzle.symmetry_transforms) == 0):
+				puzzle.symmetry_transforms = [transform]
 				puzzle.solution_colors[0] = color(text_decorator['Color'])
-				puzzle.symmetry_parallel_points = [p]
 			else:
 				puzzle.n_ways += 1
-				puzzle.symmetry_parallel_points.append(p)
+				puzzle.symmetry_transforms.append(transform)
 				puzzle.solution_colors.append(color(text_decorator['Color']))
 			
 		elif (text_decorator['Text'].to_lower() == 'exit'):
@@ -498,9 +494,13 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 	var symmetry_decorator = __find_decorator(raw_element, "ThreeWayPuzzleDecorator")
 	if (symmetry_decorator):
 		puzzle.n_ways = 3
-		puzzle.symmetry_type = SYMMETRY_ROTATIONAL
-		puzzle.symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
-		puzzle.symmetry_center += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
+		var symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
+		symmetry_center += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
+		puzzle.symmetry_transforms = [
+			Transform2D.IDENTITY,
+				Transform2D(0, symmetry_center) * Transform2D(2 * PI / 3, Vector2.ZERO) * Transform2D(0, -symmetry_center),
+				Transform2D(0, symmetry_center) * Transform2D(4 * PI / 3, Vector2.ZERO) * Transform2D(0, -symmetry_center),
+		]
 		puzzle.solution_colors.push_back(color(symmetry_decorator['SecondLineColor']))
 		puzzle.solution_colors.push_back(color(symmetry_decorator['ThirdLineColor']))
 	symmetry_decorator = __find_decorator(raw_element, "SymmetryPuzzleDecorator")
@@ -508,20 +508,29 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		var is_rotational = symmetry_decorator['IsRotational']
 		assert(is_rotational in ['true', 'false'])
 		puzzle.n_ways = 2
-		puzzle.symmetry_type = SYMMETRY_ROTATIONAL if is_rotational == 'true' else SYMMETRY_REFLECTIVE
-		puzzle.symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
-		puzzle.symmetry_center += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
-		var symmetry_angle = deg2rad(float(symmetry_decorator['Angle']))
-		puzzle.symmetry_normal = Vector2(-sin(symmetry_angle), cos(symmetry_angle))
+		var symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
+		symmetry_center += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
+		if (is_rotational == 'true'):
+			puzzle.symmetry_transforms = [
+				Transform2D.IDENTITY,
+				Transform2D(0, symmetry_center) * Transform2D(PI, Vector2.ZERO) * Transform2D(0, -symmetry_center),
+			]
+		else:
+			var symmetry_angle = deg2rad(float(symmetry_decorator['Angle']))
+			puzzle.symmetry_transforms = [
+				Transform2D.IDENTITY,
+				Transform2D(0, symmetry_center) * Transform2D(symmetry_angle, Vector2.ZERO) \
+					* Transform2D.FLIP_X * Transform2D(-symmetry_angle, Vector2.ZERO) * Transform2D(0, -symmetry_center),
+			]
+		# puzzle.symmetry_normal = Vector2(-sin(symmetry_angle), cos(symmetry_angle))
 		puzzle.solution_colors.push_back(color(symmetry_decorator['SecondLineColor']))
 	symmetry_decorator = __find_decorator(raw_element, "ParallelPuzzleDecorator")
 	if (symmetry_decorator):
 		puzzle.n_ways = 2
-		puzzle.symmetry_type = SYMMETRY_PARALLEL
-		var p1 = __get_raw_element_center(puzzle, raw_element, element_type, id)
-		p1 += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
-		var p2 = p1 + Vector2(float(symmetry_decorator['TranslationX']), float(symmetry_decorator['TranslationY']))
-		puzzle.symmetry_parallel_points = [p1, p2]
+		puzzle.symmetry_transforms = [
+			Transform2D.IDENTITY,
+			Transform2D(0, Vector2(float(symmetry_decorator['TranslationX']), float(symmetry_decorator['TranslationY'])))
+		]
 		puzzle.solution_colors.push_back(color(symmetry_decorator['SecondLineColor']))
 	if (element_type == EDGE_ELEMENT):
 		var v1 = int(raw_element['Start'])
@@ -607,6 +616,12 @@ func load_from_xml(file, preview_only=false):
 		puzzle.preprocess_tetris_covering()
 		puzzle.preprocess_edge_angles()
 		puzzle.build_neighbor_graph()
+	# normalize transforms
+	if (len(puzzle.symmetry_transforms) == 0):
+		puzzle.symmetry_transforms.append(Transform2D.IDENTITY)
+	else:
+		for way in range(puzzle.n_ways - 1, -1, -1):
+			puzzle.symmetry_transforms[way] = puzzle.symmetry_transforms[way] * puzzle.symmetry_transforms[0].inverse()
 	return puzzle
 	
 	

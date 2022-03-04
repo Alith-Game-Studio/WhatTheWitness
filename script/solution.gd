@@ -11,6 +11,8 @@ class DiscreteSolutionState:
 	var vertices: Array
 	var event_properties: Array
 	var solution_stage: Array
+	var solution_transform: Transform2D
+	var start_way: int
 	
 	func _init():
 		vertices = []
@@ -22,6 +24,7 @@ class DiscreteSolutionState:
 		result.vertices = vertices.duplicate(true)
 		result.event_properties = event_properties.duplicate(true)
 		result.solution_stage = solution_stage.duplicate(true)
+		result.start_way = start_way
 		return result
 		
 	func get_vertex_position(puzzle, way, id):
@@ -196,26 +199,16 @@ class DiscreteSolutionState:
 		return true
 	
 	func get_symmetry_point(puzzle, way, pos):
-		if (way == 0):
+		if (way == 0 or len(puzzle.symmetry_transforms) == 0):
 			return pos
-		if (puzzle.symmetry_type == Graph.SYMMETRY_ROTATIONAL):
-			return (pos - puzzle.symmetry_center).rotated(2 * PI * way / puzzle.n_ways) + puzzle.symmetry_center
-		elif (puzzle.symmetry_type == Graph.SYMMETRY_REFLECTIVE):
-			return (pos - puzzle.symmetry_center).reflect(puzzle.symmetry_normal) + puzzle.symmetry_center
-		elif (puzzle.symmetry_type == Graph.SYMMETRY_PARALLEL):
-			return pos + puzzle.symmetry_parallel_points[way] - puzzle.symmetry_parallel_points[MAIN_WAY]
-		assert(false)
+		return puzzle.symmetry_transforms[(way + start_way) % puzzle.n_ways].xform(
+			puzzle.symmetry_transforms[start_way].xform_inv(pos))
 		
 	func get_symmetry_vector(puzzle, way, vec):
-		if (way == 0):
+		if (way == 0 or len(puzzle.symmetry_transforms) == 0):
 			return vec
-		if (puzzle.symmetry_type == Graph.SYMMETRY_ROTATIONAL):
-			return vec.rotated(2 * PI * way / puzzle.n_ways)
-		elif (puzzle.symmetry_type == Graph.SYMMETRY_REFLECTIVE):
-			return vec.reflect(puzzle.symmetry_normal)
-		elif (puzzle.symmetry_type == Graph.SYMMETRY_PARALLEL):
-			return vec
-		assert(false)
+		return puzzle.symmetry_transforms[(way + start_way) % puzzle.n_ways].basis_xform(
+			puzzle.symmetry_transforms[start_way].basis_xform_inv(vec))
 			
 	func pos_to_vertex_id(puzzle, pos, eps=1e-3):
 		for vertex in puzzle.vertices:
@@ -235,16 +228,12 @@ class DiscreteSolutionState:
 		return result
 		
 	func initialize(puzzle, pos):
-		var possible_start_pos = []
-		if (puzzle.symmetry_type == Graph.SYMMETRY_PARALLEL):
-			for i in range(puzzle.n_ways):
-				possible_start_pos.append(pos - puzzle.symmetry_parallel_points[i] + puzzle.symmetry_parallel_points[MAIN_WAY])
-		else:
-			possible_start_pos = [pos]
-		for pos in possible_start_pos:
+		start_way = 0
+		while (start_way < puzzle.n_ways):
 			vertices.clear()
 			var est_start_vertex = get_nearest_start(puzzle, pos)
 			if (est_start_vertex == null):
+				start_way += 1
 				continue
 			var ok = true
 			for way in range(puzzle.n_ways):
@@ -260,6 +249,7 @@ class DiscreteSolutionState:
 				for decorator in puzzle.decorators:
 					event_properties.append(decorator.init_property(puzzle, self, est_start_vertex))
 				return true
+			start_way += 1
 		return false
 
 class SolutionLine:
