@@ -22,6 +22,7 @@ const region_judgers = [
 	'judge_region_minesweeper',
 	'judge_region_circle_arrows',
 	'judge_region_graph_counter',
+	'judge_region_water',
 	'judge_region_arrows',
 	'judge_region_tetris',
 ]
@@ -340,6 +341,35 @@ func judge_region_triangles(validator: Validation.Validator, region: Validation.
 				if (validator.vertex_region[v] < -1): # covered by any line
 					count += 1
 			if (count != response.decorator.count):
+				ok = false
+		if (!ok):
+			if (require_errors):
+				response.state = Validation.DecoratorResponse.ERROR
+				all_ok = false
+			else:
+				return false
+	return all_ok
+	
+func judge_region_water(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	if (!region.has_any('water')):
+		return true
+	var all_ok = true
+	for decorator_id in region.decorator_dict['water']:
+		var ok = true
+		var response = validator.decorator_responses[decorator_id]
+		var facet = validator.puzzle.vertices[response.vertex_index].linked_facet
+		if (facet == null): # not placed on facets
+			ok = false
+		else:
+			var count = 0
+			var neighbor_facet_vertex_ids = {}
+			for edge_tuple in facet.edge_tuples:
+				for f in validator.puzzle.edge_shared_facets[edge_tuple]:
+					var v = validator.puzzle.facets[f].center_vertex_index
+					if (validator.vertex_region[v] == validator.vertex_region[facet.center_vertex_index]):
+						if (v != facet.center_vertex_index and validator.puzzle.vertices[v].decorator.rule == 'water'):
+							count += 1
+			if (count >= 2):
 				ok = false
 		if (!ok):
 			if (require_errors):

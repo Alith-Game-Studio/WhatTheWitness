@@ -283,6 +283,14 @@ func __add_decorator(puzzle, raw_element, v):
 			decorator.color = color(text_decorator['Color'])
 			decorator.is_clockwise = false
 			puzzle.vertices[v].decorator = decorator
+		elif (text_decorator['Text'].to_lower() == '\u6709\u9650'): # limited water
+			var decorator = load('res://script/decorators/limited_water_decorator.gd').new()
+			decorator.color = color(text_decorator['Color'])
+			puzzle.vertices[v].decorator = decorator
+		elif (text_decorator['Text'].to_lower() == '\u6C34'): # water
+			var decorator = load('res://script/decorators/water_decorator.gd').new()
+			decorator.color = Color.transparent
+			puzzle.vertices[v].decorator = decorator
 		
 		elif (text_decorator['Text'].to_lower() == '\u028A'): # ghost
 			var ghost_manager = null
