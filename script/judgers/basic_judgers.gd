@@ -19,6 +19,7 @@ const region_judgers = [
 	'judge_region_big_points',
 	'judge_region_squares',
 	'judge_region_stars',
+	'judge_region_lands',
 	'judge_region_triangles',
 	'judge_region_minesweeper',
 	'judge_region_circle_arrows',
@@ -323,6 +324,56 @@ func judge_region_stars(validator: Validation.Validator, region: Validation.Regi
 			ok = false
 			if (require_errors):
 				response.state = Validation.DecoratorResponse.ERROR
+			else:
+				return false
+	return ok
+
+func get_region_area(puzzle, region: Validation.Region):
+	var area = 0.0
+	for v in region.vertice_indices:
+		if (puzzle.vertices[v].linked_facet != null):
+			var facet = puzzle.vertices[v].linked_facet
+			for i in range(2, len(facet.vertices)):
+				area += TetrisJudger.calc_triangle_area(facet.vertices[0].pos, facet.vertices[i - 1].pos, facet.vertices[i].pos)
+	return area
+
+func judge_region_lands(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	# Not competible with eliminators
+	if (!region.has_any('land')):
+		return true
+	var area = get_region_area(validator.puzzle, region)
+	var color_count = {}
+	for decorator_id in region.decorator_dict['land']:
+		var response = validator.decorator_responses[decorator_id]
+		var color = response.color
+		if !(color in color_count):
+			color_count[color] = 1
+		else:
+			color_count[color] += 1
+	var ok = true
+	for color in color_count:
+		var color_ok = false
+		for region2 in validator.regions:
+			var color_count2 = 0
+			if (region2.has_any('land') and region != region2):
+				for decorator_id2 in region2.decorator_dict['land']:
+					var response2 = validator.decorator_responses[decorator_id2]
+					if (response2.color == color):
+						color_count2 += 1
+				if (color_count2 > 0):
+					var area2 = get_region_area(validator.puzzle, region2)
+					if (abs(area2 * color_count[color] - area * color_count2) > 1e-3):
+						color_ok = false
+						break
+					else:
+						color_ok = true
+		if (!color_ok):
+			if (require_errors):
+				for decorator_id in region.decorator_dict['land']: 
+					var response = validator.decorator_responses[decorator_id]
+					if (response.color == color):
+						response.state = Validation.DecoratorResponse.ERROR
+				ok = false
 			else:
 				return false
 	return ok

@@ -257,6 +257,10 @@ func __add_decorator(puzzle, raw_element, v):
 			decorator.color = color(text_decorator['Color'])
 			decorator.count = int(text_decorator['Text'].substr(1, len(text_decorator['Text']) - 2))
 			puzzle.vertices[v].decorator = decorator
+		elif (text_decorator['Text'] == '\u623F'):
+			var decorator = load('res://script/decorators/land_decorator.gd').new()
+			decorator.color = color(text_decorator['Color'])
+			puzzle.vertices[v].decorator = decorator
 		elif (text_decorator['Text'] == 'X'):
 			var decorator = load('res://script/decorators/all_error_decorator.gd').new()
 			decorator.color = color(text_decorator['Color'])
