@@ -75,19 +75,10 @@
     </Node>
     <Node>
       <Decorator xsi:type="CombinedDecorator">
-        <First xsi:type="CombinedDecorator">
-          <First xsi:type="PointDecorator">
-            <DeltaX>0</DeltaX>
-            <DeltaY>0</DeltaY>
-            <Angle>0</Angle>
-            <ExtraScale>1</ExtraScale>
-            <Color>Black</Color>
-          </First>
-          <Second xsi:type="EndDecorator">
-            <Length>0.2</Length>
-            <Angle>-45</Angle>
-            <Color>Transparent</Color>
-          </Second>
+        <First xsi:type="EndDecorator">
+          <Length>0.2</Length>
+          <Angle>-45</Angle>
+          <Color>Transparent</Color>
         </First>
         <Second xsi:type="PointDecorator">
           <DeltaX>0</DeltaX>

@@ -2,7 +2,7 @@ extends Node
 
 const PUZZLE_FOLDER = 'res://puzzles/'
 var puzzle_name = ""
-const ALLOW_CUSTOM_LEVELS = true
+const ALLOW_CUSTOM_LEVELS = false
 
 var playing_custom_puzzle: bool
 var puzzle_path: String

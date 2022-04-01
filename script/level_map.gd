@@ -59,6 +59,7 @@ func _ready():
 			placeholder.get_parent().remove_child(placeholder)
 		elif (placeholder.text.begins_with('#')):
 			var cell_pos = placeholder.get_position() / 96
+			var int_cell_pos = [int(round(cell_pos.x)), int(round(cell_pos.y))]
 			var prefix = placeholder.text.substr(1)
 			var child_pos = placeholder.get_position() 
 			for puzzle_file in files:
@@ -67,7 +68,10 @@ func _ready():
 					node.text = puzzle_file.substr(0, len(puzzle_file) - 4)
 					node.set_position(child_pos)
 					placeholder.get_parent().add_child(node)
+					var pts_text = puzzle_file.substr(puzzle_file.find('(') + 1)
+					pos_points[int_cell_pos] = int(pts_text.substr(0, pts_text.find(')')))
 					child_pos += Vector2(96, 0)
+					int_cell_pos = [int_cell_pos[0] + 1, int_cell_pos[1]]
 			placeholder.get_parent().remove_child(placeholder)
 	placeholders = puzzle_placeholders.get_children()
 	var processed_placeholder_count = 0
