@@ -20,7 +20,7 @@ var window_size = Vector2(1024, 600)
 var view_origin = -window_size / 2
 var view_scale = 1.0
 
-const UNLOCK_ALL_PUZZLES = false
+const UNLOCK_ALL_PUZZLES = true
 const LOADING_BATCH_SIZE = 5
 
 const DIR_X = [-1, 0, 1, 0]
@@ -57,6 +57,19 @@ func _ready():
 			var int_cell_pos = [int(round(cell_pos.x)), int(round(cell_pos.y)) - 1]
 			pos_points[int_cell_pos] = int(placeholder.text.substr(1))
 			placeholder.get_parent().remove_child(placeholder)
+		elif (placeholder.text.begins_with('#')):
+			var cell_pos = placeholder.get_position() / 96
+			var prefix = placeholder.text.substr(1)
+			var child_pos = placeholder.get_position() 
+			for puzzle_file in files:
+				if (puzzle_file.begins_with(prefix)):
+					var node = placeholder.duplicate()
+					node.text = puzzle_file.substr(0, len(puzzle_file) - 4)
+					node.set_position(child_pos)
+					placeholder.get_parent().add_child(node)
+					child_pos += Vector2(96, 0)
+			placeholder.get_parent().remove_child(placeholder)
+	placeholders = puzzle_placeholders.get_children()
 	var processed_placeholder_count = 0
 	var total_placeholder_count = 0
 	for placeholder in placeholders:
