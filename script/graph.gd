@@ -195,6 +195,10 @@ const GRAPH_COUNTER_TEXTS = {'\u250F': 266240, '\u2533': 266241,  '\u2513': 2621
 	'\u2517': 4160, '\u253B': 4161, '\u251B': 65,
 	'\u2503': 262208, '\u2501': 4097, '\u254F': 17039424, '\u254D': 16781313 }
 
+const MYOPIA_TEXTS = {'\u4E0A': Vector2(0, -1), '\u4E0B': Vector2(0, 1), '\u5DE6': Vector2(-1, 0), '\u53F3': Vector2(1, 0),
+	'8': Vector2(0, -1), '2': Vector2(0, 1), '4': Vector2(-1, 0), '6': Vector2(1, 0),
+	'7': Vector2(-1, -1), '9': Vector2(1, -1), '1': Vector2(-1, 1), '3': Vector2(1, 1),}
+
 func __add_decorator(puzzle, raw_element, v):
 	var has_plus_text = false
 	var has_circle_text = false
@@ -221,6 +225,31 @@ func __add_decorator(puzzle, raw_element, v):
 			decorator.size = 0.5
 			decorator.radius = 1.0
 			puzzle.decorators.append(decorator)
+		elif (text_decorator['Text'].to_lower().begins_with('m:')):
+			var decorator = load('res://script/decorators/myopia-decorator.gd').new()
+			decorator.color = color(text_decorator['Color'])
+			decorator.directions = []
+			var text = text_decorator['Text'].substr(2)
+			var possible_edge_vs = []
+			var is_edge_vs_selected = []
+			if (puzzle.vertices[v].linked_facet != null):
+				var facet = puzzle.vertices[v].linked_facet
+				for edge_tuple in facet.edge_tuples:
+					possible_edge_vs.append(puzzle.edge_detector_node[edge_tuple])
+					is_edge_vs_selected.append(false)
+			if (len(possible_edge_vs) > 0):
+				for chr in text:
+					if (chr in MYOPIA_TEXTS):
+						var vec = MYOPIA_TEXTS[chr]
+						var best_k = 0
+						for k in range(len(possible_edge_vs)):
+							if ((puzzle.vertices[possible_edge_vs[k]].pos - puzzle.vertices[v].pos).dot(vec) >
+								(puzzle.vertices[possible_edge_vs[best_k]].pos - puzzle.vertices[v].pos).dot(vec)):
+									best_k = k
+						is_edge_vs_selected[best_k] = true
+				for k in range(len(possible_edge_vs)):
+					decorator.directions.append([k, (puzzle.vertices[possible_edge_vs[k]].pos - puzzle.vertices[v].pos).normalized(), is_edge_vs_selected[k]])
+				puzzle.vertices[v].decorator = decorator
 		elif (text_decorator['Text'] == '[ ]'):
 			boxed_decorator = true
 		elif (text_decorator['Text'][0] == '['):
@@ -592,9 +621,9 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		facet.edge_tuples = edge_tuples
 		var v_f = push_vertex_vec(puzzle, facet.center, true)
 		facet.center_vertex_index = v_f
-		__add_decorator(puzzle, raw_element, facet.center_vertex_index)
 		facet.index = len(puzzle.facets)
 		puzzle.vertices[v_f].linked_facet = facet
+		__add_decorator(puzzle, raw_element, facet.center_vertex_index)
 		puzzle.facets.push_back(facet)
 	if (element_type == VERTEX_ELEMENT):
 		__add_decorator(puzzle, raw_element, id)

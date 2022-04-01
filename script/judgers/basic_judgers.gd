@@ -15,6 +15,7 @@ const region_judgers = [
 	'judge_region_points',
 	'judge_region_ghosts',
 	'judge_region_self_intersections',
+	'judge_region_myopia',
 	'judge_region_big_points',
 	'judge_region_squares',
 	'judge_region_stars',
@@ -480,6 +481,41 @@ func judge_region_circle_arrows(validator: Validation.Validator, region: Validat
 			else:
 				return false
 	return all_ok
+	
+func judge_region_myopia(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	if (!region.has_any('myopia')):
+		return true
+	var ok = true
+	for decorator_id in region.decorator_dict['myopia']:
+		var response = validator.decorator_responses[decorator_id]
+		var origin = validator.puzzle.vertices[response.vertex_index].pos
+		var dist_list = []
+		var global_min_dist = INF
+		for k in range(len(response.decorator.directions)):
+			var direction = response.decorator.directions[k][1]
+			var min_dist = INF
+			for i in range(len(validator.puzzle.vertices)):
+				if (validator.vertex_region[i] >= -1):
+					continue
+				if (i == response.vertex_index):
+					continue
+				var vertex_dir = validator.puzzle.vertices[i].pos - origin
+				if (abs(vertex_dir.dot(direction) - vertex_dir.length()) < 1e-3):
+					min_dist = min(min_dist, vertex_dir.length())
+			dist_list.append(min_dist)
+			if (response.decorator.directions[k][2]):
+				global_min_dist = min(global_min_dist, min_dist)
+		for k in range(len(response.decorator.directions)):
+			# We test the not condition to handle issues with infinite
+			if ((response.decorator.directions[k][2] and !(global_min_dist + 1e-3 > dist_list[k])) or 
+				(!response.decorator.directions[k][2] and !(global_min_dist + 1e-3 < dist_list[k]))):
+				if (require_errors):
+					response.state = Validation.DecoratorResponse.ERROR
+					ok = false
+				else:
+					return false
+				break
+	return ok
 	
 	
 func judge_region_arrows(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
