@@ -22,6 +22,7 @@ const region_judgers = [
 	'judge_region_minesweeper',
 	'judge_region_circle_arrows',
 	'judge_region_graph_counter',
+	'judge_region_collapse',
 	'judge_region_water',
 	'judge_region_arrows',
 	'judge_region_tetris',
@@ -486,6 +487,20 @@ func judge_region_arrows(validator: Validation.Validator, region: Validation.Reg
 				return false
 	return ok
 	
+func judge_region_collapse(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	if (!region.has_any('collapse')):
+		return true
+	var ok = true
+	for decorator_id in region.decorator_dict['collapse']:
+		var response = validator.decorator_responses[decorator_id]
+		if (!response.decorator.passed):
+			if (require_errors):
+				response.state = Validation.DecoratorResponse.ERROR
+				ok = false
+			else:
+				return false
+	return ok
+
 	
 func judge_region_tetris(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('tetris')):
