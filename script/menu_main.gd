@@ -7,7 +7,6 @@ func _on_start_button_pressed():
 
 
 func _ready():
-	CSPHelper.initialize()
 	if (!Gameplay.loaded_from_command_line):
 		var args = OS.get_cmdline_args()
 		Gameplay.drag_custom_levels(args, null)
@@ -16,6 +15,7 @@ func _ready():
 		custom_level_button.visible = false
 	else:
 		get_tree().connect("files_dropped", Gameplay, "drag_custom_levels")
+	
 
 
 func _on_custom_level_button_pressed():

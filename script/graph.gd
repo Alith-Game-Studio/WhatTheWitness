@@ -196,6 +196,8 @@ const GRAPH_COUNTER_TEXTS = {'\u250F': 266240, '\u2533': 266241,  '\u2513': 2621
 	'\u2503': 262208, '\u2501': 4097, '\u254F': 17039424, '\u254D': 16781313 }
 
 func __add_decorator(puzzle, raw_element, v):
+	var has_plus_text = false
+	var has_circle_text = false
 	var boxed_decorator = false
 	var end_decorator = __find_decorator(raw_element, "EndDecorator")
 	if (end_decorator):
@@ -345,7 +347,10 @@ func __add_decorator(puzzle, raw_element, v):
 			decorator.rotational = abs(decorator.angle) > 1e-3
 			decorator.matrix = [[int(text_decorator['Text'].substr(2))]]
 			puzzle.vertices[v].decorator = decorator
-			
+		elif (text_decorator['Text'] == '+'):
+			has_plus_text = true
+		elif (text_decorator['Text'] == 'o'):
+			has_circle_text = true
 		elif (text_decorator['Text'][0] in GRAPH_COUNTER_TEXTS):
 			var decorator = load('res://script/decorators/graph_counter_decorator.gd').new()
 			var text_matrix = text_decorator['Text'].replace('\r', '').split('\n')
@@ -422,10 +427,14 @@ func __add_decorator(puzzle, raw_element, v):
 	var tetris_decorator = __find_decorator(raw_element, "TetrisDecorator")
 	if (tetris_decorator):
 		var decorator = __load_tetris(tetris_decorator, false)
+		decorator.is_multi = has_plus_text
+		decorator.is_weak = has_circle_text
 		puzzle.vertices[v].decorator = decorator
 	var hollow_tetris_decorator = __find_decorator(raw_element, "HollowTetrisDecorator")
 	if (hollow_tetris_decorator):
 		var decorator = __load_tetris(hollow_tetris_decorator, true)
+		decorator.is_multi = has_plus_text
+		decorator.is_weak = has_circle_text
 		puzzle.vertices[v].decorator = decorator
 	if (boxed_decorator):
 		var decorator = load('res://script/decorators/box_decorator.gd').new()
