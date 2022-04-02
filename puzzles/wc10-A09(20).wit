@@ -380,13 +380,6 @@
     <SaveEdge>
       <Start>8</Start>
       <End>9</End>
-      <Decorator xsi:type="PointDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
-        <ExtraScale>1</ExtraScale>
-        <Color>Black</Color>
-      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -464,13 +457,6 @@
     <SaveEdge>
       <Start>26</Start>
       <End>27</End>
-      <Decorator xsi:type="PointDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
-        <ExtraScale>1</ExtraScale>
-        <Color>Black</Color>
-      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -583,6 +569,14 @@
         <int>13</int>
         <int>7</int>
       </Nodes>
+      <Decorator xsi:type="TriangleDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Count>2</Count>
+        <Color>Gold</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
@@ -601,6 +595,14 @@
         <int>15</int>
         <int>9</int>
       </Nodes>
+      <Decorator xsi:type="TriangleDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Count>2</Count>
+        <Color>Gold</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
@@ -628,13 +630,6 @@
         <int>19</int>
         <int>13</int>
       </Nodes>
-      <Decorator xsi:type="SquareDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
-        <ExtraScale>1</ExtraScale>
-        <Color>White</Color>
-      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
@@ -685,13 +680,6 @@
         <int>23</int>
         <int>17</int>
       </Nodes>
-      <Decorator xsi:type="SquareDecorator">
-        <DeltaX>0</DeltaX>
-        <DeltaY>0</DeltaY>
-        <Angle>0</Angle>
-        <ExtraScale>1</ExtraScale>
-        <Color>White</Color>
-      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
@@ -719,6 +707,14 @@
         <int>27</int>
         <int>21</int>
       </Nodes>
+      <Decorator xsi:type="TriangleDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Count>2</Count>
+        <Color>Gold</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
@@ -737,6 +733,14 @@
         <int>29</int>
         <int>23</int>
       </Nodes>
+      <Decorator xsi:type="TriangleDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <Count>2</Count>
+        <Color>Gold</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
