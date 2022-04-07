@@ -53,9 +53,9 @@ size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[right]Is it real life or just fanta sea?[/right]
-[right]v1.03[/right]"
+[right]v1.04[/right]"
 text = "Is it real life or just fanta sea?
-v1.03"
+v1.04"
 
 [node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer"]
 margin_top = 230.0

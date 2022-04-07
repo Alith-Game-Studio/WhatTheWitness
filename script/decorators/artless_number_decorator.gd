@@ -5,9 +5,9 @@ var rule = 'artless-number'
 var count
 
 func draw_foreground(canvas: Visualizer.PuzzleCanvas, owner, owner_type: int, puzzle: Graph.Puzzle):
-	var length = 0.2 * (1 - puzzle.line_width)
-	var distance = 0.05 * (1 - puzzle.line_width)
-	var height = 0.175 * (1 - puzzle.line_width)
+	var length = 0.175 * (1 - puzzle.line_width)
+	var distance = 0.04 * (1 - puzzle.line_width)
+	var height = 0.15 * (1 - puzzle.line_width)
 	var count_per_line = 2 if count == 4 else 3 if count <= 9 else 4
 	var levels = (count - 1) / count_per_line + 1;
 	var numbersPerlevel = []

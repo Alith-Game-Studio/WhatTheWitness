@@ -1,16 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://font/wqy-MicroHei.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://level_lines.tres" type="TileSet" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 32
-font_data = ExtResource( 2 )
 
 [node name="View" type="Node2D"]
 __meta__ = {
@@ -19,7 +14,7 @@ __meta__ = {
 
 [node name="LevelAreaLimit" type="ReferenceRect" parent="."]
 margin_right = 7200.0
-margin_bottom = 2304.0
+margin_bottom = 2688.0
 __meta__ = {
 "_edit_lock_": true
 }
@@ -41,8 +36,8 @@ margin_top = 192.0
 margin_right = 768.0
 margin_bottom = 288.0
 rect_pivot_offset = Vector2( 96, 0 )
-custom_fonts/normal_font = SubResource( 2 )
-text = "  投票"
+custom_fonts/normal_font = SubResource( 1 )
+text = " vote"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Tags"]
 margin_left = 672.0
@@ -84,13 +79,21 @@ margin_bottom = 2016.0
 custom_fonts/normal_font = SubResource( 1 )
 text = "    F"
 
+[node name="RichTextLabel8" type="RichTextLabel" parent="Tags"]
+margin_left = 672.0
+margin_top = 2208.0
+margin_right = 768.0
+margin_bottom = 2304.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "    G"
+
 [node name="Lines" type="TileMap" parent="."]
 scale = Vector2( 3, 3 )
 tile_set = ExtResource( 10 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 196614, 131079, 2, 8, 131080, 2, 2, 196614, 2, 65538, 262150, 2, 65538, 327686, 2, 65544, 327687, 2, 8, 327688, 2, 2, 393222, 2, 65538, 458758, 2, 65538, 524294, 2, 65544, 524295, 2, 8, 524296, 2, 2, 589830, 2, 65538, 655366, 2, 65538, 720902, 2, 65544, 720903, 2, 8, 720904, 2, 2, 786438, 2, 65538, 851974, 2, 65538, 917510, 2, 65543, 917511, 2, 8, 917512, 2, 2, 983046, 2, 65538, 1048582, 2, 65538, 1114118, 2, 65543, 1114119, 2, 8, 1114120, 2, 2, 1179654, 2, 65538, 1245190, 2, 65538, 1310726, 2, 6, 1310727, 2, 8, 1310728, 2, 2 )
+tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 196614, 131079, 2, 8, 131080, 2, 2, 196614, 2, 65538, 262150, 2, 65538, 327686, 2, 65544, 327687, 2, 8, 327688, 2, 2, 393222, 2, 65538, 458758, 2, 65538, 524294, 2, 65544, 524295, 2, 8, 524296, 2, 2, 589830, 2, 65538, 655366, 2, 65538, 720902, 2, 65544, 720903, 2, 8, 720904, 2, 2, 786438, 2, 65538, 851974, 2, 65538, 917510, 2, 65543, 917511, 2, 8, 917512, 2, 2, 983046, 2, 65538, 1048582, 2, 65538, 1114118, 2, 65543, 1114119, 2, 8, 1114120, 2, 2, 1179654, 2, 65538, 1245190, 2, 65538, 1310726, 2, 196608, 1310727, 2, 8, 1310728, 2, 2, 1376262, 2, 65538, 1441798, 2, 65538, 1507334, 2, 7, 1507335, 2, 8, 1507336, 2, 2 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -190,4 +193,13 @@ margin_right = 864.0
 margin_bottom = 2016.0
 rect_pivot_offset = Vector2( 64, 127 )
 text = "#wc10-F"
+wrap_enabled = true
+
+[node name="TextEdit228" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 768.0
+margin_top = 2208.0
+margin_right = 864.0
+margin_bottom = 2304.0
+rect_pivot_offset = Vector2( 64, 127 )
+text = "#wc10-G"
 wrap_enabled = true

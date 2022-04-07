@@ -2,11 +2,6 @@
 <SaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Nodes>
     <Node>
-      <Decorator xsi:type="EndDecorator">
-        <Length>0.2</Length>
-        <Angle>180</Angle>
-        <Color>Transparent</Color>
-      </Decorator>
       <X>1</X>
       <Y>1</Y>
       <Hidden>false</Hidden>
@@ -14,11 +9,6 @@
     <Node>
       <X>1</X>
       <Y>2</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>1</X>
-      <Y>3</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
@@ -26,7 +16,7 @@
         <Color>Transparent</Color>
       </Decorator>
       <X>1</X>
-      <Y>4</Y>
+      <Y>3</Y>
       <Hidden>false</Hidden>
     </Node>
     <Node>
@@ -45,70 +35,36 @@
       <Hidden>false</Hidden>
     </Node>
     <Node>
+      <X>0.99999999999999978</X>
+      <Y>0</Y>
+      <Hidden>false</Hidden>
+    </Node>
+    <Node>
+      <Decorator xsi:type="EndDecorator">
+        <Length>0.2</Length>
+        <Angle>0</Angle>
+        <Color>Transparent</Color>
+      </Decorator>
       <X>2</X>
-      <Y>4</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>3</X>
-      <Y>1</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>3</X>
-      <Y>2</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>3</X>
-      <Y>3</Y>
-      <Hidden>false</Hidden>
-    </Node>
-    <Node>
-      <X>3</X>
-      <Y>4</Y>
+      <Y>-2.2204460492503131E-16</Y>
       <Hidden>false</Hidden>
     </Node>
   </Nodes>
   <EdgesID>
     <SaveEdge>
       <Start>0</Start>
-      <End>4</End>
+      <End>3</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
       <Start>1</Start>
-      <End>5</End>
+      <End>4</End>
+      <Decorator xsi:type="BrokenDecorator" />
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
       <Start>2</Start>
-      <End>6</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>3</Start>
-      <End>7</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>4</Start>
-      <End>8</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>5</Start>
-      <End>9</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>6</Start>
-      <End>10</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>7</Start>
-      <End>11</End>
+      <End>5</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -122,8 +78,8 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>2</Start>
-      <End>3</End>
+      <Start>3</Start>
+      <End>4</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
@@ -132,7 +88,12 @@
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
     <SaveEdge>
-      <Start>5</Start>
+      <Start>7</Start>
+      <End>3</End>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveEdge>
+    <SaveEdge>
+      <Start>0</Start>
       <End>6</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
@@ -141,65 +102,14 @@
       <End>7</End>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveEdge>
-    <SaveEdge>
-      <Start>8</Start>
-      <End>9</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>9</Start>
-      <End>10</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
-    <SaveEdge>
-      <Start>10</Start>
-      <End>11</End>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveEdge>
   </EdgesID>
   <FacesID>
     <SaveFace>
       <Nodes>
         <int>0</int>
-        <int>4</int>
-        <int>5</int>
-        <int>1</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>1</int>
-        <int>5</int>
-        <int>6</int>
-        <int>2</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>2</int>
-        <int>6</int>
-        <int>7</int>
         <int>3</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
         <int>4</int>
-        <int>8</int>
-        <int>9</int>
-        <int>5</int>
-      </Nodes>
-      <GraphElementColor>Transparent</GraphElementColor>
-    </SaveFace>
-    <SaveFace>
-      <Nodes>
-        <int>5</int>
-        <int>9</int>
-        <int>10</int>
-        <int>6</int>
+        <int>1</int>
       </Nodes>
       <Decorator xsi:type="TextDecorator">
         <DeltaX>0</DeltaX>
@@ -212,25 +122,62 @@
           <Size>9</Size>
           <Style>Regular</Style>
         </SerializableFont>
-        <Text>m:上下</Text>
-        <Color>Black</Color>
+        <Text>房</Text>
+        <Color>DarkOrange</Color>
       </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
     <SaveFace>
       <Nodes>
+        <int>1</int>
+        <int>4</int>
+        <int>5</int>
+        <int>2</int>
+      </Nodes>
+      <Decorator xsi:type="TextDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <SerializableFont>
+          <FontFamily>Microsoft YaHei UI</FontFamily>
+          <GraphicsUnit>Point</GraphicsUnit>
+          <Size>9</Size>
+          <Style>Regular</Style>
+        </SerializableFont>
+        <Text>房</Text>
+        <Color>DarkOrange</Color>
+      </Decorator>
+      <GraphElementColor>Transparent</GraphElementColor>
+    </SaveFace>
+    <SaveFace>
+      <Nodes>
+        <int>3</int>
+        <int>0</int>
         <int>6</int>
-        <int>10</int>
-        <int>11</int>
         <int>7</int>
       </Nodes>
+      <Decorator xsi:type="TextDecorator">
+        <DeltaX>0</DeltaX>
+        <DeltaY>0</DeltaY>
+        <Angle>0</Angle>
+        <ExtraScale>1</ExtraScale>
+        <SerializableFont>
+          <FontFamily>Microsoft YaHei UI</FontFamily>
+          <GraphicsUnit>Point</GraphicsUnit>
+          <Size>9</Size>
+          <Style>Regular</Style>
+        </SerializableFont>
+        <Text>房</Text>
+        <Color>DarkOrange</Color>
+      </Decorator>
       <GraphElementColor>Transparent</GraphElementColor>
     </SaveFace>
   </FacesID>
   <MetaData>
-    <PuzzleTitle>Square/SquarePuzzle_2x3</PuzzleTitle>
-    <BackgroundColor>LightGray</BackgroundColor>
-    <ForegroundColor>DarkGray</ForegroundColor>
+    <PuzzleTitle>Square/SquarePuzzle_1x2</PuzzleTitle>
+    <BackgroundColor>SaddleBrown</BackgroundColor>
+    <ForegroundColor>Peru</ForegroundColor>
     <EdgeWidth>0.2</EdgeWidth>
     <TetrisTemplate>
       <Shapes>
@@ -1032,6 +979,6 @@
     <FaceDecorationScale>1</FaceDecorationScale>
     <ExportWidth>768</ExportWidth>
     <ExportHeight>768</ExportHeight>
-    <LineColor>Yellow</LineColor>
+    <LineColor>GreenYellow</LineColor>
   </MetaData>
 </SaveState>
