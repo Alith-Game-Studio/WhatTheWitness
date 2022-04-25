@@ -35,8 +35,8 @@ if __name__ == '__main__':
     os.system('Godot_v3.4.3-stable_mono_win64.exe --export "Windows Desktop"')
     os.chdir(dir)
     shutil.copytree('../../puzzles', os.path.join(BUILD_FOLDER, 'puzzles'))
-    shutil.copyfile('Custom Witness Puzzles.exe', os.path.join(BUILD_FOLDER, 'Player.exe'))
-    shutil.copyfile('Custom Witness Puzzles.pck', os.path.join(BUILD_FOLDER, 'Player.pck'))
+    shutil.copyfile('WitCup10.exe', os.path.join(BUILD_FOLDER, 'Player.exe'))
+    shutil.copyfile('WitCup10.pck', os.path.join(BUILD_FOLDER, 'Player.pck'))
     try:
         os.unlink(build_zip)
         os.unlink(os.path.join(BUILD_FOLDER, 'Toolkit', 'current.toolkit'))

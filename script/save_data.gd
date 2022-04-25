@@ -2,6 +2,7 @@ extends Node
 
 var saved_solutions = {}
 const SAVE_PATH = "user://savegame.save"
+const LEGACY_SAVE_PATH = "/Godot/app_userdata/WitCup10/savegame.save"
 
 func puzzle_solved(puzzle_name):
 	return puzzle_name in saved_solutions
@@ -29,12 +30,31 @@ func load_all():
 	var save_game = File.new()
 	if not save_game.file_exists(SAVE_PATH):
 		saved_solutions = {}
-		return 
-	save_game.open(SAVE_PATH, File.READ)
-	var line = save_game.get_line()
-	if (line != ''):
-		saved_solutions = parse_json(line)
-	save_game.close()
+	else:
+		save_game.open(SAVE_PATH, File.READ)
+		var line = save_game.get_line()
+		if (line != ''):
+			saved_solutions = parse_json(line)
+		save_game.close()
+	# load legacy save
+	var appdata = OS.get_environment('appdata')
+	if (appdata != ''):
+		var old_save_path = appdata.replace('\\', '/') + LEGACY_SAVE_PATH
+		if save_game.file_exists(old_save_path):
+			save_game.open(old_save_path, File.READ)
+			var line = save_game.get_line()
+			if (line != ''):
+				var saved_solutions2 = parse_json(line)
+				for solution in saved_solutions2:
+					if not (solution in saved_solutions):
+						saved_solutions[solution] = saved_solutions2[solution]
+			save_game.close()
+			save_all()
+			var dir = Directory.new()
+			dir.remove(old_save_path)
+			save_game.open(old_save_path + '.bak', File.WRITE)
+			save_game.store_string(line)
+			save_game.close()
 
 func clear():
 	var save_game = File.new()

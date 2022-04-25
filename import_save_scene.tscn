@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://script/import_save_scene.gd" type="Script" id=2]
@@ -11,6 +11,10 @@ size = 20
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 14
 font_data = ExtResource( 1 )
 
 [node name="Node2D" type="Node2D"]
@@ -29,15 +33,12 @@ __meta__ = {
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 39.1058
-margin_top = 544.697
-margin_right = 665.106
-margin_bottom = 577.697
+margin_left = 36.0
+margin_top = 528.0
+margin_right = 662.0
+margin_bottom = 561.0
 custom_fonts/normal_font = SubResource( 2 )
 text = "Paste your save here to restore your progress."
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BackButton" type="Button" parent="."]
 margin_left = 871.156
@@ -60,6 +61,15 @@ text = "Import"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MergeCheckBox" type="CheckBox" parent="."]
+margin_left = 39.0
+margin_top = 564.0
+margin_right = 539.0
+margin_bottom = 591.0
+custom_fonts/font = SubResource( 4 )
+pressed = true
+text = "Merge into current progress (if unchecked, your current progress will be replaced)"
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="ImportButton" to="." method="_on_import_button_pressed"]
