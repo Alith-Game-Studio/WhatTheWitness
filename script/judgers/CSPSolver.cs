@@ -8,7 +8,7 @@ class CSPHelper : Node {
     const int MAX_SIZE = 1000;
     static int[,] binomial;
     static CSPHelper() {
-        binomial = new int[MAX_SIZE, MAX_SIZE];
+        binomial = new int[MAX_SIZE, MAX_SIZE]; 
         for (int k = 0; k < MAX_SIZE; ++k) {
             for (int l = 0; l <= k; ++l) {
                 if (l == 0 || l == k)

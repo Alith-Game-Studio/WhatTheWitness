@@ -1029,36 +1029,36 @@ text = "wc10-D04"
 wrap_enabled = true
 
 [node name="TextEdit354" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = -96.0
-margin_top = 4800.0
-margin_bottom = 4896.0
-rect_pivot_offset = Vector2( 48, 96 )
-text = "wc10-D05"
-wrap_enabled = true
-
-[node name="TextEdit355" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = -192.0
-margin_top = 4800.0
-margin_right = -96.0
-margin_bottom = 4896.0
-rect_pivot_offset = Vector2( 48, 96 )
-text = "wc10-D06"
-wrap_enabled = true
-
-[node name="TextEdit356" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = -480.0
 margin_top = 4896.0
 margin_right = -384.0
 margin_bottom = 4992.0
 rect_pivot_offset = Vector2( 48, 96 )
-text = "wc10-D07"
+text = "wc10-D05"
 wrap_enabled = true
 
-[node name="TextEdit357" type="TextEdit" parent="PuzzlePlaceHolders"]
+[node name="TextEdit355" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = -576.0
 margin_top = 4896.0
 margin_right = -480.0
 margin_bottom = 4992.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc10-D06"
+wrap_enabled = true
+
+[node name="TextEdit356" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = -96.0
+margin_top = 4800.0
+margin_bottom = 4896.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc10-D07"
+wrap_enabled = true
+
+[node name="TextEdit357" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = -192.0
+margin_top = 4800.0
+margin_right = -96.0
+margin_bottom = 4896.0
 rect_pivot_offset = Vector2( 48, 96 )
 text = "wc10-D08"
 wrap_enabled = true

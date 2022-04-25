@@ -46,8 +46,11 @@ func load_all():
 			if (line != ''):
 				var saved_solutions2 = parse_json(line)
 				for solution in saved_solutions2:
-					if not (solution in saved_solutions):
-						saved_solutions[solution] = saved_solutions2[solution]
+					var key = solution
+					if ('(' in solution and ')' in solution):  # legacy name fixes.
+						key = solution.split('(')[0] + solution.split(')')[1]
+					if not (key in saved_solutions):
+						saved_solutions[key] = saved_solutions2[solution]
 			save_game.close()
 			save_all()
 			var dir = Directory.new()
