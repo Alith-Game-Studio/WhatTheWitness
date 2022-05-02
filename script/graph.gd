@@ -636,6 +636,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		__check_decorator_consumed(raw_decorator, element_type)
 	
 func load_from_xml(file, preview_only=false):
+
 	if ('<' in file and '>' in file):
 		var pos1 = file.find('<')
 		var pos2 = file.find('>')

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Peer Gynt Suite no. 1, Op. 46 - II. Aase's Death.mp3-dcc8d7c6912b087f155dc76107a42f88.mp3str"
+
+[deps]
+
+source_file="res://audio/music/Peer Gynt Suite no. 1, Op. 46 - II. Aase's Death.mp3"
+dest_files=[ "res://.import/Peer Gynt Suite no. 1, Op. 46 - II. Aase's Death.mp3-dcc8d7c6912b087f155dc76107a42f88.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

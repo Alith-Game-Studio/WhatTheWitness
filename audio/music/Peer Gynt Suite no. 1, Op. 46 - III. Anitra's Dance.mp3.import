@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Peer Gynt Suite no. 1, Op. 46 - III. Anitra's Dance.mp3-a8b78ceffef58a57887879436492b666.mp3str"
+
+[deps]
+
+source_file="res://audio/music/Peer Gynt Suite no. 1, Op. 46 - III. Anitra's Dance.mp3"
+dest_files=[ "res://.import/Peer Gynt Suite no. 1, Op. 46 - III. Anitra's Dance.mp3-a8b78ceffef58a57887879436492b666.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

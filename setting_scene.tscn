@@ -3,7 +3,7 @@
 [ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://script/setting_scene.gd" type="Script" id=2]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 1 )
 
@@ -11,11 +11,11 @@ font_data = ExtResource( 1 )
 size = 24
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=3]
 size = 24
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 24
 font_data = ExtResource( 1 )
 
@@ -44,7 +44,7 @@ custom_constants/separation = 21
 margin_right = 906.0
 margin_bottom = 120.0
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Options[/center]"
 text = "Options"
@@ -95,7 +95,7 @@ margin_right = 200.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 200, 40 )
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 3 )
 text = "Mouse Speed"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -122,7 +122,7 @@ margin_right = 702.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 200, 40 )
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[center] 1.0 [/center]"
 text = " 1.0 "
@@ -135,7 +135,7 @@ margin_top = 363.0
 margin_right = 906.0
 margin_bottom = 483.0
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -145,7 +145,7 @@ __meta__ = {
 margin_top = 504.0
 margin_right = 906.0
 margin_bottom = 541.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Save & Back"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ImportSaveButton" to="." method="_on_ImportSaveButton_pressed"]

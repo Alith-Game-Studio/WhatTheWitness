@@ -101,6 +101,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FailedCover" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 1025.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="FailedCover"]
+
 [node name="BackButton" type="TextureButton" parent="."]
 margin_left = 72.0
 margin_top = 20.0

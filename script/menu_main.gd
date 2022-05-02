@@ -28,3 +28,8 @@ func _on_CreditsButton_pressed():
 
 func _on_SettingButton_pressed():
 	get_tree().change_scene("res://setting_scene.tscn")
+
+
+func _on_challenge_button_pressed():
+	get_tree().change_scene("res://level_set_selection_scene.tscn")
+	

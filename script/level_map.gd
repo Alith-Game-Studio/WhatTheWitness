@@ -1,24 +1,29 @@
 extends Node2D
 
 const puzzle_dir = "res://puzzles"
-onready var puzzle_placeholders = $Menu/View/PuzzlePlaceHolders
+var puzzle_placeholders
+var line_map
+var light_map
+var gadget_map
+var level_area_limit
+var view
+var light_tile_id
+var and_gadget_tile_id
+var or_gadget_tile_id
 onready var extra_menu = $SideMenu/Extra
 onready var clear_save_button = $SideMenu/Extra/ClearSaveButton
-onready var view = $Menu/View
 onready var drag_start = null
-onready var level_area_limit = $Menu/View/LevelAreaLimit
-onready var line_map = $Menu/View/Lines
-onready var light_map = $Menu/View/Lights
-onready var gadget_map = $Menu/View/Gadgets
-onready var light_tile_id = light_map.tile_set.find_tile_by_name('light')
-onready var and_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('and_gate')
-onready var or_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('or_gate')
 onready var puzzle_counter_text = $SideMenu/PuzzleCounter
 onready var menu_bar_button = $SideMenu/MenuBarButton
+onready var volume_button = $SideMenu/VolumeButton
 onready var loading_cover = $LoadingCover
+onready var challenge_timer = $ChallengeTimer
+onready var music_player = $MusicPlayer
+onready var back_button = $FailedCover/BackButton
 var window_size = Vector2(1024, 600)
 var view_origin = -window_size / 2
 var view_scale = 1.0
+var volume = true
 
 const UNLOCK_ALL_PUZZLES = false
 const LOADING_BATCH_SIZE = 10
@@ -40,11 +45,25 @@ func list_files(path):
 		files[file] = true
 	
 func _ready():
+	# loading set
+	var set_prefab = load('res://sets/%s' % Gameplay.level_set).instance()
+	$Menu.add_child(set_prefab)
+	puzzle_placeholders = $Menu/View/PuzzlePlaceHolders
+	view = $Menu/View
+	level_area_limit = $Menu/View/LevelAreaLimit
+	line_map = $Menu/View/Lines
+	light_map = $Menu/View/Lights
+	gadget_map = $Menu/View/Gadgets
+	light_tile_id = light_map.tile_set.find_tile_by_name('light')
+	and_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('and_gate')
+	or_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('or_gate')
+	
+	# preprocessing
+	volume_button.visible = Gameplay.challenge_mode
 	loading_cover.visible = true
 	drag_start = null
 	# puzzle_placeholders.hide()
 	SaveData.load_all()
-	var puzzle_files = list_files(puzzle_dir)
 	var files = list_files(puzzle_dir)
 	var viewports = []
 	var placeholders = puzzle_placeholders.get_children()
@@ -78,11 +97,11 @@ func _ready():
 	var total_placeholder_count = 0
 	for placeholder in placeholders:
 		var puzzle_file = placeholder.text + '.wit'
-		if (!placeholder.text.begins_with('$') and puzzle_file in files):
+		if (!placeholder.text.begins_with('$') and (puzzle_file in files or '[?]' in puzzle_file)):
 			total_placeholder_count += 1
 	for placeholder in placeholders:
 		var puzzle_file = placeholder.text + '.wit'
-		if (!placeholder.text.begins_with('$') and puzzle_file in files):
+		if (!placeholder.text.begins_with('$') and (puzzle_file in files or '[?]' in puzzle_file)):
 			var target = MenuData.puzzle_preview_prefab.instance()
 			MenuData.puzzle_preview_panels[puzzle_file] = target
 			view.add_child(target)
@@ -102,7 +121,9 @@ func _ready():
 			target.points = MenuData.puzzle_points[puzzle_file]
 			target.show_puzzle(puzzle_file, get_light_state(cell_pos))
 			placeholder.get_parent().remove_child(placeholder)
-			if (processed_placeholder_count % LOADING_BATCH_SIZE == 0):
+			if (Gameplay.challenge_mode):
+				Graph.load_from_xml(Gameplay.PUZZLE_FOLDER + puzzle_file, true)
+			if (processed_placeholder_count % LOADING_BATCH_SIZE == 0 or Gameplay.challenge_mode):
 				puzzle_counter_text.bbcode_text = '[right]loading puzzle: %d / %d[/right] ' % [processed_placeholder_count, total_placeholder_count]
 				yield(VisualServer, "frame_post_draw")
 			processed_placeholder_count += 1
@@ -116,21 +137,25 @@ func get_light_state(pos):
 		return false
 
 func update_counter():
-	var puzzle_count = 0
-	var solved_count = 0
-	var score = 0
-	var total_score = 0
-	for puzzle_file in MenuData.puzzle_grid_pos:
-		var pos = MenuData.puzzle_grid_pos[puzzle_file]
-		if(SaveData.puzzle_solved(puzzle_file)):
-			solved_count += 1
-			score += MenuData.puzzle_points[puzzle_file]
-		puzzle_count += 1
-		total_score += MenuData.puzzle_points[puzzle_file]
-	if (total_score > 0):
-		puzzle_counter_text.bbcode_text = '[right]%d / %d (%d / %d pts)[/right] ' % [solved_count, puzzle_count, score, total_score]
+	if (Gameplay.challenge_mode):
+		puzzle_counter_text.bbcode_text = '[right]%s[/right]' % Gameplay.get_current_challenge_time_formatted()
 	else:
-		puzzle_counter_text.bbcode_text = '[right]%d / %d[/right] ' % [solved_count, puzzle_count]
+		var puzzle_count = 0
+		var solved_count = 0
+		var score = 0
+		var total_score = 0
+		for puzzle_file in MenuData.puzzle_grid_pos:
+			var pos = MenuData.puzzle_grid_pos[puzzle_file]
+			if(SaveData.puzzle_solved(puzzle_file)):
+				solved_count += 1
+				score += MenuData.puzzle_points[puzzle_file]
+			puzzle_count += 1
+			total_score += MenuData.puzzle_points[puzzle_file]
+		if (total_score > 0):
+			puzzle_counter_text.bbcode_text = '[right]%d / %d (%d / %d pts)[/right] ' % [solved_count, puzzle_count, score, total_score]
+		else:
+			puzzle_counter_text.bbcode_text = '[right]%d / %d[/right] ' % [solved_count, puzzle_count]
+
 func get_gadget_direction(tile_map: TileMap, pos: Vector2):
 	var x = int(round(pos.x))
 	var y = int(round(pos.y))
@@ -250,3 +275,52 @@ func _on_menu_bar_button_mouse_exited():
 
 func _on_menu_bar_button_pressed():
 	get_tree().change_scene("res://menu_main.tscn")
+
+
+func _on_ChallengeTimer_timeout():
+	update_counter()
+
+
+func _on_music_player_finished():
+	if (Gameplay.challenge_music_track > 0):
+		Gameplay.challenge_music_track -= 1
+		music_player.stream = load('res://audio/music/%s' % Gameplay.challenge_music_list[Gameplay.challenge_music_track])
+		music_player.play()
+	else: # failed
+		fail_challenge()
+	
+func start_challenge():
+	
+	Gameplay.start_challenge()
+	challenge_timer.start()
+	Gameplay.challenge_music_track = Gameplay.total_challenge_music_tracks
+	music_player.stream = preload('res://audio/music/RecorderStart.mp3')
+	music_player.play()
+
+func fail_challenge():
+	challenge_timer.stop() 
+	if ($PuzzleUI.visible):
+		$PuzzleUI.disable_drawing()
+	$EndCover.show()
+
+func _on_volume_button_pressed():
+	volume = !volume
+	if (volume):
+		music_player.volume_db = 0
+		volume_button.texture_normal = preload("res://img/volume.png")
+	else:
+		music_player.volume_db = -80
+		volume_button.texture_normal = preload("res://img/volume_off.png")
+
+
+func _on_volume_button_mouse_entered():
+	volume_button.modulate = Color(volume_button.modulate.r, volume_button.modulate.g, volume_button.modulate.b, 0.5)
+
+
+func _on_volume_button_mouse_exited():
+	volume_button.modulate = Color(volume_button.modulate.r, volume_button.modulate.g, volume_button.modulate.b, 1.0)
+
+
+
+func _on_restart_button_pressed():
+	get_tree().change_scene("res://level_set_selection_scene.tscn")

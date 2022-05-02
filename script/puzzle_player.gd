@@ -10,6 +10,7 @@ var menu_bar_button = null
 var puzzle_counter_text = null
 onready var back_button = $BackButton
 onready var viewport = $MarginContainer/PuzzleRegion/PuzzleForeground/Viewport
+onready var failed_cover = $FailedCover
 var loaded = false
 var solver = null
 func _ready():
@@ -17,6 +18,7 @@ func _ready():
 		load_puzzle(Gameplay.puzzle_path)
 	
 func load_puzzle(puzzle_path):
+	failed_cover.hide()
 	if (!Gameplay.playing_custom_puzzle):
 		level_map = $"/root/LevelMap"
 		menu_bar_button = $"/root/LevelMap/SideMenu/MenuBarButton"
@@ -91,6 +93,8 @@ func _input(event):
 							SaveData.update(Gameplay.puzzle_name, Gameplay.solution.save_to_string(Gameplay.puzzle))
 							if (Gameplay.puzzle_name in MenuData.puzzle_preview_panels):
 								MenuData.puzzle_preview_panels[Gameplay.puzzle_name].update_puzzle()
+							if (Gameplay.puzzle_name.begins_with('[C]music-box') and Gameplay.challenge_mode):
+								level_map.start_challenge()
 							level_map.update_counter()
 						right_arrow_button.show()
 						left_arrow_button.show()
@@ -151,6 +155,16 @@ func _input(event):
 				
 							
 						
+func disable_drawing():
+	is_drawing_solution = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	loaded = false
+	failed_cover.show()
+	var tween = $FailedCover/Tween
+	tween.interpolate_property(failed_cover, "modulate",
+			Color(1, 1, 1, 0), Color(1, 1, 1, 1), 1.0,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
 
 func back_to_menu():
 	if (!Gameplay.playing_custom_puzzle):
@@ -180,9 +194,6 @@ func switch_puzzle(delta_pos):
 	else:
 		back_to_menu()
 
-func _on_back_button_pressed():
-	back_to_menu()
-
 func _on_right_arrow_button_mouse_entered():
 	right_arrow_button.modulate = Color(right_arrow_button.modulate.r, right_arrow_button.modulate.g, right_arrow_button.modulate.b, 0.5)
 
@@ -209,6 +220,9 @@ func hide_left_arrow_button():
 	_on_left_arrow_button_mouse_exited()
 	left_arrow_button.hide()
 	
+func _on_back_button_pressed():
+	back_to_menu()
+
 func _on_back_button_mouse_entered():
 	back_button.modulate = Color(back_button.modulate.r, back_button.modulate.g, back_button.modulate.b, 0.5)
 

@@ -13,7 +13,8 @@ func update(puzzle_name: String, solution_string: String):
 		var time = OS.get_datetime()
 		saved_solutions['$' + puzzle_name] = '%04d%02d%02d.%02d:%02d:%02d' % [
 			time.year, time.month, time.day, time.hour, time.minute, time.second]
-	save_all()
+	if (!puzzle_name.begins_with('[C]')):
+		save_all()
 
 func save_all():
 	var save_game = File.new()
@@ -58,6 +59,9 @@ func load_all():
 			save_game.open(old_save_path + '.bak', File.WRITE)
 			save_game.store_string(line)
 			save_game.close()
+	for key in saved_solutions:
+		if (key.begins_with('[C]')): # challenge puzzles are not saved
+			saved_solutions.erase(key)
 
 func clear():
 	var save_game = File.new()

@@ -17,6 +17,8 @@ const FULL_AUTHORS = {
 func get_full_credit(puzzle_name: String):
 	if (puzzle_name.ends_with('.wit')):
 		puzzle_name = puzzle_name.substr(0, len(puzzle_name) - 4)
+	if (puzzle_name.begins_with('[C]')):
+		return 'Challenge puzzle: ' + puzzle_name.substr(3)
 	if (!('-' in puzzle_name)):
 		return puzzle_name
 	else:

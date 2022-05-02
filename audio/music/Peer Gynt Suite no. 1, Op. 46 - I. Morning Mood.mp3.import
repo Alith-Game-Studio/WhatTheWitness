@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Peer Gynt Suite no. 1, Op. 46 - I. Morning Mood.mp3-df95ae8142f5e99b5e4aaead268dac30.mp3str"
+
+[deps]
+
+source_file="res://audio/music/Peer Gynt Suite no. 1, Op. 46 - I. Morning Mood.mp3"
+dest_files=[ "res://.import/Peer Gynt Suite no. 1, Op. 46 - I. Morning Mood.mp3-df95ae8142f5e99b5e4aaead268dac30.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

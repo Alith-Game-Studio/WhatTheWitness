@@ -1,9 +1,14 @@
 extends Node
 
 func parse_xml_file(file):
-	var result = {}
 	var parser = XMLParser.new()
-	var error = parser.open(file)
+	var error
+	if ('[?]' in file):
+		var generated_str = Generator.GeneratePanel(file, Gameplay.challenge_seed)
+		error = parser.open_buffer(generated_str.to_utf8())
+	else:
+		error = parser.open(file)
+	var result = {}
 	if (error):
 		print('Cannot open file %s' % file)
 		return result

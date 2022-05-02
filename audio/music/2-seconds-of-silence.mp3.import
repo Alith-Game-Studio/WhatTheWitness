@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/2-seconds-of-silence.mp3-83624fd785a1b364d0d1ce94f312030d.mp3str"
+
+[deps]
+
+source_file="res://audio/music/2-seconds-of-silence.mp3"
+dest_files=[ "res://.import/2-seconds-of-silence.mp3-83624fd785a1b364d0d1ce94f312030d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

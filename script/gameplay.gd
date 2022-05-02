@@ -14,6 +14,31 @@ var validation_elasped_time: float
 var background_texture = null
 var loaded_from_command_line: bool
 var mouse_speed = 1.0
+var challenge_mode: bool
+var challenge_start_time: int
+var challenge_seed: int = -1
+var level_set: String
+
+var challenge_music_list = [
+	'Peer Gynt Suite no. 1, Op. 46 - IV. In the Hall Of The Mountain King.mp3',
+	'Peer Gynt Suite no. 1, Op. 46 - III. Anitra\'s Dance.mp3',
+	'Peer Gynt Suite no. 1, Op. 46 - II. Aase\'s Death.mp3',
+	'Peer Gynt Suite no. 1, Op. 46 - I. Morning Mood.mp3',
+]
+var challenge_music_track = -1
+var total_challenge_music_tracks = 2
+
+func start_challenge():
+	challenge_start_time = OS.get_ticks_msec()
+	
+func get_current_challenge_time():
+	if (challenge_start_time <= 0):
+		return challenge_start_time
+	return OS.get_ticks_msec() - challenge_start_time
+	
+func get_current_challenge_time_formatted():
+	var ms = get_current_challenge_time()
+	return '%02d:%02d' % [ms / 60000, (ms / 1000) % 60]
 
 func get_absolute_puzzle_path():
 	return PUZZLE_FOLDER + puzzle_name

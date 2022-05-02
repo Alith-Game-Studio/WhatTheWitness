@@ -34,6 +34,7 @@ Credits="*res://script/credits.gd"
 Solver="*res://script/solver.gd"
 LaserJudger="*res://script/judgers/laser_judger.gd"
 CSPSolver="*res://script/judgers/CSPSolver.cs"
+Generator="*res://script/Generator.cs"
 
 [debug]
 
