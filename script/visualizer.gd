@@ -136,16 +136,8 @@ class PuzzleCanvas:
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		for i in range(len(puzzle.decorators)):
 			puzzle.decorators[i].draw_additive_layer(self, i, -1, puzzle, solution)
-
-	func draw_solution(target, solution, validator, time):
-		drawing_target = target
-		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
-		for i in range(len(puzzle.decorators)):
-			puzzle.decorators[i].draw_below_solution(self, i, -1, puzzle, solution)
-		for vertex in puzzle.vertices:
-			if (vertex.decorator != null):
-				drawing_target.draw_set_transform(view_origin + vertex.pos * view_scale, vertex.decorator.angle, Vector2(1.0, 1.0))
-				vertex.decorator.draw_below_solution(self, vertex, 0, puzzle, solution)
+	
+	func draw_solution_line(target, solution, color_override, thickness_multiplier=1.0):
 		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
 		if (solution != null and solution.started):
 			var state = solution.state_stack[-1]
@@ -158,10 +150,8 @@ class PuzzleCanvas:
 					continue
 				var vertices_way = state.vertices[way]
 				var color = puzzle.solution_colors[way]
-				if (validator != null and validator.elimination_happended and time < 1.0):
-					color = Color.black
-				if (solution.validity == -1):
-					color = Color.black
+				if (color_override != null):
+					color = color_override
 				elif (solution.validity == 0): # drawing illumination
 					color = Color(1 - (1 - color.r) * 0.6, 1 - (1 - color.g) * 0.6, 1 - (1 - color.b) * 0.6, color.a)
 				var delta_shift = Vector2.ZERO
@@ -169,7 +159,7 @@ class PuzzleCanvas:
 				if (len(state.solution_stage) > way and state.solution_stage[way] == Solution.SOLUTION_STAGE_SNAKE):
 					if (len(vertices_way) > 1 and !puzzle.vertices[vertices_way[-1]].is_puzzle_end):
 						last_pos = last_pos * (1 - solution.progress) + puzzle.vertices[vertices_way[1]].pos * solution.progress
-				add_circle(last_pos, puzzle.start_size, color)
+				add_circle(last_pos, puzzle.start_size * thickness_multiplier, color)
 				for i in range(1, len(vertices_way)):
 					if(vertices_way[i - 1] >= len(puzzle.vertices) or vertices_way[i] >= len(puzzle.vertices)):
 						continue
@@ -185,10 +175,27 @@ class PuzzleCanvas:
 						percentage = 1.0
 					var pos = segment[0] * (1.0 - percentage) + segment[1] * percentage
 					if (last_pos != null):
-						add_line(last_pos, pos, puzzle.line_width, color)
-						add_circle(pos, puzzle.line_width / 2.0, color)
+						add_line(last_pos, pos, puzzle.line_width * thickness_multiplier, color)
+						add_circle(pos, puzzle.line_width / 2.0 * thickness_multiplier, color)
 					last_pos = pos
-
+	
+	func draw_solution(target, solution, validator, time):
+		drawing_target = target
+		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
+		for i in range(len(puzzle.decorators)):
+			puzzle.decorators[i].draw_below_solution(self, i, -1, puzzle, solution)
+		for vertex in puzzle.vertices:
+			if (vertex.decorator != null):
+				drawing_target.draw_set_transform(view_origin + vertex.pos * view_scale, vertex.decorator.angle, Vector2(1.0, 1.0))
+				vertex.decorator.draw_below_solution(self, vertex, 0, puzzle, solution)
+		drawing_target.draw_set_transform(view_origin, 0.0, Vector2(1.0, 1.0))
+		
+		var color_override = null
+		if (validator != null and validator.elimination_happended and time < 1.0):
+			color_override = Color.black
+		if (solution != null and solution.validity == -1):
+			color_override = Color.black
+		draw_solution_line(target, solution, color_override)
 		for vertex in puzzle.vertices:
 			if (vertex.decorator != null):
 				drawing_target.draw_set_transform(view_origin + vertex.pos * view_scale, vertex.decorator.angle, Vector2(1.0, 1.0))

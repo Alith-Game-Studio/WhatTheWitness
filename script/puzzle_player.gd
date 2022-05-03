@@ -7,6 +7,7 @@ var level_map = null
 onready var left_arrow_button = $LeftArrowButton
 onready var right_arrow_button = $RightArrowButton
 var menu_bar_button = null
+var volume_button = null
 var puzzle_counter_text = null
 onready var back_button = $BackButton
 onready var viewport = $MarginContainer/PuzzleRegion/PuzzleForeground/Viewport
@@ -22,6 +23,7 @@ func load_puzzle(puzzle_path):
 	if (!Gameplay.playing_custom_puzzle):
 		level_map = $"/root/LevelMap"
 		menu_bar_button = $"/root/LevelMap/SideMenu/MenuBarButton"
+		volume_button = $"/root/LevelMap/SideMenu/VolumeButton"
 		puzzle_counter_text = $"/root/LevelMap/SideMenu/PuzzleCounter"
 	Gameplay.background_texture = null
 	Gameplay.puzzle_path = puzzle_path
@@ -57,6 +59,7 @@ func load_puzzle(puzzle_path):
 		hide_right_arrow_button()
 	else:
 		menu_bar_button.modulate = Color (front_color.r, front_color.g, front_color.b, menu_bar_button.modulate.a)
+		volume_button.modulate = Color (front_color.r, front_color.g, front_color.b, menu_bar_button.modulate.a)
 		puzzle_counter_text.modulate = front_color
 		# test if there are previous puzzles
 		var puzzle_grid_pos = MenuData.puzzle_grid_pos[Gameplay.puzzle_name]
@@ -176,6 +179,7 @@ func back_to_menu():
 		hide()
 		MenuData.can_drag_map = true
 		menu_bar_button.modulate = Color.white
+		volume_button.modulate = Color.white
 		puzzle_counter_text.modulate = Color.white
 	else:
 		get_tree().change_scene("res://custom_level_scene.tscn")

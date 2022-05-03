@@ -7,15 +7,15 @@
 [ext_resource path="res://font/wqy-MicroHei.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://img/volume.png" type="Texture" id=7]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 4 )
 fallback/0 = ExtResource( 6 )
 
@@ -38,7 +38,7 @@ margin_left = 859.538
 margin_top = 544.694
 margin_right = 991.538
 margin_bottom = 581.694
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Restart"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -62,7 +62,7 @@ margin_left = 425.333
 margin_top = 25.6667
 margin_right = 1003.33
 margin_bottom = 71.6667
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[right]0 / 0[/right] "
 text = "0 / 0 "
@@ -76,7 +76,24 @@ margin_top = 549.0
 margin_right = 1000.0
 margin_bottom = 578.0
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[right]  [/right]
+"
+text = "  
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PuzzleSetLabel" type="RichTextLabel" parent="SideMenu"]
+margin_left = 15.0
+margin_top = 549.0
+margin_right = 792.0
+margin_bottom = 578.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[right]  [/right]
 "
@@ -99,10 +116,10 @@ __meta__ = {
 }
 
 [node name="VolumeButton" type="TextureButton" parent="SideMenu"]
-margin_left = 21.9755
-margin_top = 535.821
-margin_right = 61.9755
-margin_bottom = 575.821
+margin_left = 951.976
+margin_top = 26.4876
+margin_right = 991.976
+margin_bottom = 66.4876
 texture_normal = ExtResource( 7 )
 expand = true
 __meta__ = {
@@ -135,7 +152,7 @@ __meta__ = {
 [node name="ChallengeTimer" type="Timer" parent="."]
 wait_time = 0.5
 
-[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="pressed" from="EndCover/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="mouse_entered" from="SideMenu/MenuBarButton" to="." method="_on_menu_bar_button_mouse_entered"]

@@ -10,6 +10,7 @@ var view
 var light_tile_id
 var and_gadget_tile_id
 var or_gadget_tile_id
+var emitter_gadget_tile_id
 onready var extra_menu = $SideMenu/Extra
 onready var clear_save_button = $SideMenu/Extra/ClearSaveButton
 onready var drag_start = null
@@ -20,6 +21,7 @@ onready var loading_cover = $LoadingCover
 onready var challenge_timer = $ChallengeTimer
 onready var music_player = $MusicPlayer
 onready var back_button = $FailedCover/BackButton
+onready var puzzle_set_label = $SideMenu/PuzzleSetLabel
 var window_size = Vector2(1024, 600)
 var view_origin = -window_size / 2
 var view_scale = 1.0
@@ -57,9 +59,13 @@ func _ready():
 	light_tile_id = light_map.tile_set.find_tile_by_name('light')
 	and_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('and_gate')
 	or_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('or_gate')
+	emitter_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('emitter')
+	if (Gameplay.challenge_mode):
+		puzzle_set_label.text = Gameplay.challenge_set_name
+		Gameplay.challenge_start_time = 0
 	
 	# preprocessing
-	volume_button.visible = Gameplay.challenge_mode
+	volume_button.visible = false
 	loading_cover.visible = true
 	drag_start = null
 	# puzzle_placeholders.hide()
@@ -70,6 +76,10 @@ func _ready():
 	MenuData.puzzle_grid_pos.clear()
 	MenuData.grid_pos_puzzle.clear()
 	var pos_points = {}
+	var masks_map = {}
+	var masks = $Menu/View/Masks
+	for mask in masks.get_children():
+		masks_map[mask.name] = mask
 	for placeholder in placeholders:
 		if (placeholder.text.begins_with('$')):
 			var cell_pos = placeholder.get_position() / 96
@@ -119,6 +129,9 @@ func _ready():
 			if (int_cell_pos in pos_points):
 				MenuData.puzzle_points[puzzle_file] = pos_points[int_cell_pos]
 			target.points = MenuData.puzzle_points[puzzle_file]
+			for mask_name in masks_map:
+				if (mask_name in puzzle_file):
+					target.linked_solution_texture = masks_map[mask_name]
 			target.show_puzzle(puzzle_file, get_light_state(cell_pos))
 			placeholder.get_parent().remove_child(placeholder)
 			if (Gameplay.challenge_mode):
@@ -127,7 +140,10 @@ func _ready():
 				puzzle_counter_text.bbcode_text = '[right]loading puzzle: %d / %d[/right] ' % [processed_placeholder_count, total_placeholder_count]
 				yield(VisualServer, "frame_post_draw")
 			processed_placeholder_count += 1
+	view.move_child(masks, view.get_child_count())
 	update_light(true)
+	if (Gameplay.challenge_mode):
+		volume_button.visible = true
 	Gameplay.update_mouse_speed()
 	
 func get_light_state(pos):
@@ -138,7 +154,7 @@ func get_light_state(pos):
 
 func update_counter():
 	if (Gameplay.challenge_mode):
-		puzzle_counter_text.bbcode_text = '[right]%s[/right]' % Gameplay.get_current_challenge_time_formatted()
+		puzzle_counter_text.bbcode_text = '[right]%s       [/right]' % Gameplay.get_current_challenge_time_formatted()
 	else:
 		var puzzle_count = 0
 		var solved_count = 0
@@ -192,6 +208,9 @@ func update_light(first_time=false):
 						non_activated_neighbor += 1
 				if (non_activated_neighbor == 1):
 					deltas.append(delta + get_gadget_direction(gadget_map, new_pos))
+			if (gadget_map.get_cellv(new_pos) == emitter_gadget_tile_id):
+				if (Gameplay.challenge_mode):
+					win_challenge()
 		for delta in deltas:
 			var new_pos = pos + delta
 			if (get_light_state(new_pos)):
@@ -282,6 +301,8 @@ func _on_ChallengeTimer_timeout():
 
 
 func _on_music_player_finished():
+	if (challenge_timer.is_stopped()):
+		return
 	if (Gameplay.challenge_music_track > 0):
 		Gameplay.challenge_music_track -= 1
 		music_player.stream = load('res://audio/music/%s' % Gameplay.challenge_music_list[Gameplay.challenge_music_track])
@@ -290,18 +311,25 @@ func _on_music_player_finished():
 		fail_challenge()
 	
 func start_challenge():
-	
-	Gameplay.start_challenge()
-	challenge_timer.start()
-	Gameplay.challenge_music_track = Gameplay.total_challenge_music_tracks
-	music_player.stream = preload('res://audio/music/RecorderStart.mp3')
-	music_player.play()
+	if (challenge_timer.is_stopped()):
+		Gameplay.start_challenge()
+		challenge_timer.start()
+		Gameplay.challenge_music_track = Gameplay.total_challenge_music_tracks
+		music_player.stream = preload('res://audio/music/RecorderStart.mp3')
+		music_player.play()
 
 func fail_challenge():
 	challenge_timer.stop() 
 	if ($PuzzleUI.visible):
 		$PuzzleUI.disable_drawing()
+	puzzle_set_label.text = Gameplay.challenge_set_name + ". Better luck next time."
 	$EndCover.show()
+	
+func win_challenge():
+	puzzle_set_label.text = Gameplay.challenge_set_name + ". You win!"
+	challenge_timer.stop() 
+	music_player.stop()
+	
 
 func _on_volume_button_pressed():
 	volume = !volume

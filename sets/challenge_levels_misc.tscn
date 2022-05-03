@@ -1,0 +1,199 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://level_lines.tres" type="TileSet" id=1]
+
+[node name="View" type="Node2D"]
+
+[node name="LevelAreaLimit" type="ReferenceRect" parent="."]
+margin_right = 3936.0
+margin_bottom = 2016.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lines" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 196609, 131077, 2, 8, 131078, 2, 8, 131079, 2, 8, 131080, 2, 65539, 196612, 2, 65538, 196616, 2, 65538, 262148, 2, 65543, 262149, 2, 8, 262150, 2, 8, 262151, 2, 8, 262152, 2, 131079, 262153, 2, 8, 262154, 2, 8, 262155, 2, 65539, 327684, 2, 65538, 327688, 2, 65538, 327691, 2, 65538, 393220, 2, 65543, 393221, 2, 8, 393222, 2, 8, 393223, 2, 8, 393224, 2, 3, 393227, 2, 65543, 393228, 2, 8, 393229, 2, 8, 393230, 2, 2, 458756, 2, 65538, 458763, 2, 65538, 524292, 2, 7, 524293, 2, 196614, 524294, 2, 8, 524295, 2, 65539, 524299, 2, 65538, 589829, 2, 65538, 589831, 2, 65538, 589835, 2, 65538, 655365, 2, 65544, 655366, 2, 8, 655367, 2, 131073, 655368, 2, 8, 655369, 2, 8, 655370, 2, 8, 655371, 2, 3, 720901, 2, 65538, 720903, 2, 65538, 786437, 2, 6, 786438, 2, 8, 786439, 2, 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Lights" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131074, 3, 0 )
+
+[node name="Gadgets" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 262152, 4, 0, 393227, 4, 0, 393230, 6, 0, 655367, 5, 0 )
+
+[node name="PuzzlePlaceHolders" type="Node2D" parent="."]
+
+[node name="TextEdit2" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 192.0
+margin_top = 192.0
+margin_right = 288.0
+margin_bottom = 288.0
+text = "[C]music-box"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit139" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 480.0
+margin_top = 192.0
+margin_right = 576.0
+margin_bottom = 288.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-1-1"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit141" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 480.0
+margin_top = 384.0
+margin_right = 576.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-2-1"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit145" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 480.0
+margin_top = 576.0
+margin_right = 576.0
+margin_bottom = 672.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-3-1"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit148" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 768.0
+margin_right = 672.0
+margin_bottom = 864.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-select1-1"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit149" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 960.0
+margin_right = 672.0
+margin_bottom = 1056.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-select1-2"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit150" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 1152.0
+margin_right = 672.0
+margin_bottom = 1248.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-select1-3"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit146" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 576.0
+margin_right = 672.0
+margin_bottom = 672.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-3-2"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit147" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 672.0
+margin_top = 576.0
+margin_right = 768.0
+margin_bottom = 672.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-3-3"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit142" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 384.0
+margin_right = 672.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-2-2"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit144" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 672.0
+margin_top = 384.0
+margin_right = 768.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-2-3"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit140" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 192.0
+margin_right = 672.0
+margin_bottom = 288.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-1-2"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit143" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 672.0
+margin_top = 192.0
+margin_right = 768.0
+margin_bottom = 288.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-1-3"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Masks" type="Node2D" parent="."]

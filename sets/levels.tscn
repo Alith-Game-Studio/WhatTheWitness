@@ -4911,3 +4911,5 @@ wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Masks" type="Node2D" parent="."]

@@ -5,11 +5,10 @@ onready var set_buttons = $MarginContainer/VBoxContainer/HBoxContainer/SetButton
 onready var description_box = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DescriptionBox
 onready var menu_bar_button = $MenuBarButton
 const LEVEL_SETS = {
-	'WitCups': ['levels.tscn', """400+ hand-crafted puzzles from Witcups and other fan-made sources. 
-
-Difficulty: easy to very hard."""],
-	'Challenge: Normal': ['challenge_levels.tscn', """TBA
-"""],
+	'Challenge: Normal': ['challenge_levels.tscn', """比原版见证者留声机稍微难一点的挑战关卡。暂时没有反毛方和抗体。
+""", 2],
+	'Challenge: Misc': ['challenge_levels_misc.tscn', """一些还没整理的杂项关卡
+""", 3],
 }
 
 func sample_seed():
@@ -38,7 +37,9 @@ func select_set(set_name: String):
 		Gameplay.challenge_mode = true
 	else:
 		Gameplay.challenge_mode = false
+	Gameplay.challenge_set_name = '%s (#%d)' % [set_name, Gameplay.challenge_seed]
 	Gameplay.level_set = LEVEL_SETS[set_name][0]
+	Gameplay.total_challenge_music_tracks = LEVEL_SETS[set_name][2]
 	
 	get_tree().change_scene("res://level_map.tscn")
 		

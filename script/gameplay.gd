@@ -17,6 +17,7 @@ var mouse_speed = 1.0
 var challenge_mode: bool
 var challenge_start_time: int
 var challenge_seed: int = -1
+var challenge_set_name: String
 var level_set: String
 
 var challenge_music_list = [
