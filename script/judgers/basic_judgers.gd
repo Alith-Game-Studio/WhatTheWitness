@@ -79,7 +79,7 @@ func judge_all(validator: Validation.Validator, require_errors: bool):
 	return ok
 
 func __match_color(solution_color, point_color):
-	if (point_color == Color.black): # black point matches every color
+	if (point_color == Color.black or point_color == Color.transparent): # black point matches every color
 		return true
 	return point_color == solution_color 
 

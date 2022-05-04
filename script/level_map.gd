@@ -61,7 +61,7 @@ func _ready():
 	or_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('or_gate')
 	emitter_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('emitter')
 	if (Gameplay.challenge_mode):
-		puzzle_set_label.text = Gameplay.challenge_set_name
+		puzzle_set_label.text = '%s (#%d)' % [Gameplay.challenge_set_name, Gameplay.challenge_seed]
 		Gameplay.challenge_start_time = 0
 	
 	# preprocessing
@@ -322,11 +322,11 @@ func fail_challenge():
 	challenge_timer.stop() 
 	if ($PuzzleUI.visible):
 		$PuzzleUI.disable_drawing()
-	puzzle_set_label.text = Gameplay.challenge_set_name + ". Better luck next time."
+	puzzle_set_label.text = '%s (#%d)' % [Gameplay.challenge_set_name, Gameplay.challenge_seed] + ". Better luck next time."
 	$EndCover.show()
 	
 func win_challenge():
-	puzzle_set_label.text = Gameplay.challenge_set_name + ". You win!"
+	puzzle_set_label.text = '%s (#%d)' % [Gameplay.challenge_set_name, Gameplay.challenge_seed] + ". You win!"
 	challenge_timer.stop() 
 	music_player.stop()
 	

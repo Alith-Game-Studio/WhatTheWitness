@@ -2,10 +2,19 @@
 <SaveState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Nodes>
     <Node>
-      <Decorator xsi:type="EndDecorator">
-        <Length>0.2</Length>
-        <Angle>90</Angle>
-        <Color>Transparent</Color>
+      <Decorator xsi:type="CombinedDecorator">
+        <First xsi:type="EndDecorator">
+          <Length>0.2</Length>
+          <Angle>90</Angle>
+          <Color>Transparent</Color>
+        </First>
+        <Second xsi:type="PointDecorator">
+          <DeltaX>0</DeltaX>
+          <DeltaY>0</DeltaY>
+          <Angle>0</Angle>
+          <ExtraScale>1</ExtraScale>
+          <Color>Transparent</Color>
+        </Second>
       </Decorator>
       <X>1</X>
       <Y>1</Y>

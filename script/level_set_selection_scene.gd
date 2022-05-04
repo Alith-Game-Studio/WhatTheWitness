@@ -37,7 +37,7 @@ func select_set(set_name: String):
 		Gameplay.challenge_mode = true
 	else:
 		Gameplay.challenge_mode = false
-	Gameplay.challenge_set_name = '%s (#%d)' % [set_name, Gameplay.challenge_seed]
+	Gameplay.challenge_set_name = set_name
 	Gameplay.level_set = LEVEL_SETS[set_name][0]
 	Gameplay.total_challenge_music_tracks = LEVEL_SETS[set_name][2]
 	

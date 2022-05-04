@@ -4,7 +4,7 @@ func parse_xml_file(file):
 	var parser = XMLParser.new()
 	var error
 	if ('[?]' in file):
-		var generated_str = Generator.GeneratePanel(file, Gameplay.challenge_seed)
+		var generated_str = Generator.GeneratePanel(Gameplay.challenge_set_name, file, Gameplay.challenge_seed)
 		error = parser.open_buffer(generated_str.to_utf8())
 	else:
 		error = parser.open(file)
