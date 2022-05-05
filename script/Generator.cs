@@ -27,6 +27,10 @@ public class Generator : Node
             setGenerator = new SetGeneratorNormal();
         else if (setName == "Challenge: Misc") 
             setGenerator = new SetGeneratorMisc();
+        else if (setName == "Challenge: Eliminators")
+            setGenerator = new SetGeneratorEliminators();
+        else if (setName == "Challenge: Rings")
+            setGenerator = new SetGeneratorRings();
         else 
             throw new NotImplementedException();
         setGenerator.Init(globalRng);

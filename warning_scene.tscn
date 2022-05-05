@@ -1,35 +1,29 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://script/warning_scene.gd" type="Script" id=2]
 [ext_resource path="res://font/LibreBaskerville-Italic.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://font/LibreBaskerville-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://font/wqy-MicroHei.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://theme/main_theme.tres" type="Theme" id=6]
 
 [sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=2]
 size = 20
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 20
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 20
 font_data = ExtResource( 1 )
 fallback/0 = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 18
 font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=6]
-size = 24
-font_data = ExtResource( 1 )
+fallback/0 = ExtResource( 5 )
 
 [node name="SpoilerWarning" type="Node2D"]
 script = ExtResource( 2 )
@@ -54,23 +48,26 @@ margin_right = 966.0
 margin_bottom = 571.0
 custom_constants/separation = 21
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
 margin_right = 906.0
 margin_bottom = 50.0
+
+[node name="RichTextLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer"]
+margin_left = 315.0
+margin_right = 590.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/normal_font = SubResource( 1 )
-bbcode_enabled = true
-bbcode_text = "[center]Spoiler Warning[/center]"
-text = "Spoiler Warning"
+theme = ExtResource( 6 )
+text = "SPOILER_WARNING"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 margin_top = 71.0
 margin_right = 906.0
 margin_bottom = 373.0
 size_flags_vertical = 3
-custom_fonts/italics_font = SubResource( 2 )
-custom_fonts/bold_font = SubResource( 3 )
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[i]What The Witness?[/i] is a fan game of [url=http://the-witness.net/]The Witness (2016)[/url]. Do not continue if you have not yet played the original game.
 
@@ -87,8 +84,8 @@ Link to the original game: http://the-witness.net/"
 margin_top = 394.0
 margin_right = 906.0
 margin_bottom = 425.0
-custom_fonts/font = SubResource( 5 )
-text = "Do not show this again in the future"
+custom_fonts/font = SubResource( 4 )
+text = "DO_NOT_SHOW_AGAIN"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -97,15 +94,15 @@ __meta__ = {
 margin_top = 446.0
 margin_right = 906.0
 margin_bottom = 483.0
-custom_fonts/font = SubResource( 6 )
-text = "Continue"
+theme = ExtResource( 6 )
+text = "CONTINUE"
 
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 margin_top = 504.0
 margin_right = 906.0
 margin_bottom = 541.0
-custom_fonts/font = SubResource( 6 )
-text = "Exit"
+theme = ExtResource( 6 )
+text = "BACK"
 
 [connection signal="meta_clicked" from="MarginContainer/VBoxContainer/RichTextLabel2" to="." method="_on_RichTextLabel2_meta_clicked"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]

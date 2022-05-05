@@ -1,5 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://theme/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://script/level_map.gd" type="Script" id=2]
 [ext_resource path="res://main.tscn" type="PackedScene" id=3]
 [ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=4]
@@ -7,17 +8,15 @@
 [ext_resource path="res://font/wqy-MicroHei.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://img/volume.png" type="Texture" id=7]
 
-[sub_resource type="DynamicFont" id=1]
-size = 24
-font_data = ExtResource( 4 )
-
 [sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 4 )
+fallback/0 = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 4 )
 fallback/0 = ExtResource( 6 )
+fallback/1 = ExtResource( 6 )
 
 [node name="LevelMap" type="Node2D"]
 script = ExtResource( 2 )
@@ -34,12 +33,25 @@ __meta__ = {
 }
 
 [node name="RestartButton" type="Button" parent="EndCover"]
-margin_left = 859.538
-margin_top = 544.694
-margin_right = 991.538
-margin_bottom = 581.694
-custom_fonts/font = SubResource( 1 )
-text = "Restart"
+margin_left = 832.205
+margin_top = 542.027
+margin_right = 1002.2
+margin_bottom = 579.027
+rect_min_size = Vector2( 170, 0 )
+theme = ExtResource( 1 )
+text = "RESTART"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueButton" type="Button" parent="EndCover"]
+margin_left = 642.667
+margin_top = 542.027
+margin_right = 812.667
+margin_bottom = 579.027
+rect_min_size = Vector2( 170, 0 )
+theme = ExtResource( 1 )
+text = "CONTINUE"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -155,6 +167,7 @@ wait_time = 0.5
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="pressed" from="EndCover/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="EndCover/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="mouse_entered" from="SideMenu/MenuBarButton" to="." method="_on_menu_bar_button_mouse_entered"]
 [connection signal="mouse_exited" from="SideMenu/MenuBarButton" to="." method="_on_menu_bar_button_mouse_exited"]
 [connection signal="pressed" from="SideMenu/MenuBarButton" to="." method="_on_menu_bar_button_pressed"]

@@ -1,17 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://script/level_set_selection_scene.gd" type="Script" id=2]
 [ext_resource path="res://img/menu_bar.png" type="Texture" id=3]
 [ext_resource path="res://font/wqy-MicroHei.ttf" type="DynamicFontData" id=4]
-
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 24
-font_data = ExtResource( 1 )
+[ext_resource path="res://theme/main_theme.tres" type="Theme" id=5]
 
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 1 )
@@ -45,14 +38,17 @@ margin_top = 50.0
 margin_right = 944.0
 margin_bottom = 551.0
 
-[node name="TitleLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
 margin_right = 864.0
 margin_bottom = 60.0
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer"]
+margin_left = 256.0
+margin_right = 607.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 0, 60 )
-custom_fonts/normal_font = SubResource( 1 )
-bbcode_enabled = true
-bbcode_text = "[center]Puzzle Set Selection[/center]"
-text = "Puzzle Set Selection"
+theme = ExtResource( 5 )
+text = "PUZZLE_SET_SELECTION"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 64.0
@@ -69,38 +65,36 @@ custom_constants/separation = 21
 [node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/SetButtons"]
 margin_right = 460.0
 margin_bottom = 37.0
-custom_fonts/font = SubResource( 2 )
+theme = ExtResource( 5 )
 text = "Challenge: Normal"
 
 [node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/SetButtons"]
 margin_top = 58.0
 margin_right = 460.0
 margin_bottom = 95.0
-custom_fonts/font = SubResource( 2 )
+theme = ExtResource( 5 )
 text = "Challenge: Misc"
 
 [node name="Button4" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/SetButtons"]
-visible = false
 margin_top = 116.0
 margin_right = 460.0
 margin_bottom = 153.0
-custom_fonts/font = SubResource( 2 )
-text = "Challenge: Bee Hive"
+theme = ExtResource( 5 )
+text = "Challenge: Eliminators"
 
 [node name="Button5" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/SetButtons"]
-visible = false
-margin_top = 116.0
+margin_top = 174.0
 margin_right = 460.0
-margin_bottom = 153.0
-custom_fonts/font = SubResource( 2 )
-text = "Challenge: Parallel World"
+margin_bottom = 211.0
+theme = ExtResource( 5 )
+text = "Challenge: Rings"
 
 [node name="Button6" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/SetButtons"]
 visible = false
 margin_top = 116.0
 margin_right = 460.0
 margin_bottom = 153.0
-custom_fonts/font = SubResource( 2 )
+theme = ExtResource( 5 )
 text = "Challenge: WitCup 10"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
@@ -130,13 +124,13 @@ margin_right = 400.0
 margin_bottom = 437.0
 
 [node name="SeedButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_right = 71.0
+margin_right = 82.0
 margin_bottom = 37.0
-custom_fonts/font = SubResource( 2 )
-text = "Seed"
+theme = ExtResource( 5 )
+text = "SEED"
 
 [node name="SeedText" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_left = 75.0
+margin_left = 86.0
 margin_right = 400.0
 margin_bottom = 37.0
 size_flags_horizontal = 3

@@ -16,6 +16,9 @@ public abstract class SetGenerator {
         new int[][] {new int[]{0, 1, 2} ,new int[] { 0, 1, 10 } },
         new int[][] { new int[] { 0, 1, 2, 3 }, new int[] { 0, 1, 2, 10 }, new int[] { 0, 1, 2, 11 }, new int[] { 0, 1, 2, 12 },
             new int[]{0, 1, 11, 12 }, new int[]{1, 2, 10, 11 }, new int[]{0, 1, 10, 11 } },
+        new int[][] {new int[] {0, 1, 2, 3, 4}, new int[] {0, 1, 2, 3, 10}, new int[] {0, 1, 2, 3, 13}, new int[] {0, 1, 11, 12, 21},
+        new int[] {1, 2, 10, 11, 21},new int[]{0, 1, 10, 11, 20 }, new int[]{0, 1, 10, 11, 21 }, new int[]{ 0, 1, 2, 12, 13}, new int[]{0, 1, 11, 12, 13 },
+        },
     };
     public void Init(Random globalRng) {
         solvable1 = globalRng.Next(1, 4);

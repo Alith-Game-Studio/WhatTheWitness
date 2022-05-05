@@ -86,6 +86,8 @@ func judge_csp(validator, region: Validation.Region, fill: bool, weak: bool):
 	var clauses = []
 	var n_id = len(validator.region_of_facet)
 	for i in range(n_id):
+		if (validator.region_of_facet[i] is int):
+			return false # should not happen, but some old save may cause bugs
 		var occupy = 1 if fill and validator.region_of_facet[i].index == region.index else 0
 		var init_variables = {}
 		if (weak):

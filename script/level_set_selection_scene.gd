@@ -5,10 +5,15 @@ onready var set_buttons = $MarginContainer/VBoxContainer/HBoxContainer/SetButton
 onready var description_box = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DescriptionBox
 onready var menu_bar_button = $MenuBarButton
 const LEVEL_SETS = {
-	'Challenge: Normal': ['challenge_levels.tscn', """比原版见证者留声机稍微难一点的挑战关卡。暂时没有反毛方和抗体。
+	'Challenge: Normal': ['challenge_levels.tscn', """比原版见证者留声机稍微难一点的挑战关卡。没有反毛方和抗体。
 """, 2],
-	'Challenge: Misc': ['challenge_levels_misc.tscn', """一些还没整理的杂项关卡
+	'Challenge: Misc': ['challenge_levels_misc.tscn', """一些还没整理的杂项关卡，仅测试用。
 """, 3],
+	'Challenge: Eliminators': ['challenge_levels.tscn', """听说你很喜欢玩抗体？
+	
+一组困难的关卡，但有3首歌的时间。	
+""", 3],
+	'Challenge: Rings': ['challenge_levels_misc.tscn', """来自第二届见联会的新机制，圆环和实心圆""", 2],
 }
 
 func sample_seed():

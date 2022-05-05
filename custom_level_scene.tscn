@@ -2,9 +2,7 @@
 
 [ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://script/custom_level_scene.gd" type="Script" id=2]
-
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 1 )
+[ext_resource path="res://theme/main_theme.tres" type="Theme" id=3]
 
 [sub_resource type="DynamicFont" id=2]
 size = 20
@@ -18,8 +16,8 @@ margin_left = 871.156
 margin_top = 540.23
 margin_right = 992.156
 margin_bottom = 583.23
-custom_fonts/font = SubResource( 1 )
-text = "Back"
+theme = ExtResource( 3 )
+text = "BACK"
 __meta__ = {
 "_edit_use_anchors_": false
 }

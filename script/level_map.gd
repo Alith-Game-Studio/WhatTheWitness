@@ -26,8 +26,9 @@ var window_size = Vector2(1024, 600)
 var view_origin = -window_size / 2
 var view_scale = 1.0
 var volume = true
+var challenge_time_out = false
 
-const UNLOCK_ALL_PUZZLES = false
+const UNLOCK_ALL_PUZZLES = true
 const LOADING_BATCH_SIZE = 10
 
 const DIR_X = [-1, 0, 1, 0]
@@ -61,7 +62,7 @@ func _ready():
 	or_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('or_gate')
 	emitter_gadget_tile_id = gadget_map.tile_set.find_tile_by_name('emitter')
 	if (Gameplay.challenge_mode):
-		puzzle_set_label.text = '%s (#%d)' % [Gameplay.challenge_set_name, Gameplay.challenge_seed]
+		puzzle_set_label.text = '%s (#%d)' % [tr(Gameplay.challenge_set_name), Gameplay.challenge_seed]
 		Gameplay.challenge_start_time = 0
 	
 	# preprocessing
@@ -137,7 +138,7 @@ func _ready():
 			if (Gameplay.challenge_mode):
 				Graph.load_from_xml(Gameplay.PUZZLE_FOLDER + puzzle_file, true)
 			if (processed_placeholder_count % LOADING_BATCH_SIZE == 0 or Gameplay.challenge_mode):
-				puzzle_counter_text.bbcode_text = '[right]loading puzzle: %d / %d[/right] ' % [processed_placeholder_count, total_placeholder_count]
+				puzzle_counter_text.bbcode_text = '[right]%s: %d / %d[/right] ' % [ tr('LOADING_PUZZLE'), processed_placeholder_count, total_placeholder_count]
 				yield(VisualServer, "frame_post_draw")
 			processed_placeholder_count += 1
 	view.move_child(masks, view.get_child_count())
@@ -154,7 +155,7 @@ func get_light_state(pos):
 
 func update_counter():
 	if (Gameplay.challenge_mode):
-		puzzle_counter_text.bbcode_text = '[right]%s       [/right]' % Gameplay.get_current_challenge_time_formatted()
+		puzzle_counter_text.bbcode_text = '[right]%s%s       [/right]' % [Gameplay.get_current_challenge_time_formatted(), ' (' + tr('TIME_OUT') + ')' if challenge_time_out else '']
 	else:
 		var puzzle_count = 0
 		var solved_count = 0
@@ -229,7 +230,7 @@ func update_light(first_time=false):
 	for puzzle_file in puzzles_to_unlock:
 		MenuData.puzzle_preview_panels[puzzle_file].update_puzzle(true)
 		if (first_time and processed_rendering_count % LOADING_BATCH_SIZE == 0):
-			puzzle_counter_text.bbcode_text = '[right]rendering puzzle: %d / %d[/right] ' % [processed_rendering_count, len(puzzles_to_unlock)]
+			puzzle_counter_text.bbcode_text = '[right]%s: %d / %d[/right] ' % [tr('RENDERING_PUZZLE'), processed_rendering_count, len(puzzles_to_unlock)]
 			yield(VisualServer, "frame_post_draw")
 		processed_rendering_count += 1
 	if (first_time):
@@ -322,11 +323,11 @@ func fail_challenge():
 	challenge_timer.stop() 
 	if ($PuzzleUI.visible):
 		$PuzzleUI.disable_drawing()
-	puzzle_set_label.text = '%s (#%d)' % [Gameplay.challenge_set_name, Gameplay.challenge_seed] + ". Better luck next time."
+	puzzle_set_label.text += ". " + tr('TIME_OUT')
 	$EndCover.show()
 	
 func win_challenge():
-	puzzle_set_label.text = '%s (#%d)' % [Gameplay.challenge_set_name, Gameplay.challenge_seed] + ". You win!"
+	puzzle_set_label.text += ". " + tr('YOU_WIN')
 	challenge_timer.stop() 
 	music_player.stop()
 	
@@ -352,3 +353,10 @@ func _on_volume_button_mouse_exited():
 
 func _on_restart_button_pressed():
 	get_tree().change_scene("res://level_set_selection_scene.tscn")
+
+
+func _on_continue_button_pressed():
+	challenge_timer.start()
+	challenge_time_out = true
+	$EndCover.hide()
+	
