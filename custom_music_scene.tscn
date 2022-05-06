@@ -1,0 +1,159 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://script/custom_music_scene.gd" type="Script" id=1]
+[ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://theme/main_theme.tres" type="Theme" id=3]
+[ext_resource path="res://font/wqy-MicroHei.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+fallback/0 = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+fallback/0 = ExtResource( 4 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
+
+[node name="CustomMusic" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.25989
+margin_right = 1025.15
+margin_bottom = 601.0
+custom_constants/margin_right = 60
+custom_constants/margin_top = 30
+custom_constants/margin_left = 60
+custom_constants/margin_bottom = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 60.0
+margin_top = 30.0
+margin_right = 966.0
+margin_bottom = 571.0
+custom_constants/separation = 21
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 906.0
+margin_bottom = 31.0
+
+[node name="RichTextLabel3" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer"]
+margin_left = 337.0
+margin_right = 568.0
+margin_bottom = 31.0
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+text = "CUSTOM_MUSIC"
+
+[node name="RichTextLabel4" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 906.0
+margin_bottom = 83.0
+size_flags_vertical = 1
+theme = ExtResource( 3 )
+text = "CUSTOM_MUSIC_HINTS"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 906.0
+margin_bottom = 304.0
+rect_min_size = Vector2( 0, 200 )
+custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 325.0
+margin_right = 906.0
+margin_bottom = 362.0
+
+[node name="AddButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 223.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+text = "+"
+
+[node name="RemoveButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 227.0
+margin_right = 451.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+text = "-"
+
+[node name="MoveUpButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 455.0
+margin_right = 678.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+text = "UP"
+
+[node name="MoveDownButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 682.0
+margin_right = 906.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+text = "DOWN"
+
+[node name="TotalTimeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 383.0
+margin_right = 906.0
+margin_bottom = 414.0
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+text = "Total time"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+margin_top = 435.0
+margin_right = 906.0
+margin_bottom = 439.0
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 460.0
+margin_right = 906.0
+margin_bottom = 497.0
+theme = ExtResource( 3 )
+text = "SAVE_AND_BACK"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_left = 5.33331
+margin_top = 89.3333
+margin_right = 983.333
+margin_bottom = 550.333
+rect_min_size = Vector2( 300, 105 )
+theme = SubResource( 3 )
+popup_exclusive = true
+window_title = "Open File(s)"
+mode = 1
+access = 2
+filters = PoolStringArray( "*.mp3", "*.ogg" )
+current_dir = "/Programming/CustomWitnessPuzzles"
+current_path = "/Programming/CustomWitnessPuzzles/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/ItemList" to="." method="_on_item_list_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/RemoveButton" to="." method="_on_remove_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/MoveUpButton" to="." method="_on_move_up_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/MoveDownButton" to="." method="_on_move_down_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="files_selected" from="FileDialog" to="." method="_on_file_dialog_files_selected"]

@@ -4,11 +4,11 @@
 [ext_resource path="res://script/setting_scene.gd" type="Script" id=2]
 [ext_resource path="res://theme/main_theme.tres" type="Theme" id=3]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 1 )
 
@@ -30,7 +30,7 @@ custom_constants/margin_bottom = 30
 margin_left = 60.0
 margin_top = 30.0
 margin_right = 966.0
-margin_bottom = 631.0
+margin_bottom = 571.0
 custom_constants/separation = 21
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
@@ -113,7 +113,7 @@ margin_right = 682.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 200, 40 )
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center] 1.0 [/center]"
 text = " 1.0 "
@@ -121,21 +121,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="CustomMusicButton" type="Button" parent="MarginContainer/VBoxContainer"]
 margin_top = 343.0
 margin_right = 906.0
-margin_bottom = 543.0
+margin_bottom = 380.0
+theme = ExtResource( 3 )
+text = "CUSTOM_MUSIC"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+margin_top = 401.0
+margin_right = 906.0
+margin_bottom = 483.0
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
-margin_top = 564.0
+margin_top = 504.0
 margin_right = 906.0
-margin_bottom = 601.0
+margin_bottom = 541.0
 theme = ExtResource( 3 )
 text = "SAVE_AND_BACK"
 
@@ -143,4 +150,5 @@ text = "SAVE_AND_BACK"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ExportSaveButton" to="." method="_on_ExportSaveButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ClearProgressButton" to="." method="_on_ClearProgressButton_pressed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/MouseSpeedSlider" to="." method="_on_MouseSpeedSlider_value_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CustomMusicButton" to="." method="_on_CustomMusicButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]

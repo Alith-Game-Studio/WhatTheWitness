@@ -6,14 +6,17 @@ onready var description_box = $MarginContainer/VBoxContainer/HBoxContainer/VBoxC
 onready var menu_bar_button = $MenuBarButton
 const LEVEL_SETS = {
 	'Challenge: Normal': ['challenge_levels.tscn', """比原版见证者留声机稍微难一点的挑战关卡。没有反毛方和抗体。
-""", 2],
+""", '6:35'],
+	'Challenge: Normal SC': ['challenge_levels.tscn', """是中等难度的暗改版。到底暗改了什么呢？为什么感觉变难了
+""", '6:35'],
 	'Challenge: Misc': ['challenge_levels_misc.tscn', """一些还没整理的杂项关卡，仅测试用。
-""", 3],
+""", '11:09'],
 	'Challenge: Eliminators': ['challenge_levels.tscn', """听说你很喜欢玩抗体？
 	
 一组困难的关卡，但有3首歌的时间。	
-""", 3],
-	'Challenge: Rings': ['challenge_levels_misc.tscn', """来自第二届见联会的新机制，圆环和实心圆""", 2],
+""", '11:09'],
+	'Challenge: Rings': ['challenge_levels_ring.tscn', """来自第一、二届见联会的新机制，圆环和实心圆""", '11:09'],
+	'Challenge: Arrows': ['challenge_levels_arrow.tscn', """专家模式里的箭头""", '6:35'],
 }
 
 func sample_seed():
@@ -44,8 +47,10 @@ func select_set(set_name: String):
 		Gameplay.challenge_mode = false
 	Gameplay.challenge_set_name = set_name
 	Gameplay.level_set = LEVEL_SETS[set_name][0]
-	Gameplay.total_challenge_music_tracks = LEVEL_SETS[set_name][2]
-	
+	var split_time = LEVEL_SETS[set_name][2].split(':')
+	var time = int(split_time[0]) * 60 + int(split_time[1])
+	Gameplay.challenge_total_time = time
+	Gameplay.total_challenge_music_tracks = 1 if time <= 154 else 2 if time <= 395 else 3 if time <= 669 else 4
 	get_tree().change_scene("res://level_map.tscn")
 		
 
@@ -53,7 +58,7 @@ func hover_set(set_name: String):
 	if !(set_name in LEVEL_SETS):
 		description_box.text = '???'
 	else:
-		description_box.text = LEVEL_SETS[set_name][1]
+		description_box.text = LEVEL_SETS[set_name][1] + '\n\n' + tr('TOTAL_TIME') + ': ' + LEVEL_SETS[set_name][2]
 		
 		
 func _ready():
@@ -76,3 +81,7 @@ func _on_MenuBarButton_mouse_entered():
 func _on_MenuBarButton_mouse_exited():
 	menu_bar_button.modulate = Color(menu_bar_button.modulate.r, menu_bar_button.modulate.g, menu_bar_button.modulate.b, 1.0)
 
+
+
+func _on_CustomMusicButton_pressed():
+	get_tree().change_scene("res://custom_music_scene.tscn")

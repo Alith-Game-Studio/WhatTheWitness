@@ -31,6 +31,7 @@ class SetGeneratorNormal : SetGenerator {
                 generator.AddDecorator(new Decorators.BrokenDecorator(), 3);
 
             }
+            ApplyColorScheme(generator.Graph, "Intro");
         } else if (tokens[1] == "shuffle1") {
             int id = shuffledIndices[int.Parse(tokens[2]) - 1];
             if (id == 0) {
@@ -49,9 +50,9 @@ class SetGeneratorNormal : SetGenerator {
                 generator.AddDecorator(new Decorators.SquareDecorator(0), 2);
                 generator.AddDecorator(new Decorators.SquareDecorator(1), 2);
                 generator.AddDecorator(new Decorators.TetrisDecorator(
-                    RandomTetris(new int[] { 3, 4 }, 4, localRng), false, false, 2), 1);
+                    RandomTetris(new int[] { 3, 4 }, 4, localRng), false, false, 3), 1);
                 generator.AddDecorator(new Decorators.TetrisDecorator(
-                    RandomTetris(new int[] { 3, 4 }, 4, localRng), true, false, 2), 1);
+                    RandomTetris(new int[] { 3, 4 }, 4, localRng), true, false, 3), 1);
                 generator.AddDecorator(new Decorators.BrokenDecorator(), 3);
             } else if (id == 3) {
                 generator = new WitnessGenerator(Graph.RectangularGraph(4, 4));
@@ -59,23 +60,27 @@ class SetGeneratorNormal : SetGenerator {
                 generator.AddDecorator(new Decorators.StarDecorator(2), 3);
                 generator.AddDecorator(new Decorators.BrokenDecorator(), 4);
             }
+            ApplyColorScheme(generator.Graph, "Shuffle");
         } else if (tokens[1] == "select1") {
             solvable = tokens[2] == solvable1.ToString();
             generator = new WitnessGenerator(Graph.RectangularGraph(4, 4));
-            generator.AddDecorator(new Decorators.SquareDecorator(0), 4);
-            generator.AddDecorator(new Decorators.SquareDecorator(1), 2);
-            generator.AddDecorator(new Decorators.SquareDecorator(2), 2);
+            generator.AddDecorator(new Decorators.SquareDecorator(1), 4);
+            generator.AddDecorator(new Decorators.SquareDecorator(3), 2);
+            generator.AddDecorator(new Decorators.SquareDecorator(4), 2);
+            ApplyColorScheme(generator.Graph, "Intro");
         } else if (tokens[1] == "select2") {
             solvable = tokens[2] == solvable2.ToString();
             generator = new WitnessGenerator(Graph.RectangularGraph(4, 4));
             generator.AddDecorator(new Decorators.StarDecorator(0), 6);
             generator.AddDecorator(new Decorators.StarDecorator(1), 6);
+            ApplyColorScheme(generator.Graph, "Intro");
         } else if (tokens[1] == "meta1") {
             generator = new WitnessGenerator(Graph.RectangularGraph(4, 4));
             generator.AddDecorator(new Decorators.StarDecorator(2), 2);
             generator.AddDecorator(new Decorators.TriangleDecorator(localRng.Next(1, 4), 2), 1);
             generator.AddDecorator(new Decorators.TriangleDecorator(localRng.Next(1, 4), 2), 1);
             generator.AddDecorator(new Decorators.TriangleDecorator(localRng.Next(1, 4), 2), 1);
+            ApplyColorScheme(generator.Graph, "Meta");
         } else if (tokens[1] == "6") {
             int id = int.Parse(tokens[2]);
             if (id == 1) {
@@ -92,6 +97,7 @@ class SetGeneratorNormal : SetGenerator {
                 generator.AddDecorator(new Decorators.TetrisDecorator(
                     RandomTetris(new int[] { 3, 4 }, 4, localRng), true, false, 2), 1);
             }
+            ApplyColorScheme(generator.Graph, "InMaze");
         } else if (tokens[1] == "7") {
             int id = int.Parse(tokens[2]);
             if (id == 1) {
@@ -105,6 +111,7 @@ class SetGeneratorNormal : SetGenerator {
                 generator.AddDecorator(new Decorators.StarDecorator(1), 6);
                 generator.AddDecorator(new Decorators.BrokenDecorator(), 4);
             }
+            ApplyColorScheme(generator.Graph, "Pillar");
         } else {
             generator = new WitnessGenerator(Graph.RectangularGraph(2, 2));
         }

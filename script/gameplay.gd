@@ -17,14 +17,15 @@ var mouse_speed = 1.0
 var challenge_mode: bool
 var challenge_start_time: int
 var challenge_seed: int = -1
+var challenge_total_time: int
 var challenge_set_name: String
 var level_set: String
 
 var challenge_music_list = [
-	'Peer Gynt Suite no. 1, Op. 46 - IV. In the Hall Of The Mountain King.mp3',
-	'Peer Gynt Suite no. 1, Op. 46 - III. Anitra\'s Dance.mp3',
-	'Peer Gynt Suite no. 1, Op. 46 - II. Aase\'s Death.mp3',
-	'Peer Gynt Suite no. 1, Op. 46 - I. Morning Mood.mp3',
+	preload('res://audio/music/Peer Gynt Suite no. 1, Op. 46 - I. Morning Mood.mp3'),
+	preload('res://audio/music/Peer Gynt Suite no. 1, Op. 46 - II. Aase\'s Death.mp3'),
+	preload('res://audio/music/Peer Gynt Suite no. 1, Op. 46 - III. Anitra\'s Dance.mp3'),
+	preload('res://audio/music/Peer Gynt Suite no. 1, Op. 46 - IV. In the Hall Of The Mountain King.mp3'),
 ]
 var challenge_music_track = -1
 var total_challenge_music_tracks = 2

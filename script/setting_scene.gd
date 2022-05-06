@@ -46,3 +46,7 @@ func _on_MouseSpeedSlider_value_changed(value):
 	setting['mouse_speed'] = mouse_speed_slider.value
 	SaveData.save_setting(setting)
 
+
+
+func _on_CustomMusicButton_pressed():
+	get_tree().change_scene("res://custom_music_scene.tscn")

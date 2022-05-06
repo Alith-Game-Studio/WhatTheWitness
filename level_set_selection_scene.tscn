@@ -6,11 +6,11 @@
 [ext_resource path="res://font/wqy-MicroHei.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://theme/main_theme.tres" type="Theme" id=5]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
 fallback/0 = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 20
 font_data = ExtResource( 1 )
 
@@ -68,34 +68,41 @@ margin_bottom = 37.0
 theme = ExtResource( 5 )
 text = "Challenge: Normal"
 
-[node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/SetButtons"]
+[node name="Button7" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/SetButtons"]
+visible = false
 margin_top = 58.0
 margin_right = 460.0
 margin_bottom = 95.0
 theme = ExtResource( 5 )
-text = "Challenge: Misc"
+text = "Challenge: Normal SC"
 
 [node name="Button4" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/SetButtons"]
-margin_top = 116.0
+margin_top = 58.0
 margin_right = 460.0
-margin_bottom = 153.0
+margin_bottom = 95.0
 theme = ExtResource( 5 )
 text = "Challenge: Eliminators"
 
 [node name="Button5" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/SetButtons"]
-margin_top = 174.0
-margin_right = 460.0
-margin_bottom = 211.0
-theme = ExtResource( 5 )
-text = "Challenge: Rings"
-
-[node name="Button6" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/SetButtons"]
-visible = false
 margin_top = 116.0
 margin_right = 460.0
 margin_bottom = 153.0
 theme = ExtResource( 5 )
-text = "Challenge: WitCup 10"
+text = "Challenge: Rings"
+
+[node name="Button6" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/SetButtons"]
+margin_top = 174.0
+margin_right = 460.0
+margin_bottom = 211.0
+theme = ExtResource( 5 )
+text = "Challenge: Arrows"
+
+[node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/SetButtons"]
+margin_top = 232.0
+margin_right = 460.0
+margin_bottom = 269.0
+theme = ExtResource( 5 )
+text = "Challenge: Misc"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 464.0
@@ -104,10 +111,10 @@ margin_bottom = 437.0
 
 [node name="DescriptionBox" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 400.0
-margin_bottom = 396.0
+margin_bottom = 355.0
 rect_min_size = Vector2( 400, 0 )
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "This is a line of text. This is a line of text. This is a line of text. This is a line of text. This is a line of text. 
 
 The puzzle set uses the following mechanics:
@@ -117,6 +124,13 @@ The puzzle set uses the following mechanics:
 4. Foliage from an oak tree"
 readonly = true
 wrap_enabled = true
+
+[node name="CustomMusicButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 359.0
+margin_right = 400.0
+margin_bottom = 396.0
+theme = ExtResource( 5 )
+text = "CUSTOM_MUSIC"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 400.0
@@ -134,7 +148,7 @@ margin_left = 86.0
 margin_right = 400.0
 margin_bottom = 37.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 
 [node name="MenuBarButton" type="TextureButton" parent="."]
 margin_left = 22.0
@@ -147,6 +161,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/CustomMusicButton" to="." method="_on_CustomMusicButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/SeedButton" to="." method="_on_SeedButton_pressed"]
 [connection signal="mouse_entered" from="MenuBarButton" to="." method="_on_MenuBarButton_mouse_entered"]
 [connection signal="mouse_exited" from="MenuBarButton" to="." method="_on_MenuBarButton_mouse_exited"]

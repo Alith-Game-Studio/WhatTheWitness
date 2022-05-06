@@ -17,27 +17,34 @@ public class Generator : Node
     }
     public static string GeneratePanel(string setName, string name, int seed) {
         GD.Print("Generating " + name);
-        string storeKey = name + seed;
+        string storeKey = setName + "@" + name + "@" + seed;
         if (generatedPanels.ContainsKey(storeKey))
             return generatedPanels[storeKey].ToXML();
         Random globalRng = new Random(seed);
         Random localRng = new Random(StringHash(name) + seed);
         SetGenerator setGenerator;
+        bool hardMode = false;
         if (setName == "Challenge: Normal") 
             setGenerator = new SetGeneratorNormal();
+        else if (setName == "Challenge: Normal SC") {
+            setGenerator = new SetGeneratorNormal();
+            hardMode = true;
+        }
         else if (setName == "Challenge: Misc") 
             setGenerator = new SetGeneratorMisc();
         else if (setName == "Challenge: Eliminators")
             setGenerator = new SetGeneratorEliminators();
         else if (setName == "Challenge: Rings")
             setGenerator = new SetGeneratorRings();
+        else if (setName == "Challenge: Arrows")
+            setGenerator = new SetGeneratorArrows();
         else 
             throw new NotImplementedException();
         setGenerator.Init(globalRng);
         while (true) {
             (WitnessGenerator generator, bool solvable) = setGenerator.GetGenerator(name, globalRng, localRng);
             int[] multiSolveVertices = name.Contains("meta1") ? new int[] { 0, 80 } : null;
-            Graph graph = generator.Sample(localRng, solvable, false, multiSolveVertices, 30);
+            Graph graph = generator.Sample(localRng, solvable, hardMode, multiSolveVertices, 30);
             if (graph != null) {
                 generatedPanels[storeKey] = graph;
                 GD.Print("Generated " + name);

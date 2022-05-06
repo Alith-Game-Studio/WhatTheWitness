@@ -70,8 +70,9 @@ func clear():
 		dir.remove(SAVE_PATH)
 	saved_solutions = {}
 
-func get_setting():
-	load_all()
+func get_setting(load_all=true):
+	if (load_all):
+		load_all()
 	var setting = {}
 	if ('&setting' in saved_solutions):
 		setting = saved_solutions['&setting']

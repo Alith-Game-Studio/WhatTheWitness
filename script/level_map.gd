@@ -22,13 +22,16 @@ onready var challenge_timer = $ChallengeTimer
 onready var music_player = $MusicPlayer
 onready var back_button = $FailedCover/BackButton
 onready var puzzle_set_label = $SideMenu/PuzzleSetLabel
+onready var tween = $MusicPlayer/Tween
 var window_size = Vector2(1024, 600)
 var view_origin = -window_size / 2
 var view_scale = 1.0
 var volume = true
 var challenge_time_out = false
+var challenge_playing_last_music = false
+var track_list : Array
 
-const UNLOCK_ALL_PUZZLES = true
+const UNLOCK_ALL_PUZZLES = false
 const LOADING_BATCH_SIZE = 10
 
 const DIR_X = [-1, 0, 1, 0]
@@ -299,23 +302,48 @@ func _on_menu_bar_button_pressed():
 
 func _on_ChallengeTimer_timeout():
 	update_counter()
+	var time = Gameplay.get_current_challenge_time() / 1000.0
+	if (not challenge_time_out and time > Gameplay.challenge_total_time):
+		challenge_time_out = true
+		fail_challenge()
+	if (not challenge_playing_last_music and Gameplay.challenge_total_time - time < 160):
+		tween.interpolate_property(music_player, "volume_db", 0, -60, 5.8) # current music fade out
+		tween.start()
+		challenge_playing_last_music = true
+
+func _on_tween_tween_completed(object, key):
+	music_player.stream = preload('res://audio/music/Peer Gynt Suite no. 1, Op. 46 - IV. In the Hall Of The Mountain King.mp3')
+	music_player.volume_db = 0
+	music_player.play()
 
 
 func _on_music_player_finished():
+	if (challenge_playing_last_music): # do not play other music if we are planning to play the last one
+		return
 	if (challenge_timer.is_stopped()):
 		return
-	if (Gameplay.challenge_music_track > 0):
-		Gameplay.challenge_music_track -= 1
-		music_player.stream = load('res://audio/music/%s' % Gameplay.challenge_music_list[Gameplay.challenge_music_track])
-		music_player.play()
-	else: # failed
-		fail_challenge()
+	while not track_list.empty():
+		var audio_loader = AudioLoader.new()
+		var stream = audio_loader.loadfile(track_list[0]) if track_list[0] is String else track_list[0]
+		stream.loop = false
+		track_list.pop_front()
+		if (stream != null and stream.get_length() > 1e-6):
+			music_player.stream = stream
+			music_player.play()
+			return
 	
 func start_challenge():
 	if (challenge_timer.is_stopped()):
 		Gameplay.start_challenge()
 		challenge_timer.start()
 		Gameplay.challenge_music_track = Gameplay.total_challenge_music_tracks
+		var settings = SaveData.get_setting(false)
+		if ('track_list' in settings and len(settings['track_list']) > 0):
+			track_list = [] + settings['track_list']
+		else:
+			track_list = []
+			for i in range(Gameplay.challenge_music_track - 1):
+				track_list.append(Gameplay.challenge_music_list[i + 4 - Gameplay.challenge_music_track])
 		music_player.stream = preload('res://audio/music/RecorderStart.mp3')
 		music_player.play()
 
@@ -357,6 +385,6 @@ func _on_restart_button_pressed():
 
 func _on_continue_button_pressed():
 	challenge_timer.start()
-	challenge_time_out = true
 	$EndCover.hide()
 	
+

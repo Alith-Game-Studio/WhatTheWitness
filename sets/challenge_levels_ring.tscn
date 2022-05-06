@@ -8,6 +8,7 @@
 margin_right = 3936.0
 margin_bottom = 2016.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -17,7 +18,7 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 4, 2, 65542, 5, 2, 8, 6, 2, 8, 7, 2, 8, 8, 2, 8, 9, 2, 8, 10, 2, 8, 11, 2, 131074, 65540, 2, 65538, 65547, 2, 65538, 131074, 2, 5, 131075, 2, 8, 131076, 2, 131080, 131077, 2, 8, 131078, 2, 8, 131079, 2, 8, 131080, 2, 65539, 131083, 2, 65538, 196612, 2, 65538, 196616, 2, 65538, 196619, 2, 65538, 262148, 2, 65543, 262149, 2, 8, 262150, 2, 8, 262151, 2, 8, 262152, 2, 131079, 262153, 2, 8, 262154, 2, 8, 262155, 2, 65547, 262156, 2, 8, 262157, 2, 8, 262158, 2, 2, 327684, 2, 65538, 327688, 2, 65538, 327691, 2, 65538, 393220, 2, 65543, 393221, 2, 8, 393222, 2, 8, 393223, 2, 8, 393224, 2, 3, 393227, 2, 65538, 458756, 2, 65538, 458763, 2, 65538, 524292, 2, 7, 524293, 2, 196614, 524294, 2, 8, 524295, 2, 65539, 524299, 2, 65538, 589829, 2, 65538, 589831, 2, 65538, 589835, 2, 65538, 655365, 2, 65544, 655366, 2, 8, 655367, 2, 131073, 655368, 2, 8, 655369, 2, 8, 655370, 2, 8, 655371, 2, 3, 720901, 2, 65538, 720903, 2, 65538, 786437, 2, 6, 786438, 2, 8, 786439, 2, 3 )
+tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 8, 131079, 2, 8, 131080, 2, 8, 131081, 2, 8, 131082, 2, 8, 131083, 2, 8, 131084, 2, 8, 131085, 2, 8, 131086, 2, 131074, 196622, 2, 65538, 262158, 2, 65538, 327690, 2, 131082, 327691, 2, 8, 327692, 2, 8, 327693, 2, 8, 327694, 2, 65546, 327695, 2, 8, 327696, 2, 8, 327697, 2, 8, 327698, 2, 65539, 393226, 2, 65538, 393230, 2, 65538, 393234, 2, 65538, 458762, 2, 65538, 458764, 2, 65542, 458765, 2, 8, 458766, 2, 131080, 458767, 2, 8, 458768, 2, 65539, 458770, 2, 65538, 524298, 2, 65538, 524300, 2, 65538, 524302, 2, 65538, 524304, 2, 65538, 524306, 2, 65538, 589834, 2, 65538, 589836, 2, 6, 589837, 2, 8, 589838, 2, 65546, 589839, 2, 8, 589840, 2, 4, 589842, 2, 65538, 655370, 2, 65538, 655374, 2, 65538, 655378, 2, 65538, 720906, 2, 6, 720907, 2, 8, 720908, 2, 8, 720909, 2, 8, 720910, 2, 196611, 720911, 2, 8, 720912, 2, 8, 720913, 2, 8, 720914, 2, 3, 786446, 2, 65538, 851982, 2, 65538, 917518, 2, 65538, 983054, 2, 65538, 1048590, 2, 65538, 1114126, 2, 1 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -37,7 +38,7 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 262152, 4, 0, 262155, 4, 0, 262158, 6, 0, 655367, 5, 0 )
+tile_data = PoolIntArray( 589838, -1610612731, 0, 720910, -1610612732, 0, 1114126, 6, 0 )
 
 [node name="PuzzlePlaceHolders" type="Node2D" parent="."]
 
@@ -53,9 +54,9 @@ __meta__ = {
 }
 
 [node name="TextEdit139" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 480.0
+margin_left = 576.0
 margin_top = 192.0
-margin_right = 576.0
+margin_right = 672.0
 margin_bottom = 288.0
 rect_pivot_offset = Vector2( 192, 96 )
 text = "[C][?]Misc-1-1"
@@ -65,10 +66,10 @@ __meta__ = {
 }
 
 [node name="TextEdit141" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 480.0
-margin_top = 384.0
-margin_right = 576.0
-margin_bottom = 480.0
+margin_left = 768.0
+margin_top = 192.0
+margin_right = 864.0
+margin_bottom = 288.0
 rect_pivot_offset = Vector2( 192, 96 )
 text = "[C][?]Misc-2-1"
 wrap_enabled = true
@@ -77,10 +78,10 @@ __meta__ = {
 }
 
 [node name="TextEdit145" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 480.0
-margin_top = 576.0
-margin_right = 576.0
-margin_bottom = 672.0
+margin_left = 1536.0
+margin_top = 480.0
+margin_right = 1632.0
+margin_bottom = 576.0
 rect_pivot_offset = Vector2( 192, 96 )
 text = "[C][?]Misc-3-1"
 wrap_enabled = true
@@ -89,9 +90,9 @@ __meta__ = {
 }
 
 [node name="TextEdit148" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 576.0
+margin_left = 1152.0
 margin_top = 768.0
-margin_right = 672.0
+margin_right = 1248.0
 margin_bottom = 864.0
 rect_pivot_offset = Vector2( 192, 96 )
 text = "[C][?]Misc-select1-1"
@@ -101,10 +102,10 @@ __meta__ = {
 }
 
 [node name="TextEdit149" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 576.0
-margin_top = 960.0
-margin_right = 672.0
-margin_bottom = 1056.0
+margin_left = 1344.0
+margin_top = 768.0
+margin_right = 1440.0
+margin_bottom = 864.0
 rect_pivot_offset = Vector2( 192, 96 )
 text = "[C][?]Misc-select1-2"
 wrap_enabled = true
@@ -113,10 +114,10 @@ __meta__ = {
 }
 
 [node name="TextEdit150" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 576.0
-margin_top = 1152.0
-margin_right = 672.0
-margin_bottom = 1248.0
+margin_left = 1536.0
+margin_top = 768.0
+margin_right = 1632.0
+margin_bottom = 864.0
 rect_pivot_offset = Vector2( 192, 96 )
 text = "[C][?]Misc-select1-3"
 wrap_enabled = true
@@ -125,10 +126,10 @@ __meta__ = {
 }
 
 [node name="TextEdit146" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 576.0
-margin_top = 576.0
-margin_right = 672.0
-margin_bottom = 672.0
+margin_left = 1536.0
+margin_top = 1056.0
+margin_right = 1632.0
+margin_bottom = 1152.0
 rect_pivot_offset = Vector2( 192, 96 )
 text = "[C][?]Misc-3-2"
 wrap_enabled = true
@@ -137,10 +138,10 @@ __meta__ = {
 }
 
 [node name="TextEdit147" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 672.0
-margin_top = 576.0
-margin_right = 768.0
-margin_bottom = 672.0
+margin_left = 1344.0
+margin_top = 1344.0
+margin_right = 1440.0
+margin_bottom = 1440.0
 rect_pivot_offset = Vector2( 192, 96 )
 text = "[C][?]Misc-3-3"
 wrap_enabled = true
@@ -148,22 +149,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit151" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 480.0
-margin_right = 576.0
-margin_bottom = 96.0
-rect_pivot_offset = Vector2( 192, 96 )
-text = "[C][?]Misc-4-1"
-wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="TextEdit142" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 576.0
-margin_top = 384.0
-margin_right = 672.0
-margin_bottom = 480.0
+margin_left = 1152.0
+margin_top = 1056.0
+margin_right = 1248.0
+margin_bottom = 1152.0
 rect_pivot_offset = Vector2( 192, 96 )
 text = "[C][?]Misc-2-2"
 wrap_enabled = true
@@ -172,24 +162,12 @@ __meta__ = {
 }
 
 [node name="TextEdit144" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 672.0
-margin_top = 384.0
-margin_right = 768.0
-margin_bottom = 480.0
+margin_left = 1152.0
+margin_top = 480.0
+margin_right = 1248.0
+margin_bottom = 576.0
 rect_pivot_offset = Vector2( 192, 96 )
 text = "[C][?]Misc-2-3"
-wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextEdit140" type="TextEdit" parent="PuzzlePlaceHolders"]
-margin_left = 576.0
-margin_top = 192.0
-margin_right = 672.0
-margin_bottom = 288.0
-rect_pivot_offset = Vector2( 192, 96 )
-text = "[C][?]Misc-1-2"
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false

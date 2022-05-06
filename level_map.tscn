@@ -8,12 +8,12 @@
 [ext_resource path="res://font/wqy-MicroHei.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://img/volume.png" type="Texture" id=7]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 4 )
 fallback/0 = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 4 )
 fallback/0 = ExtResource( 6 )
 fallback/1 = ExtResource( 6 )
@@ -74,7 +74,7 @@ margin_left = 425.333
 margin_top = 25.6667
 margin_right = 1003.33
 margin_bottom = 71.6667
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[right]0 / 0[/right] "
 text = "0 / 0 "
@@ -88,7 +88,7 @@ margin_top = 549.0
 margin_right = 1000.0
 margin_bottom = 578.0
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[right]  [/right]
 "
@@ -105,7 +105,7 @@ margin_top = 549.0
 margin_right = 792.0
 margin_bottom = 578.0
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[right]  [/right]
 "
@@ -166,6 +166,8 @@ wait_time = 0.5
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="Tween" type="Tween" parent="MusicPlayer"]
+
 [connection signal="pressed" from="EndCover/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="EndCover/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="mouse_entered" from="SideMenu/MenuBarButton" to="." method="_on_menu_bar_button_mouse_entered"]
@@ -177,3 +179,4 @@ wait_time = 0.5
 [connection signal="pressed" from="SideMenu/Extra/ClearSaveButton" to="." method="_on_clear_save_button_pressed"]
 [connection signal="timeout" from="ChallengeTimer" to="." method="_on_ChallengeTimer_timeout"]
 [connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]
+[connection signal="tween_completed" from="MusicPlayer/Tween" to="." method="_on_tween_tween_completed"]

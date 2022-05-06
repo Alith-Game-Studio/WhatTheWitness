@@ -4,7 +4,7 @@
 [ext_resource path="res://script/custom_level_scene.gd" type="Script" id=2]
 [ext_resource path="res://theme/main_theme.tres" type="Theme" id=3]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 20
 font_data = ExtResource( 1 )
 
@@ -27,7 +27,7 @@ margin_left = 27.2202
 margin_top = 507.091
 margin_right = 764.22
 margin_bottom = 598.091
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 1 )
 text = "To load a custom puzzle (*.wit) file, do one of the following:
 (1) Directly open *.wit file with the game's executable, or
 (2) Drag any *.wit file to the game window at any time."
@@ -50,7 +50,7 @@ margin_left = 42.0
 margin_top = 147.0
 margin_right = 770.0
 margin_bottom = 256.0
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Drag *.wit files here![/center]"
 text = "Drag *.wit files here!"

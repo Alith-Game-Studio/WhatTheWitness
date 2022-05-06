@@ -21,8 +21,14 @@ Challenge: Normal,Challenge: Normal,挑战房：中等难度
 Challenge: Misc,Challenge: Misc,挑战房：杂项关卡
 Challenge: Eliminators,Challenge: Eliminators,挑战房：抗体
 Challenge: Rings,Challenge: Rings,挑战房：圆环
+Challenge: Arrows,Challenge: Arrows,挑战房：箭头
 TIME_OUT,time out,超时
 YOU_WIN,You win!,你赢了！
 RESTART,Restart,重来
 LOADING_PUZZLE,loading puzzle,加载谜题
 RENDERING_PUZZLE,rendering puzzle,渲染谜题
+CUSTOM_MUSIC_HINTS,"If the following list is non-empty, the record player will play them in order. Notice: No matter how you change it, In the Hall of the Mountain King will always be played in the last 2'34''.",当下方音乐列表非空时，将会按次序播放它们。注意：无论如何设置，最后2分34秒总会开始播放山大王的宫殿。
+UP,Move up,上移
+DOWN,Move down,下移
+CUSTOM_MUSIC,Custom Music,自定义音乐
+TOTAL_TIME,Total time,总时长
