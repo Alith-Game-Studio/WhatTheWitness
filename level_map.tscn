@@ -86,7 +86,8 @@ __meta__ = {
 [node name="PuzzleCredits" type="RichTextLabel" parent="SideMenu"]
 margin_top = 549.0
 margin_right = 1000.0
-margin_bottom = 578.0
+margin_bottom = 589.0
+rect_min_size = Vector2( 0, 40 )
 mouse_filter = 2
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
@@ -103,14 +104,10 @@ __meta__ = {
 margin_left = 15.0
 margin_top = 549.0
 margin_right = 792.0
-margin_bottom = 578.0
+margin_bottom = 589.0
+rect_min_size = Vector2( 0, 40 )
 mouse_filter = 2
 custom_fonts/normal_font = SubResource( 2 )
-bbcode_enabled = true
-bbcode_text = "[right]  [/right]
-"
-text = "  
-"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false

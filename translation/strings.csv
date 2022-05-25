@@ -17,17 +17,29 @@ SPOILER_WARNING,Spoiler Warning,剧透警告
 DO_NOT_SHOW_AGAIN,Do not show this again in the future,以后不要再显示
 CONTINUE,Continue,继续
 PUZZLE_SET_SELECTION,Puzzle Set Selection,选择谜题集
+MECHANICS:,Mechanics:,使用机制：
 Challenge: Normal,Challenge: Normal,挑战房：中等难度
+Challenge: Normal DESC,Slightly harder than the original challenge.|original mechanics except eliminators,比原版见证者留声机稍微难一点的挑战关卡。|除了抗体以外的原版机制。
 Challenge: Misc,Challenge: Misc,挑战房：杂项关卡
+Challenge: Misc DESC,Some unsorted miscellaneous levels,一些没整理的杂项关卡
 Challenge: Eliminators,Challenge: Eliminators,挑战房：抗体
+Challenge: Eliminators DESC,The challenge for eliminator lovers. Increased time limit compared to the normal difficulty. |original mechanics,为喜欢抗体的人准备的挑战关，相比于中等难度有更长时间。|原版机制。
 Challenge: Rings,Challenge: Rings,挑战房：圆环
+Challenge: Rings DESC,The rings and circles from WitCup 1 & 2. |rings & circles,来自第一、二届见联会的新机制，圆环和实心圆。|圆环和实心圆。
 Challenge: Arrows,Challenge: Arrows,挑战房：箭头
+Challenge: Arrows DESC,Arrows from the expert mode. |Arrows,专家模式里的箭头。|箭头。
+Challenge: Bee Hive,Challenge: Bee Hive,挑战房：蜂巢
+Challenge: Bee Hive DESC,A variant where the board cells are hexagons.|original mechanics except eliminators,六边形题板格子的变种挑战。|除了抗体以外的原版机制。
+Challenge: Speed,Challenge: Speed,挑战房：速度
+Challenge: Speed DESC,Speed is everything. | original mechanics except eliminators,手速场。|除了抗体以外的原版机制。
+Challenge: Finite Water,Challenge: Finite Water,挑战房：无限水
+Challenge: Finite Water DESC,A variant with rule from WitCup 10 |Finite water by Fluittene,无限水，题不水。|无限水（喵基，第十届见联会）
 TIME_OUT,time out,超时
 YOU_WIN,You win!,你赢了！
 RESTART,Restart,重来
 LOADING_PUZZLE,loading puzzle,加载谜题
 RENDERING_PUZZLE,rendering puzzle,渲染谜题
-CUSTOM_MUSIC_HINTS,"If the following list is non-empty, the record player will play them in order. Notice: No matter how you change it, In the Hall of the Mountain King will always be played in the last 2'34''.",当下方音乐列表非空时，将会按次序播放它们。注意：无论如何设置，最后2分34秒总会开始播放山大王的宫殿。
+CUSTOM_MUSIC_HINTS,"If the following list is non-empty, the record player will play them in order. Notice: no matter how you change it, In the Hall of the Mountain King will always be played in the final 2'34''.",当下方音乐列表非空时，将会按次序播放它们。注意：无论如何设置，最后2分34秒总会开始播放山大王的宫殿。
 UP,Move up,上移
 DOWN,Move down,下移
 CUSTOM_MUSIC,Custom Music,自定义音乐

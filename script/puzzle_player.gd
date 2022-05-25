@@ -133,28 +133,28 @@ func _input(event):
 				elif (event.scancode == KEY_RIGHT):
 					if (right_arrow_button.visible):
 						_on_right_arrow_button_pressed()
-				"""elif (event.scancode in [KEY_A, KEY_S, KEY_D]):
+				elif (event.scancode in [KEY_A, KEY_S, KEY_D] and Gameplay.UNLOCK_ALL_PUZZLES):
 					solver = load("res://script/solver.gd").Solver.new()
 					solver.solve(Gameplay.puzzle, {KEY_A: 100, KEY_S: 10, KEY_D: 1}[event.scancode])
 					if (solver.get_solution_count() != 0):
 						Gameplay.solution = solver.to_solution_line()
-						puzzle_counter_text.text = '[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()]
+						print('[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()])
 					else:
-						puzzle_counter_text.text = '[0 / 0]'
-				elif (event.scancode == KEY_X):
+						print('[0 / 0]')
+				elif (event.scancode == KEY_X and Gameplay.UNLOCK_ALL_PUZZLES):
 					if (solver != null and solver.get_solution_count() != 0):
 						solver.current_solution_id += 1
 						if (solver.current_solution_id >= solver.get_solution_count()):
 							solver.current_solution_id = 0
 						Gameplay.solution = solver.to_solution_line()
-						puzzle_counter_text.text = '[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()]
-				elif (event.scancode == KEY_Z):
+						print('[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()])
+				elif (event.scancode == KEY_Z and Gameplay.UNLOCK_ALL_PUZZLES):
 					if (solver != null and solver.get_solution_count() != 0):
 						solver.current_solution_id -= 1
 						if (solver.current_solution_id < 0):
 							solver.current_solution_id = solver.get_solution_count() - 1
 						Gameplay.solution = solver.to_solution_line()
-						puzzle_counter_text.text = '[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()]"""
+						print('[%d / %d]' % [solver.current_solution_id, solver.get_solution_count()])
 				
 							
 						

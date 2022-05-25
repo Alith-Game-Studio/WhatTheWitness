@@ -31,7 +31,6 @@ var challenge_time_out = false
 var challenge_playing_last_music = false
 var track_list : Array
 
-const UNLOCK_ALL_PUZZLES = false
 const LOADING_BATCH_SIZE = 10
 
 const DIR_X = [-1, 0, 1, 0]
@@ -227,7 +226,7 @@ func update_light(first_time=false):
 	var puzzles_to_unlock = []
 	for puzzle_file in MenuData.puzzle_grid_pos:
 		var pos = MenuData.puzzle_grid_pos[puzzle_file]
-		if((UNLOCK_ALL_PUZZLES or get_light_state(pos)) and !MenuData.puzzle_preview_panels[puzzle_file].puzzle_unlocked):
+		if((Gameplay.UNLOCK_ALL_PUZZLES or get_light_state(pos)) and !MenuData.puzzle_preview_panels[puzzle_file].puzzle_unlocked):
 			puzzles_to_unlock.append(puzzle_file)
 	var processed_rendering_count = 0
 	for puzzle_file in puzzles_to_unlock:
@@ -261,23 +260,24 @@ func update_view():
 	view.scale = Vector2(view_scale, view_scale)
 
 func _input(event):
-	if (event is InputEventMouseButton and MenuData.can_drag_map):
-		if (event.button_index == BUTTON_WHEEL_DOWN):
-			view_scale = max(view_scale * 0.8, 0.2097152)
-		elif (event.button_index == BUTTON_WHEEL_UP):
-			view_scale = min(view_scale * 1.25, 3.0)
-		elif (event.pressed):
-			drag_start = event.position
-		else:
-			drag_start = null
-			return
-	elif (event is InputEventMouseMotion):
-		if (!MenuData.can_drag_map):
-			drag_start = null
-		if (drag_start != null):
-			view_origin += (event.position - drag_start) / view_scale
-			drag_start = event.position
-	update_view()
+	if (not loading_cover.visible):
+		if (event is InputEventMouseButton and MenuData.can_drag_map):
+			if (event.button_index == BUTTON_WHEEL_DOWN):
+				view_scale = max(view_scale * 0.8, 0.2097152)
+			elif (event.button_index == BUTTON_WHEEL_UP):
+				view_scale = min(view_scale * 1.25, 3.0)
+			elif (event.pressed):
+				drag_start = event.position
+			else:
+				drag_start = null
+				return
+		elif (event is InputEventMouseMotion):
+			if (!MenuData.can_drag_map):
+				drag_start = null
+			if (drag_start != null):
+				view_origin += (event.position - drag_start) / view_scale
+				drag_start = event.position
+		update_view()
 
 func _on_clear_save_button_pressed():
 	if (clear_save_button.text == 'Are you sure?'):
@@ -307,13 +307,14 @@ func _on_ChallengeTimer_timeout():
 		challenge_time_out = true
 		fail_challenge()
 	if (not challenge_playing_last_music and Gameplay.challenge_total_time - time < 160):
-		tween.interpolate_property(music_player, "volume_db", 0, -60, 5.8) # current music fade out
+		var start_value = 0 if volume else -90
+		tween.interpolate_property(music_player, "volume_db", start_value, -60, min(5.8, max(0, Gameplay.challenge_total_time - time - 154))) # current music fade out
 		tween.start()
 		challenge_playing_last_music = true
 
 func _on_tween_tween_completed(object, key):
 	music_player.stream = preload('res://audio/music/Peer Gynt Suite no. 1, Op. 46 - IV. In the Hall Of The Mountain King.mp3')
-	music_player.volume_db = 0
+	music_player.volume_db = 0 if volume else -90
 	music_player.play()
 
 

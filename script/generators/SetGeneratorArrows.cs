@@ -7,9 +7,10 @@ using WitnessInfinite;
 using Decorators = WitnessInfinite.Decorators;
 
 class SetGeneratorArrows : SetGenerator {
-    public override (WitnessGenerator, bool) GetGenerator(string name, Random globalRng, Random localRng) {
+    public override (WitnessGenerator, bool, double) GetGenerator(string name, Random globalRng, Random localRng) {
         WitnessGenerator generator = null;
         bool solvable = true;
+        double hardness = 0.0;
         string[] tokens = name.Split('.')[0].Split('-');
         if (tokens[1] == "1") {
             int id = int.Parse(tokens[2]);
@@ -59,9 +60,9 @@ class SetGeneratorArrows : SetGenerator {
                 generator.AddDecorator(new Decorators.ArrowDecorator(45 * localRng.Next(0, 8), localRng.Next(1, 4), 3), 1);
                 generator.AddDecorator(new Decorators.ArrowDecorator(45 * localRng.Next(0, 8), localRng.Next(1, 4), 3), 1);
                 generator.AddDecorator(new Decorators.TetrisDecorator(
-                                        RandomTetris(new int[] { 3, 4 }, 4, localRng), true, false, 3), 1);
+                                        RandomRectTetris(new int[] { 3, 4 }, localRng), true, false, 3), 1);
                 generator.AddDecorator(new Decorators.TetrisDecorator(
-                                        RandomTetris(new int[] { 3, 4 }, 4, localRng), false, false, 3), 1);
+                                        RandomRectTetris(new int[] { 3, 4 }, localRng), false, false, 3), 1);
                 generator.AddDecorator(new Decorators.BrokenDecorator(), 2);
             } else if (id == 3) {
                 generator = new WitnessGenerator(Graph.RectangularGraph(5, 5, "xy"));
@@ -90,6 +91,6 @@ class SetGeneratorArrows : SetGenerator {
             generator.AddDecorator(new Decorators.ArrowDecorator(45 * localRng.Next(0, 8), localRng.Next(1, 4), 3), 1);
         }
         ApplyColorScheme(generator.Graph, "Arrow");
-        return (generator, solvable);
+        return (generator, solvable, hardness);
     }
 }

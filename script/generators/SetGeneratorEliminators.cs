@@ -7,9 +7,10 @@ using WitnessInfinite;
 using Decorators = WitnessInfinite.Decorators;
 
 class SetGeneratorEliminators : SetGenerator {
-    public override (WitnessGenerator, bool) GetGenerator(string name, Random globalRng, Random localRng) {
+    public override (WitnessGenerator, bool, double) GetGenerator(string name, Random globalRng, Random localRng) {
         WitnessGenerator generator = null;
         bool solvable = true;
+        double hardness = 0.0;
         string[] tokens = name.Split('.')[0].Split('-');
         if (tokens[1] == "1") {
             int id = int.Parse(tokens[2]);
@@ -58,9 +59,9 @@ class SetGeneratorEliminators : SetGenerator {
                 generator.AddDecorator(new Decorators.SquareDecorator(0), 2);
                 generator.AddDecorator(new Decorators.SquareDecorator(1), 2);
                 generator.AddDecorator(new Decorators.TetrisDecorator(
-                    RandomTetris(new int[] { 3, 4 }, 4, localRng), false, false, 2), 1);
+                    RandomRectTetris(new int[] { 3, 4 }, localRng), false, false, 2), 1);
                 generator.AddDecorator(new Decorators.TetrisDecorator(
-                    RandomTetris(new int[] { 3, 4 }, 4, localRng), true, false, 2), 1);
+                    RandomRectTetris(new int[] { 3, 4 }, localRng), true, false, 2), 1);
                 generator.AddDecorator(new Decorators.EliminatorDecorator(1), 1);
                 generator.AddDecorator(new Decorators.BrokenDecorator(), 3);
             } else if (id == 3) {
@@ -107,9 +108,9 @@ class SetGeneratorEliminators : SetGenerator {
                 for (int _ = 0; _ < 3; ++_)
                     generator.AddDecorator(new Decorators.TriangleDecorator(localRng.Next(1, 4), 2), 1);
                 generator.AddDecorator(new Decorators.TetrisDecorator(
-                    RandomTetris(new int[] { 3, 4 }, 4, localRng), true, false, 2), 1);
+                    RandomRectTetris(new int[] { 3, 4 }, localRng), true, false, 2), 1);
                 generator.AddDecorator(new Decorators.TetrisDecorator(
-                    RandomTetris(new int[] { 3, 4 }, 4, localRng), true, false, 2), 1);
+                    RandomRectTetris(new int[] { 3, 4 }, localRng), true, false, 2), 1);
                 generator.AddDecorator(new Decorators.EliminatorDecorator(1), 1);
             }
             ApplyColorScheme(generator.Graph, "InMaze");
@@ -132,6 +133,6 @@ class SetGeneratorEliminators : SetGenerator {
         } else {
             generator = new WitnessGenerator(Graph.RectangularGraph(2, 2));
         }
-        return (generator, solvable);
+        return (generator, solvable, hardness);
     }
 }

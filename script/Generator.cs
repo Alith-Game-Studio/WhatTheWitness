@@ -23,12 +23,10 @@ public class Generator : Node
         Random globalRng = new Random(seed);
         Random localRng = new Random(StringHash(name) + seed);
         SetGenerator setGenerator;
-        bool hardMode = false;
         if (setName == "Challenge: Normal") 
             setGenerator = new SetGeneratorNormal();
         else if (setName == "Challenge: Normal SC") {
             setGenerator = new SetGeneratorNormal();
-            hardMode = true;
         }
         else if (setName == "Challenge: Misc") 
             setGenerator = new SetGeneratorMisc();
@@ -38,13 +36,24 @@ public class Generator : Node
             setGenerator = new SetGeneratorRings();
         else if (setName == "Challenge: Arrows")
             setGenerator = new SetGeneratorArrows();
+        else if (setName == "Challenge: Bee Hive")
+            setGenerator = new SetGeneratorHex();
+        else if (setName == "Challenge: Finite Water")
+            setGenerator = new SetGeneratorFiniteWater();
+        else if (setName == "Challenge: Speed")
+            setGenerator = new SetGeneratorEasy();
         else 
             throw new NotImplementedException();
         setGenerator.Init(globalRng);
         while (true) {
-            (WitnessGenerator generator, bool solvable) = setGenerator.GetGenerator(name, globalRng, localRng);
-            int[] multiSolveVertices = name.Contains("meta1") ? new int[] { 0, 80 } : null;
-            Graph graph = generator.Sample(localRng, solvable, hardMode, multiSolveVertices, 30);
+            (WitnessGenerator generator, bool solvable, double hardness) = setGenerator.GetGenerator(name, globalRng, localRng);
+            int[] multiSolveVertices = name.Contains("meta1") ? new int[] {
+                SetGenerator.GetCornerVertex(generator.Graph, 45).Index,
+                SetGenerator.GetCornerVertex(generator.Graph, -135).Index,
+            } : null;
+            if (generator.MaxTries == -1)  // prevent infinite loop
+                generator.MaxTries = 30;
+            Graph graph = generator.Sample(localRng, solvable, hardness, multiSolveVertices);
             if (graph != null) {
                 generatedPanels[storeKey] = graph;
                 GD.Print("Generated " + name);

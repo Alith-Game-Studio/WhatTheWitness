@@ -440,7 +440,8 @@ func judge_region_water(validator: Validation.Validator, region: Validation.Regi
 			for edge_tuple in facet.edge_tuples:
 				for f in validator.puzzle.edge_shared_facets[edge_tuple]:
 					var v = validator.puzzle.facets[f].center_vertex_index
-					if (validator.vertex_region[v] == validator.vertex_region[facet.center_vertex_index]):
+					var v_edge = validator.puzzle.edge_detector_node[edge_tuple]
+					if (validator.vertex_region[v_edge] >= 0):
 						if (v != facet.center_vertex_index and validator.puzzle.vertices[v].decorator.rule == 'water'):
 							count += 1
 			if (count >= 2):

@@ -20,6 +20,7 @@ var challenge_seed: int = -1
 var challenge_total_time: int
 var challenge_set_name: String
 var level_set: String
+const UNLOCK_ALL_PUZZLES = true
 
 var challenge_music_list = [
 	preload('res://audio/music/Peer Gynt Suite no. 1, Op. 46 - I. Morning Mood.mp3'),

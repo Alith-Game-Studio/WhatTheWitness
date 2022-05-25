@@ -184,6 +184,8 @@ func solve(n_solutions=-1):
 		else:
 			var solution = {}
 			for line in output:
+				if (line == 'unsat'):
+					return solutions
 				if (line.begins_with('ans ') or line == ''):
 					continue
 				elif (line == '$'):

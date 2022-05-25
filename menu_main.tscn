@@ -38,7 +38,7 @@ custom_constants/separation = 21
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 margin_right = 784.0
-margin_bottom = 65.0
+margin_bottom = 94.0
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
@@ -46,28 +46,35 @@ bbcode_text = "[center]What The Witness?[/center]"
 text = "What The Witness?"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
-margin_top = 86.0
+margin_top = 115.0
 margin_right = 784.0
-margin_bottom = 151.0
+margin_bottom = 209.0
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[right]A fan game of The Witness by Alith[/right]
-[right]v1.05.6[/right]"
+[right]v1.05.9[/right]"
 text = "A fan game of The Witness by Alith
-v1.05.6"
+v1.05.9"
 
-[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer"]
-margin_top = 172.0
-margin_right = 784.0
-margin_bottom = 209.0
-theme = ExtResource( 3 )
-text = "PUZZLES"
-
-[node name="ChallengeButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 230.0
 margin_right = 784.0
 margin_bottom = 267.0
+custom_constants/separation = 20
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 382.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+text = "PUZZLES"
+
+[node name="ChallengeButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 402.0
+margin_right = 784.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
 theme = ExtResource( 3 )
 text = "CHALLENGES"
 
@@ -92,8 +99,8 @@ margin_bottom = 441.0
 theme = ExtResource( 3 )
 text = "CREDITS"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ChallengeButton" to="." method="_on_challenge_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ChallengeButton" to="." method="_on_challenge_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SettingButton" to="." method="_on_SettingButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CustomLevelButton" to="." method="_on_custom_level_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
