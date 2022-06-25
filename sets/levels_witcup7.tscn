@@ -2996,9 +2996,6 @@ margin_right = 1680.0
 margin_bottom = 1104.0
 rect_scale = Vector2( 2, 2 )
 text = "$3"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel92" type="RichTextLabel" parent="PuzzlePlaceHolders"]
 margin_left = 1728.0

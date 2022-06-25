@@ -8,7 +8,7 @@ const LEVEL_SETS = {
 	'WitCup 7': ['levels_witcup7.tscn', ''],
 	'WitCup 10': ['levels_witcup10.tscn', ''],
 	'Other WitCups': ['levels.tscn', ''],
-	'Looksy': ['levels_looksy.tscn', ''],
+	'Looksy Sets': ['levels_looksy.tscn', ''],
 	'Challenge: Speed': ['challenge_levels_easy.tscn', '2:34'],
 	'Challenge: Normal': ['challenge_levels.tscn', '6:35'],
 	'Challenge: Normal SC': ['challenge_levels.tscn', '6:35'],

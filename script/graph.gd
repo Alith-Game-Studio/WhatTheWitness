@@ -201,6 +201,7 @@ const MYOPIA_TEXTS = {'\u4E0A': Vector2(0, -1), '\u4E0B': Vector2(0, 1), '\u5DE6
 
 func __add_decorator(puzzle, raw_element, v):
 	var has_plus_text = false
+	var has_cross_text = false
 	var has_circle_text = false
 	var boxed_decorator = false
 	var end_decorator = __find_decorator(raw_element, "EndDecorator")
@@ -399,6 +400,8 @@ func __add_decorator(puzzle, raw_element, v):
 			puzzle.vertices[v].decorator = decorator
 		elif (text_decorator['Text'] == '+'):
 			has_plus_text = true
+		elif (text_decorator['Text'] == 'x'):
+			has_cross_text = true
 		elif (text_decorator['Text'] == 'o'):
 			has_circle_text = true
 		elif (text_decorator['Text'][0] in GRAPH_COUNTER_TEXTS):
@@ -478,12 +481,14 @@ func __add_decorator(puzzle, raw_element, v):
 	if (tetris_decorator):
 		var decorator = __load_tetris(tetris_decorator, false)
 		decorator.is_multi = has_plus_text
+		decorator.is_anti = has_cross_text
 		decorator.is_weak = has_circle_text
 		puzzle.vertices[v].decorator = decorator
 	var hollow_tetris_decorator = __find_decorator(raw_element, "HollowTetrisDecorator")
 	if (hollow_tetris_decorator):
 		var decorator = __load_tetris(hollow_tetris_decorator, true)
 		decorator.is_multi = has_plus_text
+		decorator.is_anti = has_cross_text
 		decorator.is_weak = has_circle_text
 		puzzle.vertices[v].decorator = decorator
 	if (boxed_decorator):

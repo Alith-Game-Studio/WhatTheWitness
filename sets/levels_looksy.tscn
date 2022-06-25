@@ -1,0 +1,256 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://img/hand_drawing/T-shape.png" type="Texture" id=1]
+[ext_resource path="res://img/hand_drawing/circle-arrow.png" type="Texture" id=2]
+[ext_resource path="res://img/hand_drawing/all-error.png" type="Texture" id=3]
+[ext_resource path="res://img/hand_drawing/flag.png" type="Texture" id=4]
+[ext_resource path="res://img/hand_drawing/track.png" type="Texture" id=5]
+[ext_resource path="res://img/hand_drawing/reflection.png" type="Texture" id=6]
+[ext_resource path="res://img/hand_drawing/vanilla.png" type="Texture" id=7]
+[ext_resource path="res://level_lines.tres" type="TileSet" id=22]
+
+[node name="View" type="Node2D"]
+
+[node name="LevelAreaLimit" type="ReferenceRect" parent="."]
+margin_right = 4224.0
+margin_bottom = 3360.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Tags" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Tags"]
+modulate = Color( 1, 1, 1, 0.254902 )
+margin_left = 672.0
+margin_top = 126.0
+margin_right = 768.0
+margin_bottom = 222.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="Tags"]
+modulate = Color( 1, 1, 1, 0.254902 )
+margin_left = 672.0
+margin_top = 510.0
+margin_right = 768.0
+margin_bottom = 606.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect3" type="TextureRect" parent="Tags"]
+modulate = Color( 1, 1, 1, 0.254902 )
+margin_left = 672.0
+margin_top = 894.0
+margin_right = 768.0
+margin_bottom = 990.0
+texture = ExtResource( 5 )
+expand = true
+
+[node name="TextureRect4" type="TextureRect" parent="Tags"]
+modulate = Color( 1, 1, 1, 0.254902 )
+margin_left = 672.0
+margin_top = 1374.0
+margin_right = 768.0
+margin_bottom = 1470.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect5" type="TextureRect" parent="Tags"]
+modulate = Color( 1, 1, 1, 0.254902 )
+margin_left = 672.0
+margin_top = 1854.0
+margin_right = 768.0
+margin_bottom = 1950.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect6" type="TextureRect" parent="Tags"]
+modulate = Color( 1, 1, 1, 0.254902 )
+margin_left = 672.0
+margin_top = 2334.0
+margin_right = 768.0
+margin_bottom = 2430.0
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect7" type="TextureRect" parent="Tags"]
+modulate = Color( 1, 1, 1, 0.254902 )
+margin_left = 672.0
+margin_top = 2910.0
+margin_right = 768.0
+margin_bottom = 3006.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Lines" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 22 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 131077, 131079, 2, 8, 131080, 2, 8, 131081, 2, 8, 131082, 2, 8, 131083, 2, 8, 131084, 2, 8, 131085, 2, 8, 131086, 2, 8, 131087, 2, 8, 131088, 2, 8, 131089, 2, 8, 131090, 2, 8, 131091, 2, 8, 131092, 2, 8, 131093, 2, 8, 131094, 2, 8, 131095, 2, 8, 131096, 2, 8, 131097, 2, 8, 131098, 2, 8, 131099, 2, 8, 131100, 2, 2, 196614, 2, 65538, 262150, 2, 65538, 327686, 2, 65538, 393222, 2, 131083, 393223, 2, 8, 393224, 2, 8, 393225, 2, 8, 393226, 2, 8, 393227, 2, 8, 393228, 2, 8, 393229, 2, 8, 393230, 2, 8, 393231, 2, 8, 393232, 2, 8, 393233, 2, 8, 393234, 2, 8, 393235, 2, 8, 393236, 2, 8, 393237, 2, 8, 393238, 2, 8, 393239, 2, 131077, 393240, 2, 8, 393241, 2, 8, 393242, 2, 8, 393243, 2, 8, 393244, 2, 8, 393245, 2, 8, 393246, 2, 131074, 458758, 2, 65538, 458775, 2, 65538, 458782, 2, 65538, 524294, 2, 65538, 524311, 2, 65538, 524318, 2, 65538, 589830, 2, 65538, 589847, 2, 65538, 589854, 2, 65538, 655366, 2, 196608, 655367, 2, 8, 655368, 2, 8, 655369, 2, 8, 655370, 2, 8, 655371, 2, 8, 655372, 2, 8, 655373, 2, 8, 655374, 2, 8, 655375, 2, 8, 655376, 2, 8, 655377, 2, 8, 655378, 2, 8, 655379, 2, 8, 655380, 2, 8, 655381, 2, 8, 655382, 2, 8, 655383, 2, 3, 655390, 2, 65538, 720902, 2, 65538, 720926, 2, 65538, 786438, 2, 65538, 786462, 2, 65538, 851974, 2, 65538, 851988, 2, 131082, 851989, 2, 8, 851990, 2, 8, 851991, 2, 8, 851992, 2, 8, 851993, 2, 65539, 851998, 2, 65538, 917510, 2, 65538, 917512, 2, 65542, 917513, 2, 8, 917514, 2, 8, 917515, 2, 8, 917516, 2, 8, 917517, 2, 8, 917518, 2, 8, 917519, 2, 8, 917520, 2, 8, 917521, 2, 8, 917522, 2, 8, 917523, 2, 8, 917524, 2, 131075, 917529, 2, 65538, 917534, 2, 65538, 917536, 2, 131082, 917537, 2, 8, 917538, 2, 8, 917539, 2, 8, 917540, 2, 8, 917541, 2, 8, 917542, 2, 2, 983046, 2, 131083, 983047, 2, 8, 983048, 2, 131075, 983060, 2, 65544, 983061, 2, 8, 983062, 2, 8, 983063, 2, 8, 983064, 2, 8, 983065, 2, 131073, 983066, 2, 8, 983067, 2, 8, 983068, 2, 8, 983069, 2, 8, 983070, 2, 131081, 983071, 2, 8, 983072, 2, 65540, 1048582, 2, 65538, 1048584, 2, 7, 1048585, 2, 8, 1048586, 2, 8, 1048587, 2, 8, 1048588, 2, 8, 1048589, 2, 8, 1048590, 2, 8, 1048591, 2, 8, 1048592, 2, 8, 1048593, 2, 8, 1048594, 2, 8, 1048595, 2, 8, 1048596, 2, 65541, 1048601, 2, 65538, 1048606, 2, 65538, 1048608, 2, 6, 1048609, 2, 8, 1048610, 2, 8, 1048611, 2, 8, 1048612, 2, 8, 1048613, 2, 8, 1048614, 2, 2, 1114118, 2, 65538, 1114132, 2, 6, 1114133, 2, 8, 1114134, 2, 8, 1114135, 2, 8, 1114136, 2, 8, 1114137, 2, 3, 1114142, 2, 65538, 1179654, 2, 65538, 1179678, 2, 65538, 1245190, 2, 65538, 1245192, 2, 131082, 1245193, 2, 8, 1245194, 2, 8, 1245195, 2, 8, 1245196, 2, 8, 1245197, 2, 8, 1245198, 2, 131074, 1245214, 2, 65538, 1310726, 2, 131083, 1310727, 2, 8, 1310728, 2, 65541, 1310734, 2, 65544, 1310735, 2, 8, 1310736, 2, 8, 1310737, 2, 8, 1310738, 2, 8, 1310739, 2, 8, 1310740, 2, 8, 1310741, 2, 8, 1310742, 2, 8, 1310743, 2, 8, 1310744, 2, 8, 1310745, 2, 8, 1310746, 2, 8, 1310747, 2, 8, 1310748, 2, 65539, 1310750, 2, 65538, 1376262, 2, 65538, 1376264, 2, 7, 1376265, 2, 8, 1376266, 2, 8, 1376267, 2, 8, 1376268, 2, 8, 1376269, 2, 8, 1376270, 2, 4, 1376284, 2, 65538, 1376286, 2, 65538, 1441798, 2, 65538, 1441820, 2, 65538, 1441822, 2, 65538, 1507334, 2, 65538, 1507356, 2, 65538, 1507358, 2, 65538, 1572870, 2, 65538, 1572880, 2, 65542, 1572881, 2, 8, 1572882, 2, 8, 1572883, 2, 8, 1572884, 2, 65539, 1572886, 2, 65542, 1572887, 2, 8, 1572888, 2, 8, 1572889, 2, 8, 1572890, 2, 65539, 1572892, 2, 65538, 1572894, 2, 65538, 1638406, 2, 65543, 1638407, 2, 8, 1638408, 2, 8, 1638409, 2, 8, 1638410, 2, 8, 1638411, 2, 8, 1638412, 2, 8, 1638413, 2, 8, 1638414, 2, 8, 1638415, 2, 8, 1638416, 2, 65541, 1638420, 2, 196608, 1638421, 2, 8, 1638422, 2, 131075, 1638426, 2, 65544, 1638427, 2, 8, 1638428, 2, 196615, 1638429, 2, 8, 1638430, 2, 4, 1703942, 2, 65538, 1703952, 2, 6, 1703953, 2, 8, 1703954, 2, 8, 1703955, 2, 8, 1703956, 2, 3, 1703958, 2, 6, 1703959, 2, 8, 1703960, 2, 8, 1703961, 2, 8, 1703962, 2, 4, 1703964, 2, 65538, 1769478, 2, 65538, 1769500, 2, 65538, 1835014, 2, 65538, 1835036, 2, 65538, 1900550, 2, 65538, 1900572, 2, 65538, 1966086, 2, 65538, 1966094, 2, 131082, 1966095, 2, 8, 1966096, 2, 8, 1966097, 2, 8, 1966098, 2, 8, 1966099, 2, 8, 1966100, 2, 65539, 1966108, 2, 65538, 2031622, 2, 7, 2031623, 2, 8, 2031624, 2, 8, 2031625, 2, 8, 2031626, 2, 8, 2031627, 2, 8, 2031628, 2, 8, 2031629, 2, 8, 2031630, 2, 131075, 2031636, 2, 131083, 2031637, 2, 8, 2031638, 2, 8, 2031639, 2, 8, 2031640, 2, 8, 2031641, 2, 8, 2031642, 2, 8, 2031643, 2, 8, 2031644, 2, 3, 2097166, 2, 6, 2097167, 2, 8, 2097168, 2, 8, 2097169, 2, 8, 2097170, 2, 8, 2097171, 2, 8, 2097172, 2, 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Lights" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 22 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131074, 3, 0 )
+
+[node name="Gadgets" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 22 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 393239, 4, 0, 983060, 4, 0, 983065, 4, 0, 983070, 4, 0, 1310734, 4, 0, 1638420, 4, 0, 1638428, 4, 0, 2031636, 4, 0 )
+
+[node name="PuzzlePlaceHolders" type="Node2D" parent="."]
+
+[node name="TextEdit" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 192.0
+margin_top = 192.0
+margin_right = 288.0
+margin_bottom = 288.0
+text = "wc7-N00"
+wrap_enabled = true
+
+[node name="TextEdit2" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 768.0
+margin_top = 192.0
+margin_right = 864.0
+margin_bottom = 288.0
+text = "Looksy-Anti-01"
+wrap_enabled = true
+
+[node name="TextEdit3" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 192.0
+margin_right = 960.0
+margin_bottom = 288.0
+text = "Looksy-Anti-02"
+wrap_enabled = true
+
+[node name="TextEdit4" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 192.0
+margin_right = 1056.0
+margin_bottom = 288.0
+text = "Looksy-Anti-03"
+wrap_enabled = true
+
+[node name="TextEdit5" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 192.0
+margin_right = 1152.0
+margin_bottom = 288.0
+text = "Looksy-Anti-04"
+wrap_enabled = true
+
+[node name="TextEdit6" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 192.0
+margin_right = 1248.0
+margin_bottom = 288.0
+text = "Looksy-Anti-05"
+wrap_enabled = true
+
+[node name="TextEdit7" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1344.0
+margin_top = 192.0
+margin_right = 1440.0
+margin_bottom = 288.0
+text = "Looksy-Anti-06"
+wrap_enabled = true
+
+[node name="TextEdit8" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 192.0
+margin_right = 1536.0
+margin_bottom = 288.0
+text = "Looksy-Anti-07"
+wrap_enabled = true
+
+[node name="TextEdit9" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1536.0
+margin_top = 192.0
+margin_right = 1632.0
+margin_bottom = 288.0
+text = "Looksy-Anti-08"
+wrap_enabled = true
+
+[node name="TextEdit10" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 192.0
+margin_right = 1728.0
+margin_bottom = 288.0
+text = "Looksy-Anti-09"
+wrap_enabled = true
+
+[node name="TextEdit11" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1728.0
+margin_top = 192.0
+margin_right = 1824.0
+margin_bottom = 288.0
+text = "Looksy-Anti-10"
+wrap_enabled = true
+
+[node name="TextEdit12" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1920.0
+margin_top = 192.0
+margin_right = 2016.0
+margin_bottom = 288.0
+text = "Looksy-Anti-11"
+wrap_enabled = true
+
+[node name="TextEdit13" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2016.0
+margin_top = 192.0
+margin_right = 2112.0
+margin_bottom = 288.0
+text = "Looksy-Anti-12"
+wrap_enabled = true
+
+[node name="TextEdit14" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2112.0
+margin_top = 192.0
+margin_right = 2208.0
+margin_bottom = 288.0
+text = "Looksy-Anti-13"
+wrap_enabled = true
+
+[node name="TextEdit15" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 192.0
+margin_right = 2304.0
+margin_bottom = 288.0
+text = "Looksy-Anti-14"
+wrap_enabled = true
+
+[node name="TextEdit16" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2304.0
+margin_top = 192.0
+margin_right = 2400.0
+margin_bottom = 288.0
+text = "Looksy-Anti-15"
+wrap_enabled = true
+
+[node name="Masks" type="Node2D" parent="."]
