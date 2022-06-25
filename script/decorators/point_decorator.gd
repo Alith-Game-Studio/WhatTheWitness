@@ -12,3 +12,6 @@ func draw_foreground(canvas: Visualizer.PuzzleCanvas, owner, owner_type: int, pu
 	
 func draw_below_solution(canvas, owner, owner_type, puzzle, solution):
 	return draw_foreground(canvas, owner, owner_type, puzzle)
+
+func draw_question_mark(canvas, owner, owner_type: int, puzzle: Graph.Puzzle):
+	return draw_foreground(canvas, owner, owner_type, puzzle)

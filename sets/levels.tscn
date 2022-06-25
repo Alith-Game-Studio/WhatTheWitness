@@ -1617,9 +1617,6 @@ margin_bottom = 2400.0
 rect_pivot_offset = Vector2( 48, 96 )
 text = "wc7-E08"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit73" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = -480.0
@@ -1629,9 +1626,6 @@ margin_bottom = 2400.0
 rect_pivot_offset = Vector2( 48, 96 )
 text = "wc7-E09"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit74" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = -576.0

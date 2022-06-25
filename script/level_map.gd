@@ -81,8 +81,9 @@ func _ready():
 	var pos_points = {}
 	var masks_map = {}
 	var masks = $Menu/View/Masks
-	for mask in masks.get_children():
-		masks_map[mask.name] = mask
+	if masks != null:
+		for mask in masks.get_children():
+			masks_map[mask.name] = mask
 	for placeholder in placeholders:
 		if (placeholder.text.begins_with('$')):
 			var cell_pos = placeholder.get_position() / 96

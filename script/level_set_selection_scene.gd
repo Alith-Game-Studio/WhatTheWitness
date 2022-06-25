@@ -1,10 +1,14 @@
 extends Node2D
 
 onready var seed_text = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/SeedText
-onready var set_buttons = $MarginContainer/VBoxContainer/HBoxContainer/SetButtons
+onready var set_buttons = $MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons
 onready var description_box = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/DescriptionBox
 onready var menu_bar_button = $MenuBarButton
 const LEVEL_SETS = {
+	'WitCup 7': ['levels_witcup7.tscn', ''],
+	'WitCup 10': ['levels_witcup10.tscn', ''],
+	'Other WitCups': ['levels.tscn', ''],
+	'Looksy': ['levels_looksy.tscn', ''],
 	'Challenge: Speed': ['challenge_levels_easy.tscn', '2:34'],
 	'Challenge: Normal': ['challenge_levels.tscn', '6:35'],
 	'Challenge: Normal SC': ['challenge_levels.tscn', '6:35'],
@@ -40,14 +44,15 @@ func select_set(set_name: String):
 			return
 		Gameplay.challenge_seed = encode_seed(seed_text.text)
 		Gameplay.challenge_mode = true
+		var split_time = LEVEL_SETS[set_name][1].split(':')
+		var time = int(split_time[0]) * 60 + int(split_time[1])
+		Gameplay.challenge_total_time = time
+		Gameplay.challenge_set_name = set_name
+		Gameplay.total_challenge_music_tracks = 1 if time <= 154 else 2 if time <= 395 else 3 if time <= 669 else 4
+	
 	else:
 		Gameplay.challenge_mode = false
-	Gameplay.challenge_set_name = set_name
 	Gameplay.level_set = LEVEL_SETS[set_name][0]
-	var split_time = LEVEL_SETS[set_name][1].split(':')
-	var time = int(split_time[0]) * 60 + int(split_time[1])
-	Gameplay.challenge_total_time = time
-	Gameplay.total_challenge_music_tracks = 1 if time <= 154 else 2 if time <= 395 else 3 if time <= 669 else 4
 	get_tree().change_scene("res://level_map.tscn")
 		
 
