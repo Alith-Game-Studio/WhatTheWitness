@@ -3,8 +3,6 @@ extends Node2D
 onready var checkbox = $MarginContainer/VBoxContainer/CheckBox
 
 func start_game():
-	Gameplay.challenge_mode = false
-	Gameplay.level_set = 'levels.tscn'
 	get_tree().change_scene("res://level_map.tscn")
 
 func _ready():

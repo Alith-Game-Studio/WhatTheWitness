@@ -316,6 +316,11 @@ func __add_decorator(puzzle, raw_element, v):
 			var decorator = load('res://script/decorators/collapse_decorator.gd').new()
 			decorator.color = color(text_decorator['Color'])
 			puzzle.vertices[v].decorator = decorator
+		elif (text_decorator['Text'].to_lower() == '\u27F1'): # droplet
+			var decorator = load('res://script/decorators/droplet_decorator.gd').new()
+			decorator.color = color(text_decorator['Color'])
+			decorator.angle = deg2rad(float(text_decorator['Angle']))
+			puzzle.vertices[v].decorator = decorator
 		elif (text_decorator['Text'].to_lower() == '\u2B6E'): # clockwise arrow
 			var decorator = load('res://script/decorators/circle_arrow_decorator.gd').new()
 			decorator.color = color(text_decorator['Color'])

@@ -61,17 +61,19 @@ scroll_horizontal_enabled = false
 
 [node name="SetButtons" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
 margin_right = 448.0
-margin_bottom = 675.0
+margin_bottom = 443.0
 size_flags_horizontal = 3
 custom_constants/separation = 21
 
 [node name="Button10" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons"]
+visible = false
 margin_right = 448.0
 margin_bottom = 37.0
 theme = ExtResource( 5 )
 text = "WitCup 7"
 
 [node name="Button11" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons"]
+visible = false
 margin_top = 58.0
 margin_right = 448.0
 margin_bottom = 95.0
@@ -79,6 +81,7 @@ theme = ExtResource( 5 )
 text = "WitCup 10"
 
 [node name="Button12" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons"]
+visible = false
 margin_top = 116.0
 margin_right = 448.0
 margin_bottom = 153.0
@@ -86,6 +89,7 @@ theme = ExtResource( 5 )
 text = "Other WitCups"
 
 [node name="Button13" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons"]
+visible = false
 margin_top = 174.0
 margin_right = 448.0
 margin_bottom = 211.0
@@ -93,58 +97,57 @@ theme = ExtResource( 5 )
 text = "Looksy Sets"
 
 [node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons"]
-margin_top = 232.0
 margin_right = 448.0
-margin_bottom = 269.0
+margin_bottom = 37.0
 theme = ExtResource( 5 )
 text = "Challenge: Normal"
 
 [node name="Button4" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons"]
-margin_top = 290.0
+margin_top = 58.0
 margin_right = 448.0
-margin_bottom = 327.0
+margin_bottom = 95.0
 theme = ExtResource( 5 )
 text = "Challenge: Eliminators"
 
 [node name="Button5" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons"]
-margin_top = 348.0
+margin_top = 116.0
 margin_right = 448.0
-margin_bottom = 385.0
+margin_bottom = 153.0
 theme = ExtResource( 5 )
 text = "Challenge: Rings"
 
 [node name="Button6" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons"]
-margin_top = 406.0
+margin_top = 174.0
 margin_right = 448.0
-margin_bottom = 443.0
+margin_bottom = 211.0
 theme = ExtResource( 5 )
 text = "Challenge: Arrows"
 
 [node name="Button7" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons"]
-margin_top = 464.0
+margin_top = 232.0
 margin_right = 448.0
-margin_bottom = 501.0
+margin_bottom = 269.0
 theme = ExtResource( 5 )
 text = "Challenge: Bee Hive"
 
 [node name="Button9" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons"]
-margin_top = 522.0
+margin_top = 290.0
 margin_right = 448.0
-margin_bottom = 559.0
+margin_bottom = 327.0
 theme = ExtResource( 5 )
 text = "Challenge: Speed"
 
 [node name="Button8" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons"]
-margin_top = 580.0
+margin_top = 348.0
 margin_right = 448.0
-margin_bottom = 617.0
+margin_bottom = 385.0
 theme = ExtResource( 5 )
 text = "Challenge: Finite Water"
 
 [node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/SetButtons"]
-margin_top = 638.0
+margin_top = 406.0
 margin_right = 448.0
-margin_bottom = 675.0
+margin_bottom = 443.0
 theme = ExtResource( 5 )
 text = "Challenge: Misc"
 

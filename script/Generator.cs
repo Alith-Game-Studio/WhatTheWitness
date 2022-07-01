@@ -42,6 +42,8 @@ public class Generator : Node
             setGenerator = new SetGeneratorFiniteWater();
         else if (setName == "Challenge: Speed")
             setGenerator = new SetGeneratorEasy();
+        else if (setName == "Challenge: Antipolynomino")
+            setGenerator = new SetGeneratorAntipolynomino();
         else 
             throw new NotImplementedException();
         setGenerator.Init(globalRng);

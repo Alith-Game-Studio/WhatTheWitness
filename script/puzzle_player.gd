@@ -96,8 +96,14 @@ func _input(event):
 							SaveData.update(Gameplay.puzzle_name, Gameplay.solution.save_to_string(Gameplay.puzzle))
 							if (Gameplay.puzzle_name in MenuData.puzzle_preview_panels):
 								MenuData.puzzle_preview_panels[Gameplay.puzzle_name].update_puzzle()
-							if (Gameplay.puzzle_name.begins_with('[C]music-box') and Gameplay.challenge_mode):
-								level_map.start_challenge()
+							if (Gameplay.puzzle_name.begins_with('[C]music-box')):
+								if (Gameplay.challenge_mode):
+									if (len(Gameplay.solution.save_to_string(Gameplay.puzzle).split(',')) <= 2):
+										level_map.clear_challenge()
+									else:
+										level_map.start_challenge()
+							if (Gameplay.puzzle_name.begins_with('[C]seed')):
+								Gameplay.solution_to_seed(Gameplay.solution, Gameplay.puzzle)
 							level_map.update_counter()
 						right_arrow_button.show()
 						left_arrow_button.show()

@@ -31,7 +31,7 @@ var challenge_time_out = false
 var challenge_playing_last_music = false
 var track_list : Array
 
-const LOADING_BATCH_SIZE = 10
+const LOADING_BATCH_SIZE = 20
 
 const DIR_X = [-1, 0, 1, 0]
 const DIR_Y = [0, -1, 0, 1]
@@ -66,6 +66,8 @@ func _ready():
 	if (Gameplay.challenge_mode):
 		puzzle_set_label.text = '%s (#%d)' % [tr(Gameplay.challenge_set_name), Gameplay.challenge_seed]
 		Gameplay.challenge_start_time = 0
+	else:
+		Gameplay.solution_to_seed(null, null)
 	
 	# preprocessing
 	volume_button.visible = false
@@ -106,16 +108,16 @@ func _ready():
 					child_pos += Vector2(96, 0)
 					int_cell_pos = [int_cell_pos[0] + 1, int_cell_pos[1]]
 			placeholder.get_parent().remove_child(placeholder)
-	placeholders = puzzle_placeholders.get_children()
+		placeholder = puzzle_placeholders.get_children()
 	var processed_placeholder_count = 0
 	var total_placeholder_count = 0
 	for placeholder in placeholders:
 		var puzzle_file = placeholder.text + '.wit'
-		if (!placeholder.text.begins_with('$') and (puzzle_file in files or '[?]' in puzzle_file)):
+		if (!placeholder.text.begins_with('$') and (puzzle_file in files or '?' in puzzle_file)):
 			total_placeholder_count += 1
 	for placeholder in placeholders:
 		var puzzle_file = placeholder.text + '.wit'
-		if (!placeholder.text.begins_with('$') and (puzzle_file in files or '[?]' in puzzle_file)):
+		if (!placeholder.text.begins_with('$') and (puzzle_file in files or '?' in puzzle_file)):
 			var target = MenuData.puzzle_preview_prefab.instance()
 			MenuData.puzzle_preview_panels[puzzle_file] = target
 			view.add_child(target)
@@ -132,6 +134,10 @@ func _ready():
 			MenuData.puzzle_points[puzzle_file] = 0
 			if (int_cell_pos in pos_points):
 				MenuData.puzzle_points[puzzle_file] = pos_points[int_cell_pos]
+			if ('<?' in puzzle_file):
+				var pos1 = puzzle_file.find('<?') + 2
+				var pos2 = puzzle_file.find('>')
+				target.challenge_set_name = puzzle_file.substr(pos1, pos2 - pos1)
 			target.points = MenuData.puzzle_points[puzzle_file]
 			for mask_name in masks_map:
 				if (mask_name in puzzle_file):
@@ -169,7 +175,8 @@ func update_counter():
 			if(SaveData.puzzle_solved(puzzle_file)):
 				solved_count += 1
 				score += MenuData.puzzle_points[puzzle_file]
-			puzzle_count += 1
+			if (not puzzle_file.begins_with('[C]seed')):
+				puzzle_count += 1
 			total_score += MenuData.puzzle_points[puzzle_file]
 		if (total_score > 0):
 			puzzle_counter_text.bbcode_text = '[right]%d / %d (%d / %d pts)[/right] ' % [solved_count, puzzle_count, score, total_score]
@@ -298,7 +305,10 @@ func _on_menu_bar_button_mouse_exited():
 	menu_bar_button.modulate = Color(menu_bar_button.modulate.r, menu_bar_button.modulate.g, menu_bar_button.modulate.b, 1.0)
 
 func _on_menu_bar_button_pressed():
-	get_tree().change_scene("res://menu_main.tscn")
+	if (Gameplay.challenge_mode):
+		Gameplay.select_set('Challenges')
+	else:
+		get_tree().change_scene("res://menu_main.tscn")
 
 
 func _on_ChallengeTimer_timeout():
@@ -333,9 +343,15 @@ func _on_music_player_finished():
 			music_player.stream = stream
 			music_player.play()
 			return
+
+
+func clear_challenge():
+	SaveData.update_challenge(Gameplay.challenge_set_name, -1.0, true)
+	Gameplay.select_set(Gameplay.challenge_set_name)
 	
 func start_challenge():
 	if (challenge_timer.is_stopped()):
+		SaveData.update_challenge(Gameplay.challenge_set_name, -1.0)
 		Gameplay.start_challenge()
 		challenge_timer.start()
 		Gameplay.challenge_music_track = Gameplay.total_challenge_music_tracks
@@ -360,7 +376,9 @@ func win_challenge():
 	puzzle_set_label.text += ". " + tr('YOU_WIN')
 	challenge_timer.stop() 
 	music_player.stop()
-	
+	if (not challenge_time_out):
+		SaveData.update_challenge(Gameplay.challenge_set_name, Gameplay.get_current_challenge_time() / 1000.0)
+	MenuData.puzzle_preview_panels['[C]music-box.wit'].update_puzzle(true)
 
 func _on_volume_button_pressed():
 	volume = !volume
@@ -382,7 +400,7 @@ func _on_volume_button_mouse_exited():
 
 
 func _on_restart_button_pressed():
-	get_tree().change_scene("res://level_set_selection_scene.tscn")
+	Gameplay.select_set('Challenges')
 
 
 func _on_continue_button_pressed():

@@ -20,7 +20,8 @@ var challenge_seed: int = -1
 var challenge_total_time: int
 var challenge_set_name: String
 var level_set: String
-const UNLOCK_ALL_PUZZLES = false
+var switch_level_set: String
+const UNLOCK_ALL_PUZZLES = true
 
 var challenge_music_list = [
 	preload('res://audio/music/Peer Gynt Suite no. 1, Op. 46 - I. Morning Mood.mp3'),
@@ -30,6 +31,23 @@ var challenge_music_list = [
 ]
 var challenge_music_track = -1
 var total_challenge_music_tracks = 2
+const LEVEL_SETS = {
+	'Challenges': ['levels_challenges.tscn', ''],
+	'WitCup 7': ['levels_witcup7.tscn', ''],
+	'WitCup 10': ['levels_witcup10.tscn', ''],
+	'Other WitCups': ['levels.tscn', ''],
+	'Looksy Sets': ['levels_looksy.tscn', ''],
+	'Challenge: Speed': ['challenge_levels_easy.tscn', '2:34'],
+	'Challenge: Normal': ['challenge_levels.tscn', '6:35'],
+	'Challenge: Normal SC': ['challenge_levels.tscn', '6:35'],
+	'Challenge: Misc': ['challenge_levels_misc.tscn', '14:58'],
+	'Challenge: Eliminators': ['challenge_levels.tscn', '11:09'],
+	'Challenge: Rings': ['challenge_levels_ring.tscn', '6:35'],
+	'Challenge: Arrows': ['challenge_levels_arrow.tscn', '6:35'],
+	'Challenge: Bee Hive': ['challenge_levels_hex.tscn', '6:35'],
+	'Challenge: Finite Water': ['challenge_levels.tscn', '11:09'],
+	'Challenge: Antipolynomino': ['challenge_levels_arrow.tscn', '6:35'],
+}
 
 func start_challenge():
 	challenge_start_time = OS.get_ticks_msec()
@@ -67,3 +85,58 @@ func update_mouse_speed():
 		mouse_speed = exp(setting['mouse_speed'])
 	else:
 		mouse_speed = 1.0
+
+func select_set(set_name: String):
+	if (set_name.begins_with('Challenge:')):
+		if (challenge_seed == -1):
+			challenge_seed = int(rand_range(0, 1000000000))
+		challenge_mode = true
+		var split_time = LEVEL_SETS[set_name][1].split(':')
+		var time = int(split_time[0]) * 60 + int(split_time[1])
+		challenge_total_time = time
+		challenge_set_name = set_name
+		total_challenge_music_tracks = 1 if time <= 154 else 2 if time <= 395 else 3 if time <= 669 else 4
+	else:
+		challenge_mode = false
+	level_set = LEVEL_SETS[set_name][0]
+	get_tree().change_scene("res://level_map.tscn")
+
+func encode_seed(seed_str: String):
+	print(seed_str)
+	var is_str = false
+	for i in range(len(seed_str)):
+		if (seed_str.ord_at(i) < 48 or seed_str.ord_at(i) > 57):
+			is_str = true
+			break
+	if (not is_str):
+		return int(seed_str)
+	else:
+		var result = 0
+		for i in range(len(seed_str)):
+			result = result * 31 + seed_str.ord_at(i)
+		return result
+
+func solution_to_seed(solution, puzzle):
+	if (solution != null):
+		var solution_str = solution.save_to_string(puzzle)
+		var split = solution_str.substr(0, len(solution_str) - 1).split(',')
+		var result = 0
+		for item in split:
+			var v_id = int(item)
+			var pos = puzzle.vertices[v_id].pos * 2
+			var pos_x = int(pos[0])
+			var pos_y = int(pos[1])
+			if (pos_y % 2 == 1):
+				result += (pos_x / 2 - 1) * pow(10, pos_y / 2 - 1)
+		if (len(split) <= 2):
+			challenge_seed = -1
+		else:
+			challenge_seed = int(result)
+	else:
+		challenge_seed = -1
+	var seed_label = $"/root/LevelMap/Menu/View/Tags/SeedLabel"
+	if (seed_label != null):
+		seed_label.text = tr('SEED') + ': ' + (tr('RANDOM') if challenge_seed == -1 else str(challenge_seed))
+							
+	
+

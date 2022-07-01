@@ -52,8 +52,8 @@ public abstract class SetGenerator {
             list[n] = value;
         }
     }
-    public static Vector[][] RandomRectTetris(int size, Random rng) {
-        int[][] choices = RECT_POLYMINO_INDICES[size];
+    public static Vector[][] RandomRectTetris(int size, Random rng, int[][][] template=null) {
+        int[][] choices = (template ?? RECT_POLYMINO_INDICES)[size];
         int[] choice = choices[rng.Next(choices.Length)];
         IEnumerable<Vector[]> shapes = choice.Select(center => new Vector[] {
             new Vector(center / 10, center % 10),
@@ -182,6 +182,14 @@ public abstract class SetGenerator {
             if (graph.NumWays == 2)
                 graph.LineColorMap = new List<string>() { "BlueViolet", "BlueViolet" };
             graph.ColorMap = new List<string>() { "Black", "White", "Yellow", "BlueViolet" };
+        } else if (scheme == "Antipolynomino") {
+            graph.BackgroundColor = "Gray";
+            graph.ForegroundColor = "DarkRed";
+            if (graph.NumWays == 1)
+                graph.LineColorMap = new List<string>() { "Yellow" };
+            if (graph.NumWays == 2)
+                graph.LineColorMap = new List<string>() { "Yellow", "Aqua" };
+            graph.ColorMap = new List<string>() { "Black", "White", "Yellow", "#C00000", "#404040" };
         }
     }
 }

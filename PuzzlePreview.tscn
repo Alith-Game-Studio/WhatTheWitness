@@ -1,9 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://script/puzzle_preview.gd" type="Script" id=1]
 [ext_resource path="res://font/DroidSansMono.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://img/lock-padlock-symbol-for-protect-cc.png" type="Texture" id=3]
 [ext_resource path="res://font/LibreBaskerville-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://font/wqy-MicroHei.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=5]
+size = 36
+font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0.392157 )
@@ -17,13 +22,10 @@ bg_color = Color( 0, 0, 0, 0 )
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 36
-font_data = ExtResource( 2 )
-
 [sub_resource type="DynamicFont" id=6]
 size = 64
 font_data = ExtResource( 4 )
+fallback/0 = ExtResource( 5 )
 
 [node name="Node2D" type="Node2D"]
 scale = Vector2( 0.375, 0.375 )
@@ -36,9 +38,6 @@ margin_bottom = 256.0
 rect_min_size = Vector2( 1, 1 )
 rect_pivot_offset = Vector2( 128, 128 )
 color = Color( 0.398438, 0.398438, 0.398438, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="PuzzleVisualizer" type="TextureRect" parent="PuzzlePreview"]
 margin_left = 6.0
@@ -47,35 +46,30 @@ margin_right = 250.0
 margin_bottom = 250.0
 texture = ExtResource( 3 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Button" type="Button" parent="PuzzlePreview"]
 margin_right = 256.0
 margin_bottom = 256.0
 focus_mode = 0
+custom_fonts/font = SubResource( 5 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
 enabled_focus_mode = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PointsLabel" type="RichTextLabel" parent="PuzzlePreview"]
-margin_top = 255.75
-margin_right = 256.0
-margin_bottom = 362.75
+margin_left = -512.0
+margin_top = 256.0
+margin_right = 768.0
+margin_bottom = 512.0
 custom_fonts/normal_font = SubResource( 6 )
 bbcode_enabled = true
 bbcode_text = "[center] [/center]"
 text = " "
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="PuzzlePreview/PointsLabel"]
 visible = false

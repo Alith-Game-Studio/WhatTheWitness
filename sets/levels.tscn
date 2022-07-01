@@ -2668,9 +2668,6 @@ margin_right = 3600.0
 margin_bottom = 1296.0
 rect_scale = Vector2( 2, 2 )
 text = "$15"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit134" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 192.0
@@ -2739,9 +2736,6 @@ margin_right = 288.0
 margin_bottom = 288.0
 text = "witness-intro-1-a"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit137" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1440.0
@@ -2750,9 +2744,6 @@ margin_right = 1536.0
 margin_bottom = 1248.0
 text = "wc1-B101"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit138" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 864.0
@@ -2761,9 +2752,6 @@ margin_right = 960.0
 margin_bottom = 1344.0
 text = "Alith-ring-tutorial1"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit139" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 864.0
@@ -2772,9 +2760,6 @@ margin_right = 960.0
 margin_bottom = 2112.0
 text = "wc2-C01"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit140" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 864.0
@@ -2871,9 +2856,6 @@ margin_right = 1056.0
 margin_bottom = 4128.0
 text = "rpg-arrow-T1"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit149" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 864.0
@@ -2882,9 +2864,6 @@ margin_right = 960.0
 margin_bottom = 4128.0
 text = "rpg-arrow-T0"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit150" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1056.0
@@ -2893,9 +2872,6 @@ margin_right = 1152.0
 margin_bottom = 4128.0
 text = "rpg-arrow-T2"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit151" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1152.0
@@ -2904,9 +2880,6 @@ margin_right = 1248.0
 margin_bottom = 4128.0
 text = "rpg-arrow-T3"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit152" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1248.0
@@ -2915,9 +2888,6 @@ margin_right = 1344.0
 margin_bottom = 4128.0
 text = "rpg-arrow-CaveEntrance"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit153" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1632.0
@@ -3245,9 +3215,6 @@ margin_right = 1056.0
 margin_bottom = 2112.0
 text = "wc2-C02"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit183" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1056.0
@@ -3256,9 +3223,6 @@ margin_right = 1152.0
 margin_bottom = 2112.0
 text = "wc2-C03"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit184" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1152.0
@@ -3267,9 +3231,6 @@ margin_right = 1248.0
 margin_bottom = 2112.0
 text = "wc2-C04"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit185" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1728.0
@@ -3421,9 +3382,6 @@ margin_right = 1056.0
 margin_bottom = 1344.0
 text = "Alith-ring-tutorial2"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit199" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1056.0
@@ -3432,9 +3390,6 @@ margin_right = 1152.0
 margin_bottom = 1344.0
 text = "Alith-ring-tutorial3"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit200" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 2112.0
@@ -3454,9 +3409,6 @@ margin_right = 1248.0
 margin_bottom = 1344.0
 text = "Alith-ring-tutorial4"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit202" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1248.0
@@ -3465,9 +3417,6 @@ margin_right = 1344.0
 margin_bottom = 1344.0
 text = "Alith-ring-tutorial5"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit203" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1536.0
@@ -3476,9 +3425,6 @@ margin_right = 1632.0
 margin_bottom = 1248.0
 text = "wc1-B102"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit204" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1632.0
@@ -3487,9 +3433,6 @@ margin_right = 1728.0
 margin_bottom = 1248.0
 text = "wc1-B103"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit205" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1440.0
@@ -3498,9 +3441,6 @@ margin_right = 1536.0
 margin_bottom = 1440.0
 text = "wc1-B104"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit206" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1536.0
@@ -3509,9 +3449,6 @@ margin_right = 1632.0
 margin_bottom = 1440.0
 text = "wc1-B105"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit207" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 1632.0
@@ -3520,9 +3457,6 @@ margin_right = 1728.0
 margin_bottom = 1440.0
 text = "wc1-B106"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit208" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 2112.0

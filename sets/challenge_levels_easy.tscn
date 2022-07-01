@@ -50,9 +50,6 @@ margin_right = 288.0
 margin_bottom = 288.0
 text = "[C]music-box"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextEdit139" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 576.0

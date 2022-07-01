@@ -4,7 +4,42 @@ var saved_solutions = {}
 const SAVE_PATH = "user://savegame.save"
 const LEGACY_SAVE_PATH = "/Godot/app_userdata/WitCup10/savegame.save"
 
+func update_challenge(set_name: String, time: float, clear=false):
+	var key = '?' + set_name
+	var statistics = get_challenge_statistics(set_name)
+	if (time < 0):
+		statistics['start_count'] += 1
+	else:
+		statistics['win_count'] += 1
+		statistics['total_time'] += time
+		statistics['min_time'] = time if statistics['min_time'] < 0 else min(statistics['min_time'], time)
+		statistics['passed'] = 1
+	if clear:
+		statistics['start_count'] = 0
+		statistics['win_count'] = 0
+		statistics['total_time'] = 0.0
+		statistics['min_time'] = -1.0
+	saved_solutions[key] = statistics
+	save_all()
+
+func get_challenge_statistics(set_name: String):
+	var key = '?' + set_name
+	var statistics
+	if (key in saved_solutions):
+		statistics = saved_solutions[key]
+	else:
+		statistics = {'start_count': 0, 'win_count': 0, 'total_time': 0.0, 'min_time': -1.0}
+	return statistics
+
 func puzzle_solved(puzzle_name):
+	if (puzzle_name.begins_with('[C]seed')):
+		return false
+	if ('<?' in puzzle_name):
+		var pos1 = puzzle_name.find('<?') + 2
+		var pos2 = puzzle_name.find('>')
+		var challenge_set_name = puzzle_name.substr(pos1, pos2 - pos1)
+		var key = '?Challenge: ' + challenge_set_name
+		return key in saved_solutions and 'passed' in saved_solutions[key]
 	return puzzle_name in saved_solutions
 
 func update(puzzle_name: String, solution_string: String):
@@ -59,9 +94,12 @@ func load_all():
 			save_game.open(old_save_path + '.bak', File.WRITE)
 			save_game.store_string(line)
 			save_game.close()
+	var keys_to_remove = []
 	for key in saved_solutions:
 		if (key.begins_with('[C]')): # challenge puzzles are not saved
-			saved_solutions.erase(key)
+			keys_to_remove.append(key)
+	for key in keys_to_remove:
+		saved_solutions.erase(key)
 
 func clear():
 	var save_game = File.new()

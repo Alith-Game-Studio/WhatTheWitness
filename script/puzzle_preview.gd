@@ -11,6 +11,7 @@ var puzzle_name
 var puzzle_unlocked
 var linked_solution_texture : TextureRect
 var points = 0
+var challenge_set_name : String = ''
 var masks 
 
 func update_solution_texture():
@@ -35,7 +36,10 @@ func update_solution_texture():
 		linked_solution_texture.texture = image_texture
 
 	
-
+func format_time(sec):
+	var secs = int(round(sec))
+	return '%d:%02d' % [int(secs / 60), secs % 60]
+	
 func show_puzzle(load_puzzle_name, unlocked=true):
 	puzzle_name = load_puzzle_name
 	puzzle_unlocked = unlocked
@@ -70,6 +74,21 @@ func show_puzzle(load_puzzle_name, unlocked=true):
 	else:
 		points_label.modulate = Color.white
 		delete_bar.visible = false
+	if (puzzle_name.begins_with('[C]music-box')):
+		var set_name = ('Challenge: ' + challenge_set_name) if challenge_set_name != '' else Gameplay.challenge_set_name
+		var time = Gameplay.LEVEL_SETS[set_name][1]
+		var statistics = SaveData.get_challenge_statistics(set_name)
+		points_label.bbcode_text = '[center]%s (%s)\n%s: %d/%d\n%s: %s %s: %s[/center]' % [
+			tr(set_name),
+			time,
+			tr('WIN'),
+			statistics['win_count'], statistics['start_count'],
+			tr('AVG'),
+			format_time(statistics['total_time'] / statistics['win_count'] if statistics['win_count'] > 0 else 0.0),
+			tr('MIN'),
+			format_time(max(statistics['min_time'], 0.0))
+			
+		]
 		
 func update_puzzle(unlocked=true):
 	show_puzzle(puzzle_name, unlocked)
@@ -77,13 +96,16 @@ func update_puzzle(unlocked=true):
 func _on_Button_pressed():
 	if (puzzle_unlocked and test_mask()):
 		_on_Button_mouse_exited()
-		Gameplay.puzzle_name = puzzle_name
-		Gameplay.playing_custom_puzzle = false
-		$"/root/LevelMap/PuzzleUI".load_puzzle(Gameplay.PUZZLE_FOLDER + Gameplay.puzzle_name)
-		$"/root/LevelMap/PuzzleUI".show()
-		$"/root/LevelMap/Menu".hide()
-		MenuData.can_drag_map = false
-		puzzle_credit_text.bbcode_text = ''
+		if (puzzle_name.begins_with('[C]music-box<?')):
+			Gameplay.select_set('Challenge: ' + challenge_set_name)
+		else:
+			Gameplay.puzzle_name = puzzle_name
+			Gameplay.playing_custom_puzzle = false
+			$"/root/LevelMap/PuzzleUI".load_puzzle(Gameplay.PUZZLE_FOLDER + Gameplay.puzzle_name)
+			$"/root/LevelMap/PuzzleUI".show()
+			$"/root/LevelMap/Menu".hide()
+			MenuData.can_drag_map = false
+			puzzle_credit_text.bbcode_text = ''
 	
 func _on_Button_mouse_entered():
 	if (puzzle_unlocked):

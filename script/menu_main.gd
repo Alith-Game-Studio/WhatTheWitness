@@ -3,10 +3,13 @@ extends Node2D
 onready var custom_level_button = $MarginContainer/VBoxContainer/CustomLevelButton
 
 func _on_start_button_pressed():
+	Gameplay.challenge_mode = false
+	Gameplay.level_set = 'levels.tscn'
 	get_tree().change_scene("res://warning_scene.tscn")
 
 
 func _ready():
+	randomize()
 	if (!Gameplay.loaded_from_command_line):
 		var args = OS.get_cmdline_args()
 		Gameplay.drag_custom_levels(args, null)
@@ -31,5 +34,7 @@ func _on_SettingButton_pressed():
 
 
 func _on_challenge_button_pressed():
-	get_tree().change_scene("res://level_set_selection_scene.tscn")
+	Gameplay.challenge_mode = false
+	Gameplay.level_set = 'levels_challenges.tscn'
+	get_tree().change_scene("res://warning_scene.tscn")
 	

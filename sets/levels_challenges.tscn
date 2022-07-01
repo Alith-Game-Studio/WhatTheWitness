@@ -1,0 +1,366 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://img/hand_drawing/vanilla.png" type="Texture" id=7]
+[ext_resource path="res://theme/main_theme.tres" type="Theme" id=8]
+[ext_resource path="res://level_lines.tres" type="TileSet" id=22]
+
+[node name="View" type="Node2D"]
+
+[node name="LevelAreaLimit" type="ReferenceRect" parent="."]
+margin_left = -1728.0
+margin_right = 2400.0
+margin_bottom = 2592.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tags" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Tags"]
+modulate = Color( 1, 1, 1, 0.254902 )
+margin_left = 672.0
+margin_top = 480.0
+margin_right = 768.0
+margin_bottom = 576.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="SeedLabel" type="Label" parent="Tags"]
+margin_left = 679.0
+margin_top = 194.0
+margin_right = 951.0
+margin_bottom = 225.0
+theme = ExtResource( 8 )
+align = 1
+
+[node name="Lines" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 22 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( -131079, 2, 65537, -196589, 2, 65537, -65543, 2, 65538, -131053, 2, 65538, -7, 2, 65538, -65517, 2, 65538, 65529, 2, 65538, 19, 2, 65538, 131065, 2, 65538, 65555, 2, 65538, 196601, 2, 65538, 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 131077, 131079, 2, 8, 131080, 2, 8, 131081, 2, 8, 131082, 2, 2, 131091, 2, 65538, 262137, 2, 65538, 196614, 2, 65538, 196627, 2, 65538, 327673, 2, 65538, 262150, 2, 65538, 262163, 2, 65538, 393209, 2, 65538, 327686, 2, 65538, 327694, 2, 131082, 327695, 2, 8, 327696, 2, 8, 327697, 2, 8, 327698, 2, 8, 327699, 2, 131075, 458745, 2, 65538, 393222, 2, 131083, 393223, 2, 8, 393224, 2, 8, 393225, 2, 8, 393226, 2, 8, 393227, 2, 8, 393228, 2, 8, 393229, 2, 8, 393230, 2, 131076, 393235, 2, 65538, 524281, 2, 65538, 458758, 2, 65538, 458766, 2, 6, 458767, 2, 8, 458768, 2, 8, 458769, 2, 8, 458770, 2, 8, 458771, 2, 131076, 589817, 2, 131083, 589818, 2, 8, 589819, 2, 8, 589820, 2, 8, 589821, 2, 8, 589822, 2, 8, 589823, 2, 8, 524288, 2, 8, 524289, 2, 8, 524290, 2, 8, 524291, 2, 8, 524292, 2, 8, 524293, 2, 8, 524294, 2, 131076, 524307, 2, 65538, 655353, 2, 65538, 589830, 2, 65538, 589843, 2, 65538, 720889, 2, 65538, 655366, 2, 196608, 655367, 2, 8, 655368, 2, 8, 655369, 2, 8, 655370, 2, 8, 655371, 2, 8, 655372, 2, 8, 655373, 2, 8, 655374, 2, 8, 655375, 2, 8, 655376, 2, 8, 655377, 2, 8, 655378, 2, 8, 655379, 2, 131076, 786425, 2, 65538, 720902, 2, 65538, 720915, 2, 65538, 720926, 2, 0, 851961, 2, 196608, 851962, 2, 8, 851963, 2, 8, 851964, 2, 8, 851965, 2, 8, 851966, 2, 8, 851967, 2, 8, 786432, 2, 8, 786433, 2, 8, 786434, 2, 8, 786435, 2, 8, 786436, 2, 8, 786437, 2, 8, 786438, 2, 131075, 786451, 2, 65538, 917497, 2, 65538, 851974, 2, 65538, 851987, 2, 65538, 983033, 2, 65538, 917510, 2, 131083, 917511, 2, 8, 917512, 2, 8, 917513, 2, 8, 917514, 2, 8, 917515, 2, 8, 917516, 2, 8, 917517, 2, 8, 917518, 2, 8, 917519, 2, 8, 917520, 2, 8, 917521, 2, 8, 917522, 2, 8, 917523, 2, 65541, 1048569, 2, 65538, 983046, 2, 65538, 983059, 2, 65538, 1114105, 2, 7, 1114106, 2, 8, 1114107, 2, 8, 1114108, 2, 8, 1114109, 2, 8, 1114110, 2, 8, 1114111, 2, 8, 1048576, 2, 8, 1048577, 2, 8, 1048578, 2, 8, 1048579, 2, 8, 1048580, 2, 8, 1048581, 2, 8, 1048582, 2, 131076, 1048595, 2, 65538, 1114118, 2, 65538, 1114131, 2, 65538, 1179654, 2, 7, 1179655, 2, 8, 1179656, 2, 8, 1179657, 2, 8, 1179658, 2, 8, 1179659, 2, 8, 1179660, 2, 8, 1179661, 2, 8, 1179662, 2, 8, 1179663, 2, 8, 1179664, 2, 8, 1179665, 2, 8, 1179666, 2, 8, 1179667, 2, 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Lights" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 22 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131074, 3, 0 )
+
+[node name="Gadgets" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 22 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 327699, -1073741820, 0, 458771, -1073741820, 0, 589817, -1073741820, 0, 655379, -1073741820, 0, 851961, -1073741820, 0, 917523, -1073741820, 0 )
+
+[node name="PuzzlePlaceHolders" type="Node2D" parent="."]
+
+[node name="TextEdit" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 192.0
+margin_top = 192.0
+margin_right = 288.0
+margin_bottom = 288.0
+text = "witness-intro-1-a"
+wrap_enabled = true
+
+[node name="TextEdit2" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 768.0
+margin_top = 576.0
+margin_right = 864.0
+margin_bottom = 672.0
+text = "witness-cave-1"
+wrap_enabled = true
+
+[node name="TextEdit3" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 576.0
+margin_right = 960.0
+margin_bottom = 672.0
+text = "witness-cave-2"
+wrap_enabled = true
+
+[node name="TextEdit17" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 192.0
+margin_right = 672.0
+margin_bottom = 288.0
+text = "witness-intro-1-b"
+wrap_enabled = true
+
+[node name="TextEdit18" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 576.0
+margin_right = 1248.0
+margin_bottom = 672.0
+text = "[C]music-box<?Normal>"
+wrap_enabled = true
+
+[node name="TextEdit21" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 192.0
+margin_right = 1056.0
+margin_bottom = 288.0
+text = "[C]seed"
+wrap_enabled = true
+
+[node name="TextEdit19" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 480.0
+margin_right = 1728.0
+margin_bottom = 576.0
+text = "[C]music-box<?Speed>"
+wrap_enabled = true
+
+[node name="TextEdit25" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = -480.0
+margin_top = 768.0
+margin_right = -384.0
+margin_bottom = 864.0
+text = "[C]music-box<?Finite Water>"
+wrap_enabled = true
+
+[node name="TextEdit26" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = -480.0
+margin_top = 1152.0
+margin_right = -384.0
+margin_bottom = 1248.0
+text = "[C]music-box<?Antipolynomino>"
+wrap_enabled = true
+
+[node name="TextEdit22" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 960.0
+margin_right = 1728.0
+margin_bottom = 1056.0
+text = "[C]music-box<?Rings>"
+wrap_enabled = true
+
+[node name="TextEdit23" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 1344.0
+margin_right = 1728.0
+margin_bottom = 1440.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "[C]music-box<?Bee Hive>"
+wrap_enabled = true
+
+[node name="TextEdit24" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 1728.0
+margin_right = 1728.0
+margin_bottom = 1824.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "[C]music-box<?Arrows>"
+wrap_enabled = true
+
+[node name="TextEdit20" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1632.0
+margin_top = 672.0
+margin_right = 1728.0
+margin_bottom = 768.0
+text = "[C]music-box<?Eliminators>"
+wrap_enabled = true
+
+[node name="TextEdit138" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 768.0
+margin_top = 960.0
+margin_right = 864.0
+margin_bottom = 1056.0
+text = "Alith-ring-tutorial1"
+wrap_enabled = true
+
+[node name="TextEdit198" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 960.0
+margin_right = 960.0
+margin_bottom = 1056.0
+text = "Alith-ring-tutorial2"
+wrap_enabled = true
+
+[node name="TextEdit199" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 960.0
+margin_right = 1056.0
+margin_bottom = 1056.0
+text = "Alith-ring-tutorial3"
+wrap_enabled = true
+
+[node name="TextEdit201" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 960.0
+margin_right = 1152.0
+margin_bottom = 1056.0
+text = "Alith-ring-tutorial4"
+wrap_enabled = true
+
+[node name="TextEdit202" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 960.0
+margin_right = 1248.0
+margin_bottom = 1056.0
+text = "Alith-ring-tutorial5"
+wrap_enabled = true
+
+[node name="TextEdit139" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 768.0
+margin_top = 1344.0
+margin_right = 864.0
+margin_bottom = 1440.0
+text = "wc2-C01"
+wrap_enabled = true
+
+[node name="TextEdit182" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 1344.0
+margin_right = 960.0
+margin_bottom = 1440.0
+text = "wc2-C02"
+wrap_enabled = true
+
+[node name="TextEdit183" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 1344.0
+margin_right = 1056.0
+margin_bottom = 1440.0
+text = "wc2-C03"
+wrap_enabled = true
+
+[node name="TextEdit184" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 1344.0
+margin_right = 1152.0
+margin_bottom = 1440.0
+text = "wc2-C04"
+wrap_enabled = true
+
+[node name="TextEdit148" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 864.0
+margin_top = 1728.0
+margin_right = 960.0
+margin_bottom = 1824.0
+text = "rpg-arrow-T1"
+wrap_enabled = true
+
+[node name="TextEdit149" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 768.0
+margin_top = 1728.0
+margin_right = 864.0
+margin_bottom = 1824.0
+text = "rpg-arrow-T0"
+wrap_enabled = true
+
+[node name="TextEdit150" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 960.0
+margin_top = 1728.0
+margin_right = 1056.0
+margin_bottom = 1824.0
+text = "rpg-arrow-T2"
+wrap_enabled = true
+
+[node name="TextEdit151" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 1728.0
+margin_right = 1152.0
+margin_bottom = 1824.0
+text = "rpg-arrow-T3"
+wrap_enabled = true
+
+[node name="TextEdit152" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1152.0
+margin_top = 1728.0
+margin_right = 1248.0
+margin_bottom = 1824.0
+text = "rpg-arrow-CaveEntrance"
+wrap_enabled = true
+
+[node name="TextEdit395" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 384.0
+margin_top = 768.0
+margin_right = 480.0
+margin_bottom = 864.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc10-G01"
+wrap_enabled = true
+
+[node name="TextEdit396" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 288.0
+margin_top = 768.0
+margin_right = 384.0
+margin_bottom = 864.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc10-G02"
+wrap_enabled = true
+
+[node name="TextEdit397" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 192.0
+margin_top = 768.0
+margin_right = 288.0
+margin_bottom = 864.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc10-G03"
+wrap_enabled = true
+
+[node name="TextEdit398" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 96.0
+margin_top = 768.0
+margin_right = 192.0
+margin_bottom = 864.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc10-G04"
+wrap_enabled = true
+
+[node name="TextEdit399" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_top = 768.0
+margin_right = 96.0
+margin_bottom = 864.0
+rect_pivot_offset = Vector2( 48, 96 )
+text = "wc10-G05"
+wrap_enabled = true
+
+[node name="TextEdit4" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 384.0
+margin_top = 1152.0
+margin_right = 480.0
+margin_bottom = 1248.0
+text = "Looksy-Anti-01"
+wrap_enabled = true
+
+[node name="TextEdit5" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 288.0
+margin_top = 1152.0
+margin_right = 384.0
+margin_bottom = 1248.0
+text = "Looksy-Anti-02"
+wrap_enabled = true
+
+[node name="TextEdit6" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 192.0
+margin_top = 1152.0
+margin_right = 288.0
+margin_bottom = 1248.0
+text = "Looksy-Anti-03"
+wrap_enabled = true
+
+[node name="TextEdit7" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 96.0
+margin_top = 1152.0
+margin_right = 192.0
+margin_bottom = 1248.0
+text = "Looksy-Anti-04"
+wrap_enabled = true
+
+[node name="TextEdit8" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_top = 1152.0
+margin_right = 96.0
+margin_bottom = 1248.0
+text = "Looksy-Anti-05"
+wrap_enabled = true
+
+[node name="Masks" type="Node2D" parent="."]
