@@ -10,10 +10,10 @@ func sample_seed():
 
 
 func hover_set(set_name: String):
-	if !(set_name in LEVEL_SETS):
+	if !(set_name in Gameplay.LEVEL_SETS):
 		description_box.text = '???'
 	else:
-		description_box.text = tr(set_name + ' DESC').replace('|', '\n\n' + tr('MECHANICS:')) + '\n\n' + tr('TOTAL_TIME') + ': ' + LEVEL_SETS[set_name][1]
+		description_box.text = tr(set_name + ' DESC').replace('|', '\n\n' + tr('MECHANICS:')) + '\n\n' + tr('TOTAL_TIME') + ': ' + Gameplay.LEVEL_SETS[set_name][1]
 		
 		
 func _ready():

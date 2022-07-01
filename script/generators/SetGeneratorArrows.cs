@@ -71,12 +71,24 @@ class SetGeneratorArrows : SetGenerator {
                 generator.AddDecorator(new Decorators.ArrowDecorator(45 * localRng.Next(0, 8), localRng.Next(1, 4), 3), 1);
                 generator.AddDecorator(new Decorators.ArrowDecorator(45 * localRng.Next(0, 8), localRng.Next(1, 4), 3), 1);
                 generator.AddDecorator(new Decorators.BrokenDecorator(), 5);
+            } else if (id == 4) {
+                generator = new WitnessGenerator(Graph.HexGraph(5, "round", "none", "none"));
+                SetCornerStart(generator.Graph, 91, new Vector(0, 1));
+                SetCornerEnd(generator.Graph, -89, -90);
+                generator.AddDecorator(new Decorators.ArrowDecorator(60 * localRng.Next(0, 8) - 30, localRng.Next(1, 4), 3), 1);
+                generator.AddDecorator(new Decorators.ArrowDecorator(60 * localRng.Next(0, 8) - 30, localRng.Next(1, 4), 3), 1);
+                generator.AddDecorator(new Decorators.ArrowDecorator(60 * localRng.Next(0, 8) - 30, localRng.Next(1, 4), 3), 1);
+                generator.AddDecorator(new Decorators.ArrowDecorator(60 * localRng.Next(0, 8) - 30, localRng.Next(1, 4), 3), 1);
+                generator.AddDecorator(new Decorators.ArrowDecorator(60 * localRng.Next(0, 8) - 30, localRng.Next(1, 4), 3), 1);
+                generator.AddDecorator(new Decorators.BrokenDecorator(), 4);
             } else {
                 generator = new WitnessGenerator(Graph.RectangularGraph(5, 5));
                 generator.AddDecorator(new Decorators.ArrowDecorator(45 * localRng.Next(0, 8), localRng.Next(1, 4), 3), 1);
                 generator.AddDecorator(new Decorators.ArrowDecorator(45 * localRng.Next(0, 8), localRng.Next(1, 4), 3), 1);
                 generator.AddDecorator(new Decorators.ArrowDecorator(45 * localRng.Next(0, 8), localRng.Next(1, 4), 3), 1);
                 generator.AddDecorator(new Decorators.ArrowDecorator(45 * localRng.Next(0, 8), localRng.Next(1, 4), 3), 1);
+                generator.AddDecorator(new Decorators.ArrowDecorator(45 * localRng.Next(0, 8), localRng.Next(1, 4), 3), 1);
+                generator.AddDecorator(new Decorators.TriangleDecorator(localRng.Next(1, 4), 2), 1);
                 generator.AddDecorator(new Decorators.TriangleDecorator(localRng.Next(1, 4), 2), 1);
                 generator.AddDecorator(new Decorators.TriangleDecorator(localRng.Next(1, 4), 2), 1);
                 generator.AddDecorator(new Decorators.TriangleDecorator(localRng.Next(1, 4), 2), 1);

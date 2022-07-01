@@ -190,6 +190,14 @@ public abstract class SetGenerator {
             if (graph.NumWays == 2)
                 graph.LineColorMap = new List<string>() { "Yellow", "Aqua" };
             graph.ColorMap = new List<string>() { "Black", "White", "Yellow", "#C00000", "#404040" };
+        } else if (scheme == "Droplet") {
+            graph.BackgroundColor = "Khaki";
+            graph.ForegroundColor = "Olive";
+            if (graph.NumWays == 1)
+                graph.LineColorMap = new List<string>() { "Gold" };
+            if (graph.NumWays == 2)
+                graph.LineColorMap = new List<string>() { "Gold", "Aqua" };
+            graph.ColorMap = new List<string>() { "Black", "White", "Yellow", "Blue", "Lime" };
         }
     }
 }

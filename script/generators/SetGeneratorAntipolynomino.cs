@@ -111,6 +111,21 @@ class SetGeneratorAntipolynomino : SetGenerator {
                 generator.AddDecorator(new Decorators.PointDecorator(-1, 1), 2);
                 generator.AddDecorator(new Decorators.StarDecorator(3), 1);
                 generator.AddDecorator(new Decorators.StarDecorator(4), 1);
+            } else if (id == 4) {
+                generator = new WitnessGenerator(Graph.HexGraph(5, "round", "none", "none"));
+                SetCornerStart(generator.Graph, 91, new Vector(0, 1));
+                SetCornerEnd(generator.Graph, -89, -90);
+                generator.AddDecorator(new Decorators.AntiTetrisDecorator(
+                    RandomHexTetris(2, localRng, 0), false, 3), 1);
+                generator.AddDecorator(new Decorators.AntiTetrisDecorator(
+                    RandomHexTetris(2, localRng, 0), false, 3), 1);
+                generator.AddDecorator(new Decorators.AntiTetrisDecorator(
+                    RandomHexTetris(3, localRng, 0), false, 3), 1);
+                generator.AddDecorator(new Decorators.AntiTetrisDecorator(
+                    RandomHexTetris(3, localRng, 0), false, 3), 1);
+                generator.AddDecorator(new Decorators.AntiTetrisDecorator(
+                    RandomHexTetris(4, localRng, 0), false, 3), 1);
+                generator.AddDecorator(new Decorators.BrokenDecorator(), 5);
             } else {
                 generator = new WitnessGenerator(Graph.RectangularGraph(4, 4));
                 generator.AddDecorator(new Decorators.AntiTetrisDecorator(

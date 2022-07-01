@@ -12,6 +12,7 @@ const FULL_AUTHORS = {
 	'wc7': 'from the 7th WitCup (by Alith)',
 	'wc10': 'from the 10th WitCup (by Artless, Leaving Leaves, Zhvsjia, 牙刷架, 普通的解谜人, sevenkplus & Fluittene)',
 	'rpg': 'from the Witness RPG Mod (by Sigma144)',
+	'Looksy': 'from Looksy (looksy.kro.kr)',
 }
 
 func get_full_credit(puzzle_name: String):

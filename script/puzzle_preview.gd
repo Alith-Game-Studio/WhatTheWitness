@@ -74,7 +74,7 @@ func show_puzzle(load_puzzle_name, unlocked=true):
 	else:
 		points_label.modulate = Color.white
 		delete_bar.visible = false
-	if (puzzle_name.begins_with('[C]music-box')):
+	if (puzzle_name.begins_with('[C]music-box') and unlocked):
 		var set_name = ('Challenge: ' + challenge_set_name) if challenge_set_name != '' else Gameplay.challenge_set_name
 		var time = Gameplay.LEVEL_SETS[set_name][1]
 		var statistics = SaveData.get_challenge_statistics(set_name)

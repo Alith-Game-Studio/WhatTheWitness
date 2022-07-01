@@ -76,6 +76,14 @@ class SetGeneratorMisc : SetGenerator {
             generator.AddDecorator(new Decorators.TetrisDecorator(
                                     RandomRectTetris(new int[] { 2, 3 }, localRng), true, true, 6), 1);
             generator.MaxTries = 5; // too slow verification
+        } else if (tokens[1] == "8") {
+            generator = new WitnessGenerator(Graph.RectangularGraph(6, 6));
+            generator.AddDecorator(new Decorators.DropDecorator(0, 3), 2);
+            generator.AddDecorator(new Decorators.DropDecorator(90, 3), 2);
+            generator.AddDecorator(new Decorators.DropDecorator(180, 3), 2);
+            generator.AddDecorator(new Decorators.DropDecorator(-90, 3), 2);
+            generator.AddDecorator(new Decorators.StarDecorator(3), 4);
+            ApplyColorScheme(generator.Graph, "Droplet");
         } else if (tokens[1] == "select1") {
             solvable = tokens[2] == solvable1.ToString();
             generator = new WitnessGenerator(Graph.RectangularGraph(4, 4));

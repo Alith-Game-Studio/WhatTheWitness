@@ -33,8 +33,10 @@ Challenge: Bee Hive,Bee Hive,蜂巢
 Challenge: Bee Hive DESC,A variant where the board cells are hexagons.|original mechanics except eliminators,六边形题板格子的变种挑战。|除了抗体以外的原版机制。
 Challenge: Speed,Speed,速度
 Challenge: Speed DESC,Speed is everything. | original mechanics except eliminators,手速场。|除了抗体以外的原版机制。
-Challenge: Finite Water,Finite Water,无限水
-Challenge: Finite Water DESC,A variant with rule from WitCup 10 |Finite water by Fluittene,无限水，题不水。|无限水（喵基，第十届见联会）
+Challenge: Finite Water,Finite Water,有限水
+Challenge: Finite Water DESC,A variant with rule from WitCup 10 |Finite water by Fluittene,有限水，题不水。|无限水（喵基，第十届见联会）
+Challenge: Antipolynomino,Antipolynomino,禁止俄方
+Challenge: Droplets,Droplets,水滴
 RANDOM,Random,随机
 TIME_OUT,time out,超时
 YOU_WIN,You win!,你赢了！

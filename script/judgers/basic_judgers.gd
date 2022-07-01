@@ -27,6 +27,7 @@ const region_judgers = [
 	'judge_region_collapse',
 	'judge_region_water',
 	'judge_region_artless_numbers',
+	'judge_region_droplets',
 	'judge_region_arrows',
 	'judge_region_tetris',
 ]
@@ -569,6 +570,49 @@ func judge_region_myopia(validator: Validation.Validator, region: Validation.Reg
 				break
 	return ok
 	
+	
+func judge_region_droplets(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
+	if (!region.has_any('drop')):
+		return true
+	var all_ok = true
+	for decorator_id in region.decorator_dict['drop']:
+		var ok = true
+		var response = validator.decorator_responses[decorator_id]
+		var origin = validator.puzzle.vertices[response.vertex_index].pos
+		var direction = Vector2(sin(response.decorator.angle), -cos(response.decorator.angle))
+		var start_facet = validator.puzzle.vertices[response.vertex_index].linked_facet
+		if (start_facet == null): # not placed on facets
+			ok = false
+		else:
+			# dfs
+			var stack = [start_facet]
+			var visited = {start_facet.index: 1}
+			while (len(stack) > 0):
+				var facet = stack.pop_back()
+				for edge_tuple in facet.edge_tuples:
+					var v_edge = validator.puzzle.edge_detector_node[edge_tuple]
+					var flow_dir = validator.puzzle.vertices[facet.center_vertex_index].pos - validator.puzzle.vertices[v_edge].pos
+					if (validator.vertex_region[v_edge] >= 0 and flow_dir.dot(direction) >= -1e-6):
+						if (len(validator.puzzle.edge_shared_facets[edge_tuple]) <= 1):
+							# print(str(origin) + ' ->x ' + str(validator.puzzle.vertices[v_edge].pos))
+							ok = false
+							break
+						else:
+							for f in validator.puzzle.edge_shared_facets[edge_tuple]:
+								var v = validator.puzzle.facets[f].center_vertex_index
+								if (v != facet.center_vertex_index and not (f in visited)):
+									# print(str(origin) + ' -> ' + str(validator.puzzle.vertices[v].pos))
+									stack.push_back(validator.puzzle.facets[f])
+									visited[f] = true
+				if (not ok):
+					break
+			if (not ok):
+				if (require_errors):
+					response.state = Validation.DecoratorResponse.ERROR
+					all_ok = false
+				else:
+					return false
+	return all_ok
 	
 func judge_region_arrows(validator: Validation.Validator, region: Validation.Region, require_errors: bool):
 	if (!region.has_any('arrow')):

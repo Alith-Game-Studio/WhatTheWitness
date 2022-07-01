@@ -7,9 +7,6 @@
 [node name="LevelAreaLimit" type="ReferenceRect" parent="."]
 margin_right = 3936.0
 margin_bottom = 2016.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Lines" type="TileMap" parent="."]
 scale = Vector2( 3, 3 )
@@ -60,15 +57,21 @@ margin_bottom = 288.0
 rect_pivot_offset = Vector2( 192, 96 )
 text = "[C][?]Misc-1-1"
 wrap_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="TextEdit141" type="TextEdit" parent="PuzzlePlaceHolders"]
+[node name="TextEdit140" type="TextEdit" parent="PuzzlePlaceHolders"]
 margin_left = 480.0
 margin_top = 384.0
 margin_right = 576.0
 margin_bottom = 480.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-8-1"
+wrap_enabled = true
+
+[node name="TextEdit141" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 192.0
+margin_right = 672.0
+margin_bottom = 288.0
 rect_pivot_offset = Vector2( 192, 96 )
 text = "[C][?]Misc-2-1"
 wrap_enabled = true
