@@ -46,6 +46,8 @@ public class Generator : Node
             setGenerator = new SetGeneratorAntipolynomino();
         else if (setName == "Challenge: Droplets")
             setGenerator = new SetGeneratorDroplets();
+        else if (setName == "Challenge: Minesweeper")
+            setGenerator = new SetGeneratorMinesweeper();
         else 
             throw new NotImplementedException();
         setGenerator.Init(globalRng);

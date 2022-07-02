@@ -21,7 +21,7 @@ var challenge_total_time: int
 var challenge_set_name: String
 var level_set: String
 var switch_level_set: String
-const UNLOCK_ALL_PUZZLES = false
+const UNLOCK_ALL_PUZZLES = true
 
 var challenge_music_list = [
 	preload('res://audio/music/Peer Gynt Suite no. 1, Op. 46 - I. Morning Mood.mp3'),
@@ -48,6 +48,7 @@ const LEVEL_SETS = {
 	'Challenge: Finite Water': ['challenge_levels.tscn', '11:09'],
 	'Challenge: Antipolynomino': ['challenge_levels_arrow.tscn', '6:35'],
 	'Challenge: Droplets': ['challenge_levels_arrow.tscn', '6:35'],
+	'Challenge: Minesweeper': ['challenge_levels_arrow.tscn', '11:09'],
 }
 
 func start_challenge():

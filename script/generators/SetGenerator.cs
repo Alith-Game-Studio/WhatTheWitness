@@ -198,6 +198,14 @@ public abstract class SetGenerator {
             if (graph.NumWays == 2)
                 graph.LineColorMap = new List<string>() { "Gold", "Aqua" };
             graph.ColorMap = new List<string>() { "Black", "White", "Yellow", "Blue", "Lime" };
+        } else if (scheme == "Minesweeper") {
+            graph.BackgroundColor = "#A9A9A9";
+            graph.ForegroundColor = "#800000";
+            if (graph.NumWays == 1)
+                graph.LineColorMap = new List<string>() { "Red" };
+            if (graph.NumWays == 2)
+                graph.LineColorMap = new List<string>() { "Red", "Red" };
+            graph.ColorMap = new List<string>() { "Black", "DimGray", "Blue", "#007F00", "#DC0000", "Navy", "Brown", "DarkCyan", "Gold", "White" };
         }
     }
 }
