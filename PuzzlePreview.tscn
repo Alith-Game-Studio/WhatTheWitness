@@ -66,6 +66,7 @@ margin_left = -512.0
 margin_top = 256.0
 margin_right = 768.0
 margin_bottom = 512.0
+mouse_filter = 1
 custom_fonts/normal_font = SubResource( 6 )
 bbcode_enabled = true
 bbcode_text = "[center] [/center]"
@@ -73,13 +74,11 @@ text = " "
 
 [node name="ColorRect" type="ColorRect" parent="PuzzlePreview/PointsLabel"]
 visible = false
-margin_left = 42.0
-margin_top = 43.0
-margin_right = 214.0
-margin_bottom = 47.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = 558.333
+margin_top = 40.0068
+margin_right = 730.333
+margin_bottom = 44.0068
+mouse_filter = 1
 
 [connection signal="gui_input" from="PuzzlePreview/Button" to="." method="_on_Button_gui_input"]
 [connection signal="mouse_exited" from="PuzzlePreview/Button" to="." method="_on_Button_mouse_exited"]

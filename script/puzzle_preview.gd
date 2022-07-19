@@ -78,11 +78,13 @@ func show_puzzle(load_puzzle_name, unlocked=true):
 		var set_name = ('Challenge: ' + challenge_set_name) if challenge_set_name != '' else Gameplay.challenge_set_name
 		var time = Gameplay.LEVEL_SETS[set_name][1]
 		var statistics = SaveData.get_challenge_statistics(set_name)
-		points_label.bbcode_text = '[center]%s (%s)\n%s: %d/%d\n%s: %s %s: %s[/center]' % [
+		points_label.bbcode_text = '[center]%s (%s)\n%s: %d/%d %s: %d\n%s: %s %s: %s[/center]' % [
 			tr(set_name),
 			time,
 			tr('WIN'),
 			statistics['win_count'], statistics['start_count'],
+			tr('STREAK'),
+			max(statistics['win_streak'], 0),
 			tr('AVG'),
 			format_time(statistics['total_time'] / statistics['win_count'] if statistics['win_count'] > 0 else 0.0),
 			tr('MIN'),

@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://level_lines.tres" type="TileSet" id=1]
+
+[node name="View" type="Node2D"]
+
+[node name="LevelAreaLimit" type="ReferenceRect" parent="."]
+margin_right = 3936.0
+margin_bottom = 2016.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Lines" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 8, 131078, 2, 8, 131079, 2, 8, 131080, 2, 8, 131081, 2, 8, 131082, 2, 8, 131083, 2, 8, 131084, 2, 65539, 196620, 2, 65538, 262156, 2, 65538, 327692, 2, 65538, 393228, 2, 65538, 393234, 2, 0, 458764, 2, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Lights" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131074, 3, 0 )
+
+[node name="Gadgets" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+
+[node name="PuzzlePlaceHolders" type="Node2D" parent="."]
+
+[node name="TextEdit2" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 192.0
+margin_top = 192.0
+margin_right = 288.0
+margin_bottom = 288.0
+text = "[C]music-box"
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit139" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 576.0
+margin_top = 192.0
+margin_right = 672.0
+margin_bottom = 288.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-1-1"
+wrap_enabled = true
+
+[node name="TextEdit141" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 768.0
+margin_top = 192.0
+margin_right = 864.0
+margin_bottom = 288.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-2-1"
+wrap_enabled = true
+
+[node name="TextEdit143" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 672.0
+margin_top = 192.0
+margin_right = 768.0
+margin_bottom = 288.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]Misc-1-3"
+wrap_enabled = true
+
+[node name="Masks" type="Node2D" parent="."]

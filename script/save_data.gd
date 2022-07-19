@@ -9,16 +9,22 @@ func update_challenge(set_name: String, time: float, clear=false):
 	var statistics = get_challenge_statistics(set_name)
 	if (time < 0):
 		statistics['start_count'] += 1
+		if (statistics['win_streak'] > 0):
+			statistics['win_streak'] = -statistics['win_streak']
+		else:
+			statistics['win_streak'] = 0
 	else:
 		statistics['win_count'] += 1
 		statistics['total_time'] += time
 		statistics['min_time'] = time if statistics['min_time'] < 0 else min(statistics['min_time'], time)
 		statistics['passed'] = 1
+		statistics['win_streak'] = -statistics['win_streak'] + 1
 	if clear:
 		statistics['start_count'] = 0
 		statistics['win_count'] = 0
 		statistics['total_time'] = 0.0
 		statistics['min_time'] = -1.0
+		statistics['win_streak'] = 0
 	saved_solutions[key] = statistics
 	save_all()
 
@@ -27,8 +33,10 @@ func get_challenge_statistics(set_name: String):
 	var statistics
 	if (key in saved_solutions):
 		statistics = saved_solutions[key]
+		if not ('win_streak' in statistics):
+			statistics['win_streak'] = 0
 	else:
-		statistics = {'start_count': 0, 'win_count': 0, 'total_time': 0.0, 'min_time': -1.0}
+		statistics = {'start_count': 0, 'win_count': 0, 'total_time': 0.0, 'min_time': -1.0, 'win_streak': 0}
 	return statistics
 
 func puzzle_solved(puzzle_name):
