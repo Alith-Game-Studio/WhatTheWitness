@@ -10,6 +10,14 @@ public abstract class SetGenerator {
     protected int solvable1;
     protected int solvable2;
     protected List<int> shuffledIndices;
+    public static int[][][] FULL_DOT_RECT_POLYMINO_INDICES = new int[][][]{
+        new int[][] {},
+        new int[][] {new int[]{0} },
+        new int[][] {new int[]{0, 1} },
+        new int[][] {new int[]{0, 1, 2} ,new int[] { 0, 1, 10 } },
+        new int[][] { new int[] { 0, 1, 2, 3 }, new int[] { 0, 1, 2, 10 }, new int[] { 0, 1, 2, 11 }, new int[] { 0, 1, 2, 12 },
+            new int[]{0, 1, 11, 12 }, new int[]{1, 2, 10, 11 }},
+    };
     public static int[][][] RECT_POLYMINO_INDICES = new int[][][]{
         new int[][] {},
         new int[][] {new int[]{0} },
@@ -36,7 +44,7 @@ public abstract class SetGenerator {
         return shapes.Select(shape => shape.Select(vec =>
             new Vector(cosAngle * vec.X - sinAngle * vec.Y, sinAngle * vec.X + cosAngle * vec.Y)).ToArray());
     }
-    public void Init(Random globalRng) {
+    public virtual void Init(Random globalRng) {
         solvable1 = globalRng.Next(1, 4);
         solvable2 = globalRng.Next(1, 4);
         shuffledIndices = new List<int>() { 0, 1, 2, 3 };
@@ -133,7 +141,7 @@ public abstract class SetGenerator {
                 vertex.Decorator = new Decorators.PointDecorator();
         }
     }
-    public abstract (WitnessGenerator, bool, double) GetGenerator(string name, Random globalRng, Random localRng);
+    public abstract (WitnessGenerator, GeneratorFlags) GetGenerator(string name, Random globalRng, Random localRng);
 
     public void ApplyColorScheme(Graph graph, string scheme) {
         if (scheme == "Intro") {
@@ -141,8 +149,19 @@ public abstract class SetGenerator {
             graph.ForegroundColor = "#234B5A";
             if (graph.NumWays == 1)
                 graph.LineColorMap = new List<string>() { "#eeeeee" };
-            graph.ColorMap = new List<string> { "Black", "White", "Gold", "#98cd88", "#9639e5" };
-
+            graph.ColorMap = new List<string> { "Black", "White", "Gold", "#98cd88", "#9639e5", "Blue" };
+        } else if (scheme == "Normal") {
+            graph.BackgroundColor = "#9DCF4A";
+            graph.ForegroundColor = "#535A23";
+            if (graph.NumWays == 1)
+                graph.LineColorMap = new List<string>() { "#eeeeee" };
+            graph.ColorMap = new List<string> { "Black", "White", "Gold", "#98cd88", "#9639e5", "Blue" };
+        } else if (scheme == "Hard") {
+            graph.BackgroundColor = "#CF7D4A";
+            graph.ForegroundColor = "#5A3423";
+            if (graph.NumWays == 1)
+                graph.LineColorMap = new List<string>() { "#eeeeee" };
+            graph.ColorMap = new List<string> { "Black", "White", "Gold", "#98cd88", "#9639e5", "Blue" };
         } else if (scheme == "Shuffle") {
             graph.BackgroundColor = "#00b06f";
             graph.ForegroundColor = "#496853";
@@ -165,7 +184,7 @@ public abstract class SetGenerator {
             if (graph.NumWays == 1)
                 graph.LineColorMap = new List<string>() { "#F2C454" };
             else if (graph.NumWays == 2)
-                    graph.LineColorMap = new List<string>() { "#F2C454", "#F2C454" };
+                graph.LineColorMap = new List<string>() { "#F2C454", "#F2C454" };
         } else if (scheme == "Ring") {
             graph.BackgroundColor = "#400040";
             graph.ForegroundColor = "Purple";

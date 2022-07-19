@@ -7,10 +7,10 @@ using WitnessInfinite;
 using Decorators = WitnessInfinite.Decorators;
 
 class SetGeneratorEasy : SetGenerator {
-    public override (WitnessGenerator, bool, double) GetGenerator(string name, Random globalRng, Random localRng) {
+    public override (WitnessGenerator, GeneratorFlags) GetGenerator(string name, Random globalRng, Random localRng) {
         WitnessGenerator generator = null;
-        bool solvable = true;
-        double hardness = 0.0;
+        GeneratorFlags flags = new GeneratorFlags();
+        flags.Solvable = true;
         string[] tokens = name.Split('.')[0].Split('-');
         if (tokens[1] == "1") {
             int id = int.Parse(tokens[2]);
@@ -63,14 +63,14 @@ class SetGeneratorEasy : SetGenerator {
             }
             ApplyColorScheme(generator.Graph, "Shuffle");
         } else if (tokens[1] == "select1") {
-            solvable = tokens[2] == solvable1.ToString();
+            flags.Solvable = tokens[2] == solvable1.ToString();
             generator = new WitnessGenerator(Graph.RectangularGraph(4, 3));
             generator.AddDecorator(new Decorators.SquareDecorator(1), 3);
             generator.AddDecorator(new Decorators.SquareDecorator(3), 2);
             generator.AddDecorator(new Decorators.SquareDecorator(4), 1);
             ApplyColorScheme(generator.Graph, "Intro");
         } else if (tokens[1] == "select2") {
-            solvable = tokens[2] == solvable2.ToString();
+            flags.Solvable = tokens[2] == solvable2.ToString();
             generator = new WitnessGenerator(Graph.RectangularGraph(4, 3));
             generator.AddDecorator(new Decorators.StarDecorator(0), 6);
             generator.AddDecorator(new Decorators.StarDecorator(1), 2);
@@ -115,6 +115,6 @@ class SetGeneratorEasy : SetGenerator {
         } else {
             generator = new WitnessGenerator(Graph.RectangularGraph(2, 2));
         }
-        return (generator, solvable, hardness);
+        return (generator, flags);
     }
 }

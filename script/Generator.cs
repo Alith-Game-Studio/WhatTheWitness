@@ -48,18 +48,20 @@ public class Generator : Node
             setGenerator = new SetGeneratorDroplets();
         else if (setName == "Challenge: Minesweeper")
             setGenerator = new SetGeneratorMinesweeper();
+        else if (setName == "Challenge: Multiple Choices")
+            setGenerator = new SetGeneratorMultipleChoices(3);
         else 
             throw new NotImplementedException();
         setGenerator.Init(globalRng);
         while (true) {
-            (WitnessGenerator generator, bool solvable, double hardness) = setGenerator.GetGenerator(name, globalRng, localRng);
-            int[] multiSolveVertices = name.Contains("meta1") ? new int[] {
+            (WitnessGenerator generator, GeneratorFlags flags) = setGenerator.GetGenerator(name, globalRng, localRng);
+            flags.MultiSolveVertices = name.Contains("meta1") ? new int[] {
                 SetGenerator.GetCornerVertex(generator.Graph, 45).Index,
                 SetGenerator.GetCornerVertex(generator.Graph, -135).Index,
             } : null;
             if (generator.MaxTries == -1)  // prevent infinite loop
                 generator.MaxTries = 30;
-            Graph graph = generator.Sample(localRng, solvable, hardness, multiSolveVertices);
+            Graph graph = generator.Sample(localRng, flags);
             if (graph != null) {
                 generatedPanels[storeKey] = graph;
                 GD.Print("Generated " + name);

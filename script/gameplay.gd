@@ -21,7 +21,7 @@ var challenge_total_time: int
 var challenge_set_name: String
 var level_set: String
 var switch_level_set: String
-const UNLOCK_ALL_PUZZLES = false
+const UNLOCK_ALL_PUZZLES = true
 
 var challenge_music_list = [
 	preload('res://audio/music/Peer Gynt Suite no. 1, Op. 46 - I. Morning Mood.mp3'),
@@ -40,7 +40,7 @@ const LEVEL_SETS = {
 	'Challenge: Speed': ['challenge_levels_easy.tscn', '2:39'],
 	'Challenge: Normal': ['challenge_levels.tscn', '6:35'],
 	'Challenge: Normal SC': ['challenge_levels.tscn', '6:35'],
-	'Challenge: Misc': ['challenge_levels_misc.tscn', '14:58'],
+	'Challenge: Misc': ['challenge_levels_misc.tscn', '15:00'],
 	'Challenge: Eliminators': ['challenge_levels.tscn', '11:09'],
 	'Challenge: Rings': ['challenge_levels_ring.tscn', '6:35'],
 	'Challenge: Arrows': ['challenge_levels_arrow.tscn', '6:35'],
@@ -49,7 +49,8 @@ const LEVEL_SETS = {
 	'Challenge: Antipolynomino': ['challenge_levels_arrow.tscn', '6:35'],
 	'Challenge: Droplets': ['challenge_levels_arrow.tscn', '6:35'],
 	'Challenge: Minesweeper': ['challenge_levels_arrow.tscn', '11:09'],
-	'Challenge: Multiple Choices': ['challenge_levels_multiple_choices.tscn', '6:35'],
+	'Challenge: Multiple Choices': ['challenge_levels_multiple_choices.tscn', '15:00'],
+	'Challenge: What The Witness': ['challenge_levels_wtw.tscn', '240:00'],
 }
 
 func start_challenge():

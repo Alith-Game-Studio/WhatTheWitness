@@ -50,9 +50,9 @@ size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[right]A fan game of The Witness by Alith[/right]
-[right]v1.05.9[/right]"
+[right]v1.05.913[/right]"
 text = "A fan game of The Witness by Alith
-v1.05.9"
+v1.05.913"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 230.0

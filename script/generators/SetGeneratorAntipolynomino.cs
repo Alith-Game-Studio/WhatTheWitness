@@ -18,20 +18,22 @@ class SetGeneratorAntipolynomino : SetGenerator {
         new int[] {1, 2, 10, 11, 21},new int[]{0, 1, 10, 11, 20 }, new int[]{0, 1, 10, 11, 21 }, new int[]{ 0, 1, 2, 12, 13}, new int[]{0, 1, 11, 12, 13 },
         },
     };
-    public override (WitnessGenerator, bool, double) GetGenerator(string name, Random globalRng, Random localRng) {
+    public override (WitnessGenerator, GeneratorFlags) GetGenerator(string name, Random globalRng, Random localRng) {
         WitnessGenerator generator = null;
-        bool solvable = true;
-        double hardness = 0.0;
+        GeneratorFlags flags = new GeneratorFlags();
+        flags.Solvable = true;
         string[] tokens = name.Split('.')[0].Split('-');
         if (tokens[1] == "1") {
             int id = int.Parse(tokens[2]);
             if (id == 1) {
-                generator = new WitnessGenerator(Graph.RectangularGraph(3, 3));
+                generator = new WitnessGenerator(Graph.RectangularGraph(4, 3));
                 generator.AddDecorator(new Decorators.AntiTetrisDecorator(
                     RandomRectTetris(2, localRng), false, 3), 1);
                 generator.AddDecorator(new Decorators.AntiTetrisDecorator(
-                    RandomRectTetris(2, localRng), false, 3), 1);
-                generator.AddDecorator(new Decorators.BrokenDecorator(), 2);
+                    RandomRectTetris(3, localRng), false, 3), 1);
+                generator.AddDecorator(new Decorators.AntiTetrisDecorator(
+                    RandomRectTetris(3, localRng), false, 3), 1);
+                generator.AddDecorator(new Decorators.BrokenDecorator(), 3);
             } else if (id == 2) {
                 generator = new WitnessGenerator(Graph.RectangularGraph(4, 3));
                 generator.AddDecorator(new Decorators.AntiTetrisDecorator(
@@ -141,7 +143,7 @@ class SetGeneratorAntipolynomino : SetGenerator {
                 generator.AddDecorator(new Decorators.BrokenDecorator(), 3);
             }
         } else if (tokens[1] == "select1") {
-            solvable = tokens[2] == solvable1.ToString();
+            flags.Solvable = tokens[2] == solvable1.ToString();
             generator = new WitnessGenerator(Graph.RectangularGraph(4, 4));
             generator.AddDecorator(new Decorators.AntiTetrisDecorator(
                 RandomRectTetris(2, localRng), false, 3), 1);
@@ -151,7 +153,9 @@ class SetGeneratorAntipolynomino : SetGenerator {
                 RandomRectTetris(4, localRng), false, 3), 1);
             generator.AddDecorator(new Decorators.StarDecorator(3), 1);
         }
+        if (generator.Graph.RectangularGraphVertices != null)
+            flags.ForceRectBackTrace = true; // prevent easy solutions
         ApplyColorScheme(generator.Graph, "Antipolynomino");
-        return (generator, solvable, hardness);
+        return (generator, flags);
     }
 }

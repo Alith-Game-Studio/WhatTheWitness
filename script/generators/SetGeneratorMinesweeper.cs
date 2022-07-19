@@ -11,10 +11,10 @@ class SetGeneratorMinesweeper : SetGenerator {
     Decorators.MinesweeperDecorator MinesweeperAutoColor(int count) {
         return new Decorators.MinesweeperDecorator(count, (count + 1) % 8);
     }
-    public override (WitnessGenerator, bool, double) GetGenerator(string name, Random globalRng, Random localRng) {
+    public override (WitnessGenerator, GeneratorFlags) GetGenerator(string name, Random globalRng, Random localRng) {
         WitnessGenerator generator = null;
-        bool solvable = true;
-        double hardness = 0.0;
+        GeneratorFlags flags = new GeneratorFlags();
+        flags.Solvable = true;
         string[] tokens = name.Split('.')[0].Split('-');
         if (tokens[1] == "1") {
             int id = int.Parse(tokens[2]);
@@ -80,7 +80,7 @@ class SetGeneratorMinesweeper : SetGenerator {
                 generator.AddDecorator(new Decorators.EliminatorDecorator(9), 1);
             }
         } else if (tokens[1] == "select1") {
-            solvable = tokens[2] == solvable1.ToString();
+            flags.Solvable = tokens[2] == solvable1.ToString();
             generator = new WitnessGenerator(Graph.RectangularGraph(4, 4));
             generator.AddDecorator(MinesweeperAutoColor(localRng.Next(0, 5)), 1);
             generator.AddDecorator(MinesweeperAutoColor(localRng.Next(0, 5)), 1);
@@ -88,6 +88,6 @@ class SetGeneratorMinesweeper : SetGenerator {
             generator.AddDecorator(MinesweeperAutoColor(localRng.Next(1, 8)), 1);
         }
         ApplyColorScheme(generator.Graph, "Minesweeper");
-        return (generator, solvable, hardness);
+        return (generator, flags);
     }
 }

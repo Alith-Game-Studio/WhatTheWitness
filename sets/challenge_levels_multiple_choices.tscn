@@ -1,0 +1,596 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://level_lines.tres" type="TileSet" id=1]
+[ext_resource path="res://theme/main_theme.tres" type="Theme" id=2]
+
+[node name="View" type="Node2D"]
+
+[node name="LevelAreaLimit" type="ReferenceRect" parent="."]
+margin_left = -864.0
+margin_right = 3360.0
+margin_bottom = 2880.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Lines" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131074, 2, 5, 131075, 2, 8, 131076, 2, 8, 131077, 2, 65545, 131078, 2, 8, 131079, 2, 8, 131080, 2, 8, 131081, 2, 8, 131082, 2, 8, 131083, 2, 8, 131084, 2, 8, 131085, 2, 65545, 131086, 2, 8, 131087, 2, 8, 131088, 2, 8, 131089, 2, 8, 131090, 2, 8, 131091, 2, 8, 131092, 2, 8, 131093, 2, 65539, 196613, 2, 65538, 196621, 2, 65538, 196629, 2, 65538, 262147, 2, 65542, 262148, 2, 8, 262149, 2, 65546, 262150, 2, 8, 262151, 2, 65539, 262155, 2, 65542, 262156, 2, 8, 262157, 2, 65546, 262158, 2, 8, 262159, 2, 65539, 262163, 2, 65542, 262164, 2, 8, 262165, 2, 65546, 262166, 2, 8, 262167, 2, 65539, 327683, 2, 65538, 327685, 2, 65538, 327687, 2, 65538, 327691, 2, 65538, 327693, 2, 65538, 327695, 2, 65538, 327699, 2, 65538, 327701, 2, 65538, 327703, 2, 65538, 393219, 2, 6, 393220, 2, 8, 393221, 2, 65546, 393222, 2, 8, 393223, 2, 3, 393227, 2, 6, 393228, 2, 8, 393229, 2, 65546, 393230, 2, 8, 393231, 2, 3, 393235, 2, 6, 393236, 2, 8, 393237, 2, 65546, 393238, 2, 8, 393239, 2, 3, 458757, 2, 65538, 458765, 2, 65538, 458773, 2, 65538, 524291, 2, 65542, 524292, 2, 8, 524293, 2, 196618, 524294, 2, 8, 524295, 2, 65539, 524299, 2, 65542, 524300, 2, 8, 524301, 2, 196618, 524302, 2, 8, 524303, 2, 65539, 524307, 2, 65542, 524308, 2, 8, 524309, 2, 65546, 524310, 2, 8, 524311, 2, 65539, 589827, 2, 65538, 589829, 2, 65538, 589831, 2, 65538, 589835, 2, 65538, 589837, 2, 65538, 589839, 2, 65538, 589843, 2, 65538, 589845, 2, 65538, 589847, 2, 65538, 655363, 2, 7, 655364, 2, 8, 655365, 2, 131072, 655366, 2, 8, 655367, 2, 4, 655371, 2, 7, 655372, 2, 8, 655373, 2, 131072, 655374, 2, 8, 655375, 2, 4, 655379, 2, 7, 655380, 2, 8, 655381, 2, 131072, 655382, 2, 8, 655383, 2, 4, 720901, 2, 65538, 720909, 2, 65538, 720917, 2, 65538, 786435, 2, 65542, 786436, 2, 8, 786437, 2, 196612, 786438, 2, 8, 786439, 2, 65539, 786443, 2, 65542, 786444, 2, 8, 786445, 2, 196612, 786446, 2, 8, 786447, 2, 65539, 786451, 2, 65542, 786452, 2, 8, 786453, 2, 196612, 786454, 2, 8, 786455, 2, 65539, 851971, 2, 65538, 851973, 2, 65538, 851975, 2, 65538, 851979, 2, 65538, 851981, 2, 65538, 851983, 2, 65538, 851987, 2, 65538, 851989, 2, 65538, 851991, 2, 65538, 917507, 2, 7, 917508, 2, 8, 917509, 2, 65546, 917510, 2, 8, 917511, 2, 4, 917515, 2, 7, 917516, 2, 8, 917517, 2, 65546, 917518, 2, 8, 917519, 2, 4, 917523, 2, 7, 917524, 2, 8, 917525, 2, 65546, 917526, 2, 8, 917527, 2, 4, 983045, 2, 65538, 983053, 2, 65538, 983061, 2, 65538, 1048579, 2, 65542, 1048580, 2, 8, 1048581, 2, 65546, 1048582, 2, 8, 1048583, 2, 65539, 1048587, 2, 65542, 1048588, 2, 8, 1048589, 2, 65546, 1048590, 2, 8, 1048591, 2, 65539, 1048595, 2, 65542, 1048596, 2, 8, 1048597, 2, 65546, 1048598, 2, 8, 1048599, 2, 65539, 1114115, 2, 65538, 1114117, 2, 65538, 1114119, 2, 65538, 1114123, 2, 65538, 1114125, 2, 65538, 1114127, 2, 65538, 1114131, 2, 65538, 1114133, 2, 65538, 1114135, 2, 65538, 1179651, 2, 6, 1179652, 2, 8, 1179653, 2, 65546, 1179654, 2, 8, 1179655, 2, 3, 1179659, 2, 6, 1179660, 2, 8, 1179661, 2, 65546, 1179662, 2, 8, 1179663, 2, 3, 1179667, 2, 6, 1179668, 2, 8, 1179669, 2, 65546, 1179670, 2, 8, 1179671, 2, 3, 1245189, 2, 65538, 1245197, 2, 65538, 1245205, 2, 65538, 1310723, 2, 65542, 1310724, 2, 8, 1310725, 2, 65546, 1310726, 2, 8, 1310727, 2, 65539, 1310731, 2, 65542, 1310732, 2, 8, 1310733, 2, 65546, 1310734, 2, 8, 1310735, 2, 65539, 1310739, 2, 65542, 1310740, 2, 8, 1310741, 2, 65546, 1310742, 2, 8, 1310743, 2, 65539, 1376259, 2, 65538, 1376261, 2, 65538, 1376263, 2, 65538, 1376267, 2, 65538, 1376269, 2, 65538, 1376271, 2, 65538, 1376275, 2, 65538, 1376277, 2, 65538, 1376279, 2, 65538, 1441795, 2, 6, 1441796, 2, 8, 1441797, 2, 65546, 1441798, 2, 8, 1441799, 2, 3, 1441803, 2, 6, 1441804, 2, 8, 1441805, 2, 65546, 1441806, 2, 8, 1441807, 2, 3, 1441811, 2, 6, 1441812, 2, 8, 1441813, 2, 65546, 1441814, 2, 8, 1441815, 2, 3, 1507333, 2, 65538, 1507341, 2, 65538, 1507349, 2, 65538, 1572869, 2, 6, 1572870, 2, 8, 1572871, 2, 8, 1572872, 2, 8, 1572873, 2, 8, 1572874, 2, 8, 1572875, 2, 8, 1572876, 2, 8, 1572877, 2, 65546, 1572878, 2, 8, 1572879, 2, 8, 1572880, 2, 8, 1572881, 2, 8, 1572882, 2, 8, 1572883, 2, 8, 1572884, 2, 8, 1572885, 2, 3, 1638413, 2, 65538, 1703949, 2, 65538, 1769485, 2, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Lights" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131074, 3, 0 )
+
+[node name="Gadgets" type="TileMap" parent="."]
+scale = Vector2( 3, 3 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 393221, -1610612731, 0, 393229, -1610612731, 0, 393237, -1610612731, 0, 655365, -1610612731, 0, 655373, -1610612731, 0, 655381, -1610612731, 0, 917509, -1610612731, 0, 917517, -1610612731, 0, 917525, -1610612731, 0, 1179653, -1610612731, 0, 1179661, -1610612731, 0, 1179669, -1610612731, 0, 1441797, -1610612731, 0, 1441805, -1610612731, 0, 1441813, -1610612731, 0, 1572877, -1610612732, 0, 1769485, 6, 0 )
+
+[node name="PuzzlePlaceHolders" type="Node2D" parent="."]
+
+[node name="TextEdit2" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 192.0
+margin_top = 192.0
+margin_right = 288.0
+margin_bottom = 288.0
+text = "[C]music-box"
+wrap_enabled = true
+
+[node name="TextEdit144" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 288.0
+margin_top = 480.0
+margin_right = 384.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select1-1"
+wrap_enabled = true
+
+[node name="TextEdit145" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 480.0
+margin_top = 480.0
+margin_right = 576.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select1-2"
+wrap_enabled = true
+
+[node name="TextEdit146" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 672.0
+margin_top = 480.0
+margin_right = 768.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select1-3"
+wrap_enabled = true
+
+[node name="TextEdit147" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 288.0
+margin_top = 864.0
+margin_right = 384.0
+margin_bottom = 960.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select2-1"
+wrap_enabled = true
+
+[node name="TextEdit148" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 480.0
+margin_top = 864.0
+margin_right = 576.0
+margin_bottom = 960.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select2-2"
+wrap_enabled = true
+
+[node name="TextEdit149" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 672.0
+margin_top = 864.0
+margin_right = 768.0
+margin_bottom = 960.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select2-3"
+wrap_enabled = true
+
+[node name="TextEdit150" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 288.0
+margin_top = 1248.0
+margin_right = 384.0
+margin_bottom = 1344.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select3-1"
+wrap_enabled = true
+
+[node name="TextEdit151" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 480.0
+margin_top = 1248.0
+margin_right = 576.0
+margin_bottom = 1344.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select3-2"
+wrap_enabled = true
+
+[node name="TextEdit152" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 672.0
+margin_top = 1248.0
+margin_right = 768.0
+margin_bottom = 1344.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select3-3"
+wrap_enabled = true
+
+[node name="TextEdit153" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 288.0
+margin_top = 1632.0
+margin_right = 384.0
+margin_bottom = 1728.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select4-1"
+wrap_enabled = true
+
+[node name="TextEdit154" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 480.0
+margin_top = 1632.0
+margin_right = 576.0
+margin_bottom = 1728.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select4-2"
+wrap_enabled = true
+
+[node name="TextEdit155" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 672.0
+margin_top = 1632.0
+margin_right = 768.0
+margin_bottom = 1728.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select4-3"
+wrap_enabled = true
+
+[node name="TextEdit156" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 288.0
+margin_top = 2016.0
+margin_right = 384.0
+margin_bottom = 2112.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select5-1"
+wrap_enabled = true
+
+[node name="TextEdit157" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 480.0
+margin_top = 2016.0
+margin_right = 576.0
+margin_bottom = 2112.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select5-2"
+wrap_enabled = true
+
+[node name="TextEdit158" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 672.0
+margin_top = 2016.0
+margin_right = 768.0
+margin_bottom = 2112.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select5-3"
+wrap_enabled = true
+
+[node name="TextEdit159" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 480.0
+margin_right = 1152.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select6-1"
+wrap_enabled = true
+
+[node name="TextEdit160" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 480.0
+margin_right = 1344.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select6-2"
+wrap_enabled = true
+
+[node name="TextEdit161" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 480.0
+margin_right = 1536.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select6-3"
+wrap_enabled = true
+
+[node name="TextEdit162" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 480.0
+margin_right = 1920.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select11-1"
+wrap_enabled = true
+
+[node name="TextEdit163" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2016.0
+margin_top = 480.0
+margin_right = 2112.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select11-2"
+wrap_enabled = true
+
+[node name="TextEdit164" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 480.0
+margin_right = 2304.0
+margin_bottom = 576.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select11-3"
+wrap_enabled = true
+
+[node name="TextEdit166" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 864.0
+margin_right = 1920.0
+margin_bottom = 960.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select12-1"
+wrap_enabled = true
+
+[node name="TextEdit167" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2016.0
+margin_top = 864.0
+margin_right = 2112.0
+margin_bottom = 960.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select12-2"
+wrap_enabled = true
+
+[node name="TextEdit168" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 864.0
+margin_right = 2304.0
+margin_bottom = 960.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select12-3"
+wrap_enabled = true
+
+[node name="TextEdit169" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 1248.0
+margin_right = 1920.0
+margin_bottom = 1344.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select13-1"
+wrap_enabled = true
+
+[node name="TextEdit170" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2016.0
+margin_top = 1248.0
+margin_right = 2112.0
+margin_bottom = 1344.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select13-2"
+wrap_enabled = true
+
+[node name="TextEdit171" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 1248.0
+margin_right = 2304.0
+margin_bottom = 1344.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select13-3"
+wrap_enabled = true
+
+[node name="TextEdit172" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 1632.0
+margin_right = 1920.0
+margin_bottom = 1728.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select14-1"
+wrap_enabled = true
+
+[node name="TextEdit173" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2016.0
+margin_top = 1632.0
+margin_right = 2112.0
+margin_bottom = 1728.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select14-2"
+wrap_enabled = true
+
+[node name="TextEdit174" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 1632.0
+margin_right = 2304.0
+margin_bottom = 1728.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select14-3"
+wrap_enabled = true
+
+[node name="TextEdit175" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1824.0
+margin_top = 2016.0
+margin_right = 1920.0
+margin_bottom = 2112.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select15-1"
+wrap_enabled = true
+
+[node name="TextEdit176" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2016.0
+margin_top = 2016.0
+margin_right = 2112.0
+margin_bottom = 2112.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select15-2"
+wrap_enabled = true
+
+[node name="TextEdit177" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 2208.0
+margin_top = 2016.0
+margin_right = 2304.0
+margin_bottom = 2112.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select15-3"
+wrap_enabled = true
+
+[node name="TextEdit182" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 864.0
+margin_right = 1152.0
+margin_bottom = 960.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select7-1"
+wrap_enabled = true
+
+[node name="TextEdit183" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 864.0
+margin_right = 1344.0
+margin_bottom = 960.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select7-2"
+wrap_enabled = true
+
+[node name="TextEdit184" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 864.0
+margin_right = 1536.0
+margin_bottom = 960.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select7-3"
+wrap_enabled = true
+
+[node name="TextEdit187" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 1248.0
+margin_right = 1152.0
+margin_bottom = 1344.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select8-1"
+wrap_enabled = true
+
+[node name="TextEdit188" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 1248.0
+margin_right = 1344.0
+margin_bottom = 1344.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select8-2"
+wrap_enabled = true
+
+[node name="TextEdit189" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 1248.0
+margin_right = 1536.0
+margin_bottom = 1344.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select8-3"
+wrap_enabled = true
+
+[node name="TextEdit192" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 1632.0
+margin_right = 1152.0
+margin_bottom = 1728.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select9-1"
+wrap_enabled = true
+
+[node name="TextEdit193" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 1632.0
+margin_right = 1344.0
+margin_bottom = 1728.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select9-2"
+wrap_enabled = true
+
+[node name="TextEdit194" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 1632.0
+margin_right = 1536.0
+margin_bottom = 1728.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select9-3"
+wrap_enabled = true
+
+[node name="TextEdit197" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1056.0
+margin_top = 2016.0
+margin_right = 1152.0
+margin_bottom = 2112.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select10-1"
+wrap_enabled = true
+
+[node name="TextEdit198" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1248.0
+margin_top = 2016.0
+margin_right = 1344.0
+margin_bottom = 2112.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select10-2"
+wrap_enabled = true
+
+[node name="TextEdit199" type="TextEdit" parent="PuzzlePlaceHolders"]
+margin_left = 1440.0
+margin_top = 2016.0
+margin_right = 1536.0
+margin_bottom = 2112.0
+rect_pivot_offset = Vector2( 192, 96 )
+text = "[C][?]MultipleChoice-select10-3"
+wrap_enabled = true
+
+[node name="Masks" type="Node2D" parent="."]
+
+[node name="Tags" type="Node2D" parent="."]
+
+[node name="Label1" type="Label" parent="Tags"]
+margin_left = 480.0
+margin_top = 384.0
+margin_right = 521.0
+margin_bottom = 415.0
+theme = ExtResource( 2 )
+text = "1"
+align = 1
+
+[node name="Label2" type="Label" parent="Tags"]
+margin_left = 480.0
+margin_top = 768.0
+margin_right = 521.0
+margin_bottom = 799.0
+theme = ExtResource( 2 )
+text = "2"
+align = 1
+
+[node name="Label3" type="Label" parent="Tags"]
+margin_left = 480.0
+margin_top = 1152.0
+margin_right = 521.0
+margin_bottom = 1183.0
+theme = ExtResource( 2 )
+text = "3"
+align = 1
+
+[node name="Label4" type="Label" parent="Tags"]
+margin_left = 480.0
+margin_top = 1536.0
+margin_right = 521.0
+margin_bottom = 1567.0
+theme = ExtResource( 2 )
+text = "4"
+align = 1
+
+[node name="Label5" type="Label" parent="Tags"]
+margin_left = 480.0
+margin_top = 1920.0
+margin_right = 521.0
+margin_bottom = 1951.0
+theme = ExtResource( 2 )
+text = "5"
+align = 1
+
+[node name="Label6" type="Label" parent="Tags"]
+margin_left = 1248.0
+margin_top = 384.0
+margin_right = 1289.0
+margin_bottom = 415.0
+theme = ExtResource( 2 )
+text = "6"
+align = 1
+
+[node name="Label7" type="Label" parent="Tags"]
+margin_left = 1248.0
+margin_top = 768.0
+margin_right = 1289.0
+margin_bottom = 799.0
+theme = ExtResource( 2 )
+text = "7"
+align = 1
+
+[node name="Label8" type="Label" parent="Tags"]
+margin_left = 1248.0
+margin_top = 1152.0
+margin_right = 1289.0
+margin_bottom = 1183.0
+theme = ExtResource( 2 )
+text = "8"
+align = 1
+
+[node name="Label9" type="Label" parent="Tags"]
+margin_left = 1248.0
+margin_top = 1536.0
+margin_right = 1289.0
+margin_bottom = 1567.0
+theme = ExtResource( 2 )
+text = "9"
+align = 1
+
+[node name="Label10" type="Label" parent="Tags"]
+margin_left = 1248.0
+margin_top = 1920.0
+margin_right = 1289.0
+margin_bottom = 1951.0
+theme = ExtResource( 2 )
+text = "10"
+align = 1
+
+[node name="Label11" type="Label" parent="Tags"]
+margin_left = 2016.0
+margin_top = 384.0
+margin_right = 2057.0
+margin_bottom = 415.0
+theme = ExtResource( 2 )
+text = "11"
+align = 1
+
+[node name="Label12" type="Label" parent="Tags"]
+margin_left = 2016.0
+margin_top = 768.0
+margin_right = 2057.0
+margin_bottom = 799.0
+theme = ExtResource( 2 )
+text = "12"
+align = 1
+
+[node name="Label13" type="Label" parent="Tags"]
+margin_left = 2016.0
+margin_top = 1152.0
+margin_right = 2057.0
+margin_bottom = 1183.0
+theme = ExtResource( 2 )
+text = "13"
+align = 1
+
+[node name="Label14" type="Label" parent="Tags"]
+margin_left = 2016.0
+margin_top = 1536.0
+margin_right = 2057.0
+margin_bottom = 1567.0
+theme = ExtResource( 2 )
+text = "14"
+align = 1
+
+[node name="Label15" type="Label" parent="Tags"]
+margin_left = 2016.0
+margin_top = 1920.0
+margin_right = 2057.0
+margin_bottom = 1951.0
+theme = ExtResource( 2 )
+text = "15"
+align = 1

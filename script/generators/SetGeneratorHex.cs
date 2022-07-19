@@ -7,10 +7,10 @@ using WitnessInfinite;
 using Decorators = WitnessInfinite.Decorators;
 
 class SetGeneratorHex : SetGenerator {
-    public override (WitnessGenerator, bool, double) GetGenerator(string name, Random globalRng, Random localRng) {
+    public override (WitnessGenerator, GeneratorFlags) GetGenerator(string name, Random globalRng, Random localRng) {
         WitnessGenerator generator = null;
-        bool solvable = true;
-        double hardness = 0.0;
+        GeneratorFlags flags = new GeneratorFlags();
+        flags.Solvable = true;
         string[] tokens = name.Split('.')[0].Split('-');
         if (tokens[1] == "1") {
             int id = int.Parse(tokens[2]);
@@ -44,7 +44,7 @@ class SetGeneratorHex : SetGenerator {
                 generator.AddDecorator(new Decorators.PointDecorator(1), 2);
                 generator.AddDecorator(new Decorators.PointDecorator(), 2);
                 generator.AddDecorator(new Decorators.BrokenDecorator(), 4);
-                hardness = 0.7;
+                flags.VertexComplexity = 0.7;
             } else if (id == 1) {
                 generator = new WitnessGenerator(Graph.HexGraph(4, "diamond", "none", "none"));
                 generator.Graph.Rotate(-30);
@@ -74,7 +74,7 @@ class SetGeneratorHex : SetGenerator {
             }
             ApplyColorScheme(generator.Graph, "Shuffle");
         } else if (tokens[1] == "select1") {
-            solvable = tokens[2] == solvable1.ToString();
+            flags.Solvable = tokens[2] == solvable1.ToString();
             generator = new WitnessGenerator(Graph.HexGraph(4, "rect", "none", "none"));
             SetCornerStart(generator.Graph, 135);
             SetCornerEnd(generator.Graph, -45, -30);
@@ -82,7 +82,7 @@ class SetGeneratorHex : SetGenerator {
             generator.AddDecorator(new Decorators.SquareDecorator(1), 6);
             ApplyColorScheme(generator.Graph, "Intro");
         } else if (tokens[1] == "select2") {
-            solvable = tokens[2] == solvable2.ToString();
+            flags.Solvable = tokens[2] == solvable2.ToString();
             generator = new WitnessGenerator(Graph.HexGraph(4, "rect", "none", "none"));
             SetCornerStart(generator.Graph, 135);
             SetCornerEnd(generator.Graph, -45, -30);
@@ -90,31 +90,7 @@ class SetGeneratorHex : SetGenerator {
             generator.AddDecorator(new Decorators.SquareDecorator(3), 2);
             generator.AddDecorator(new Decorators.SquareDecorator(4), 2);
             ApplyColorScheme(generator.Graph, "Intro");
-            generator.PreTest = Graph => {
-                foreach (Vertex vertex in Graph.Vertices) {
-                    // 3-color test
-                    if (vertex.Decorator is Decorators.SquareDecorator squareDecorator) {
-                        Edge[] edges = vertex.LinkedFacet.Edges;
-                        for (int i = 0; i < edges.Length; ++i) {
-                            int color1 = -1;
-                            for (int b = 0; b <= 1; ++b) {
-                                Edge edge = b == 0 ? edges[i] : (i == 0) ? edges[edges.Length - 1] : edges[i - 1];
-                                foreach (Facet facet in edge.SharedFacets) {
-                                    if (facet.CenterVertex.Decorator is Decorators.SquareDecorator squareDecorator2) {
-                                        if (squareDecorator2.Color != squareDecorator.Color) {
-                                            if (color1 == -1)
-                                                color1 = squareDecorator2.Color;
-                                            else if (color1 != squareDecorator2.Color)
-                                                return false;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                return true;
-            };
+            generator.PreTest = PreTests.VertexSquareColorTest;
         } else if (tokens[1] == "meta1") {
             generator = new WitnessGenerator(Graph.HexGraph(4, "rect", "none", "none"));
             SetCornerStart(generator.Graph, 135);
@@ -171,6 +147,6 @@ class SetGeneratorHex : SetGenerator {
         } else {
             generator = new WitnessGenerator(Graph.RectangularGraph(2, 2));
         }
-        return (generator, solvable, hardness);
+        return (generator, flags);
     }
 }
