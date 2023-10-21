@@ -55,9 +55,6 @@ margin_right = -4.99994
 margin_bottom = -2.0
 texture = SubResource( 1 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Viewport" type="Viewport" parent="MarginContainer/PuzzleRegion/PuzzleForeground"]
 size = Vector2( 1440, 1200 )
@@ -97,9 +94,6 @@ margin_right = 103.824
 margin_bottom = 332.997
 texture_normal = ExtResource( 5 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="FailedCover" type="ColorRect" parent="."]
 visible = false

@@ -63,9 +63,6 @@ visible = false
 margin_right = 1025.0
 margin_bottom = 603.0
 color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SideMenu" type="Node2D" parent="."]
 

@@ -8,6 +8,9 @@ const EDGE_ELEMENT = 1
 const FACET_ELEMENT = 2
 const GLOBAL_ELEMENT = 3
 
+func load_float(s):
+	return float(s.replace(',', '.'))
+
 func color(name):
 	if (name.begins_with('#')):
 		return Color(name)
@@ -206,8 +209,8 @@ func __add_decorator(puzzle, raw_element, v):
 	var boxed_decorator = false
 	var end_decorator = __find_decorator(raw_element, "EndDecorator")
 	if (end_decorator):
-		var end_length = float(end_decorator['Length'])
-		var end_angle = deg2rad(float(end_decorator['Angle']))
+		var end_length = load_float(end_decorator['Length'])
+		var end_angle = deg2rad(load_float(end_decorator['Angle']))
 		var p_end = puzzle.vertices[v].pos + Vector2(cos(end_angle), sin(end_angle)) * end_length
 		var v_end = push_vertex_vec(puzzle, p_end)
 		var e = push_edge_idx(puzzle, v, v_end)
@@ -287,9 +290,9 @@ func __add_decorator(puzzle, raw_element, v):
 		elif (text_decorator['Text'].to_lower() in ['parallel', 'p', 'd', 'b', 'q']):
 			var chr = text_decorator['Text'][0].to_lower()
 			var symmetry_center = puzzle.vertices[v].pos
-			symmetry_center += Vector2(float(text_decorator['DeltaX']), float(text_decorator['DeltaY']))
+			symmetry_center += Vector2(load_float(text_decorator['DeltaX']), load_float(text_decorator['DeltaY']))
 			var flip_x = chr in ['b', 'q']
-			var symmetry_angle = deg2rad(float(text_decorator['Angle'])) + (PI if chr in ['b', 'd'] else 0)
+			var symmetry_angle = deg2rad(load_float(text_decorator['Angle'])) + (PI if chr in ['b', 'd'] else 0)
 			var transform = Transform2D(0, symmetry_center) * Transform2D(symmetry_angle, Vector2.ZERO) * (Transform2D.FLIP_X if flip_x else Transform2D.IDENTITY)
 			if (puzzle.n_ways == 1 and len(puzzle.symmetry_transforms) == 0):
 				puzzle.symmetry_transforms = [transform]
@@ -319,7 +322,7 @@ func __add_decorator(puzzle, raw_element, v):
 		elif (text_decorator['Text'].to_lower() == '\u27F1'): # droplet
 			var decorator = load('res://script/decorators/droplet_decorator.gd').new()
 			decorator.color = color(text_decorator['Color'])
-			decorator.angle = deg2rad(float(text_decorator['Angle']))
+			decorator.angle = deg2rad(load_float(text_decorator['Angle']))
 			puzzle.vertices[v].decorator = decorator
 		elif (text_decorator['Text'].to_lower() == '\u2B6E'): # clockwise arrow
 			var decorator = load('res://script/decorators/circle_arrow_decorator.gd').new()
@@ -351,7 +354,7 @@ func __add_decorator(puzzle, raw_element, v):
 				puzzle.decorators.append(ghost_manager)
 			var decorator = load('res://script/decorators/ghost_decorator.gd').new()
 			decorator.color = color(text_decorator['Color'])
-			decorator.pattern = 0 if float(text_decorator['Angle']) == 0.0 else 1
+			decorator.pattern = 0 if load_float(text_decorator['Angle']) == 0.0 else 1
 			puzzle.vertices[v].decorator = decorator
 		elif (text_decorator['Text'].to_lower() in ['laser_region_min', 'laser_region_max', '\u263F\uFE0F']): # laser
 			var laser_manager = null
@@ -372,7 +375,7 @@ func __add_decorator(puzzle, raw_element, v):
 				var decorator = load('res://script/decorators/laser_emitter_decorator.gd').new()
 				decorator.color = color(text_decorator['Color'])
 				puzzle.vertices[v].decorator = decorator
-				decorator.angle = deg2rad(float(text_decorator['Angle']))
+				decorator.angle = deg2rad(load_float(text_decorator['Angle']))
 				laser_manager.add_laser_emitter(puzzle, puzzle.vertices[v].pos, decorator.color, decorator.angle)
 		elif (text_decorator['Text'].to_lower() in ['\uC6C3', '\u337F']): # cosmic express
 			var cosmic_manager = null
@@ -399,7 +402,7 @@ func __add_decorator(puzzle, raw_element, v):
 			decorator.step_y = 1.0 - puzzle.line_width
 			decorator.size = 1.0
 			decorator.color = color(text_decorator['Color'])
-			decorator.angle = deg2rad(float(text_decorator['Angle']))
+			decorator.angle = deg2rad(load_float(text_decorator['Angle']))
 			decorator.rotational = abs(decorator.angle) > 1e-3
 			decorator.matrix = [[int(text_decorator['Text'].substr(2))]]
 			puzzle.vertices[v].decorator = decorator
@@ -425,10 +428,10 @@ func __add_decorator(puzzle, raw_element, v):
 				decorator.matrix.append(symbols)
 			decorator.step_x = (1.0 - puzzle.line_width) / n_cols
 			decorator.step_y = (1.0 - puzzle.line_width) / n_rows
-			var font_size = float(text_decorator['SerializableFont']['Size'])
+			var font_size = load_float(text_decorator['SerializableFont']['Size'])
 			decorator.size = 1.0 if font_size >= 4.5 else 0.5 if font_size >= 3.5 else 0.34
 			decorator.color = color(text_decorator['Color'])
-			decorator.angle = deg2rad(float(text_decorator['Angle']))
+			decorator.angle = deg2rad(load_float(text_decorator['Angle']))
 			decorator.rotational = abs(decorator.angle) > 1e-3
 			puzzle.vertices[v].decorator = decorator
 			
@@ -450,7 +453,7 @@ func __add_decorator(puzzle, raw_element, v):
 		var decorator = load('res://script/decorators/arrow_decorator.gd').new()
 		decorator.color = color(arrow_decorator['Color'])
 		decorator.count = int(arrow_decorator['Count'])
-		decorator.angle = deg2rad(float(arrow_decorator['Angle']))
+		decorator.angle = deg2rad(load_float(arrow_decorator['Angle']))
 		puzzle.vertices[v].decorator = decorator
 	var star_decorator = __find_decorator(raw_element, "StarDecorator")
 	if (star_decorator):
@@ -508,7 +511,7 @@ func __add_decorator(puzzle, raw_element, v):
 		puzzle.vertices[v].decorator = load("res://script/decorators/no_decorator.gd").new()
 	var point_decorator = __find_decorator(raw_element, "PointDecorator")
 	if (point_decorator):
-		var extra_scale = float(point_decorator['ExtraScale'])
+		var extra_scale = load_float(point_decorator['ExtraScale'])
 		if (extra_scale > 1.9):
 			puzzle.vertices[v].decorator = load('res://script/decorators/big_point_decorator.gd').new()
 		else:
@@ -530,7 +533,7 @@ func __load_tetris(raw_decorator, is_hollow):
 	for raw_shape in raw_decorator['Shapes']['_arr']:
 		var shape = []
 		for raw_node in raw_shape['_arr']:
-			var node = Vector2(float(raw_node['X']), float(raw_node['Y']))
+			var node = Vector2(load_float(raw_node['X']), load_float(raw_node['Y']))
 			min_x = min(min_x, node.x)
 			min_y = min(min_y, node.y)
 			max_x = max(max_x, node.x)
@@ -545,10 +548,10 @@ func __load_tetris(raw_decorator, is_hollow):
 	decorator.shapes = shapes
 	decorator.is_hollow = is_hollow
 	if (is_hollow):
-		decorator.border_size = float(raw_decorator['BorderSize'])
+		decorator.border_size = load_float(raw_decorator['BorderSize'])
 	decorator.color = color(raw_decorator['Color'])
-	decorator.margin_size = float(raw_decorator['MarginSize'])
-	decorator.angle = deg2rad(float(raw_decorator['Angle']))
+	decorator.margin_size = load_float(raw_decorator['MarginSize'])
+	decorator.angle = deg2rad(load_float(raw_decorator['Angle']))
 	return decorator
 
 func add_element(puzzle, raw_element, element_type, id=-1):
@@ -556,7 +559,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 	if (symmetry_decorator):
 		puzzle.n_ways = 3
 		var symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
-		symmetry_center += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
+		symmetry_center += Vector2(load_float(symmetry_decorator['DeltaX']), load_float(symmetry_decorator['DeltaY']))
 		puzzle.symmetry_transforms = [
 			Transform2D.IDENTITY,
 				Transform2D(0, symmetry_center) * Transform2D(2 * PI / 3, Vector2.ZERO) * Transform2D(0, -symmetry_center),
@@ -570,14 +573,14 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		assert(is_rotational in ['true', 'false'])
 		puzzle.n_ways = 2
 		var symmetry_center = __get_raw_element_center(puzzle, raw_element, element_type, id)
-		symmetry_center += Vector2(float(symmetry_decorator['DeltaX']), float(symmetry_decorator['DeltaY']))
+		symmetry_center += Vector2(load_float(symmetry_decorator['DeltaX']), load_float(symmetry_decorator['DeltaY']))
 		if (is_rotational == 'true'):
 			puzzle.symmetry_transforms = [
 				Transform2D.IDENTITY,
 				Transform2D(0, symmetry_center) * Transform2D(PI, Vector2.ZERO) * Transform2D(0, -symmetry_center),
 			]
 		else:
-			var symmetry_angle = deg2rad(float(symmetry_decorator['Angle']))
+			var symmetry_angle = deg2rad(load_float(symmetry_decorator['Angle']))
 			puzzle.symmetry_transforms = [
 				Transform2D.IDENTITY,
 				Transform2D(0, symmetry_center) * Transform2D(symmetry_angle, Vector2.ZERO) \
@@ -590,7 +593,7 @@ func add_element(puzzle, raw_element, element_type, id=-1):
 		puzzle.n_ways = 2
 		puzzle.symmetry_transforms = [
 			Transform2D.IDENTITY,
-			Transform2D(0, Vector2(float(symmetry_decorator['TranslationX']), float(symmetry_decorator['TranslationY'])))
+			Transform2D(0, Vector2(load_float(symmetry_decorator['TranslationX']), load_float(symmetry_decorator['TranslationY'])))
 		]
 		puzzle.solution_colors.push_back(color(symmetry_decorator['SecondLineColor']))
 	if (element_type == EDGE_ELEMENT):
@@ -659,13 +662,13 @@ func load_from_xml(file, preview_only=false):
 	puzzle.solution_colors = [color(raw_meta['LineColor'])]
 	puzzle.line_color = color(raw_meta['ForegroundColor'])
 	puzzle.background_color = color(raw_meta['BackgroundColor'])
-	puzzle.line_width = float(raw_meta['EdgeWidth'])
+	puzzle.line_width = load_float(raw_meta['EdgeWidth'])
 	puzzle.start_size = puzzle.line_width * 1.5
 	var vertices = puzzle.vertices
 	var edges = puzzle.edges
 	var facets = puzzle.facets
 	for raw_node in raw['Nodes']['_arr']:
-		var v = push_vertex_vec(puzzle, Vector2(float(raw_node['X']), float(raw_node['Y'])), raw_node['Hidden'] == 'true')
+		var v = push_vertex_vec(puzzle, Vector2(load_float(raw_node['X']), load_float(raw_node['Y'])), raw_node['Hidden'] == 'true')
 		puzzle.vertices[v].is_attractor = true
 	for i in range(len(raw['Nodes']['_arr'])):
 		var raw_node = raw['Nodes']['_arr'][i]

@@ -2,11 +2,11 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using WitnessInfinite;
 using Decorators = WitnessInfinite.Decorators;
 
-public class Generator : Node
-{
+public class Generator : Node {
     static Dictionary<string, Graph> generatedPanels = new Dictionary<string, Graph>();
     public static int StringHash(string str) {
         uint value = 0;

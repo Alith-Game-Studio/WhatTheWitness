@@ -24,6 +24,10 @@ config/name="Custom Witness Puzzles"
 run/main_scene="res://menu_main.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+output_latency.web=150
+
 [autoload]
 
 Gameplay="*res://script/gameplay.gd"
@@ -52,9 +56,17 @@ settings/stdout/print_fps=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
+[global]
+
+hd=false
+
 [locale]
 
 translations=PoolStringArray( "res://translation/strings.en.translation", "res://translation/strings.zh_CN.translation" )
+
+[mono]
+
+project/assembly_name="Custom Witness Puzzles"
 
 [network]
 
